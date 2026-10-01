@@ -1,3 +1,9 @@
+18.0.1.0.2 (2026-10-01)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Help pages restructured on the help rule: new record, update record, how to search, report, example, FAQ and footer sections
+* [IMP] Wildcard search explained; version specific text shown only on its Odoo version
+
 18.0.1.0.1 (2026-09-27)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

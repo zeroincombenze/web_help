@@ -281,8 +281,12 @@ class ContextHelpPage(models.Model):
         return res
 
     @api.model
+    def _wch_version(self):
+        return release.version_info[0]
+
+    @api.model
     def _wch_group(self):
-        return rst_help.version_group(release.version_info[0])
+        return rst_help.version_group(self._wch_version())
 
     @api.model
     def _wch_modules(self):
@@ -315,14 +319,17 @@ class ContextHelpPage(models.Model):
     def sync_sources(self, force=False):
         """Rebuild the pages when any help source checksum changed"""
         group = self._wch_group()
+        version = self._wch_version()
         modules = self._wch_modules()
-        checksums = {name: rst_help.checksum(path, group) for name, path in modules}
+        checksums = {
+            name: rst_help.checksum(path, group, version) for name, path in modules
+        }
         Source = self.env["context.help.source"]
         stored = {s.module: s for s in Source.search([])}
         if not force and checksums == {m: s.checksum for m, s in stored.items()}:
             return False
         _logger.info("web_context_help: rebuilding help pages")
-        self._wch_rebuild(modules, group)
+        self._wch_rebuild(modules, group, version)
         for name, value in checksums.items():
             if name in stored:
                 if stored[name].checksum != value:
@@ -335,7 +342,7 @@ class ContextHelpPage(models.Model):
         return True
 
     @api.model
-    def _wch_parse_module(self, module, help_dir, group):
+    def _wch_parse_module(self, module, help_dir, group, version=None):
         """Return (pages, inherits) parsed from the sources of one module"""
         pages, inherits = [], []
         for filename, path in sorted(rst_help.list_sources(help_dir, group).items()):
@@ -347,6 +354,7 @@ class ContextHelpPage(models.Model):
                     group,
                     lang,
                     fields_help=self._wch_with_lang(lang).fields_help,
+                    version=version,
                 )
             except Exception as e:
                 _logger.warning("web_context_help: %s not parsed: %s", path, e)
@@ -383,11 +391,12 @@ class ContextHelpPage(models.Model):
         return result
 
     @api.model
-    def _wch_rebuild(self, modules, group):
+    def _wch_rebuild(self, modules, group, version=None):
+        version = version or self._wch_version()
         order = {name: seq for seq, (name, dummy) in enumerate(modules)}
         pages, inherits = [], []
         for module, help_dir in modules:
-            p, i = self._wch_parse_module(module, help_dir, group)
+            p, i = self._wch_parse_module(module, help_dir, group, version)
             pages.extend(p)
             inherits.extend(i)
         inherits.sort(key=lambda i: order.get(i["module"], 0))
@@ -403,6 +412,7 @@ class ContextHelpPage(models.Model):
                     group,
                     item["lang"],
                     self._wch_with_lang(item["lang"]).fields_help,
+                    version,
                 )
                 if not ok:
                     _logger.warning(

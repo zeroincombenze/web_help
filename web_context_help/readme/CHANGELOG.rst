@@ -1,3 +1,8 @@
+18.0.1.0.2 (2026-10-01)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Version specific help: help-version directive and :version: role, pages built for the running Odoo version
+
 18.0.1.0.1 (2026-09-27)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

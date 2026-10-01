@@ -1,7 +1,7 @@
-.. _configuration:
+.. _configure:
 
-Configuration
--------------
+Configure
+---------
 
 Open **Sales ‣ Configuration ‣ Settings**:
 
@@ -11,8 +11,8 @@ Open **Sales ‣ Configuration ‣ Settings**:
 * **Pricing**: *Discounts* on order lines and *Pricelists*.
 * **Product Catalog**: *Variants* and *Units of Measure*.
 * **Invoicing**: the default *Invoicing Policy*, *Invoice what is ordered* or
-  *Invoice what is delivered*; each product can override it in its
-  **Invoicing Policy** field. Set the *Down Payments* product here too.
+  *Invoice what is delivered*; each product can override it in its **Invoicing
+  Policy** field. Set the *Down Payments* product here too.
 
 Payment terms are managed in **Invoicing ‣ Configuration ‣ Payment Terms**,
 sales teams in **Sales ‣ Configuration ‣ Sales Teams**, quotation templates in

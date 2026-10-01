@@ -32,7 +32,16 @@ Custom directives::
        :auto:
        :model: res.partner
 
-Roles: :field:`name` (highlight field in Odoo tab), :tour:`name` (run tour).
+    .. help-version:: >=17              content kept only on matching versions
+
+       RST content (sections allowed)
+
+Roles: :field:`name` (highlight field in Odoo tab), :tour:`name` (run tour),
+:version:`16|text;17-18|text;*|text` (text of the first matching version).
+
+Version conditions: ``16``, ``16-18``, ``>=17``, ``>17``, ``<=16``, ``<17``,
+``*`` (any), several joined by comma (``10,16``). The version is the major
+of the running Odoo; when unknown, the lowest version of the group is used.
 """
 from __future__ import unicode_literals
 
@@ -58,11 +67,50 @@ COMMON = "common"
 DEFAULT_LANG = "en_US"
 POSITIONS = ("before", "after", "replace", "remove")
 RE_LANG = re.compile(r"^(?P<base>.+?)\.(?P<lang>[a-z]{2}_[A-Z]{2})\.rst$")
+RE_VERSION_CMP = re.compile(r"^(>=|<=|>|<)\s*(\d+)$")
+RE_VERSION_RANGE = re.compile(r"^(\d+)(?:\s*-\s*(\d+))?$")
 
 try:  # pragma: no cover
     from markupsafe import escape
 except ImportError:  # pragma: no cover
     from cgi import escape
+
+
+def group_version(group):
+    """Lowest Odoo major of a group: ``v16_20`` -> 16"""
+    for lo, dummy, name in VERSION_GROUPS:
+        if name == group:
+            return lo
+    return VERSION_GROUPS[-1][0]
+
+
+def version_match(spec, version):
+    """True when the Odoo major ``version`` satisfies ``spec``"""
+    for item in spec.split(","):
+        item = item.strip()
+        if not item:
+            continue
+        if item == "*":
+            return True
+        x = RE_VERSION_CMP.match(item)
+        if x:
+            op, num = x.group(1), int(x.group(2))
+            if (
+                (op == ">=" and version >= num)
+                or (op == ">" and version > num)
+                or (op == "<=" and version <= num)
+                or (op == "<" and version < num)
+            ):
+                return True
+            continue
+        x = RE_VERSION_RANGE.match(item)
+        if not x:
+            raise ValueError("invalid version condition %r" % item)
+        lo = int(x.group(1))
+        hi = int(x.group(2)) if x.group(2) else lo
+        if lo <= version <= hi:
+            return True
+    return False
 
 
 def version_group(major):
@@ -93,8 +141,9 @@ def list_sources(help_dir, group):
     return sources
 
 
-def checksum(help_dir, group):
-    sha = hashlib.sha1(group.encode("utf-8"))
+def checksum(help_dir, group, version=None):
+    seed = "%s:%s" % (group, version or group_version(group))
+    sha = hashlib.sha1(seed.encode("utf-8"))
     for fn, path in sorted(list_sources(help_dir, group).items()):
         sha.update(fn.encode("utf-8"))
         with open(path, "rb") as fd:
@@ -124,7 +173,7 @@ class _LogStream(object):
         _logger.debug(text.strip())
 
 
-def _settings(help_dir, group, lang, fields_help):
+def _settings(help_dir, group, lang, fields_help, version=None):
     return {
         "doctitle_xform": False,
         "sectsubtitle_xform": False,
@@ -140,6 +189,7 @@ def _settings(help_dir, group, lang, fields_help):
         "initial_header_level": 2,
         "wch_help_dir": help_dir,
         "wch_group": group,
+        "wch_version": version or group_version(group),
         "wch_lang": lang,
         "wch_fields_help": fields_help,
     }
@@ -266,6 +316,53 @@ class HelpQuestion(Directive):
         return box
 
 
+class HelpVersion(Directive):
+    """Keep the content only when the running Odoo version matches"""
+
+    required_arguments = 1
+    final_argument_whitespace = True
+    has_content = True
+
+    def run(self):
+        version = self.state.document.settings.wch_version
+        try:
+            matched = version_match(self.arguments[0], version)
+        except ValueError as e:
+            raise self.error("help-version: %s" % e)
+        if matched and self.content:
+            # Like help-include: the content is read as if written in place,
+            # so it may hold sections, lists and other directives
+            self.state_machine.insert_input(
+                list(self.content), self.content.source(0) or "<help-version>"
+            )
+        return []
+
+
+def version_role(name, rawtext, text, lineno, inliner, options=None, content=None):
+    """:version:`16|text;>=17|text`: inline text of the first matching version"""
+    version = inliner.document.settings.wch_version
+    chosen = ""
+    for alternative in nodes.unescape(text).split(";"):
+        if "|" not in alternative:
+            msg = inliner.reporter.error(
+                "version: %r has no condition" % alternative, line=lineno
+            )
+            return [inliner.problematic(rawtext, rawtext, msg)], [msg]
+        spec, value = alternative.split("|", 1)
+        try:
+            if version_match(spec, version):
+                # a leading space is kept: menu\ :version:`>=17| (gear icon)`
+                chosen = re.sub(r"\s+", " ", value).rstrip()
+                break
+        except ValueError as e:
+            msg = inliner.reporter.error("version: %s" % e, line=lineno)
+            return [inliner.problematic(rawtext, rawtext, msg)], [msg]
+    if not chosen:
+        return [], []
+    # The chosen text keeps the inline markup (**bold**, *italic*)
+    return inliner.parse(chosen, lineno, inliner, inliner.parent)
+
+
 def _data_role(kind):
     def role(name, rawtext, text, lineno, inliner, options=None, content=None):
         text = nodes.unescape(text)
@@ -290,27 +387,39 @@ directives.register_directive("help-page", HelpPage)
 directives.register_directive("help-include", HelpInclude)
 directives.register_directive("help-inherit", HelpInherit)
 directives.register_directive("help-question", HelpQuestion)
+directives.register_directive("help-version", HelpVersion)
+roles.register_local_role("version", version_role)
 roles.register_local_role("field", _data_role("field"))
 roles.register_local_role("tour", _data_role("tour"))
 
 
-def parse(text, source_path, help_dir, group, lang=DEFAULT_LANG, fields_help=None):
-    """Parse RST text; return the doctree.
+def parse(
+    text,
+    source_path,
+    help_dir,
+    group,
+    lang=DEFAULT_LANG,
+    fields_help=None,
+    version=None,
+):
+    """Parse RST text for the Odoo major ``version``; return the doctree.
 
     ``document.wch_page`` holds the help-page options (or None),
     ``document.wch_inherits`` the help-inherit instructions."""
     document = core.publish_doctree(
         text,
         source_path=source_path,
-        settings_overrides=_settings(help_dir, group, lang, fields_help),
+        settings_overrides=_settings(help_dir, group, lang, fields_help, version),
     )
     _store(document, "wch_page", None)
     _store(document, "wch_inherits", [])
     return document
 
 
-def parse_file(path, help_dir, group, lang=DEFAULT_LANG, fields_help=None):
-    return parse(read_text(path), path, help_dir, group, lang, fields_help)
+def parse_file(
+    path, help_dir, group, lang=DEFAULT_LANG, fields_help=None, version=None
+):
+    return parse(read_text(path), path, help_dir, group, lang, fields_help, version)
 
 
 def find_section(document, label):
@@ -320,7 +429,9 @@ def find_section(document, label):
     return None
 
 
-def apply_inherit(document, inherit, help_dir, group, lang, fields_help=None):
+def apply_inherit(
+    document, inherit, help_dir, group, lang, fields_help=None, version=None
+):
     """Apply one help-inherit instruction to a page doctree; return success"""
     position = inherit["position"]
     if inherit["section"]:
@@ -332,7 +443,13 @@ def apply_inherit(document, inherit, help_dir, group, lang, fields_help=None):
     new_nodes = []
     if position != "remove":
         new_nodes = parse(
-            inherit["content"], "<inherit>", help_dir, group, lang, fields_help
+            inherit["content"],
+            "<inherit>",
+            help_dir,
+            group,
+            lang,
+            fields_help,
+            version,
         ).children[:]
     if target is None:
         if position == "before":

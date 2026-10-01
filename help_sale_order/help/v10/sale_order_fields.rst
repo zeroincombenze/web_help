@@ -1,7 +1,7 @@
-.. _options:
+.. _fields:
 
-Options
--------
+Main fields
+~~~~~~~~~~~
 
 * :field:`Pricelist <pricelist_id>`: prices and automatic discounts for the
   customer (*Sale Price* setting).

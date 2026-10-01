@@ -174,6 +174,64 @@ class TestRstHelp(common.BaseCase):
         questions = [s["question"] for s in sections if s["question"]]
         self.assertEqual(questions, ["How to add a tag?", "Name"])
 
+    def test_version_match(self):
+        self.assertEqual(rst_help.group_version("v16_20"), 16)
+        self.assertEqual(rst_help.group_version("v11_14"), 11)
+        for spec, yes, no in (
+            ("16", (16,), (15, 17)),
+            ("16-18", (16, 17, 18), (15, 19)),
+            (">=17", (17, 20), (16,)),
+            (">17", (18,), (17,)),
+            ("<=16", (10, 16), (17,)),
+            ("<17", (16,), (17,)),
+            ("10, 16", (10, 16), (12, 17)),
+            ("*", (10, 18), ()),
+        ):
+            for version in yes:
+                self.assertTrue(rst_help.version_match(spec, version), (spec, version))
+            for version in no:
+                self.assertFalse(rst_help.version_match(spec, version), (spec, version))
+        with self.assertRaises(ValueError):
+            rst_help.version_match("odoo", 16)
+
+    def test_version_blocks(self):
+        text = """Page
+====
+
+.. help-version:: >=17
+
+   New
+   ---
+
+   #. Press **Create Draft**.
+
+.. help-version:: 16
+
+   Only :field:`Sixteen <x>`.
+
+Press :version:`16|**View Invoice**;17|*Draft Invoice*;*|Create Draft` now.
+"""
+        html = {}
+        for version in (16, 17, 18):
+            doc = rst_help.parse(
+                text, "<t>", self.help_dir, "v16_20", version=version
+            )
+            html[version] = rst_help.to_html(doc)
+        self.assertNotIn("Create Draft</strong>", html[16])
+        self.assertIn('data-field="x"', html[16])
+        self.assertIn("<strong>View Invoice</strong>", html[16])
+        self.assertIn("<h2>New</h2>", html[17])
+        self.assertNotIn('data-field="x"', html[17])
+        self.assertIn("<em>Draft Invoice</em>", html[17])
+        self.assertIn("Press Create Draft now", html[18])
+        # unknown version: lowest version of the group
+        doc = rst_help.parse(text, "<t>", self.help_dir, "v16_20")
+        self.assertIn("View Invoice", rst_help.to_html(doc))
+        self.assertNotEqual(
+            rst_help.checksum(self.help_dir, "v16_20", 16),
+            rst_help.checksum(self.help_dir, "v16_20", 18),
+        )
+
     def test_html_page(self):
         body = html_page.render("T<", "<p>x</p>", lang="it_IT", warning=True)
         self.assertIn("T&lt;", body)
