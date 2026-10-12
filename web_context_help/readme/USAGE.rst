@@ -2,6 +2,20 @@ Press the |sos| button in the control panel. Pages are looked up by view xmlid,
 then by model and view type, then by model; otherwise an automatic page lists
 the fields help.
 
+The box in the help window header finds text in the page, like the browser
+Ctrl+F (which focuses it). Case and accents are ignored, line breaks and bold or
+linked words too. With several words, words of 1-2 letters are ignored and only the places where all of them are
+within 12 words in the same paragraph are shown; when there is no such place,
+every occurrence of every word is shown and the counter says *any word*. Text
+in quotes (``"draft invoice"``) is searched as an exact phrase.
+**Enter** / ▼ and **Shift+Enter** / ▲ go to the next / previous match,
+**Esc** clears the search.
+
+The *FAQ* section of a page and the fields help of its model are shown on
+their own pages, opened by the **FAQ** and **Fields** buttons in the help
+window header; the **Help** button goes back to the page. The questions built by
+``help-question`` ``:auto:`` are left to the **Fields** page.
+
 Writing help for a module: put RST files in ``help/common/`` or in the
 directory of a group of Odoo versions (``help/v10``, ``help/v11_14``,
 ``help/v15``, ``help/v16_20``); a group file overrides the common one with the
@@ -18,6 +32,10 @@ Every page has these sections, in this order, with their label:
 ``faq`` (frequently asked questions, ``help-question`` blocks),
 ``footer`` (date and time of page creation and copyright notice).
 A section that does not apply keeps one line saying so.
+Every list page gets the *Searching with the wildcard* text of
+web_context_help (``help/common/search_wildcard.rst``) at the end of its
+``search`` section: do not write it in the module; a page section labelled
+``wildcard`` is replaced by it.
 
 ::
 
@@ -26,6 +44,7 @@ A section that does not apply keeps one line saying so.
        :model: res.partner
        :view: base.view_partner_form
        :view-type: form
+       :when: is_company = True
 
     .. help-include:: common_part.rst
 
@@ -41,6 +60,13 @@ A section that does not apply keeps one line saying so.
 
     .. help-question::
        :auto:
+
+``:when:`` shows the page only when the open record (its selection and boolean
+fields) or the menu (its ``default_<field>`` context keys) match: conditions
+``field = value``, ``field != value``, several values joined by comma, several
+conditions joined by ``and``. When the value is unknown the page is not used,
+e.g. ``move_type != entry`` keeps the invoice help away from the journal
+entries, which share the invoice form.
 
 ``:position:`` is one of ``before``, ``after``, ``replace``, ``remove``.
 ``:auto:`` builds the questions from the fields help of the page model.

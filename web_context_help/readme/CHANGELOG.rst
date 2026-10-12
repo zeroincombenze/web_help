@@ -1,3 +1,12 @@
+18.0.1.0.3 (2026-10-02)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Help window: find in page box, like the browser Ctrl+F, with previous / next buttons; several words found when near each other, phrase in quotes
+* [IMP] Help window: FAQ and fields help on their own pages, opened by the FAQ and Fields buttons
+* [IMP] Every list page gets the global wildcard search text at the end of its How to search section
+* [IMP] help-page :when: condition on the open record or the menu context, e.g. move_type != entry
+* [FIX] RST: a :field: role wrapped on two lines was printed as text; a :version: role with a stray ";" now fails on every version instead of cutting the text
+
 18.0.1.0.2 (2026-10-01)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

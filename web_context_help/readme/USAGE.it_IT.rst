@@ -2,6 +2,22 @@ Premere il pulsante |sos| del pannello di controllo. La pagina è cercata per
 xmlid della vista, poi per modello e tipo vista, poi per modello; altrimenti
 una pagina automatica elenca l'aiuto dei campi.
 
+La casella nell'intestazione della finestra di aiuto cerca un testo nella
+pagina, come Ctrl+F del browser (che la seleziona). Maiuscole e accenti sono
+ignorati, come gli a capo e le parole in grassetto o con link. Con più parole
+quelle di 1-2 lettere sono ignorate e sono mostrati solo i punti in cui sono tutte entro 12 parole nello stesso
+paragrafo; se non ce ne sono, è mostrata ogni occorrenza di ogni parola e il
+contatore indica *qualsiasi parola*. Il testo tra virgolette
+(``"bozza fattura"``) è cercato come frase esatta.
+**Invio** / ▼ e **Maiusc+Invio** / ▲ passano all'occorrenza successiva /
+precedente, **Esc** annulla la ricerca.
+
+La sezione *Domande frequenti* di una pagina e l'aiuto dei campi del suo
+modello sono mostrati in pagine a parte, aperte dai pulsanti **FAQ** e
+**Campi** nell'intestazione della finestra di aiuto; il pulsante **Aiuto**
+torna alla pagina. Le domande costruite da ``help-question`` ``:auto:`` sono
+lasciate alla pagina **Campi**.
+
 Scrivere l'aiuto di un modulo: mettere i file RST in ``help/common/`` o nella
 cartella di un gruppo di versioni Odoo (``help/v10``, ``help/v11_14``,
 ``help/v15``, ``help/v16_20``); il file del gruppo prevale su quello comune con
@@ -18,6 +34,10 @@ Ogni pagina ha queste sezioni, in quest'ordine, con la loro etichetta:
 ``faq`` (domande frequenti, blocchi ``help-question``),
 ``footer`` (data e ora di creazione della pagina e nota di copyright).
 Una sezione che non si applica contiene una riga che lo dice.
+Ogni pagina lista riceve il testo *Ricerche con il carattere jolly* di
+web_context_help (``help/common/search_wildcard.it_IT.rst``) in fondo alla
+sezione ``search``: non scriverlo nel modulo; una sezione della pagina con
+etichetta ``wildcard`` viene sostituita.
 
 ::
 
@@ -26,6 +46,7 @@ Una sezione che non si applica contiene una riga che lo dice.
        :model: res.partner
        :view: base.view_partner_form
        :view-type: form
+       :when: is_company = True
 
     .. help-include:: parte_comune.rst
 
@@ -41,6 +62,14 @@ Una sezione che non si applica contiene una riga che lo dice.
 
     .. help-question::
        :auto:
+
+``:when:`` mostra la pagina solo quando il record aperto (i suoi campi di
+selezione e booleani) o il menu (le sue chiavi di contesto ``default_<campo>``)
+corrispondono: condizioni ``campo = valore``, ``campo != valore``, più valori
+separati da virgola, più condizioni unite da ``and``. Quando il valore non è
+noto la pagina non è usata, ad es. ``move_type != entry`` tiene l'aiuto delle
+fatture lontano dalle registrazioni contabili, che usano la stessa maschera
+delle fatture.
 
 ``:position:`` vale ``before``, ``after``, ``replace`` o ``remove``.
 ``:auto:`` costruisce le domande dall'aiuto dei campi del modello della pagina.

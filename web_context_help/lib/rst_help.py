@@ -18,6 +18,7 @@ Custom directives::
        :model: res.partner
        :view: base.view_partner_form, base.view_partner_tree
        :view-type: form
+       :when: move_type != entry       see when_match()
 
     .. help-include:: file.rst          group dir, then common/ fallback
 
@@ -35,6 +36,10 @@ Custom directives::
     .. help-version:: >=17              content kept only on matching versions
 
        RST content (sections allowed)
+
+List pages (``:view-type: list``) get the global *wildcard* text of
+web_context_help (``help/common/search_wildcard.rst``) at the end of their
+*How to search* section, see insert_global().
 
 Roles: :field:`name` (highlight field in Odoo tab), :tour:`name` (run tour),
 :version:`16|text;17-18|text;*|text` (text of the first matching version).
@@ -113,6 +118,44 @@ def version_match(spec, version):
     return False
 
 
+RE_WHEN = re.compile(r"^\s*(\w+)\s*(!=|=)\s*(.+?)\s*$")
+
+
+def parse_when(spec):
+    """``a = x, y and b != z`` -> [(a, "=", [x, y]), (b, "!=", [z])]"""
+    conditions = []
+    for item in re.split(r"\s+and\s+", (spec or "").strip()):
+        if not item:
+            continue
+        x = RE_WHEN.match(item)
+        if not x:
+            raise ValueError("invalid when condition %r" % item)
+        values = [v.strip() for v in x.group(3).split(",") if v.strip()]
+        if not values:
+            raise ValueError("invalid when condition %r" % item)
+        conditions.append((x.group(1), x.group(2), values))
+    return conditions
+
+
+def when_match(spec, values):
+    """True when the Odoo context ``values`` satisfy every condition of spec.
+
+    ``values`` holds the selection / boolean fields of the open record and the
+    ``default_<name>`` keys of the action context (as ``<name>``). A missing
+    value never matches, so the page is not shown where the condition cannot
+    be checked. An empty spec always matches."""
+    values = values or {}
+    for name, op, wanted in parse_when(spec):
+        if name not in values:
+            return False
+        value = values[name]
+        # an empty selection or a false boolean compares as "False"
+        value = "False" if value in (None, False, "") else "%s" % value
+        if (value in wanted) != (op == "="):
+            return False
+    return True
+
+
 def version_group(major):
     for lo, hi, group in VERSION_GROUPS:
         if lo <= major <= hi:
@@ -141,8 +184,12 @@ def list_sources(help_dir, group):
     return sources
 
 
+# Bumped when the HTML built from the same sources changes: pages are rebuilt
+BUILD = 5
+
+
 def checksum(help_dir, group, version=None):
-    seed = "%s:%s" % (group, version or group_version(group))
+    seed = "%s:%s:%s" % (BUILD, group, version or group_version(group))
     sha = hashlib.sha1(seed.encode("utf-8"))
     for fn, path in sorted(list_sources(help_dir, group).items()):
         sha.update(fn.encode("utf-8"))
@@ -216,9 +263,14 @@ class HelpPage(Directive):
         "model": directives.unchanged,
         "view": directives.unchanged,
         "view-type": directives.unchanged,
+        "when": directives.unchanged,
     }
 
     def run(self):
+        try:
+            parse_when(self.options.get("when", ""))
+        except ValueError as e:
+            raise self.error("help-page: %s" % e)
         page = {
             "name": self.arguments[0].strip(),
             "title": self.options.get("title", ""),
@@ -227,6 +279,7 @@ class HelpPage(Directive):
                 x.strip() for x in self.options.get("view", "").split(",") if x.strip()
             ),
             "view_type": self.options.get("view-type", ""),
+            "when": self.options.get("when", "").strip(),
         }
         self.state.document.wch_page = page
         return []
@@ -294,16 +347,17 @@ class HelpQuestion(Directive):
             fields_help = document.settings.wch_fields_help
             if not model or not fields_help:
                 return []
+            # Marked: the FAQ page leaves them to the Fields page
             return [
-                self._question(label, [help_text])
+                self._question(label, [help_text], classes=["wch-auto-q"])
                 for (dummy, label, help_text) in fields_help(model)
             ]
         if not self.arguments:
             raise self.error("help-question: question text required")
         return [self._question(self.arguments[0], None)]
 
-    def _question(self, question, answer):
-        box = nodes.container(classes=["wch-question"])
+    def _question(self, question, answer, classes=None):
+        box = nodes.container(classes=["wch-question"] + (classes or []))
         box["wch_question"] = question
         box += nodes.paragraph(question, question, classes=["wch-q"])
         body = nodes.container(classes=["wch-a"])
@@ -342,12 +396,16 @@ def version_role(name, rawtext, text, lineno, inliner, options=None, content=Non
     """:version:`16|text;>=17|text`: inline text of the first matching version"""
     version = inliner.document.settings.wch_version
     chosen = ""
-    for alternative in nodes.unescape(text).split(";"):
+    alternatives = nodes.unescape(text).split(";")
+    # Checked before choosing: a ";" in the text must fail on every version,
+    # not only on the versions after the first match
+    for alternative in alternatives:
         if "|" not in alternative:
             msg = inliner.reporter.error(
                 "version: %r has no condition" % alternative, line=lineno
             )
             return [inliner.problematic(rawtext, rawtext, msg)], [msg]
+    for alternative in alternatives:
         spec, value = alternative.split("|", 1)
         try:
             if version_match(spec, version):
@@ -365,7 +423,8 @@ def version_role(name, rawtext, text, lineno, inliner, options=None, content=Non
 
 def _data_role(kind):
     def role(name, rawtext, text, lineno, inliner, options=None, content=None):
-        text = nodes.unescape(text)
+        # A role wrapped on two lines has a newline in its label
+        text = re.sub(r"\s+", " ", nodes.unescape(text)).strip()
         label, target = text, text
         x = re.match(r"^(.*?)\s*<([^<>]+)>$", text)
         if x:
@@ -473,6 +532,37 @@ def apply_inherit(
         for node in reversed(new_nodes):
             parent.insert(index + 1, node)
     return True
+
+
+LIST_VIEW_TYPES = ("list", "tree")
+GLOBAL_SEARCH = "search_wildcard.rst"
+
+
+def insert_global(document, new_nodes, label, section, fallback="footer"):
+    """Put a global section in a page doctree; return where it went.
+
+    A section with the same ``label`` is replaced; else the nodes are appended
+    to ``section``, else placed before ``fallback``, else at the end."""
+    new_nodes = [node.deepcopy() for node in new_nodes]
+    old = find_section(document, label)
+    if old is not None:
+        parent, index = old.parent, old.parent.index(old)
+        parent.remove(old)
+        for node in reversed(new_nodes):
+            parent.insert(index, node)
+        return "replace"
+    target = find_section(document, section)
+    if target is not None:
+        target.extend(new_nodes)
+        return "append"
+    target = find_section(document, fallback)
+    if target is not None:
+        parent, index = target.parent, target.parent.index(target)
+        for node in reversed(new_nodes):
+            parent.insert(index, node)
+        return "before"
+    document.extend(new_nodes)
+    return "end"
 
 
 def to_html(document):

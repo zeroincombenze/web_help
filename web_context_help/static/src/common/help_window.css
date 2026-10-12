@@ -19,6 +19,8 @@
         --wch-border: #3f3f46;
         --wch-warn: #4a3f1a;
     }
+    mark.wch-match { background: #6b5d1a; }
+    mark.wch-match.wch-current { background: #b8621b; }
 }
 body.wch-body {
     margin: 0;
@@ -37,9 +39,19 @@ body.wch-body {
     border-bottom: 1px solid var(--wch-border);
 }
 .wch-follow { white-space: nowrap; font-size: 13px; color: var(--wch-muted); }
-.wch-ask { display: flex; flex: 1; gap: 6px; }
-.wch-ask input { flex: 1; min-width: 0; padding: 4px 8px; border: 1px solid var(--wch-border);
+.wch-find { display: flex; flex: 1; gap: 6px; align-items: center; min-width: 0; }
+.wch-find input, .wch-ask input { flex: 1; min-width: 0; padding: 4px 8px; border: 1px solid var(--wch-border);
     border-radius: 4px; background: var(--wch-bg); color: var(--wch-fg); }
+.wch-find-nav { padding: 2px 6px; font-size: 11px; line-height: 1; cursor: pointer;
+    border: 1px solid var(--wch-border); border-radius: 4px; background: var(--wch-bg); color: var(--wch-fg); }
+.wch-find-nav:hover { border-color: var(--wch-accent); color: var(--wch-accent); }
+.wch-nav { padding: 3px 10px; font-size: 13px; white-space: nowrap; text-decoration: none;
+    border: 1px solid var(--wch-accent); border-radius: 4px; color: var(--wch-accent); }
+.wch-nav:hover { background: var(--wch-accent); color: var(--wch-bg); }
+.wch-find-count { font-size: 13px; color: var(--wch-muted); white-space: nowrap; }
+mark.wch-match { background: #fff3a3; color: inherit; border-radius: 2px; }
+mark.wch-match.wch-current { background: #ff9632; }
+.wch-ask { display: flex; flex: 1; gap: 6px; }
 .wch-answers { padding: 0 16px; }
 .wch-answer { border-bottom: 1px solid var(--wch-border); padding: 8px 0; }
 .wch-answer p { margin: 4px 0 0; color: var(--wch-muted); font-size: 13px; }

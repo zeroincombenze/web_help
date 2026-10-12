@@ -27,6 +27,47 @@ Usage
 Write the invoice address.
 """
 
+WHEN_COMPANY = """.. help-page:: company
+   :model: res.partner
+   :view-type: form
+   :when: is_company = True
+"""
+
+WHEN_PERSON = """.. help-page:: person
+   :model: res.partner
+   :view-type: form
+   :when: is_company = False
+"""
+
+LIST = """.. help-page:: partner_list
+   :model: res.partner.category
+   :view-type: list
+
+Partners
+========
+
+.. _search:
+
+How to search
+-------------
+
+Type the name.
+
+.. _wildcard:
+
+Searching with the wildcard
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Module text replaced by the global one.
+
+.. _footer:
+
+Footer
+------
+
+Page created.
+"""
+
 INHERIT = """.. help-inherit:: wch_test_a.partner
    :section: usage
    :position: after
@@ -45,13 +86,19 @@ class TestContextHelp(common.TransactionCase):
         self.Page = self.env["context.help.page"]
         self.tmp = tempfile.mkdtemp()
         self.addCleanup(shutil.rmtree, self.tmp)
-        self.dir_a = self._help_dir("a", {"common/partner.rst": BASE})
+        self.dir_a = self._help_dir(
+            "a", {"common/partner.rst": BASE, "common/partner_list.rst": LIST}
+        )
         self.dir_b = self._help_dir("b", {"common/extra.rst": INHERIT})
+        self.dir_c = self._help_dir(
+            "c", {"common/company.rst": WHEN_COMPANY, "common/person.rst": WHEN_PERSON}
+        )
         own = os.path.join(get_module_path("web_context_help"), "help")
         self.modules = [
             ("web_context_help", own),
             ("wch_test_a", self.dir_a),
             ("wch_test_b", self.dir_b),
+            ("wch_test_c", self.dir_c),
         ]
 
     def _help_dir(self, name, files):
@@ -87,6 +134,23 @@ class TestContextHelp(common.TransactionCase):
         html = page.html
         self.assertLess(html.index("invoice address"), html.index("carrier notes"))
         self.assertIn("extra", page.section_ids.mapped("label"))
+
+    def test_list_global_wildcard(self):
+        self._rebuild()
+        page = self.Page.search(
+            [("key", "=", "wch_test_a.partner_list"), ("lang", "=", "en_US")]
+        )
+        html = page.html
+        self.assertNotIn("Module text replaced", html)
+        self.assertEqual(html.count('id="wildcard"'), 1)
+        self.assertLess(html.index("Type the name"), html.index("S%Maria%C%V"))
+        self.assertLess(html.index("S%Maria%C%V"), html.index("Page created"))
+        self.assertIn(
+            "Searching with the wildcard", page.section_ids.mapped("title")
+        )
+        # form pages do not get it
+        form = self.Page.search([("key", "=", "wch_test_a.partner")])
+        self.assertNotIn("S%Maria%C%V", form.html)
 
     def test_edit_and_source_change(self):
         self._rebuild()
@@ -136,6 +200,21 @@ class TestContextHelp(common.TransactionCase):
         )
         self.assertEqual(page.lang, "en_US")
 
+    def test_lookup_when(self):
+        self._rebuild()
+
+        def lookup(**kw):
+            return self.Page.lookup(model="res.partner", view_type="form", **kw)
+
+        page = lookup(values={"is_company": True})
+        self.assertEqual(page.key, "wch_test_c.company")
+        self.assertEqual(page.when, "is_company = True")
+        page = lookup(values={"is_company": False})
+        self.assertEqual(page.key, "wch_test_c.person")
+        # value unknown: both conditional pages skipped, the model page is used
+        page = lookup()
+        self.assertEqual(page.key, "wch_test_a.partner")
+
     def test_fields_help(self):
         items = self.Page.fields_help("context.help.page")
         self.assertIn("key", [name for name, dummy, dummy2 in items])
@@ -175,9 +254,29 @@ class TestContextHelpHttp(common.HttpCase):
         self.assertIn(
             "/web_context_help/page/web_context_help.context_help_page", res["url"]
         )
-        res = self.url_open(res["url"])
+        url = res["url"]
+        res = self.url_open(url)
         self.assertEqual(res.status_code, 200)
         self.assertIn("help_window.js", res.text)
+        # FAQ and fields help on their own pages, linked by header buttons
+        self.assertIn('id="wch_faq"', res.text)
+        self.assertIn('id="wch_fields"', res.text)
+        self.assertNotIn('id="wch_help"', res.text)
+        self.assertNotIn('id="faq"', res.text)
+        res = self.url_open(url + "&view=faq")
+        self.assertEqual(res.status_code, 200)
+        self.assertIn('id="faq"', res.text)
+        self.assertNotIn("wch-auto-q", res.text)
+        self.assertIn('id="wch_help"', res.text)
+        self.assertNotIn('id="wch_faq"', res.text)
+        res = self.url_open(url + "&view=fields")
+        self.assertEqual(res.status_code, 200)
+        self.assertIn('class="wch-field"', res.text)
+        self.assertIn('id="wch_faq"', res.text)
+        self.assertNotIn('id="wch_fields"', res.text)
+        res = self.url_open(url + "&view=other")
+        self.assertEqual(res.status_code, 200)
+        self.assertIn('id="wch_fields"', res.text)
         res = self._json("/web_context_help/lookup", {"model": "res.country"})
         self.assertIn("/web_context_help/auto/res.country", res["url"])
         self.assertEqual(self.url_open(res["url"]).status_code, 200)

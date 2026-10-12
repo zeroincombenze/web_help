@@ -11,7 +11,7 @@ import re
 from odoo import api, fields, models, release
 from odoo.modules.module import get_module_path
 
-from ..lib import rst_help
+from ..lib import html_page, rst_help
 
 _logger = logging.getLogger(__name__)
 
@@ -62,6 +62,10 @@ class ContextHelpPage(models.Model):
         "Views", help="Comma separated xmlids of the views this page explains"
     )
     view_type = fields.Char()
+    when = fields.Char(
+        help="Condition on the open record or the action context, e.g. "
+        "move_type != entry"
+    )
     source_html = fields.Html(sanitize=False, readonly=True)
     html = fields.Html("Content", sanitize=False)
     edited = fields.Boolean(
@@ -109,9 +113,13 @@ class ContextHelpPage(models.Model):
         }
 
     @api.model
-    def page_url(self, key, lang=None):
+    def page_url(self, key, lang=None, view=None):
+        """URL of a page; view: "faq" or "fields" for its FAQ or Fields page"""
         url = "/web_context_help/page/%s" % key
-        return "%s?lang=%s" % (url, lang) if lang else url
+        params = ["lang=%s" % lang] if lang else []
+        if view:
+            params.append("view=%s" % view)
+        return "%s?%s" % (url, "&".join(params)) if params else url
 
     # ------------------------------------------------------------------
     # Lookup
@@ -130,23 +138,35 @@ class ContextHelpPage(models.Model):
         return "%s.%s" % (data.module, data.name) if data else False
 
     @api.model
-    def lookup(self, model=None, view_type=None, view_id=None, lang=None):
+    def lookup(
+        self, model=None, view_type=None, view_id=None, lang=None, values=None
+    ):
         """Return the page matching the Odoo context, or an empty recordset.
 
-        Order: view xmlid -> model + view_type -> model."""
+        Order: view xmlid -> model + view_type -> model. At every step a page
+        whose ``when`` condition fails on ``values`` is skipped (see
+        rst_help.when_match)."""
         lang = lang or self.env.context.get("lang") or rst_help.DEFAULT_LANG
         xmlid = self._wch_view_xmlid(view_id)
+
+        def matching(pages):
+            return pages.filtered(lambda p: rst_help.when_match(p.when, values))
+
         pages = self.browse()
         if xmlid:
-            pages = self.search([("view_xmlid", "ilike", xmlid)]).filtered(
-                lambda p: xmlid in (p.view_xmlid or "").split(",")
+            pages = matching(
+                self.search([("view_xmlid", "ilike", xmlid)]).filtered(
+                    lambda p: xmlid in (p.view_xmlid or "").split(",")
+                )
             )
         if not pages and model and view_type:
             types = VIEW_TYPE_ALIASES.get(view_type, (view_type,))
-            pages = self.search([("model", "=", model), ("view_type", "in", types)])
+            pages = matching(
+                self.search([("model", "=", model), ("view_type", "in", types)])
+            )
         if not pages and model:
-            pages = self.search(
-                [("model", "=", model), ("view_type", "in", (False, ""))]
+            pages = matching(
+                self.search([("model", "=", model), ("view_type", "in", (False, ""))])
             )
         if not pages:
             return pages
@@ -260,7 +280,16 @@ class ContextHelpPage(models.Model):
                     "title": section.title,
                     "snippet": (section.text or "")[:300],
                     "url": "%s#%s"
-                    % (self.page_url(page.key, page.lang), section.label),
+                    % (
+                        self.page_url(
+                            page.key,
+                            page.lang,
+                            view="faq"
+                            if section.label == html_page.FAQ_LABEL
+                            else None,
+                        ),
+                        section.label,
+                    ),
                     "score": score,
                 }
             )
@@ -400,10 +429,17 @@ class ContextHelpPage(models.Model):
             pages.extend(p)
             inherits.extend(i)
         inherits.sort(key=lambda i: order.get(i["module"], 0))
+        globals_ = {}
         built = {}
         for item in pages:
             key = "%s.%s" % (item["module"], item["page"]["name"])
             doc = item["doc"]
+            if item["page"]["view_type"] in rst_help.LIST_VIEW_TYPES:
+                lang = item["lang"]
+                if lang not in globals_:
+                    globals_[lang] = self._wch_global_search(group, lang, version)
+                if globals_[lang]:
+                    rst_help.insert_global(doc, globals_[lang], "wildcard", "search")
             for inherit in self._wch_inherits_for(inherits, key, item["lang"]):
                 ok = rst_help.apply_inherit(
                     doc,
@@ -434,12 +470,27 @@ class ContextHelpPage(models.Model):
                     "model": page["model"] or False,
                     "view_xmlid": page["view"] or False,
                     "view_type": page["view_type"] or False,
+                    "when": page.get("when") or False,
                     "active": True,
                 },
                 "html": rst_help.to_html(doc),
                 "sections": rst_help.extract_sections(doc),
             }
         self._wch_store(built)
+
+    @api.model
+    def _wch_global_search(self, group, lang, version=None):
+        """Nodes of the wildcard text added to the search of every list page"""
+        help_dir = os.path.join(get_module_path("web_context_help"), "help")
+        path = rst_help.resolve_include(help_dir, group, rst_help.GLOBAL_SEARCH, lang)
+        if not path:
+            return []
+        try:
+            doc = rst_help.parse_file(path, help_dir, group, lang, version=version)
+        except Exception as e:
+            _logger.warning("web_context_help: %s not parsed: %s", path, e)
+            return []
+        return doc.children[:]
 
     @api.model
     def _wch_store(self, built):

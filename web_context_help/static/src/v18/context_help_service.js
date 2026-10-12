@@ -34,6 +34,7 @@ export const contextHelpService = {
                 model: ctx.model,
                 view_type: ctx.viewType,
                 view_id: ctx.viewId,
+                values: ctx.values || {},
             });
         }
 
@@ -54,7 +55,10 @@ export const contextHelpService = {
                 return;
             }
             const result = await lookup(ctx);
-            const current = helpWindow.location.pathname + helpWindow.location.search;
+            // The FAQ and Fields pages of the current page are not left
+            const location = new URL(helpWindow.location.href);
+            location.searchParams.delete("view");
+            const current = location.pathname + location.search;
             if (result.url && result.url !== current) {
                 helpWindow.location = result.url;
             }

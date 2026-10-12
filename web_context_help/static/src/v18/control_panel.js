@@ -27,7 +27,33 @@ patch(ControlPanel.prototype, {
                 (this.env.model && this.env.model.root && this.env.model.root.resModel),
             viewType: config.viewType,
             viewId: config.viewId,
+            values: this.getContextHelpValues(),
         };
+    },
+    /**
+     * Values checked by the "when" condition of the help pages: the
+     * default_<name> keys of the action context (as <name>), overridden by the
+     * selection and boolean fields of the open record (form view)
+     */
+    getContextHelpValues() {
+        const values = {};
+        const searchModel = this.env.searchModel;
+        const context = (searchModel && searchModel.globalContext) || {};
+        for (const [key, value] of Object.entries(context)) {
+            const scalar = ["string", "number", "boolean"].includes(typeof value);
+            if (key.startsWith("default_") && scalar) {
+                values[key.slice(8)] = value;
+            }
+        }
+        const root = this.env.model && this.env.model.root;
+        if (root && root.data && root.fields && !root.records) {
+            for (const [name, field] of Object.entries(root.fields)) {
+                if (["selection", "boolean"].includes(field.type) && name in root.data) {
+                    values[name] = root.data[name];
+                }
+            }
+        }
+        return values;
     },
     onContextHelpClick() {
         this.contextHelp.open(this.getContextHelpContext());
