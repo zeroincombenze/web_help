@@ -48,6 +48,13 @@ LABELS = {
         "faq": "FAQ",
         "fields": "Fields",
         "help": "Help",
+        "home": "Home",
+        "summary": "Summary",
+        "edit": "Edit",
+        "summary_title": "Help summary",
+        "summary_none": "No help page available.",
+        "view_list": "list",
+        "view_form": "form",
         "ask": "Ask a question",
         "none": "No answer found",
         "auto": "Fields of this form",
@@ -62,6 +69,13 @@ LABELS = {
         "faq": "FAQ",
         "fields": "Campi",
         "help": "Aiuto",
+        "home": "Inizio",
+        "summary": "Sommario",
+        "edit": "Modifica",
+        "summary_title": "Sommario dell'aiuto",
+        "summary_none": "Nessuna pagina di aiuto disponibile.",
+        "view_list": "elenco",
+        "view_form": "maschera",
         "ask": "Fai una domanda",
         "none": "Nessuna risposta trovata",
         "auto": "Campi di questa maschera",
@@ -114,13 +128,15 @@ def split_faq(body_html):
     return body, faq
 
 
-NAV = ("help", "faq", "fields")
+NAV = ("home", "help", "faq", "fields", "summary", "edit")
+# Opened in a new tab: the Odoo backend, not a help page
+NAV_BLANK = ("edit",)
 
 
 def render(
     title, body_html, lang="en_US", page_key="", model="", warning=False, nav=None
 ):
-    """nav: {"help"|"faq"|"fields": url} buttons in the header, in NAV order"""
+    """nav: {name: url} buttons in the header, in NAV order"""
     tr = labels(lang)
     config = json.dumps(
         {"page_key": page_key, "model": model, "lang": lang, "labels": tr}
@@ -157,8 +173,13 @@ def render(
         "version": asset_version(),
         "follow": escape(tr["follow"]),
         "nav": "".join(
-            '  <a class="wch-nav" id="wch_%s" href="%s">%s</a>\n'
-            % (name, escape(nav[name]), escape(tr[name]))
+            '  <a class="wch-nav" id="wch_%s" href="%s"%s>%s</a>\n'
+            % (
+                name,
+                escape(nav[name]),
+                ' target="_blank" rel="noopener"' if name in NAV_BLANK else "",
+                escape(tr[name]),
+            )
             for name in NAV
             if (nav or {}).get(name)
         ),
@@ -203,6 +224,24 @@ def fields_body(title, fields_help, lang="en_US"):
     )
 
 
-def render_auto(title, fields_help, lang="en_US", model=""):
+def render_auto(title, fields_help, lang="en_US", model="", nav=None):
     """Page built on the fly from the fields help of a model"""
-    return render(title, fields_body(title, fields_help, lang), lang=lang, model=model)
+    return render(
+        title, fields_body(title, fields_help, lang), lang=lang, model=model, nav=nav
+    )
+
+
+def summary_body(groups, lang="en_US"):
+    """Body listing the help pages: groups is [(module title, [(title, url)])]"""
+    tr = labels(lang)
+    parts = ["<h1>%s</h1>" % escape(tr["summary_title"])]
+    for module_title, pages in groups:
+        parts.append('<h2>%s</h2>\n<ul class="wch-summary">' % escape(module_title))
+        parts.extend(
+            '<li><a href="%s">%s</a></li>' % (escape(url), escape(title))
+            for title, url in pages
+        )
+        parts.append("</ul>")
+    if not groups:
+        parts.append('<p class="wch-none">%s</p>' % escape(tr["summary_none"]))
+    return "\n".join(parts)

@@ -180,6 +180,25 @@ class TestContextHelp(common.TransactionCase):
         self.assertFalse(page.active)
         self.assertTrue(page.exists())
 
+    def test_summary(self):
+        self._rebuild()
+        groups = dict(self.Page.summary("en_US"))
+        # Grouped by module, one entry per key, the home page excluded
+        self.assertEqual(
+            [title for title, dummy in groups["wch_test_a"]],
+            ["Partner", "Partners (list)"],
+        )
+        italian = dict(self.Page.summary("it_IT"))["wch_test_a"]
+        self.assertIn("Partners (elenco)", dict(italian))
+        self.assertIn(
+            "/web_context_help/page/wch_test_a.partner?lang=en_US",
+            dict(groups["wch_test_a"]).values(),
+        )
+        self.assertNotIn("wch_test_b", groups)
+        own = [url for dummy, url in groups["Context help"]]
+        self.assertFalse([url for url in own if "web_context_help.home" in url])
+        self.assertTrue(self.Page.get_page("web_context_help.home", "it_IT"))
+
     def test_lookup(self):
         self._rebuild()
         form = self.env.ref("base.view_partner_form")
@@ -288,3 +307,44 @@ class TestContextHelpHttp(common.HttpCase):
         )
         res = self._json("/web_context_help/ask", {"question": "rebuilt checksum"})
         self.assertTrue(res["results"])
+
+    def test_home_and_summary(self):
+        self.env["context.help.page"].sync_sources(force=True)
+        self.authenticate("admin", "admin")
+        res = self.url_open("/web_context_help/home?lang=en_US")
+        self.assertEqual(res.status_code, 200)
+        self.assertIn("/web_context_help/page/web_context_help.home", res.url)
+        self.assertIn('id="wch_summary"', res.text)
+        self.assertNotIn('id="wch_home"', res.text)
+        self.assertIn('id="wch_edit"', res.text)
+        # A stray "?debug=1" after the lang keeps the language
+        res = self.url_open(
+            "/web_context_help/page/web_context_help.home?lang=it_IT?debug=1"
+        )
+        self.assertIn("Benvenuto", res.text)
+        res = self.url_open("/web_context_help/summary?lang=en_US")
+        self.assertEqual(res.status_code, 200)
+        self.assertIn("Help summary", res.text)
+        self.assertIn(
+            "/web_context_help/page/web_context_help.context_help_page", res.text
+        )
+        self.assertIn('id="wch_home"', res.text)
+        self.assertNotIn('id="wch_summary"', res.text)
+        res = self.url_open(
+            "/web_context_help/page/web_context_help.context_help_page?lang=en_US"
+        )
+        self.assertIn('id="wch_home"', res.text)
+        self.assertIn('id="wch_summary"', res.text)
+        # Edit is for the users allowed to change the pages
+        self.env["res.users"].create(
+            {
+                "name": "Help reader",
+                "login": "wch_reader",
+                "password": "wch_reader_pwd",
+                "groups_id": [(6, 0, [self.env.ref("base.group_user").id])],
+            }
+        )
+        self.authenticate("wch_reader", "wch_reader_pwd")
+        res = self.url_open("/web_context_help/home")
+        self.assertEqual(res.status_code, 200)
+        self.assertNotIn('id="wch_edit"', res.text)

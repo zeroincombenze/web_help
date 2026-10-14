@@ -49,6 +49,14 @@ export const contextHelpService = {
             }
         }
 
+        // Help menu: the home page, in the same window as the context help
+        function openHome() {
+            helpWindow = browser.open("/web_context_help/home", WINDOW_NAME);
+            if (helpWindow) {
+                helpWindow.focus();
+            }
+        }
+
         async function notify(ctx) {
             lastContext = ctx;
             if (!isOpen() || !isFollowing()) {
@@ -145,8 +153,13 @@ export const contextHelpService = {
             }
         });
 
-        return {open, notify, isOpen};
+        return {open, openHome, notify, isOpen};
     },
 };
 
 registry.category("services").add("context_help", contextHelpService);
+
+// Client action of the Help menu: opens the window, the current view stays
+registry.category("actions").add("web_context_help.home", (env) => {
+    env.services.context_help.openHome();
+});

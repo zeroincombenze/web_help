@@ -18,6 +18,8 @@ _logger = logging.getLogger(__name__)
 RE_WORD = re.compile(r"\w{3,}", re.UNICODE)
 # The web client says "list", arch and actions say "tree"
 VIEW_TYPE_ALIASES = {"list": ("list", "tree"), "tree": ("list", "tree")}
+# Page opened by the Help menu; the summary lists all the other pages
+HOME_KEY = "web_context_help.home"
 
 
 class ContextHelpSource(models.Model):
@@ -120,6 +122,46 @@ class ContextHelpPage(models.Model):
         if view:
             params.append("view=%s" % view)
         return "%s?%s" % (url, "&".join(params)) if params else url
+
+    @api.model
+    def edit_url(self, page):
+        """URL of the backend form of a page"""
+        return "/odoo/action-web_context_help.action_context_help_page/%s" % page.id
+
+    @api.model
+    def summary(self, lang=None):
+        """[(module title, [(page title, url)])] of the pages of every installed
+        help module, the home page excluded; sorted by title. The title ends
+        with the view type of the page: Invoices (list), Invoice (form)"""
+        lang = lang or self.env.context.get("lang") or rst_help.DEFAULT_LANG
+        by_key = {}
+        for page in self.search([("key", "!=", HOME_KEY)]):
+            by_key.setdefault(page.key, self.browse())
+            by_key[page.key] |= page
+        tr = html_page.labels(lang)
+        by_module = {}
+        for key, pages in by_key.items():
+            page = self._wch_best_lang(pages, lang)
+            title = page.name
+            # A model has a list page and a form page with the same title
+            view_type = "list" if page.view_type == "tree" else page.view_type
+            if tr.get("view_%s" % view_type):
+                title = "%s (%s)" % (title, tr["view_%s" % view_type])
+            by_module.setdefault(page.module or "", []).append(
+                (title, self.page_url(key, lang))
+            )
+        Module = self._wch_with_lang(lang).env["ir.module.module"].sudo()
+        titles = {
+            m.name: m.shortdesc or m.name
+            for m in Module.search([("name", "in", list(by_module))])
+        }
+        return sorted(
+            (
+                (titles.get(name, name), sorted(pages, key=lambda p: p[0].lower()))
+                for name, pages in by_module.items()
+            ),
+            key=lambda group: group[0].lower(),
+        )
 
     # ------------------------------------------------------------------
     # Lookup

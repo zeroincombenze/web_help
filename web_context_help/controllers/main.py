@@ -4,6 +4,8 @@
 #
 # License LGPL-3.0-or-later (https://www.gnu.org/licenses/lgpl).
 #
+import re
+
 from markupsafe import escape
 from werkzeug.exceptions import NotFound
 
@@ -11,11 +13,59 @@ from odoo import http
 from odoo.http import request
 
 from ..lib import html_page
+from ..models.context_help_page import HOME_KEY
+
+
+RE_LANG = re.compile(r"^[a-z]{2,3}(_[A-Za-z0-9]+)?(@\w+)?$")
 
 
 class ContextHelp(http.Controller):
     def _lang(self, lang=None):
-        return lang or request.env.context.get("lang") or request.env.user.lang
+        """lang of the request; a malformed one is cut at the first bad char,
+        e.g. it_IT?debug=1 (a second "?" in the URL) gives it_IT"""
+        if lang and not RE_LANG.match(lang):
+            lang = re.split(r"[^\w@]", lang, maxsplit=1)[0]
+        if lang and RE_LANG.match(lang):
+            return lang
+        return request.env.context.get("lang") or request.env.user.lang
+
+    def _nav(self, lang, current=None):
+        """Buttons of every help window page: Home and Summary"""
+        Page = request.env["context.help.page"]
+        nav = {}
+        if current != "home" and Page.get_page(HOME_KEY, lang):
+            nav["home"] = Page.page_url(HOME_KEY, lang)
+        if current != "summary":
+            nav["summary"] = "/web_context_help/summary?lang=%s" % lang
+        return nav
+
+    def _html(self, body):
+        return request.make_response(
+            body, headers=[("Content-Type", "text/html; charset=utf-8")]
+        )
+
+    @http.route("/web_context_help/home", type="http", auth="user")
+    def home(self, lang=None, **kw):
+        """Page of the Help menu; the summary when the page is missing"""
+        lang = self._lang(lang)
+        Page = request.env["context.help.page"]
+        if Page.get_page(HOME_KEY, lang):
+            return request.redirect(Page.page_url(HOME_KEY, lang))
+        return request.redirect("/web_context_help/summary?lang=%s" % lang)
+
+    @http.route("/web_context_help/summary", type="http", auth="user")
+    def summary(self, lang=None, **kw):
+        """Pages of every installed help module, grouped by module"""
+        lang = self._lang(lang)
+        groups = request.env["context.help.page"].summary(lang)
+        return self._html(
+            html_page.render(
+                html_page.labels(lang)["summary_title"],
+                html_page.summary_body(groups, lang),
+                lang=lang,
+                nav=self._nav(lang, "summary"),
+            )
+        )
 
     @http.route("/web_context_help/lookup", type="json", auth="user")
     def lookup(
@@ -62,9 +112,12 @@ class ContextHelp(http.Controller):
             content = html_page.fields_body(page.name, fields_help, lang)
         nav = {
             name: Page.page_url(page.key, lang, view=None if name == "help" else name)
-            for name in html_page.NAV
+            for name in ("help", "faq", "fields")
             if name != (view or "help") and pages[None if name == "help" else name]
         }
+        nav.update(self._nav(lang, "home" if page.key == HOME_KEY else None))
+        if page.has_access("write"):
+            nav["edit"] = Page.edit_url(page)
         body = html_page.render(
             title,
             content,
@@ -75,9 +128,7 @@ class ContextHelp(http.Controller):
             and request.env.user.has_group("base.group_system"),
             nav=nav,
         )
-        return request.make_response(
-            body, headers=[("Content-Type", "text/html; charset=utf-8")]
-        )
+        return self._html(body)
 
     @http.route("/web_context_help/auto/<string:model>", type="http", auth="user")
     def auto(self, model, lang=None, **kw):
@@ -92,11 +143,13 @@ class ContextHelp(http.Controller):
             .name
         )
         body = html_page.render_auto(
-            title or model, Page.fields_help(model), lang=lang, model=model
+            title or model,
+            Page.fields_help(model),
+            lang=lang,
+            model=model,
+            nav=self._nav(lang),
         )
-        return request.make_response(
-            body, headers=[("Content-Type", "text/html; charset=utf-8")]
-        )
+        return self._html(body)
 
     @http.route("/web_context_help/ask", type="json", auth="user")
     def ask(self, question=None, context=None, **kw):

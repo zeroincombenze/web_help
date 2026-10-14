@@ -9,5 +9,8 @@ current view in a separate window, so the Odoo tab stays usable.
 * Administrators can edit a page; the edited version survives the upgrades and
   a warning appears when the original source changes
 * Views without a page get an automatic page built from the fields help
+* The **Help** menu opens the help home page; its **Summary** button lists the
+  pages of every installed help module (e.g. help_account_invoice,
+  help_sale_order)
 
 .. |sos| unicode:: U+1F6DF

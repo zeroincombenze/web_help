@@ -66,3 +66,5 @@ a.wch-tour::before { content: "▶ "; }
 .wch-question .wch-a > :last-child { margin-bottom: 0; }
 .wch-auto dt { font-weight: 600; margin-top: 8px; }
 .wch-auto dd { margin-left: 16px; color: var(--wch-muted); }
+ul.wch-summary { padding-left: 20px; }
+ul.wch-summary li { margin: 2px 0; }

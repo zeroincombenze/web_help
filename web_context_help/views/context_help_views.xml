@@ -59,10 +59,10 @@
                     </group>
                     <notebook>
                         <page name="content" string="Content">
-                            <field name="html"/>
+                            <field name="html" widget="wch_html" class="o_wch_html"/>
                         </page>
                         <page name="source" string="Source">
-                            <field name="source_html"/>
+                            <field name="source_html" widget="wch_html" class="o_wch_html"/>
                         </page>
                         <page name="sections" string="Sections">
                             <field name="section_ids">
@@ -141,6 +141,16 @@
         <field name="res_model">context.help.question</field>
         <field name="view_mode">list</field>
     </record>
+
+    <record id="action_context_help_home" model="ir.actions.client">
+        <field name="name">Help</field>
+        <field name="tag">web_context_help.home</field>
+    </record>
+
+    <!-- Top menu: opens the help home page, with the summary of all the pages -->
+    <menuitem id="menu_help_root" name="Help" action="action_context_help_home"
+        web_icon="web_context_help,static/description/icon.png"
+        groups="base.group_user" sequence="990"/>
 
     <menuitem id="menu_context_help" name="Context Help"
         parent="base.menu_custom" sequence="90"/>

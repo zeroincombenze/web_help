@@ -1,3 +1,10 @@
+Il menu **Aiuto**, in cima all'albero dei menu, apre la pagina iniziale
+dell'aiuto nella finestra di aiuto. Il pulsante **Sommario** nell'intestazione
+elenca, raggruppate per modulo, le pagine di ogni modulo di aiuto installato;
+**Inizio** torna alla pagina iniziale. Gli utenti abilitati a modificare le
+pagine di aiuto vedono anche **Modifica**, che apre la pagina nel backend:
+anche la pagina iniziale può essere adattata come ogni altra pagina.
+
 Premere il pulsante |sos| del pannello di controllo. La pagina è cercata per
 xmlid della vista, poi per modello e tipo vista, poi per modello; altrimenti
 una pagina automatica elenca l'aiuto dei campi.

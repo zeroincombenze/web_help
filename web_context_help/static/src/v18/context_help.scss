@@ -10,3 +10,15 @@
     outline-offset: 2px;
     transition: outline-color 0.3s;
 }
+// Help page content: the field and its code view use the whole page width
+.o_field_widget.o_wch_html {
+    display: block;
+    width: 100%;
+    textarea.o_codeview {
+        width: 100%;
+        min-height: 70vh;
+        font-family: $font-family-monospace;
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+}

@@ -1,3 +1,10 @@
+18.0.1.0.4 (2026-10-14)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Help menu at the top of the menu tree: opens the help home page, editable by the administrator; HTML code view (</>) on the content of the help pages, also without developer mode and as wide as the page
+* [IMP] Help window: Summary button, page listing the help pages of every installed help module, each title followed by its view type (list) or (form); Home and Edit buttons
+* [FIX] Help window: a malformed lang in the URL (e.g. ?lang=it_IT?debug=1) no longer falls back to the English page
+
 18.0.1.0.3 (2026-10-02)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

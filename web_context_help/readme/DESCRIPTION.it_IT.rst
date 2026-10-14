@@ -10,5 +10,8 @@ utilizzabile.
 * Gli amministratori possono modificare una pagina; la versione modificata
   sopravvive agli aggiornamenti e un avviso compare quando cambia la sorgente
 * Le viste senza pagina ricevono una pagina automatica costruita dall'aiuto dei campi
+* Il menu **Aiuto** apre la pagina iniziale dell'aiuto; il suo pulsante
+  **Sommario** elenca le pagine di ogni modulo di aiuto installato (ad es.
+  help_account_invoice, help_sale_order)
 
 .. |sos| unicode:: U+1F6DF
