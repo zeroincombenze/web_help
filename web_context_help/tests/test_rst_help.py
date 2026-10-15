@@ -319,6 +319,27 @@ Press :version:`16|**View Invoice**;17|*Draft Invoice*;*|Create Draft` now.
         html = rst_help.to_html(doc)
         self.assertIn('data-field="partner_shipping_id">delivery address</a>', html)
 
+    def test_html_sections(self):
+        sections = html_page.extract_sections(
+            '<div class="section" id="page"><h1>P</h1><p>intro</p>'
+            '<div class="section" id="faq-1"><span id="faq"></span><h2>FAQ</h2>'
+            '<div class="wch-question"><p class="wch-q">Why?</p>'
+            '<div class="wch-a"><p>Because</p></div></div></div></div>'
+            "<h2 id='v'>Videos</h2><h3>Invoice</h3><div>shown</div>"
+        )
+        self.assertEqual(
+            [(s["label"], s["title"], s["text"]) for s in sections],
+            [
+                ("page", "P", "intro"),
+                ("faq", "FAQ", "Why? Because"),
+                ("v", "Videos", ""),
+                ("", "Invoice", "shown"),
+                ("faq", "Why?", "Because"),
+            ],
+        )
+        self.assertEqual(sections[-1]["question"], "Why?")
+        self.assertEqual(html_page.extract_sections(""), [])
+
     def test_split_faq(self):
         html = (
             '<div class="section" id="page"><h1>P</h1>\n'

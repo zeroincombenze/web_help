@@ -59,10 +59,10 @@
                     </group>
                     <notebook>
                         <page name="content" string="Content">
-                            <field name="html" widget="wch_html" class="o_wch_html"/>
+                            <field name="html" widget="wch_html" options="{'codeview': true}" class="o_wch_html"/>
                         </page>
                         <page name="source" string="Source">
-                            <field name="source_html" widget="wch_html" class="o_wch_html"/>
+                            <field name="source_html" widget="html" options="{'codeview': true}" class="o_wch_html"/>
                         </page>
                         <page name="sections" string="Sections">
                             <field name="section_ids">

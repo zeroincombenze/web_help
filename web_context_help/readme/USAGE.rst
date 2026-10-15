@@ -3,6 +3,11 @@ the help window. The **Summary** button in the header lists, grouped by module,
 the pages of every installed help module; **Home** goes back to the home page.
 Users allowed to change the help pages also see **Edit**, which opens the page
 in the backend: the home page itself can be adapted like any other page.
+In the editor, the film button of the floating toolbar (or the */Help video*
+command) lists the videos of the video directory: the chosen one is inserted
+after the current paragraph, as a player started by a click. To remove a
+video, press Backspace in the line after it or Delete in the line before it. In developer mode
+the **</>** button shows the HTML code of the page.
 
 Press the |sos| button in the control panel. Pages are looked up by view xmlid,
 then by model and view type, then by model; otherwise an automatic page lists

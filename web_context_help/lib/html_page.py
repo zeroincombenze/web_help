@@ -101,6 +101,82 @@ def _section(el):
     return None
 
 
+HEADINGS = ("h1", "h2", "h3", "h4", "h5", "h6")
+SKIP_TAGS = ("script", "style", "video", "audio", "iframe")
+
+
+def _has_class(el, name):
+    return name in (el.get("class") or "").split()
+
+
+def _label_of(el):
+    """Anchor of a heading: its id, else the label of its section"""
+    if el.get("id"):
+        return el.get("id")
+    section = _section(el)
+    if section is None:
+        return ""
+    for span in section.xpath("./span[@id]"):
+        if not span.text_content().strip():
+            return span.get("id")
+    return section.get("id") or ""
+
+
+def _text(el):
+    return " ".join(" ".join(el.itertext()).split())
+
+
+def extract_sections(body_html):
+    """Return [{label, title, text, question}] of an HTML page, as
+    rst_help.extract_sections does from the source.
+
+    Used for the pages edited by an administrator, whose headings are not
+    always wrapped in a section: every heading starts a new entry, its text
+    runs up to the next heading."""
+    if not body_html or not body_html.strip():
+        return []
+    root = lxml_html.fragment_fromstring(body_html, create_parent="div")
+    result = [{"label": "", "title": "", "text": [], "question": ""}]
+    questions = []
+
+    def visit(el):
+        tag = el.tag if isinstance(el.tag, str) else ""
+        if tag in SKIP_TAGS:
+            pass
+        elif tag in HEADINGS:
+            result.append(
+                {"label": _label_of(el), "title": _text(el), "text": [], "question": ""}
+            )
+        elif _has_class(el, "wch-question"):
+            q = el.xpath('.//*[contains(concat(" ", @class, " "), " wch-q ")]')
+            a = el.xpath('.//*[contains(concat(" ", @class, " "), " wch-a ")]')
+            question = _text(q[0]) if q else ""
+            questions.append(
+                {
+                    "label": result[-1]["label"],
+                    "title": question,
+                    "text": _text(a[0]) if a else "",
+                    "question": question,
+                }
+            )
+            result[-1]["text"].append(_text(el))
+        else:
+            if el.text and tag:
+                result[-1]["text"].append(el.text)
+            for child in el:
+                visit(child)
+        if el.tail and el is not root:
+            result[-1]["text"].append(el.tail)
+
+    visit(root)
+    sections = []
+    for entry in result:
+        text = " ".join(" ".join(entry["text"]).split())
+        if entry["title"] or text:
+            sections.append(dict(entry, text=text))
+    return sections + questions
+
+
 def split_faq(body_html):
     """Return (body without the FAQ section, FAQ section html or "").
 

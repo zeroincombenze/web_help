@@ -1,3 +1,10 @@
+18.0.1.0.5 (2026-10-14)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Help pages: Help video button in the floating toolbar of the editor (and /Help video command): inserts a video of the directory set by the system parameter web_help_video_path (default ~/Video), played on click; Backspace or Delete next to a video removes it
+* [UPD] Help pages: HTML code view (</>) shown only in developer mode, as in standard Odoo; the custom field widget is removed
+* [FIX] Help pages: the Sections of a page edited by the administrator (editor or HTML code view) are rebuilt from its content, so the added headings and text are listed and found by the search; a reset to source rebuilds them too
+
 18.0.1.0.4 (2026-10-14)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

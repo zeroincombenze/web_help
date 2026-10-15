@@ -20,6 +20,10 @@ RE_WORD = re.compile(r"\w{3,}", re.UNICODE)
 VIEW_TYPE_ALIASES = {"list": ("list", "tree"), "tree": ("list", "tree")}
 # Page opened by the Help menu; the summary lists all the other pages
 HOME_KEY = "web_context_help.home"
+# Directory of the videos inserted in the help pages
+VIDEO_PATH_PARAM = "web_help_video_path"
+VIDEO_PATH_DEFAULT = "~/Video"
+VIDEO_EXTS = (".mp4", ".m4v", ".webm", ".ogv", ".ogg", ".mov")
 
 
 class ContextHelpSource(models.Model):
@@ -90,13 +94,27 @@ class ContextHelpPage(models.Model):
     def write(self, vals):
         if "html" in vals and not self.env.context.get("wch_sync"):
             vals = dict(vals, edited=True)
-        return super(ContextHelpPage, self).write(vals)
+        res = super(ContextHelpPage, self).write(vals)
+        if "html" in vals and not self.env.context.get("wch_sync"):
+            for page in self:
+                page._wch_set_sections(html_page.extract_sections(page.html))
+        return res
+
+    def _wch_set_sections(self, sections):
+        """Replace the sections used by the full-text search"""
+        self.ensure_one()
+        self.section_ids.unlink()
+        for seq, section in enumerate(sections):
+            self.env["context.help.section"].create(
+                dict(section, page_id=self.id, sequence=seq)
+            )
 
     def action_reset_to_source(self):
         for page in self:
             page.with_context(wch_sync=True).write(
                 {"html": page.source_html, "edited": False, "source_changed": False}
             )
+            page._wch_set_sections(html_page.extract_sections(page.html))
         return True
 
     def action_source_seen(self):
@@ -340,6 +358,50 @@ class ContextHelpPage(models.Model):
         return results
 
     # ------------------------------------------------------------------
+    # Videos
+    # ------------------------------------------------------------------
+    @api.model
+    def _wch_video_dir(self):
+        """Absolute path of the video directory (system parameter)"""
+        path = (
+            self.env["ir.config_parameter"].sudo().get_param(VIDEO_PATH_PARAM)
+            or VIDEO_PATH_DEFAULT
+        )
+        return os.path.realpath(os.path.expanduser(path.strip()))
+
+    @api.model
+    def video_list(self):
+        """{path, videos: [{name, size}]}: the videos of the video directory
+        and its subdirectories, name relative to the directory"""
+        root = self._wch_video_dir()
+        videos = []
+        for dirpath, dirnames, filenames in os.walk(root, followlinks=True):
+            dirnames[:] = sorted(d for d in dirnames if not d.startswith("."))
+            for fn in sorted(filenames):
+                if fn.startswith(".") or not fn.lower().endswith(VIDEO_EXTS):
+                    continue
+                full = os.path.join(dirpath, fn)
+                videos.append(
+                    {
+                        "name": os.path.relpath(full, root).replace(os.sep, "/"),
+                        "size": os.path.getsize(full),
+                    }
+                )
+        return {"path": root, "exists": os.path.isdir(root), "videos": videos}
+
+    @api.model
+    def video_file(self, name):
+        """Full path of a video of the video directory, None when the name
+        is not a video or goes out of the directory"""
+        if not name or not name.lower().endswith(VIDEO_EXTS):
+            return None
+        root = self._wch_video_dir()
+        full = os.path.realpath(os.path.join(root, name))
+        if not full.startswith(root + os.sep) or not os.path.isfile(full):
+            return None
+        return full
+
+    # ------------------------------------------------------------------
     # Build from RST sources
     # ------------------------------------------------------------------
     def _register_hook(self):
@@ -553,11 +615,11 @@ class ContextHelpPage(models.Model):
                     else:
                         vals["html"] = html
                 page.write(vals)
-                page.section_ids.unlink()
-            for seq, section in enumerate(data["sections"]):
-                self.env["context.help.section"].create(
-                    dict(section, page_id=page.id, sequence=seq)
-                )
+            # an edited page keeps the content of the administrator
+            if page.edited:
+                page._wch_set_sections(html_page.extract_sections(page.html))
+            else:
+                page._wch_set_sections(data["sections"])
         for page in existing.values():
             if page.edited:
                 page.active = False

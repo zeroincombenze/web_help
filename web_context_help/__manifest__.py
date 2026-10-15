@@ -9,7 +9,7 @@
 #
 {
     "name": "Context help",
-    "version": "18.0.1.0.4",
+    "version": "18.0.1.0.5",
     "category": "Hidden/Tools",
     "summary": "Context help button, pages written in RST by each module",
     "author": "Zeroincombenze srls",
@@ -20,6 +20,7 @@
     "external_dependencies": {"python": ["docutils"]},
     "data": [
         "security/ir.model.access.csv",
+        "data/ir_config_parameter.xml",
         "views/context_help_views.xml",
     ],
     "assets": {
@@ -28,6 +29,9 @@
             "web_context_help/static/src/v18/control_panel.js",
             "web_context_help/static/src/v18/control_panel.xml",
             "web_context_help/static/src/v18/context_help.scss",
+            "web_context_help/static/src/v18/help_video_dialog.js",
+            "web_context_help/static/src/v18/help_video_dialog.xml",
+            "web_context_help/static/src/v18/help_video_plugin.js",
             "web_context_help/static/src/v18/help_html_field.js",
         ],
     },

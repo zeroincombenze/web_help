@@ -171,6 +171,27 @@ class TestContextHelp(common.TransactionCase):
         self.assertFalse(page.source_changed)
         self.assertIn("New paragraph", page.html)
 
+    def test_edit_rebuilds_sections(self):
+        self._rebuild()
+        page = self.Page.search([("key", "=", "wch_test_a.partner")])
+        page.html = (
+            '<div class="section" id="extra-1"><span id="extra"></span>'
+            "<h2>Extra</h2><p>kept</p></div>"
+            "<h2>Videos</h2><div><br></div>"
+            "<h3>Ordinary invoice</h3><div>The video shows</div>"
+            "<p><video controls><source src='/x'>No video</video></p>"
+        )
+        titles = page.section_ids.mapped("title")
+        self.assertEqual(titles, ["Extra", "Videos", "Ordinary invoice"])
+        self.assertEqual(page.section_ids[0].label, "extra")
+        self.assertEqual(page.section_ids[2].text, "The video shows")
+        # an edited page keeps its sections on rebuild
+        self._rebuild()
+        self.assertIn("Ordinary invoice", page.section_ids.mapped("title"))
+        page.action_reset_to_source()
+        self.assertNotIn("Ordinary invoice", page.section_ids.mapped("title"))
+        self.assertIn("extra", page.section_ids.mapped("label"))
+
     def test_removed_source(self):
         self._rebuild()
         page = self.Page.search([("key", "=", "wch_test_a.partner")])
@@ -348,3 +369,54 @@ class TestContextHelpHttp(common.HttpCase):
         res = self.url_open("/web_context_help/home")
         self.assertEqual(res.status_code, 200)
         self.assertNotIn('id="wch_edit"', res.text)
+
+    def test_videos(self):
+        tmp = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, tmp)
+        os.makedirs(os.path.join(tmp, "videos", "sale"))
+        for fn, data in (
+            ("videos/intro.mp4", b"0123456789"),
+            ("videos/sale/order.webm", b"webm"),
+            ("videos/notes.txt", b"text"),
+            ("secret.mp4", b"secret"),
+        ):
+            with open(os.path.join(tmp, fn), "wb") as fd:
+                fd.write(data)
+        self.env["ir.config_parameter"].sudo().set_param(
+            "web_help_video_path", os.path.join(tmp, "videos")
+        )
+        Page = self.env["context.help.page"]
+        listed = Page.video_list()
+        self.assertTrue(listed["exists"])
+        self.assertEqual(
+            [v["name"] for v in listed["videos"]], ["intro.mp4", "sale/order.webm"]
+        )
+        self.assertFalse(Page.video_file("../secret.mp4"))
+        self.assertFalse(Page.video_file("notes.txt"))
+        self.authenticate("admin", "admin")
+        res = self.url_open("/web_context_help/video/intro.mp4")
+        self.assertEqual((res.status_code, res.content), (200, b"0123456789"))
+        res = self.url_open(
+            "/web_context_help/video/intro.mp4", headers={"Range": "bytes=2-4"}
+        )
+        self.assertEqual((res.status_code, res.content), (206, b"234"))
+        res = self.url_open("/web_context_help/video/sale/order.webm")
+        self.assertEqual(res.content, b"webm")
+        res = self.url_open("/web_context_help/video/..%2Fsecret.mp4")
+        self.assertEqual(res.status_code, 404)
+        res = self.make_jsonrpc_request("/web_context_help/videos")
+        self.assertEqual(len(res["videos"]), 2)
+        # only the administrator lists the videos
+        self.env["res.users"].create(
+            {
+                "name": "Video reader",
+                "login": "wch_video",
+                "password": "wch_video_pwd",
+                "groups_id": [(6, 0, [self.env.ref("base.group_user").id])],
+            }
+        )
+        self.authenticate("wch_video", "wch_video_pwd")
+        res = self.url_open("/web_context_help/video/intro.mp4")
+        self.assertEqual(res.status_code, 200)
+        with self.assertRaises(Exception):
+            self.make_jsonrpc_request("/web_context_help/videos")

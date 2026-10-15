@@ -4,13 +4,15 @@
 #
 # License LGPL-3.0-or-later (https://www.gnu.org/licenses/lgpl).
 #
+import mimetypes
+import os
 import re
 
 from markupsafe import escape
-from werkzeug.exceptions import NotFound
+from werkzeug.exceptions import Forbidden, NotFound
 
 from odoo import http
-from odoo.http import request
+from odoo.http import Stream, request
 
 from ..lib import html_page
 from ..models.context_help_page import HOME_KEY
@@ -156,3 +158,28 @@ class ContextHelp(http.Controller):
         context = dict(context or {})
         context.setdefault("lang", self._lang())
         return request.env["context.help.page"].ask(question, context)
+
+    @http.route("/web_context_help/videos", type="json", auth="user")
+    def videos(self, **kw):
+        """Videos that the administrator can insert in a help page"""
+        if not request.env.user.has_group("base.group_system"):
+            raise Forbidden()
+        return request.env["context.help.page"].video_list()
+
+    @http.route("/web_context_help/video/<path:name>", type="http", auth="user")
+    def video(self, name, **kw):
+        """A video of the video directory, streamed with HTTP range support"""
+        path = request.env["context.help.page"].video_file(name)
+        if not path:
+            raise NotFound()
+        stat = os.stat(path)
+        stream = Stream(
+            type="path",
+            path=path,
+            mimetype=mimetypes.guess_type(path)[0] or "application/octet-stream",
+            download_name=os.path.basename(path),
+            etag="%d-%d" % (int(stat.st_mtime), stat.st_size),
+            last_modified=stat.st_mtime,
+            size=stat.st_size,
+        )
+        return stream.get_response(as_attachment=bool(kw.get("download")))

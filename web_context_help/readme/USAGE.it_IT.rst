@@ -4,6 +4,11 @@ elenca, raggruppate per modulo, le pagine di ogni modulo di aiuto installato;
 **Inizio** torna alla pagina iniziale. Gli utenti abilitati a modificare le
 pagine di aiuto vedono anche **Modifica**, che apre la pagina nel backend:
 anche la pagina iniziale può essere adattata come ogni altra pagina.
+Nell'editor, il pulsante con la pellicola della barra mobile (o il comando
+*/Video di aiuto*) elenca i video della cartella dei video: quello scelto è
+inserito dopo il paragrafo corrente, come lettore avviato con un clic. Per
+togliere un video, premere Backspace nella riga dopo o Canc nella riga prima. In
+modalità sviluppatore il pulsante **</>** mostra il codice HTML della pagina.
 
 Premere il pulsante |sos| del pannello di controllo. La pagina è cercata per
 xmlid della vista, poi per modello e tipo vista, poi per modello; altrimenti

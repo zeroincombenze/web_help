@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="param_web_help_video_path" model="ir.config_parameter">
+        <field name="key">web_help_video_path</field>
+        <field name="value">~/Video</field>
+    </record>
+</odoo>

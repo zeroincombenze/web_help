@@ -347,3 +347,57 @@ msgstr "Tipo vista"
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_page__view_xmlid
 msgid "Views"
 msgstr "Viste"
+
+#. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_plugin.js:0
+msgid "Help video"
+msgstr "Video di aiuto"
+
+#. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_plugin.js:0
+msgid "Insert a video of the help video directory"
+msgstr "Inserisce un video della cartella dei video di aiuto"
+
+#. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_plugin.js:0
+msgid "The browser cannot play the video: "
+msgstr "Il browser non riesce a riprodurre il video: "
+
+#. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_plugin.js:0
+msgid "download it"
+msgstr "scaricalo"
+
+#. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_dialog.xml:0
+msgid "Insert a help video"
+msgstr "Inserisci un video di aiuto"
+
+#. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_dialog.xml:0
+msgid "The video directory does not exist: set the system parameter web_help_video_path."
+msgstr "La cartella dei video non esiste: impostare il parametro di sistema web_help_video_path."
+
+#. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_dialog.xml:0
+msgid "Search a video"
+msgstr "Cerca un video"
+
+#. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_dialog.xml:0
+msgid "No video found."
+msgstr "Nessun video trovato."
+
+#. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_dialog.xml:0
+msgid "Cancel"
+msgstr "Annulla"
