@@ -3,6 +3,7 @@
    :model: account.payment.term
    :view: account.view_payment_term_tree
    :view-type: list
+   :priority: 96
 
 Termini di pagamento
 ====================

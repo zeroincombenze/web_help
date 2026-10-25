@@ -29,13 +29,30 @@ export const contextHelpService = {
             return Boolean(helpWindow && !helpWindow.closed);
         }
 
-        async function lookup(ctx) {
+        async function lookup(ctx, looseFrom) {
             return rpc("/web_context_help/lookup", {
                 model: ctx.model,
                 view_type: ctx.viewType,
                 view_id: ctx.viewId,
                 values: ctx.values || {},
+                loose_from: looseFrom || false,
             });
+        }
+
+        // Loose help button of the help window: the general page of the
+        // open record, the page shown being clear cut or of high priority
+        async function loose(pageKey) {
+            if (!isOpen()) {
+                return;
+            }
+            if (!lastContext) {
+                helpWindow.location = `/web_context_help/loose/${encodeURIComponent(pageKey)}`;
+                return;
+            }
+            const result = await lookup(lastContext, pageKey);
+            if (result.url) {
+                helpWindow.location = result.url;
+            }
         }
 
         async function open(ctx) {
@@ -144,6 +161,9 @@ export const contextHelpService = {
                     break;
                 case "wch_tour":
                     runTour(ev.data.tour);
+                    break;
+                case "wch_loose":
+                    loose(ev.data.page_key);
                     break;
                 case "wch_follow":
                     if (ev.data.value && lastContext) {

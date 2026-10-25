@@ -10,10 +10,16 @@
     var labels = config.labels || {};
     var FOLLOW_KEY = "web_context_help.follow";
 
-    function post(message) {
-        if (window.opener && !window.opener.closed) {
+    function hasOpener() {
+        return Boolean(window.opener && !window.opener.closed);
+    }
+
+    function post(message, keepFocus) {
+        if (hasOpener()) {
             window.opener.postMessage(message, window.location.origin);
-            window.opener.focus();
+            if (!keepFocus) {
+                window.opener.focus();
+            }
         }
     }
 
@@ -35,6 +41,16 @@
     }
 
     function onClick(ev) {
+        var loose = ev.target.closest ? ev.target.closest("#wch_loose") : null;
+        if (loose) {
+            // The Odoo tab knows the open record: it looks the general page
+            // up; without it the link looks it up by the model of the page
+            if (hasOpener()) {
+                ev.preventDefault();
+                post({type: "wch_loose", page_key: config.page_key}, true);
+            }
+            return;
+        }
         var el = ev.target.closest ? ev.target.closest("a.wch-field, a.wch-tour") : null;
         if (!el) {
             return;

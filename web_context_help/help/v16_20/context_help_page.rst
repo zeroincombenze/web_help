@@ -23,6 +23,32 @@ Fields
 :field:`Model <model>` and :field:`View type <view_type>` decide which view
 opens the page.
 
+.. _rules:
+
+Rules
+-----
+
+The **Rules** tab chooses the page by a field of the open record, with no RST
+source: field (selection, boolean or many2one), *is* or *is not*, and the value.
+The Rules tab is shown on the **Clear cut** pages: a clear cut page is shown
+only when one of its rules is met, e.g. the help of an order type. Which page
+wins is set by its **Priority** (1 is the highest):
+
+* the clear cut pages come first, in priority order: the first one with a rule
+  met is shown;
+* with no rule met, the general page (not clear cut) with the highest priority
+  is shown: your own pages (default 32) come before the pages of the modules
+  (96), which are the last fallback.
+
+A clear cut page, or a page of priority 64 or less, shows the **Loose help**
+button: it opens the general help of the same record, i.e. the general page
+of priority 64 or more with the highest priority, usually the page of the
+module.
+
+All the rules are also listed in *Help Rules*. A page created with **New** or
+**Duplicate** has no source and is kept by **Rebuild all pages**; a duplicate
+gets the key of the page followed by " (copy)".
+
 .. help-include:: editing.rst
 
 .. _faq:

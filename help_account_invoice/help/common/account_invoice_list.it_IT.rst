@@ -5,6 +5,7 @@
       :model: account.invoice
       :view: account.invoice_tree, account.invoice_tree_with_onboarding, account.invoice_supplier_tree
       :view-type: list
+      :priority: 96
 
 .. help-version:: 13
 
@@ -14,6 +15,7 @@
       :view: account.view_invoice_tree, account.view_out_invoice_tree, account.view_in_invoice_tree
       :view-type: list
       :when: type != entry
+      :priority: 96
 
 .. help-version:: >=14
 
@@ -23,6 +25,7 @@
       :view: account.view_invoice_tree, account.view_out_invoice_tree, account.view_in_invoice_tree
       :view-type: list
       :when: move_type != entry
+      :priority: 96
 
 Fatture
 =======

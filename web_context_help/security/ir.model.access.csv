@@ -1,7 +1,12 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_context_help_page_user,context.help.page user,model_context_help_page,base.group_user,1,0,0,0
-access_context_help_page_admin,context.help.page admin,model_context_help_page,base.group_system,1,1,1,1
+access_context_help_page_editor,context.help.page editor,model_context_help_page,group_help_editor,1,1,1,1
 access_context_help_section_user,context.help.section user,model_context_help_section,base.group_user,1,0,0,0
-access_context_help_section_admin,context.help.section admin,model_context_help_section,base.group_system,1,1,1,1
+access_context_help_section_editor,context.help.section editor,model_context_help_section,group_help_editor,1,1,1,1
 access_context_help_source_admin,context.help.source admin,model_context_help_source,base.group_system,1,1,1,1
+access_context_help_question_editor,context.help.question editor,model_context_help_question,group_help_editor,1,0,0,0
 access_context_help_question_admin,context.help.question admin,model_context_help_question,base.group_system,1,1,1,1
+access_context_help_rule_editor,context.help.rule editor,model_context_help_rule,group_help_editor,1,1,1,1
+access_ir_model_help_editor,ir.model help editor,base.model_ir_model,group_help_editor,1,0,0,0
+access_ir_model_fields_help_editor,ir.model.fields help editor,base.model_ir_model_fields,group_help_editor,1,0,0,0
+access_ir_model_fields_selection_help_editor,ir.model.fields.selection help editor,base.model_ir_model_fields_selection,group_help_editor,1,0,0,0

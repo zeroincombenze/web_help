@@ -2,6 +2,7 @@
    :title: Ordine di vendita
    :model: sale.order
    :view-type: form
+   :priority: 96
 
 Ordine di vendita
 =================

@@ -20,6 +20,13 @@ RE_WORD = re.compile(r"\w{3,}", re.UNICODE)
 VIEW_TYPE_ALIASES = {"list": ("list", "tree"), "tree": ("list", "tree")}
 # Page opened by the Help menu; the summary lists all the other pages
 HOME_KEY = "web_context_help.home"
+# 1 is the highest priority: the pages built from the sources of the modules
+# are the last fallback, the pages of the administrator come before them
+PRIORITY_DEFAULT = 32
+PRIORITY_STANDARD = 96
+# a clear cut page or a page of priority up to this one shows the Loose help
+# button: the general pages from this priority on, e.g. the module pages
+PRIORITY_LOOSE = 64
 # Directory of the videos inserted in the help pages
 VIDEO_PATH_PARAM = "web_help_video_path"
 VIDEO_PATH_DEFAULT = "~/Video"
@@ -62,7 +69,8 @@ class ContextHelpPage(models.Model):
     name = fields.Char("Title", required=True)
     lang = fields.Char(required=True, default=rst_help.DEFAULT_LANG, index=True)
     module = fields.Char(index=True)
-    source_file = fields.Char(readonly=True)
+    # a copy has no source: it is a page of the administrator, kept by the rebuild
+    source_file = fields.Char(readonly=True, copy=False)
     model = fields.Char(index=True)
     view_xmlid = fields.Char(
         "Views", help="Comma separated xmlids of the views this page explains"
@@ -79,9 +87,32 @@ class ContextHelpPage(models.Model):
     )
     source_changed = fields.Boolean(
         readonly=True,
+        copy=False,
         help="Source changed after the content was edited by an administrator",
     )
     section_ids = fields.One2many("context.help.section", "page_id", "Sections")
+    rule_ids = fields.One2many(
+        "context.help.rule",
+        "page_id",
+        "Rules",
+        help="Conditions set by the administrator: the page is shown when the "
+        "open record meets one of them",
+    )
+    priority = fields.Integer(
+        default=PRIORITY_DEFAULT,
+        copy=False,
+        help="1 is the highest. Pages with rules are checked first, in priority "
+        "order: the first one with a rule met is shown. Otherwise the page "
+        "without rules with the highest priority is shown. Pages built from "
+        "the modules have priority %d, so they are the last fallback"
+        % PRIORITY_STANDARD,
+    )
+    clear_cut = fields.Boolean(
+        "Clear cut",
+        help="Page shown only when one of its rules is met, e.g. the help of an "
+        "order type. A page not clear cut is a general page: its rules are "
+        "ignored and it is shown when no rule of a clear cut page is met",
+    )
     active = fields.Boolean(default=True)
 
     _sql_constraints = [
@@ -91,6 +122,16 @@ class ContextHelpPage(models.Model):
     # ------------------------------------------------------------------
     # Admin editing
     # ------------------------------------------------------------------
+    @api.model_create_multi
+    def create(self, vals_list):
+        pages = super(ContextHelpPage, self).create(vals_list)
+        # a page created by the administrator has no source: its sections
+        # come from its content
+        if not self.env.context.get("wch_sync"):
+            for page in pages:
+                page._wch_set_sections(html_page.extract_sections(page.html))
+        return pages
+
     def write(self, vals):
         if "html" in vals and not self.env.context.get("wch_sync"):
             vals = dict(vals, edited=True)
@@ -99,6 +140,22 @@ class ContextHelpPage(models.Model):
             for page in self:
                 page._wch_set_sections(html_page.extract_sections(page.html))
         return res
+
+    def copy_data(self, default=None):
+        """The copy key ends with " (copy)", the key being unique per language"""
+        vals_list = super().copy_data(default=default)
+        if default and "key" in default:
+            return vals_list
+        for page, vals in zip(self, vals_list):
+            key = "%s (copy)" % page.key
+            n = 1
+            while self.with_context(active_test=False).search_count(
+                [("key", "=", key), ("lang", "=", vals.get("lang", page.lang))]
+            ):
+                n += 1
+                key = "%s (copy %d)" % (page.key, n)
+            vals["key"] = key
+        return vals_list
 
     def _wch_set_sections(self, sections):
         """Replace the sections used by the full-text search"""
@@ -109,8 +166,14 @@ class ContextHelpPage(models.Model):
                 dict(section, page_id=self.id, sequence=seq)
             )
 
+    def has_loose_help(self):
+        """Loose help button: the page is clear cut or of high priority"""
+        self.ensure_one()
+        return self.clear_cut or self.priority <= PRIORITY_LOOSE
+
     def action_reset_to_source(self):
-        for page in self:
+        # a page created by the administrator has no source to go back to
+        for page in self.filtered("source_file"):
             page.with_context(wch_sync=True).write(
                 {"html": page.source_html, "edited": False, "source_changed": False}
             )
@@ -198,39 +261,130 @@ class ContextHelpPage(models.Model):
         return "%s.%s" % (data.module, data.name) if data else False
 
     @api.model
+    def _wch_when_values(self, model, values, names):
+        """values with the many2one fields of model among names turned into
+        [id, xmlid, ...], so a condition can name the record by id or xmlid"""
+        values = dict(values or {})
+        if not model or model not in self.env:
+            return values
+        model_fields = self.env[model]._fields
+        by_comodel = {}
+        for name in names:
+            field = model_fields.get(name)
+            if name not in values or not field or field.type != "many2one":
+                continue
+            value = values[name]
+            if isinstance(value, (list, tuple)):
+                value = value[0] if value else False
+            if isinstance(value, str) and value.isdigit():
+                value = int(value)
+            if isinstance(value, bool) or not isinstance(value, int) or not value:
+                values[name] = False
+                continue
+            values[name] = [str(value)]
+            by_comodel.setdefault(field.comodel_name, {}).setdefault(value, []).append(
+                name
+            )
+        Data = self.env["ir.model.data"].sudo()
+        for comodel, ids in by_comodel.items():
+            for data in Data.search(
+                [("model", "=", comodel), ("res_id", "in", list(ids))]
+            ):
+                for name in ids[data.res_id]:
+                    values[name].append("%s.%s" % (data.module, data.name))
+        return values
+
+    @api.model
     def lookup(
-        self, model=None, view_type=None, view_id=None, lang=None, values=None
+        self,
+        model=None,
+        view_type=None,
+        view_id=None,
+        lang=None,
+        values=None,
+        loose_from=None,
     ):
         """Return the page matching the Odoo context, or an empty recordset.
 
-        Order: view xmlid -> model + view_type -> model. At every step a page
-        whose ``when`` condition fails on ``values`` is skipped (see
-        rst_help.when_match)."""
+        Candidates: the pages of the view xmlid, of model + view_type and of
+        the model alone. A page whose ``when`` condition fails on ``values``
+        is skipped (see rst_help.when_match). The clear cut pages come first,
+        in priority order (1 is the highest): the first one with a rule
+        (context.help.rule) met wins. Otherwise the general page (not clear
+        cut, its rules ignored) with the highest priority wins: the pages of
+        the administrator
+        (default 32) come before the pages of the modules (96), the last
+        fallback. Same priority: the more specific page wins (view xmlid,
+        then view_type, then model), then the one meeting more ``when``
+        conditions.
+
+        loose_from: key of the page shown, for its Loose help button: only
+        the general pages of priority PRIORITY_LOOSE or lower (number from 64
+        up), that page excluded."""
         lang = lang or self.env.context.get("lang") or rst_help.DEFAULT_LANG
         xmlid = self._wch_view_xmlid(view_id)
+        Rule = self.env["context.help.rule"].sudo()
 
-        def matching(pages):
-            return pages.filtered(lambda p: rst_help.when_match(p.when, values))
-
-        pages = self.browse()
+        # level of each candidate page: 0 view xmlid, 1 view type, 2 model
+        level = {}
         if xmlid:
-            pages = matching(
-                self.search([("view_xmlid", "ilike", xmlid)]).filtered(
-                    lambda p: xmlid in (p.view_xmlid or "").split(",")
-                )
-            )
-        if not pages and model and view_type:
+            for page in self.search([("view_xmlid", "ilike", xmlid)]):
+                if xmlid in (page.view_xmlid or "").split(","):
+                    level.setdefault(page.id, 0)
+        if model and view_type:
             types = VIEW_TYPE_ALIASES.get(view_type, (view_type,))
-            pages = matching(
-                self.search([("model", "=", model), ("view_type", "in", types)])
-            )
-        if not pages and model:
-            pages = matching(
-                self.search([("model", "=", model), ("view_type", "in", (False, ""))])
+            for page in self.search([("model", "=", model), ("view_type", "in", types)]):
+                level.setdefault(page.id, 1)
+        if model:
+            for page in self.search(
+                [("model", "=", model), ("view_type", "in", (False, ""))]
+            ):
+                level.setdefault(page.id, 2)
+        pages = self.browse(list(level))
+        if loose_from:
+            pages = pages.filtered(
+                lambda p: not p.clear_cut
+                and p.priority >= PRIORITY_LOOSE
+                and p.key != loose_from
             )
         if not pages:
             return pages
-        return self._wch_best_lang(pages, lang)
+
+        rules = {}
+        clear_cut = pages.filtered("clear_cut")
+        for rule in Rule.search([("page_key", "in", clear_cut.mapped("key"))]):
+            rules.setdefault(rule.page_key, []).append(rule)
+        specs = [p.when for p in pages if p.when]
+        specs += [r.condition for items in rules.values() for r in items]
+        names = set(n for spec in specs for n, op, w in rst_help.parse_when(spec))
+        when_values = self._wch_when_values(model, values, names)
+        with_rules, general = [], []
+        for page in pages:
+            if page.when and not rst_help.when_match(page.when, when_values):
+                continue
+            if not page.clear_cut:
+                general.append(page)
+            elif any(
+                rst_help.when_match(r.condition, when_values)
+                for r in rules.get(page.key, [])
+            ):
+                with_rules.append(page)
+        for found in (with_rules, general):
+            if found:
+                best = min(
+                    found,
+                    key=lambda p: (
+                        p.priority,
+                        level[p.id],
+                        -rst_help.when_count(p.when) if p.when else 0,
+                        p.key,
+                    ),
+                )
+                # every language of the page: the user's one is picked
+                return self._wch_best_lang(
+                    self.browse([p.id for p in found if p.key == best.key]), lang
+                )
+        return self.browse()
 
     @api.model
     def _wch_best_lang(self, pages, lang):
@@ -575,6 +729,7 @@ class ContextHelpPage(models.Model):
                     "view_xmlid": page["view"] or False,
                     "view_type": page["view_type"] or False,
                     "when": page.get("when") or False,
+                    "priority": page.get("priority") or PRIORITY_STANDARD,
                     "active": True,
                 },
                 "html": rst_help.to_html(doc),
@@ -621,6 +776,9 @@ class ContextHelpPage(models.Model):
             else:
                 page._wch_set_sections(data["sections"])
         for page in existing.values():
+            if not page.source_file:
+                # created by the administrator: no source, kept as it is
+                continue
             if page.edited:
                 page.active = False
             else:

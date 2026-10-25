@@ -8,6 +8,9 @@ current view in a separate window, so the Odoo tab stays usable.
   question is logged for the administrator
 * Administrators can edit a page; the edited version survives the upgrades and
   a warning appears when the original source changes
+* A page can be chosen by a field of the open record, many2one included: by
+  the ``:when:`` of its RST source or by rules set by the administrator, e.g. a
+  different sale order help for each order type
 * Views without a page get an automatic page built from the fields help
 * The **Help** menu opens the help home page; its **Summary** button lists the
   pages of every installed help module (e.g. help_account_invoice,

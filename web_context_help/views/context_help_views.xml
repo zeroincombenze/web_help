@@ -14,6 +14,8 @@
                 <field name="module"/>
                 <field name="model"/>
                 <field name="view_type"/>
+                <field name="priority"/>
+                <field name="clear_cut"/>
                 <field name="edited"/>
                 <field name="source_changed"/>
             </list>
@@ -28,7 +30,7 @@
                 <header>
                     <button name="action_open" type="object" string="Open" class="oe_highlight"/>
                     <button name="action_reset_to_source" type="object" string="Reset to source"
-                        invisible="not edited"
+                        invisible="not edited or not source_file"
                         confirm="Discard the changes made to this page?"/>
                     <button name="action_source_seen" type="object" string="Keep my version"
                         invisible="not source_changed"/>
@@ -52,6 +54,10 @@
                             <field name="model"/>
                             <field name="view_xmlid"/>
                             <field name="view_type"/>
+                            <field name="when" readonly="1" invisible="not when"/>
+                            <!-- the rebuild sets the pages of the modules back to 96 -->
+                            <field name="priority" readonly="source_file"/>
+                            <field name="clear_cut"/>
                             <field name="edited"/>
                             <field name="source_changed"/>
                             <field name="active"/>
@@ -63,6 +69,36 @@
                         </page>
                         <page name="source" string="Source">
                             <field name="source_html" widget="html" options="{'codeview': true}" class="o_wch_html"/>
+                        </page>
+                        <page name="rules" string="Rules" invisible="not model or not clear_cut">
+                            <p class="text-muted">
+                                This clear cut page is shown only when the open record
+                                meets one of these rules. Clear cut pages are checked
+                                first, in priority order (1 is the highest); with no
+                                rule met, the general page with the highest priority
+                                is shown, the pages of the modules being the last.
+                            </p>
+                            <field name="rule_ids" context="{'default_page_id': id}">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="model" column_invisible="1"/>
+                                    <field name="field_type" column_invisible="1"/>
+                                    <field name="relation" column_invisible="1"/>
+                                    <field name="field_id" options="{'no_create': True}"/>
+                                    <field name="operator"/>
+                                    <field name="selection_ids" widget="many2many_tags"
+                                        options="{'no_create': True}"
+                                        invisible="field_type != 'selection'"/>
+                                    <field name="value_boolean"
+                                        invisible="field_type != 'boolean'"/>
+                                    <field name="relation_model_id" column_invisible="1"/>
+                                    <field name="record_ref"
+                                        options="{'model_field': 'relation_model_id', 'no_create': True, 'no_open': True}"
+                                        invisible="field_type != 'many2one'"/>
+                                    <field name="condition"/>
+                                    <field name="active" widget="boolean_toggle"/>
+                                </list>
+                            </field>
                         </page>
                         <page name="sections" string="Sections">
                             <field name="section_ids">
@@ -130,9 +166,78 @@
         </field>
     </record>
 
+    <record id="context_help_rule_tree" model="ir.ui.view">
+        <field name="name">context.help.rule.list</field>
+        <field name="model">context.help.rule</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="page_id"/>
+                <field name="model"/>
+                <field name="condition"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="context_help_rule_form" model="ir.ui.view">
+        <field name="name">context.help.rule.form</field>
+        <field name="model">context.help.rule</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <!-- field, operator and value read as one condition -->
+                        <group>
+                            <field name="page_id" options="{'no_create': True}"/>
+                            <field name="field_id" options="{'no_create': True}"
+                                readonly="not model"/>
+                            <field name="field_type" invisible="1"/>
+                            <field name="relation" invisible="1"/>
+                            <field name="operator"/>
+                            <field name="selection_ids" widget="many2many_tags"
+                                options="{'no_create': True}"
+                                invisible="field_type != 'selection'"/>
+                            <field name="value_boolean"
+                                invisible="field_type != 'boolean'"/>
+                            <field name="relation_model_id" invisible="1"/>
+                            <field name="record_ref"
+                                options="{'model_field': 'relation_model_id', 'no_create': True, 'no_open': True}"
+                                invisible="field_type != 'many2one'"/>
+                        </group>
+                        <group>
+                            <field name="model"/>
+                            <field name="condition"/>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="context_help_rule_search" model="ir.ui.view">
+        <field name="name">context.help.rule.search</field>
+        <field name="model">context.help.rule</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="page_id"/>
+                <field name="model"/>
+                <field name="field_id"/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
     <record id="action_context_help_page" model="ir.actions.act_window">
         <field name="name">Help Pages</field>
         <field name="res_model">context.help.page</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_context_help_rule" model="ir.actions.act_window">
+        <field name="name">Help Rules</field>
+        <field name="res_model">context.help.rule</field>
         <field name="view_mode">list,form</field>
     </record>
 
@@ -151,11 +256,24 @@
     <menuitem id="menu_help_root" name="Help" action="action_context_help_home"
         web_icon="web_context_help,static/description/icon.png"
         groups="base.group_user" sequence="990"/>
+    <!-- App of the help editors: the Help app only opens the help window,
+         the Technical menu is for the administrators in debug mode -->
+    <menuitem id="menu_help_editor_root" name="Help Editor"
+        web_icon="web_context_help,static/description/icon.png"
+        groups="group_help_editor" sequence="991"/>
+    <menuitem id="menu_help_editor_page" name="Help Pages" action="action_context_help_page"
+        parent="menu_help_editor_root" sequence="10"/>
+    <menuitem id="menu_help_editor_rule" name="Help Rules" action="action_context_help_rule"
+        parent="menu_help_editor_root" sequence="15"/>
+    <menuitem id="menu_help_editor_question" name="Help Questions" action="action_context_help_question"
+        parent="menu_help_editor_root" sequence="20"/>
 
     <menuitem id="menu_context_help" name="Context Help"
         parent="base.menu_custom" sequence="90"/>
     <menuitem id="menu_context_help_page" action="action_context_help_page"
         parent="menu_context_help" sequence="10"/>
+    <menuitem id="menu_context_help_rule" action="action_context_help_rule"
+        parent="menu_context_help" sequence="15"/>
     <menuitem id="menu_context_help_question" action="action_context_help_question"
         parent="menu_context_help" sequence="20"/>
 

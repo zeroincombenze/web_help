@@ -9,6 +9,9 @@ utilizzabile.
   ogni domanda è registrata per l'amministratore
 * Gli amministratori possono modificare una pagina; la versione modificata
   sopravvive agli aggiornamenti e un avviso compare quando cambia la sorgente
+* Una pagina può essere scelta in base a un campo del record aperto, anche
+  many2one: con il ``:when:`` della sua sorgente RST o con regole impostate
+  dall'amministratore, ad es. un aiuto diverso per ogni tipo di ordine di vendita
 * Le viste senza pagina ricevono una pagina automatica costruita dall'aiuto dei campi
 * Il menu **Aiuto** apre la pagina iniziale dell'aiuto; il suo pulsante
   **Sommario** elenca le pagine di ogni modulo di aiuto installato (ad es.

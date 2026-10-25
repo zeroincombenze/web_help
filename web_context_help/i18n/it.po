@@ -6,23 +6,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-27 10:30+0000\n"
-"PO-Revision-Date: 2026-09-27 10:30+0000\n"
+"POT-Creation-Date: 2026-10-22 05:49+0000\n"
+"PO-Revision-Date: 2026-10-22 05:49+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: web_context_help
 #: model:ir.model.fields,help:web_context_help.field_context_help_page__key
+#: model:ir.model.fields,help:web_context_help.field_context_help_rule__page_key
 msgid "<module>.<name>"
 msgstr "<modulo>.<nome>"
 
 #. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_page__active
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__active
 msgid "Active"
 msgstr "Attivo"
 
@@ -33,8 +34,20 @@ msgstr "Pagina di risposta"
 
 #. module: web_context_help
 #: model_terms:ir.ui.view,arch_db:web_context_help.context_help_page_search
+#: model_terms:ir.ui.view,arch_db:web_context_help.context_help_rule_search
 msgid "Archived"
 msgstr "Archiviato"
+
+#. module: web_context_help
+#: model:ir.model.fields,help:web_context_help.field_context_help_rule__value_boolean
+msgid "Boolean field: checked or not"
+msgstr "Campo booleano: selezionato o no"
+
+#. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_dialog.xml:0
+msgid "Cancel"
+msgstr "Annulla"
 
 #. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_source__checksum
@@ -45,6 +58,30 @@ msgstr "Checksum"
 #: model:ir.model.fields,help:web_context_help.field_context_help_page__view_xmlid
 msgid "Comma separated xmlids of the views this page explains"
 msgstr "Xmlid, separati da virgola, delle viste spiegate da questa pagina"
+
+#. module: web_context_help
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__condition
+msgid "Condition"
+msgstr "Condizione"
+
+#. module: web_context_help
+#: model:ir.model.fields,help:web_context_help.field_context_help_rule__condition
+msgid "Condition checked by the help lookup, same syntax as :when:"
+msgstr "Condizione verificata dalla ricerca dell'aiuto, stessa sintassi di :when:"
+
+#. module: web_context_help
+#: model:ir.model.fields,help:web_context_help.field_context_help_page__when
+msgid ""
+"Condition on the open record or the action context, e.g. move_type != entry"
+msgstr "Condizione sul record aperto o sul contesto dell'azione, ad es. move_type != entry"
+
+#. module: web_context_help
+#: model:ir.model.fields,help:web_context_help.field_context_help_page__rule_ids
+msgid ""
+"Conditions set by the administrator: the page is shown when the open record "
+"meets one of them"
+msgstr "Condizioni impostate dall'amministratore: la pagina è mostrata quando il "
+"record aperto ne soddisfa una"
 
 #. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_page__html
@@ -58,6 +95,7 @@ msgid "Content was changed by an administrator"
 msgstr "Il contenuto è stato modificato da un amministratore"
 
 #. module: web_context_help
+#: model:ir.module.category,name:web_context_help.module_category_context_help
 #: model:ir.ui.menu,name:web_context_help.menu_context_help
 msgid "Context Help"
 msgstr "Aiuto contestuale"
@@ -73,6 +111,11 @@ msgid "Context help question log"
 msgstr "Registro domande aiuto contestuale"
 
 #. module: web_context_help
+#: model:ir.model,name:web_context_help.model_context_help_rule
+msgid "Context help rule"
+msgstr "Regola di aiuto contestuale"
+
+#. module: web_context_help
 #: model:ir.model,name:web_context_help.model_context_help_section
 msgid "Context help section"
 msgstr "Sezione aiuto contestuale"
@@ -85,6 +128,7 @@ msgstr "Checksum sorgenti aiuto contestuale"
 #. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_page__create_uid
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_question__create_uid
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__create_uid
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_section__create_uid
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_source__create_uid
 msgid "Created by"
@@ -93,6 +137,7 @@ msgstr "Creato da"
 #. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_page__create_date
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_question__create_date
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__create_date
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_section__create_date
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_source__create_date
 msgid "Created on"
@@ -106,6 +151,7 @@ msgstr "Scartare le modifiche fatte a questa pagina?"
 #. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_page__display_name
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_question__display_name
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__display_name
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_section__display_name
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_source__display_name
 msgid "Display Name"
@@ -116,6 +162,21 @@ msgstr "Nome visualizzato"
 #: model_terms:ir.ui.view,arch_db:web_context_help.context_help_page_search
 msgid "Edited"
 msgstr "Modificata"
+
+#. module: web_context_help
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__field_id
+msgid "Field"
+msgstr "Campo"
+
+#. module: web_context_help
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__field_type
+msgid "Field Type"
+msgstr "Tipo campo"
+
+#. module: web_context_help
+#: model:ir.model.fields,help:web_context_help.field_context_help_rule__relation
+msgid "For relationship fields, the technical name of the target model"
+msgstr "Per i campi relazionali, il nome tecnico del modello di destinazione"
 
 #. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_question__found
@@ -130,32 +191,58 @@ msgstr "Raggruppa per"
 #. module: web_context_help
 #. odoo-javascript
 #: code:addons/web_context_help/static/src/v18/control_panel.xml:0
-#: code:addons/web_context_help/static/src/v18/control_panel.xml:0
 #: model:ir.actions.client,name:web_context_help.action_context_help_home
 #: model:ir.ui.menu,name:web_context_help.menu_help_root
-#, python-format
 msgid "Help"
 msgstr "Aiuto"
 
 #. module: web_context_help
 #: model:ir.actions.act_window,name:web_context_help.action_context_help_page
 #: model:ir.ui.menu,name:web_context_help.menu_context_help_page
+#: model:ir.ui.menu,name:web_context_help.menu_help_editor_page
 msgid "Help Pages"
 msgstr "Pagine di aiuto"
 
 #. module: web_context_help
 #: model:ir.actions.act_window,name:web_context_help.action_context_help_question
 #: model:ir.ui.menu,name:web_context_help.menu_context_help_question
+#: model:ir.ui.menu,name:web_context_help.menu_help_editor_question
 msgid "Help Questions"
 msgstr "Domande di aiuto"
 
 #. module: web_context_help
+#: model:ir.actions.act_window,name:web_context_help.action_context_help_rule
+#: model:ir.ui.menu,name:web_context_help.menu_context_help_rule
+#: model:ir.ui.menu,name:web_context_help.menu_help_editor_rule
+msgid "Help Rules"
+msgstr "Regole di aiuto"
+
+#. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_plugin.js:0
+msgid "Help video"
+msgstr "Video di aiuto"
+
+#. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_page__id
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_question__id
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__id
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_section__id
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_source__id
 msgid "ID"
 msgstr "ID"
+
+#. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_dialog.xml:0
+msgid "Insert a help video"
+msgstr "Inserisci un video di aiuto"
+
+#. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_plugin.js:0
+msgid "Insert a video of the help video directory"
+msgstr "Inserisce un video della cartella dei video di aiuto"
 
 #. module: web_context_help
 #: model_terms:ir.ui.view,arch_db:web_context_help.context_help_page_form
@@ -164,6 +251,7 @@ msgstr "Mantieni la mia versione"
 
 #. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_page__key
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__page_key
 msgid "Key"
 msgstr "Chiave"
 
@@ -183,16 +271,9 @@ msgid "Language"
 msgstr "Lingua"
 
 #. module: web_context_help
-#: model:ir.model.fields,field_description:web_context_help.field_context_help_page____last_update
-#: model:ir.model.fields,field_description:web_context_help.field_context_help_question____last_update
-#: model:ir.model.fields,field_description:web_context_help.field_context_help_section____last_update
-#: model:ir.model.fields,field_description:web_context_help.field_context_help_source____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_page__write_uid
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_question__write_uid
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__write_uid
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_section__write_uid
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_source__write_uid
 msgid "Last Updated by"
@@ -201,14 +282,26 @@ msgstr "Ultimo aggiornamento di"
 #. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_page__write_date
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_question__write_date
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__write_date
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_section__write_date
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_source__write_date
 msgid "Last Updated on"
 msgstr "Ultimo aggiornamento il"
 
 #. module: web_context_help
+#: model:ir.model.fields,help:web_context_help.field_context_help_rule__record_ref
+msgid "Many2one field: this record; empty when the field is empty"
+msgstr "Campo many2one: questo record; vuoto quando il campo è vuoto"
+
+#. module: web_context_help
+#: model:ir.model.fields,help:web_context_help.field_context_help_rule__res_id
+msgid "Many2one field: id of the record, 0 when the field is empty"
+msgstr "Campo many2one: id del record, 0 quando il campo è vuoto"
+
+#. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_page__model
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_question__model
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__model
 msgid "Model"
 msgstr "Modello"
 
@@ -225,11 +318,29 @@ msgid "Module must be unique"
 msgstr "Il modulo deve essere univoco"
 
 #. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_dialog.xml:0
+msgid "No video found."
+msgstr "Nessun video trovato."
+
+#. module: web_context_help
+#. odoo-python
+#: code:addons/web_context_help/models/context_help_rule.py:0
+msgid "Only selection, boolean and many2one fields can be used"
+msgstr "Si possono usare solo campi di selezione, booleani e many2one"
+
+#. module: web_context_help
 #: model_terms:ir.ui.view,arch_db:web_context_help.context_help_page_form
 msgid "Open"
 msgstr "Apri"
 
 #. module: web_context_help
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__operator
+msgid "Operator"
+msgstr "Operatore"
+
+#. module: web_context_help
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__page_id
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_section__page_id
 msgid "Page"
 msgstr "Pagina"
@@ -261,9 +372,36 @@ msgid "Rebuild all pages"
 msgstr "Ricostruisci tutte le pagine"
 
 #. module: web_context_help
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__record_ref
+msgid "Record"
+msgstr "Record"
+
+#. module: web_context_help
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__res_id
+msgid "Record id"
+msgstr "Id del record"
+
+#. module: web_context_help
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__relation
+msgid "Related Model"
+msgstr "Modello correlato"
+
+#. module: web_context_help
 #: model_terms:ir.ui.view,arch_db:web_context_help.context_help_page_form
 msgid "Reset to source"
 msgstr "Ripristina la sorgente"
+
+#. module: web_context_help
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_page__rule_ids
+#: model_terms:ir.ui.view,arch_db:web_context_help.context_help_page_form
+msgid "Rules"
+msgstr "Regole"
+
+#. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_dialog.xml:0
+msgid "Search a video"
+msgstr "Cerca un video"
 
 #. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_page__section_ids
@@ -272,6 +410,12 @@ msgid "Sections"
 msgstr "Sezioni"
 
 #. module: web_context_help
+#: model:ir.model.fields,help:web_context_help.field_context_help_rule__selection_ids
+msgid "Selection field: any of these values"
+msgstr "Campo di selezione: uno qualsiasi di questi valori"
+
+#. module: web_context_help
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__sequence
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_section__sequence
 msgid "Sequence"
 msgstr "Sequenza"
@@ -314,6 +458,33 @@ msgid "Text"
 msgstr "Testo"
 
 #. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_plugin.js:0
+msgid "The browser cannot play the video: "
+msgstr "Il browser non riesce a riprodurre il video: "
+
+#. module: web_context_help
+#. odoo-python
+#: code:addons/web_context_help/models/context_help_rule.py:0
+msgid "The field %(field)s is not a field of %(model)s"
+msgstr "Il campo %(field)s non è un campo di %(model)s"
+
+#. module: web_context_help
+#: model_terms:ir.ui.view,arch_db:web_context_help.context_help_page_form
+msgid ""
+"This clear cut page is shown only when the open record\n"
+"                                meets one of these rules. Clear cut pages are checked\n"
+"                                first, in priority order (1 is the highest); with no\n"
+"                                rule met, the general page with the highest priority\n"
+"                                is shown, the pages of the modules being the last."
+msgstr ""
+"Questa pagina clear cut è mostrata solo quando il record aperto\n"
+"                                soddisfa una di queste regole. Le pagine clear cut sono controllate\n"
+"                                per prime, in ordine di priorità (1 è la più alta); se nessuna\n"
+"                                regola è soddisfatta, è mostrata la pagina generale con la priorità più alta,\n"
+"                                le pagine dei moduli per ultime."
+
+#. module: web_context_help
 #: model_terms:ir.ui.view,arch_db:web_context_help.context_help_page_form
 msgid ""
 "The source of this page changed after it was edited:\n"
@@ -321,6 +492,16 @@ msgid ""
 msgstr ""
 "La sorgente di questa pagina è cambiata dopo la modifica:\n"
 "                        ripristinare la sorgente o mantenere la propria versione."
+
+#. module: web_context_help
+#. odoo-javascript
+#: code:addons/web_context_help/static/src/v18/help_video_dialog.xml:0
+msgid ""
+"The video directory does not exist: set the system parameter "
+"web_help_video_path."
+msgstr ""
+"La cartella dei video non esiste: impostare il parametro di sistema "
+"web_help_video_path."
 
 #. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_page__name
@@ -339,6 +520,16 @@ msgid "User"
 msgstr "Utente"
 
 #. module: web_context_help
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__value_boolean
+msgid "Value"
+msgstr "Valore"
+
+#. module: web_context_help
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_rule__selection_ids
+msgid "Values"
+msgstr "Valori"
+
+#. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_page__view_type
 msgid "View Type"
 msgstr "Tipo vista"
@@ -349,22 +540,9 @@ msgid "Views"
 msgstr "Viste"
 
 #. module: web_context_help
-#. odoo-javascript
-#: code:addons/web_context_help/static/src/v18/help_video_plugin.js:0
-msgid "Help video"
-msgstr "Video di aiuto"
-
-#. module: web_context_help
-#. odoo-javascript
-#: code:addons/web_context_help/static/src/v18/help_video_plugin.js:0
-msgid "Insert a video of the help video directory"
-msgstr "Inserisce un video della cartella dei video di aiuto"
-
-#. module: web_context_help
-#. odoo-javascript
-#: code:addons/web_context_help/static/src/v18/help_video_plugin.js:0
-msgid "The browser cannot play the video: "
-msgstr "Il browser non riesce a riprodurre il video: "
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_page__when
+msgid "When"
+msgstr "Quando"
 
 #. module: web_context_help
 #. odoo-javascript
@@ -373,31 +551,57 @@ msgid "download it"
 msgstr "scaricalo"
 
 #. module: web_context_help
-#. odoo-javascript
-#: code:addons/web_context_help/static/src/v18/help_video_dialog.xml:0
-msgid "Insert a help video"
-msgstr "Inserisci un video di aiuto"
+#: model:ir.model.fields.selection,name:web_context_help.selection__context_help_rule__operator__=
+msgid "is"
+msgstr "è"
 
 #. module: web_context_help
-#. odoo-javascript
-#: code:addons/web_context_help/static/src/v18/help_video_dialog.xml:0
-msgid "The video directory does not exist: set the system parameter web_help_video_path."
-msgstr "La cartella dei video non esiste: impostare il parametro di sistema web_help_video_path."
+#: model:ir.model.fields.selection,name:web_context_help.selection__context_help_rule__operator__!=
+msgid "is not"
+msgstr "non è"
 
 #. module: web_context_help
-#. odoo-javascript
-#: code:addons/web_context_help/static/src/v18/help_video_dialog.xml:0
-msgid "Search a video"
-msgstr "Cerca un video"
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_page__priority
+msgid "Priority"
+msgstr "Priorità"
 
 #. module: web_context_help
-#. odoo-javascript
-#: code:addons/web_context_help/static/src/v18/help_video_dialog.xml:0
-msgid "No video found."
-msgstr "Nessun video trovato."
+#: model:ir.model.fields,help:web_context_help.field_context_help_page__priority
+msgid ""
+"1 is the highest. Pages with rules are checked first, in priority order: the"
+" first one with a rule met is shown. Otherwise the page without rules with "
+"the highest priority is shown. Pages built from the modules have priority "
+"96, so they are the last fallback"
+msgstr ""
+"1 è la più alta. Le pagine con regole sono controllate per prime, in ordine "
+"di priorità: è mostrata la prima con una regola soddisfatta. Altrimenti è "
+"mostrata la pagina senza regole con la priorità più alta. Le pagine "
+"costruite dai moduli hanno priorità 96, quindi sono l'ultima alternativa"
 
 #. module: web_context_help
-#. odoo-javascript
-#: code:addons/web_context_help/static/src/v18/help_video_dialog.xml:0
-msgid "Cancel"
-msgstr "Annulla"
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_page__clear_cut
+msgid "Clear cut"
+msgstr "Clear cut"
+
+#. module: web_context_help
+#: model:ir.model.fields,help:web_context_help.field_context_help_page__clear_cut
+msgid ""
+"Page shown only when one of its rules is met, e.g. the help of an order "
+"type. A page not clear cut is a general page: its rules are ignored and it "
+"is shown when no rule of a clear cut page is met"
+msgstr ""
+"Pagina mostrata solo quando una delle sue regole è soddisfatta, ad es. "
+"l'aiuto di un tipo di ordine. Una pagina non clear cut è una pagina "
+"generale: le sue regole sono ignorate ed è mostrata quando nessuna regola di "
+"una pagina clear cut è soddisfatta"
+
+#. module: web_context_help
+#: model:res.groups,name:web_context_help.group_help_editor
+#: model:ir.ui.menu,name:web_context_help.menu_help_editor_root
+msgid "Help Editor"
+msgstr "Editor dell'aiuto"
+
+#. module: web_context_help
+#: model:res.groups,comment:web_context_help.group_help_editor
+msgid "Edits the help pages, their rules and reads the questions asked."
+msgstr "Modifica le pagine di aiuto e le loro regole e legge le domande poste."

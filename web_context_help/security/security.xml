@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 Zeroincombenze srls <https://www.zeroincombenze.it>
+     License LGPL-3.0-or-later (https://www.gnu.org/licenses/lgpl). -->
+<odoo>
+
+    <record id="module_category_context_help" model="ir.module.category">
+        <field name="name">Context Help</field>
+        <field name="sequence">90</field>
+    </record>
+
+    <!-- Writes the help pages and their rules without being an administrator -->
+    <record id="group_help_editor" model="res.groups">
+        <field name="name">Help Editor</field>
+        <field name="category_id" ref="module_category_context_help"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Edits the help pages, their rules and reads the questions asked.</field>
+    </record>
+
+    <!-- The administrators keep editing the help -->
+    <record id="base.group_system" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_help_editor'))]"/>
+    </record>
+
+</odoo>

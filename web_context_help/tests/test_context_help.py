@@ -9,6 +9,7 @@ import os
 import shutil
 import tempfile
 
+from odoo.exceptions import AccessError, ValidationError
 from odoo.modules.module import get_module_path
 from odoo.tests import common, tagged
 
@@ -37,6 +38,12 @@ WHEN_PERSON = """.. help-page:: person
    :model: res.partner
    :view-type: form
    :when: is_company = False
+"""
+
+WHEN_ITALIAN = """.. help-page:: italian
+   :model: res.partner
+   :view-type: form
+   :when: country_id = base.it
 """
 
 LIST = """.. help-page:: partner_list
@@ -201,6 +208,19 @@ class TestContextHelp(common.TransactionCase):
         self.assertFalse(page.active)
         self.assertTrue(page.exists())
 
+    def test_copy(self):
+        self._rebuild()
+        page = self.Page.search([("key", "=", "wch_test_a.partner")])
+        copy1 = page.copy()
+        copy2 = page.copy()
+        self.assertEqual(copy1.key, "wch_test_a.partner (copy)")
+        self.assertEqual(copy2.key, "wch_test_a.partner (copy 2)")
+        self.assertFalse(copy1.source_file)
+        self.assertTrue(copy1.section_ids)
+        # a copy has no source: the rebuild keeps it
+        self._rebuild()
+        self.assertTrue(copy1.exists() and copy1.active)
+
     def test_summary(self):
         self._rebuild()
         groups = dict(self.Page.summary("en_US"))
@@ -254,6 +274,218 @@ class TestContextHelp(common.TransactionCase):
         # value unknown: both conditional pages skipped, the model page is used
         page = lookup()
         self.assertEqual(page.key, "wch_test_a.partner")
+
+    def test_lookup_many2one(self):
+        self.modules.append(
+            ("wch_test_d", self._help_dir("d", {"common/italian.rst": WHEN_ITALIAN}))
+        )
+        self._rebuild()
+        italy = self.env.ref("base.it")
+
+        def lookup(values):
+            return self.Page.lookup(
+                model="res.partner", view_type="form", values=values
+            )
+
+        # the record id is matched by its xmlid, whatever form the client sends
+        self.assertEqual(lookup({"country_id": italy.id}).key, "wch_test_d.italian")
+        self.assertEqual(
+            lookup({"country_id": [italy.id, "Italy"]}).key, "wch_test_d.italian"
+        )
+        self.assertEqual(
+            lookup({"country_id": str(italy.id)}).key, "wch_test_d.italian"
+        )
+        fr = self.env.ref("base.fr").id
+        self.assertEqual(lookup({"country_id": fr}).key, "wch_test_a.partner")
+        self.assertEqual(lookup({"country_id": False}).key, "wch_test_a.partner")
+
+    def _field(self, name):
+        return self.env["ir.model.fields"]._get("res.partner", name)
+
+    def test_rules(self):
+        self._rebuild()
+        Rule = self.env["context.help.rule"]
+        italy = self.env.ref("base.it").id
+        fr = self.env.ref("base.fr").id
+        company = self.Page.search([("key", "=", "wch_test_c.company")])
+        company.clear_cut = True
+        rule = Rule.create(
+            {"page_id": company.id, "field_id": self._field("country_id").id}
+        )
+        self.assertEqual(rule.condition, "country_id = False")
+        self.assertEqual(rule.relation_model_id.model, "res.country")
+        # the record is picked by the reference field, like the server actions
+        rule.record_ref = "res.country,%d" % italy
+        self.assertEqual(rule.res_id, italy)
+        self.assertEqual(rule.condition, "country_id = %d" % italy)
+        self.assertEqual(rule.record_ref, self.env.ref("base.it"))
+
+        def lookup(values):
+            return self.Page.lookup(
+                model="res.partner", view_type="form", values=values
+            )
+
+        # the when of the source and one of the rules must be met
+        self.assertEqual(
+            lookup({"is_company": True, "country_id": italy}).key, "wch_test_c.company"
+        )
+        self.assertEqual(
+            lookup({"is_company": True, "country_id": fr}).key, "wch_test_a.partner"
+        )
+        # rules are alternatives
+        Rule.create(
+            {
+                "page_id": company.id,
+                "field_id": self._field("type").id,
+                "selection_ids": [
+                    (
+                        6,
+                        0,
+                        self._field("type")
+                        .selection_ids.filtered(
+                            lambda s: s.value in ("invoice", "delivery")
+                        )
+                        .ids,
+                    )
+                ],
+            }
+        )
+        self.assertEqual(
+            lookup({"is_company": True, "country_id": fr, "type": "delivery"}).key,
+            "wch_test_c.company",
+        )
+        rule.active = False
+        self.assertEqual(
+            lookup({"is_company": True, "country_id": italy}).key, "wch_test_a.partner"
+        )
+        rule = Rule.create(
+            {
+                "page_id": company.id,
+                "field_id": self._field("active").id,
+                "operator": "!=",
+                "value_boolean": True,
+            }
+        )
+        self.assertEqual(rule.condition, "active != True")
+        with self.assertRaises(ValidationError):
+            Rule.create(
+                {
+                    "page_id": company.id,
+                    "field_id": self.env["ir.model.fields"]
+                    ._get("res.country", "code")
+                    .id,
+                }
+            )
+        # rules are kept by a rebuild
+        self._rebuild()
+        self.assertEqual(
+            Rule.with_context(active_test=False).search_count(
+                [("page_id", "=", company.id)]
+            ),
+            3,
+        )
+
+    def test_custom_page(self):
+        self._rebuild()
+        italy = self.env.ref("base.it").id
+        values = {
+            "model": "res.partner",
+            "view_type": "form",
+            "html": "<h2>Export</h2><p>Customs papers.</p>",
+        }
+        export = self.Page.create(
+            dict(values, key="custom.export", name="Export", clear_cut=True)
+        )
+        self.Page.create(dict(values, key="custom.generic", name="Generic"))
+        self.assertIn("Export", export.section_ids.mapped("title"))
+        self.env["context.help.rule"].create(
+            {
+                "page_id": export.id,
+                "field_id": self._field("country_id").id,
+                "res_id": italy,
+            }
+        )
+
+        def lookup(values):
+            return self.Page.lookup(
+                model="res.partner", view_type="form", values=values
+            )
+
+        # a page meeting a condition wins over a page without conditions
+        self.assertEqual(lookup({"country_id": italy}).key, "custom.export")
+        fr = self.env.ref("base.fr").id
+        self.assertEqual(lookup({"country_id": fr}).key, "custom.generic")
+        # no source: kept by a rebuild, nothing to reset to
+        self._rebuild()
+        self.assertTrue(export.exists() and export.active)
+        export.write({"html": "<p>Changed</p>"})
+        export.action_reset_to_source()
+        self.assertEqual(export.html, "<p>Changed</p>")
+
+    def test_priority(self):
+        self._rebuild()
+        standard = self.Page.search([("key", "=", "wch_test_a.partner")])
+        self.assertEqual(standard.priority, 96)
+        self.assertEqual(standard.copy().priority, 32)
+        italy = self.env.ref("base.it").id
+        values = {"model": "res.partner", "view_type": "form", "html": "<p>x</p>"}
+        own = self.Page.create(dict(values, key="custom.own", name="Own", priority=50))
+        values["clear_cut"] = True
+        low = self.Page.create(dict(values, key="custom.low", name="Low", priority=90))
+        high = self.Page.create(dict(values, key="custom.high", name="High", priority=10))
+        for page in (low, high):
+            self.env["context.help.rule"].create(
+                {
+                    "page_id": page.id,
+                    "field_id": self._field("country_id").id,
+                    "res_id": italy,
+                }
+            )
+
+        def lookup(values):
+            return self.Page.lookup(
+                model="res.partner", view_type="form", values=values
+            ).key
+
+        # pages with a rule met first, in priority order
+        self.assertEqual(lookup({"country_id": italy}), "custom.high")
+        high.priority = 95
+        self.assertEqual(lookup({"country_id": italy}), "custom.low")
+        # no rule met: the page without rules with the highest priority
+        fr = self.env.ref("base.fr").id
+        self.assertEqual(lookup({"country_id": fr}), "wch_test_a.partner (copy)")
+        own.priority = 1
+        self.assertEqual(lookup({"country_id": fr}), "custom.own")
+        # a clear cut page is never the general page, even without rules
+        own.clear_cut = True
+        self.assertEqual(lookup({"country_id": fr}), "wch_test_a.partner (copy)")
+        # the rules of a page not clear cut are ignored
+        high.clear_cut = False
+        self.assertEqual(lookup({"country_id": italy}), "custom.low")
+        self.assertEqual(lookup({"country_id": fr}), "wch_test_a.partner (copy)")
+        # Loose help: general pages from priority 64 on, the page shown excluded
+        # own clear cut and 1, low clear cut and 90, high neither (95)
+        self.assertTrue(own.has_loose_help() and low.has_loose_help())
+        self.assertFalse(high.has_loose_help())
+        self.assertFalse(standard.has_loose_help())
+
+        def loose(values, key):
+            return self.Page.lookup(
+                model="res.partner", view_type="form", values=values, loose_from=key
+            ).key
+
+        # by priority: high (95) before the page of the module (96)
+        self.assertEqual(loose({"country_id": italy}, "custom.low"), "custom.high")
+        # pages of priority under 64 and clear cut pages are not general enough
+        high.priority = 60
+        self.assertEqual(loose({"country_id": italy}, "custom.low"), "wch_test_a.partner")
+        self.assertEqual(
+            loose({"country_id": fr}, "wch_test_a.partner (copy)"), "wch_test_a.partner"
+        )
+        # the pages of the modules are the last fallback
+        self.Page.search([("key", "like", "custom.%")]).unlink()
+        self.Page.search([("key", "like", "% (copy)")]).unlink()
+        self.assertEqual(lookup({"country_id": fr}), "wch_test_a.partner")
 
     def test_fields_help(self):
         items = self.Page.fields_help("context.help.page")
@@ -329,6 +561,41 @@ class TestContextHelpHttp(common.HttpCase):
         res = self._json("/web_context_help/ask", {"question": "rebuilt checksum"})
         self.assertTrue(res["results"])
 
+    def test_loose_help(self):
+        Page = self.env["context.help.page"]
+        Page.sync_sources(force=True)
+        standard = Page.search(
+            [("key", "=", "web_context_help.context_help_page"), ("lang", "=", "en_US")]
+        )
+        own = standard.copy()
+        self.authenticate("admin", "admin")
+        # a page of the modules (96) has no Loose help button, an own page has
+        res = self.url_open(Page.page_url(standard.key, "en_US"))
+        self.assertNotIn('id="wch_loose"', res.text)
+        res = self._json(
+            "/web_context_help/lookup",
+            {"model": "context.help.page", "view_type": "form", "lang": "en_US"},
+        )
+        self.assertEqual(res["key"], own.key)
+        res = self.url_open(res["url"])
+        self.assertIn('id="wch_loose"', res.text)
+        # Loose help: the general page from priority 64 on, the own one excluded
+        res = self._json(
+            "/web_context_help/lookup",
+            {
+                "model": "context.help.page",
+                "view_type": "form",
+                "lang": "en_US",
+                "loose_from": own.key,
+            },
+        )
+        self.assertEqual(res["key"], standard.key)
+        res = self.url_open("/web_context_help/loose/%s?lang=en_US" % own.key)
+        self.assertIn("/web_context_help/page/%s" % standard.key, res.url)
+        self.assertEqual(
+            self.url_open("/web_context_help/loose/no.page").status_code, 404
+        )
+
     def test_home_and_summary(self):
         self.env["context.help.page"].sync_sources(force=True)
         self.authenticate("admin", "admin")
@@ -369,6 +636,59 @@ class TestContextHelpHttp(common.HttpCase):
         res = self.url_open("/web_context_help/home")
         self.assertEqual(res.status_code, 200)
         self.assertNotIn('id="wch_edit"', res.text)
+        # a help editor, not an administrator, edits the pages
+        self.env["res.users"].create(
+            {
+                "name": "Help editor",
+                "login": "wch_editor",
+                "password": "wch_editor_pwd",
+                "groups_id": [
+                    (6, 0, [self.env.ref("web_context_help.group_help_editor").id])
+                ],
+            }
+        )
+        self.authenticate("wch_editor", "wch_editor_pwd")
+        res = self.url_open("/web_context_help/home")
+        self.assertIn('id="wch_edit"', res.text)
+
+    def test_help_editor(self):
+        Page = self.env["context.help.page"]
+        Page.sync_sources(force=True)
+        editor_group = self.env.ref("web_context_help.group_help_editor")
+        # the administrators are help editors
+        self.assertIn(editor_group, self.env.ref("base.group_system").implied_ids)
+
+        def user(login, groups):
+            return self.env["res.users"].create(
+                {"name": login, "login": login, "groups_id": [(6, 0, groups.ids)]}
+            )
+
+        reader = user("wch_r", self.env.ref("base.group_user"))
+        editor = user("wch_e", editor_group)
+        self.assertFalse(editor.has_group("base.group_system"))
+        page = Page.search([("key", "=", "web_context_help.context_help_page")])[0]
+        with self.assertRaises(AccessError):
+            page.with_user(reader).write({"html": "<p>no</p>"})
+        own = page.with_user(editor).copy()
+        own.write({"html": "<h2>Mine</h2><p>text</p>", "clear_cut": True})
+        self.assertTrue(own.edited)
+        rule = (
+            self.env["context.help.rule"]
+            .with_user(editor)
+            .create(
+                {
+                    "page_id": own.id,
+                    "field_id": self.env["ir.model.fields"]
+                    ._get("context.help.page", "edited")
+                    .id,
+                    "value_boolean": True,
+                }
+            )
+        )
+        self.assertEqual(rule.condition, "edited = True")
+        self.env["context.help.question"].with_user(editor).search([])
+        with self.assertRaises(AccessError):
+            self.env["context.help.rule"].with_user(reader).search([])
 
     def test_videos(self):
         tmp = tempfile.mkdtemp()

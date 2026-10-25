@@ -5,6 +5,7 @@
       :model: account.invoice
       :view: account.invoice_form, account.invoice_supplier_form
       :view-type: form
+      :priority: 96
 
 .. help-version:: 13
 
@@ -14,6 +15,7 @@
       :view: account.view_move_form
       :view-type: form
       :when: type != entry
+      :priority: 96
 
 .. help-version:: >=14
 
@@ -23,6 +25,7 @@
       :view: account.view_move_form
       :view-type: form
       :when: move_type != entry
+      :priority: 96
 
 Invoice
 =======

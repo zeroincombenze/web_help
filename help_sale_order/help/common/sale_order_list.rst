@@ -2,6 +2,7 @@
    :title: Sale orders
    :model: sale.order
    :view-type: list
+   :priority: 96
 
 Sale orders
 ===========

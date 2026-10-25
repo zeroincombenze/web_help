@@ -2,6 +2,7 @@
    :title: Ordini di vendita
    :model: sale.order
    :view-type: list
+   :priority: 96
 
 Ordini di vendita
 =================

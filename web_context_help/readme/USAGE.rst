@@ -56,6 +56,7 @@ web_context_help (``help/common/search_wildcard.rst``) at the end of its
        :view: base.view_partner_form
        :view-type: form
        :when: is_company = True
+       :priority: 96
 
     .. help-include:: common_part.rst
 
@@ -72,12 +73,48 @@ web_context_help (``help/common/search_wildcard.rst``) at the end of its
     .. help-question::
        :auto:
 
-``:when:`` shows the page only when the open record (its selection and boolean
-fields) or the menu (its ``default_<field>`` context keys) match: conditions
-``field = value``, ``field != value``, several values joined by comma, several
-conditions joined by ``and``. When the value is unknown the page is not used,
-e.g. ``move_type != entry`` keeps the invoice help away from the journal
-entries, which share the invoice form.
+``:when:`` shows the page only when the open record (its selection, boolean
+and many2one fields) or the menu (its ``default_<field>`` context keys) match:
+conditions ``field = value``, ``field != value``, several values joined by
+comma, several conditions joined by ``and``. When the value is unknown the page
+is not used, e.g. ``move_type != entry`` keeps the invoice help away from the
+journal entries, which share the invoice form. A many2one value is the xmlid
+or the id of the record, e.g. ``type_id = sale_order_type.normal_sale_type``;
+``False`` means empty. Among the pages of the same priority that can be shown,
+the one meeting more conditions wins: a page with ``:when:`` beats the page
+without it.
+
+Rules
+~~~~~
+
+Without writing RST, a help editor chooses which page is shown from
+*Help Editor ‣ Help Rules* or from the **Rules** tab of
+a page: field of the page model (selection, boolean or many2one), *is* or *is
+not*, and the values (selection), the checkbox (boolean) or the record
+(many2one). A page with rules is shown when one of them is met, and the
+``:when:`` of its source too.
+
+The rules apply to the **Clear cut** pages only: a clear cut page is shown only
+when one of its rules is met. Every page has a **Priority**, 1 being the
+highest. The clear cut pages are checked first, in priority order: the first
+one with a rule met is shown. With no rule met, the general page (not clear
+cut, its rules ignored) with the highest priority is shown. The pages of the
+administrator get 32 by default, the pages built from the modules 96: these are
+the last fallback, always available. The priority of a module page is set by
+the ``:priority:`` option of its ``help-page``, 96 when missing.
+
+A clear cut page, or a page of priority 64 or less, shows the **Loose help**
+button in the help window: it opens the general page of priority 64 or more
+with the highest priority, for the same record, usually the page of the
+module.
+
+Example: sale orders with a different help for each OCA *sale_order_type*.
+Create a page per type (*Help Pages ‣ New*: key, title, model ``sale.order``,
+view type ``form``, content), check *Clear cut* and add to it the rule
+*Type is <the type>*.
+Orders of the other types keep the standard sale order help. A page created
+this way, or by **Duplicate** of the standard page (key followed by " (copy)"),
+has no source: it is kept by the rebuild of the pages.
 
 ``:position:`` is one of ``before``, ``after``, ``replace``, ``remove``.
 ``:auto:`` builds the questions from the fields help of the page model.

@@ -38,7 +38,13 @@ current view in a separate window, so the Odoo tab stays usable.
   question is logged for the administrator</li>
 <li>Administrators can edit a page; the edited version survives the upgrades and
   a warning appears when the original source changes</li>
+<li>A page can be chosen by a field of the open record, many2one included: by
+  the <code>:when:</code> of its RST source or by rules set by the administrator, e.g. a
+  different sale order help for each order type</li>
 <li>Views without a page get an automatic page built from the fields help</li>
+<li>The <b>Help</b> menu opens the help home page; its <b>Summary</b> button lists the
+  pages of every installed help module (e.g. help_account_invoice,
+  help_sale_order)</li>
 </ul>
 </p><p align="justify">
 </p>
@@ -60,7 +66,13 @@ utilizzabile.
   ogni domanda &#232; registrata per l'amministratore</li>
 <li>Gli amministratori possono modificare una pagina; la versione modificata
   sopravvive agli aggiornamenti e un avviso compare quando cambia la sorgente</li>
+<li>Una pagina pu&#242; essere scelta in base a un campo del record aperto, anche
+  many2one: con il <code>:when:</code> della sua sorgente RST o con regole impostate
+  dall'amministratore, ad es. un aiuto diverso per ogni tipo di ordine di vendita</li>
 <li>Le viste senza pagina ricevono una pagina automatica costruita dall'aiuto dei campi</li>
+<li>Il menu <b>Aiuto</b> apre la pagina iniziale dell'aiuto; il suo pulsante
+  <b>Sommario</b> elenca le pagine di ogni modulo di aiuto installato (ad es.
+  help_account_invoice, help_sale_order)</li>
 </ul>
 </p><p align="justify">
 </p>
@@ -78,111 +90,40 @@ utilizzabile.
                 <img src="l10n_us.png" alt="English" style="width:28px;height:16px;"/>
             </p>
             <p class="oe_mt16" align="justify">No configuration is needed. Pages are rebuilt at server start when a help
-source changes; the administrator can force it with <b>Rebuild all pages</b> in
-<i>Settings &gt; Technical &gt; Context Help &gt; Help Pages</i>.</p>
+source changes; a help editor can force it with <b>Rebuild all pages</b> in
+<i>Help Editor &gt; Help Pages</i>.
+<p align="justify">
+Every internal user reads the help. The help pages and their rules are written
+by the users of the group <b>Help Editor</b> (<i>Settings &gt; Users</i>, section
+<i>Context Help</i>), with no administrator rights: they get the <i>Help Editor</i> app
+(pages, rules, questions asked) and the <b>Edit</b> button of the help window.
+The administrators are help editors too.
+</p><p align="justify">
+The videos inserted in the help pages are read from the directory of the system
+parameter <code>web_help_video_path</code> (default <code>~/Video</code>, the home of the user
+running Odoo), subdirectories included; change it in <i>Settings &gt; Technical &gt;
+System Parameters</i>.
+</p></p>
         </div>
         <div class="oe_span6">
             <p align="center">
                 <img src="l10n_it.png" alt="Italiano" style="width:28px;height:16px;"/>
             </p>
             <p class="oe_mt16" align="justify">Non serve configurazione. Le pagine sono ricostruite all'avvio del server
-quando cambia una sorgente di aiuto; l'amministratore pu&#242; forzarlo con
-<b>Ricostruisci tutte le pagine</b> in <i>Impostazioni &gt; Tecnico &gt; Aiuto contestuale &gt; Pagine di aiuto</i>.</p>
-        </div>
-    </div>
-</section>
-
-<section>
-    <div class="oe_row oe_spaced">
-        <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">Usage | Utilizzo</h3>
-        <div class="oe_span6">
-            <p align="center">
-                <img src="l10n_uk.png" alt="English" style="width:28px;height:16px;"/>
-                <img src="l10n_us.png" alt="English" style="width:28px;height:16px;"/>
-            </p>
-            <p class="oe_mt16" align="justify">Press the |sos| button in the control panel. Pages are looked up by view xmlid,
-then by model and view type, then by model; otherwise an automatic page lists
-the fields help.
+quando cambia una sorgente di aiuto; un editor dell'aiuto pu&#242; forzarlo con
+<b>Ricostruisci tutte le pagine</b> in <i>Editor dell'aiuto &gt; Pagine di aiuto</i>.
 <p align="justify">
-Writing help for a module: put RST files in <code>help/common/</code> or in the
-directory of a group of Odoo versions (<code>help/v10</code>, <code>help/v11_14</code>,
-<code>help/v15</code>, <code>help/v16_20</code>); a group file overrides the common one with the
-same name. Italian twins are named <code>page.it_IT.rst</code>.
+Ogni utente interno legge l'aiuto. Le pagine di aiuto e le loro regole sono
+scritte dagli utenti del gruppo <b>Editor dell'aiuto</b> (<i>Impostazioni &gt; Utenti</i>,
+sezione <i>Aiuto contestuale</i>), senza diritti di amministratore: hanno l'app
+<i>Editor dell'aiuto</i> (pagine, regole, domande poste) e il pulsante <b>Modifica</b>
+della finestra di aiuto. Anche gli amministratori sono editor dell'aiuto.
 </p><p align="justify">
-
-<code>
-    .. help-page:: partner
-       :title: Partners
-       :model: res.partner
-       :view: base.view_partner_form
-       :view-type: form
-</code>
-</p><p align="justify">
-    .. help-include:: common_part.rst
-</p><p align="justify">
-    .. help-inherit:: other_module.partner
-       :section: usage
-       :position: after
-</p><p align="justify">
-       RST added after the section labelled "usage"
-</p><p align="justify">
-    .. help-question:: How do I add a tag?
-</p><p align="justify">
-       Use the :field:`Tags &lt;category_id&gt;` field.
-</p><p align="justify">
-    .. help-question::
-       :auto:
-</p><p align="justify">
-<code>:position:</code> is one of <code>before</code>, <code>after</code>, <code>replace</code>, <code>remove</code>.
-<code>:auto:</code> builds the questions from the fields help of the page model.
-Roles <code>:field:</code> and <code>:tour:</code> highlight a field or run a tour in the Odoo tab.
-</p><p align="justify">
-</p>
-.. |sos| unicode:: U+1F6DF</p>
-        </div>
-        <div class="oe_span6">
-            <p align="center">
-                <img src="l10n_it.png" alt="Italiano" style="width:28px;height:16px;"/>
-            </p>
-            <p class="oe_mt16" align="justify">Premere il pulsante |sos| del pannello di controllo. La pagina &#232; cercata per
-xmlid della vista, poi per modello e tipo vista, poi per modello; altrimenti
-una pagina automatica elenca l'aiuto dei campi.
-<p align="justify">
-Scrivere l'aiuto di un modulo: mettere i file RST in <code>help/common/</code> o nella
-cartella di un gruppo di versioni Odoo (<code>help/v10</code>, <code>help/v11_14</code>,
-<code>help/v15</code>, <code>help/v16_20</code>); il file del gruppo prevale su quello comune con
-lo stesso nome. I gemelli italiani si chiamano <code>pagina.it_IT.rst</code>.
-</p><p align="justify">
-
-<code>
-    .. help-page:: partner
-       :title: Partner
-       :model: res.partner
-       :view: base.view_partner_form
-       :view-type: form
-</code>
-</p><p align="justify">
-    .. help-include:: parte_comune.rst
-</p><p align="justify">
-    .. help-inherit:: altro_modulo.partner
-       :section: usage
-       :position: after
-</p><p align="justify">
-       RST aggiunto dopo la sezione con etichetta "usage"
-</p><p align="justify">
-    .. help-question:: Come aggiungo un'etichetta?
-</p><p align="justify">
-       Usare il campo :field:`Etichette &lt;category_id&gt;`.
-</p><p align="justify">
-    .. help-question::
-       :auto:
-</p><p align="justify">
-<code>:position:</code> vale <code>before</code>, <code>after</code>, <code>replace</code> o <code>remove</code>.
-<code>:auto:</code> costruisce le domande dall'aiuto dei campi del modello della pagina.
-I ruoli <code>:field:</code> e <code>:tour:</code> evidenziano un campo o avviano un tour nella scheda di Odoo.
-</p><p align="justify">
-</p>
-.. |sos| unicode:: U+1F6DF</p>
+I video inseriti nelle pagine di aiuto sono letti dalla cartella del parametro
+di sistema <code>web_help_video_path</code> (predefinito <code>~/Video</code>, la home
+dell'utente che esegue Odoo), sottocartelle comprese; si cambia in
+<i>Impostazioni &gt; Tecnico &gt; Parametri di sistema</i>.
+</p></p>
         </div>
     </div>
 </section>
@@ -191,8 +132,54 @@ I ruoli <code>:field:</code> e <code>:tour:</code> evidenziano un campo o avvian
     <div class="oe_row oe_spaced">
         <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">ChangeLog History | Cronologia modifiche</h3>
         <div class="oe_span12">
-<h4>18.0.1.0.1 (2026-09-27)</h4>
+<h4>18.0.1.0.6 (2026-10-22)</h4>
 <p align="justify">
+<ul>
+<li>[IMP] help-page :when: condition on many2one fields too, the record named by xmlid or id, e.g. type_id = sale_order_type.normal_sale_type</li>
+<li>[IMP] Help rules (Settings &#8227; Technical &#8227; Context Help &#8227; Help Rules, or the Rules tab of a page): the administrator chooses which page is shown by a selection, boolean or many2one field of the record, no RST source needed; several rules of a page are alternatives; in the rule form field, operator and value are shown together</li>
+<li>[IMP] Help lookup by page Priority (1 the highest) and Clear cut flag: the clear cut pages come first, the first one with a rule met is shown; otherwise the general page (not clear cut, its rules ignored) with the highest priority: pages of the administrator (default 32) before the pages of the modules (96), the last fallback; same priority, the page meeting more :when: conditions wins</li>
+<li>[IMP] Help pages created by the administrator are kept by the rebuild of the pages and their sections are built from their content</li>
+<li>[IMP] Help Editor group: writes the help pages, their rules and reads the questions asked, with no administrator rights, from the new Help Editor app; the administrators are help editors too</li>
+<li>[IMP] help-page :priority: option, the priority of a module page (96 when missing)</li>
+<li>[IMP] Help window: Loose help button on a clear cut page or a page of priority 64 or less: opens the general page of priority 64 or more with the highest priority, for the same record (usually the page of the module)</li>
+<li>[FIX] Odoo 18 form views: the help sees the fields of the open record (the form view did not share its record with the control panel), so the :when: conditions and the rules work on the record; the help window follows the record when it is saved or the pager moves to another one</li>
+<li>[FIX] Help pages: Duplicate no longer fails on the duplicate key: the copy key ends with " (copy)" (" (copy 2)" and so on for further copies); the copy has no source file, so it is a page of the administrator kept by the rebuild</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.5 (2026-10-14)</h4>
+</p><p align="justify">
+<ul>
+<li>[IMP] Help pages: Help video button in the floating toolbar of the editor (and /Help video command): inserts a video of the directory set by the system parameter web_help_video_path (default ~/Video), played on click; Backspace or Delete next to a video removes it</li>
+<li>[UPD] Help pages: HTML code view (&lt;/&gt;) shown only in developer mode, as in standard Odoo; the custom field widget is removed</li>
+<li>[FIX] Help pages: the Sections of a page edited by the administrator (editor or HTML code view) are rebuilt from its content, so the added headings and text are listed and found by the search; a reset to source rebuilds them too</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.4 (2026-10-14)</h4>
+</p><p align="justify">
+<ul>
+<li>[IMP] Help menu at the top of the menu tree: opens the help home page, editable by the administrator; HTML code view (&lt;/&gt;) on the content of the help pages, also without developer mode and as wide as the page</li>
+<li>[IMP] Help window: Summary button, page listing the help pages of every installed help module, each title followed by its view type (list) or (form); Home and Edit buttons</li>
+<li>[FIX] Help window: a malformed lang in the URL (e.g. ?lang=it_IT?debug=1) no longer falls back to the English page</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.3 (2026-10-02)</h4>
+</p><p align="justify">
+<ul>
+<li>[IMP] Help window: find in page box, like the browser Ctrl+F, with previous / next buttons; several words found when near each other, phrase in quotes</li>
+<li>[IMP] Help window: FAQ and fields help on their own pages, opened by the FAQ and Fields buttons</li>
+<li>[IMP] Every list page gets the global wildcard search text at the end of its How to search section</li>
+<li>[IMP] help-page :when: condition on the open record or the menu context, e.g. move_type != entry</li>
+<li>[FIX] RST: a :field: role wrapped on two lines was printed as text; a :version: role with a stray ";" now fails on every version instead of cutting the text</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.2 (2026-10-01)</h4>
+</p><p align="justify">
+<ul>
+<li>[IMP] Version specific help: help-version directive and :version: role, pages built for the running Odoo version</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.1 (2026-09-27)</h4>
+</p><p align="justify">
 <ul>
 <li>[IMP] Field labels highlighted too, dialogs keep the help of the main view</li>
 </ul>
@@ -236,7 +223,7 @@ I ruoli <code>:field:</code> e <code>:tour:</code> evidenziano un campo o avvian
         </div>
     </div>
     <div class="oe_row oe_spaced">
-        <p>This module is part of <a href="https://github.com/zeroincombenze/zerobug-test">zerobug-test</a> project.</p>
-        <p>Published information on | Informazioni pubblicate: 2026-09-27</p>
+        <p>This module is part of <a href="https://github.com/zeroincombenze/web_help">web_help</a> project.</p>
+        <p>Published information on | Informazioni pubblicate: 2026-10-25</p>
     </div>
 </section>

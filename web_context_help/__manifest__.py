@@ -9,7 +9,7 @@
 #
 {
     "name": "Context help",
-    "version": "18.0.1.0.5",
+    "version": "18.0.1.0.6",
     "category": "Hidden/Tools",
     "summary": "Context help button, pages written in RST by each module",
     "author": "Zeroincombenze srls",
@@ -19,6 +19,7 @@
     "depends": ["web", "html_editor"],
     "external_dependencies": {"python": ["docutils"]},
     "data": [
+        "security/security.xml",
         "security/ir.model.access.csv",
         "data/ir_config_parameter.xml",
         "views/context_help_views.xml",

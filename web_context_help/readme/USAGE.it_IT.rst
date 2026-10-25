@@ -59,6 +59,7 @@ etichetta ``wildcard`` viene sostituita.
        :view: base.view_partner_form
        :view-type: form
        :when: is_company = True
+       :priority: 96
 
     .. help-include:: parte_comune.rst
 
@@ -76,12 +77,49 @@ etichetta ``wildcard`` viene sostituita.
        :auto:
 
 ``:when:`` mostra la pagina solo quando il record aperto (i suoi campi di
-selezione e booleani) o il menu (le sue chiavi di contesto ``default_<campo>``)
-corrispondono: condizioni ``campo = valore``, ``campo != valore``, più valori
-separati da virgola, più condizioni unite da ``and``. Quando il valore non è
-noto la pagina non è usata, ad es. ``move_type != entry`` tiene l'aiuto delle
-fatture lontano dalle registrazioni contabili, che usano la stessa maschera
-delle fatture.
+selezione, booleani e many2one) o il menu (le sue chiavi di contesto
+``default_<campo>``) corrispondono: condizioni ``campo = valore``,
+``campo != valore``, più valori separati da virgola, più condizioni unite da
+``and``. Quando il valore non è noto la pagina non è usata, ad es.
+``move_type != entry`` tiene l'aiuto delle fatture lontano dalle registrazioni
+contabili, che usano la stessa maschera delle fatture. Il valore di un many2one
+è l'xmlid o l'id del record, ad es.
+``type_id = sale_order_type.normal_sale_type``; ``False`` significa vuoto. Tra
+le pagine della stessa priorità che possono essere mostrate vince quella che
+soddisfa più condizioni: una pagina con ``:when:`` prevale sulla pagina senza.
+
+Regole
+~~~~~~
+
+Senza scrivere RST, un editor dell'aiuto sceglie quale pagina mostrare da
+*Editor dell'aiuto ‣ Regole di aiuto* o dalla scheda
+**Regole** di una pagina: campo del modello della pagina (selezione, booleano o
+many2one), *è* o *non è*, e i valori (selezione), la casella (booleano) o il
+record (many2one). Una pagina con regole è mostrata quando una di esse è
+soddisfatta, e anche il ``:when:`` della sua sorgente.
+
+Le regole valgono solo per le pagine **Clear cut**: una pagina clear cut è
+mostrata solo quando una delle sue regole è soddisfatta. Ogni pagina ha una
+**Priorità**, 1 è la più alta. Le pagine clear cut sono controllate per prime,
+in ordine di priorità: è mostrata la prima con una regola soddisfatta. Se
+nessuna regola è soddisfatta, è mostrata la pagina generale (non clear cut, le
+sue regole sono ignorate) con la priorità più alta. Le pagine
+dell'amministratore hanno 32 come predefinito, quelle costruite dai moduli 96:
+sono l'ultima alternativa, sempre disponibile. La priorità di una pagina di
+modulo è data dall'opzione ``:priority:`` del suo ``help-page``, 96 se manca.
+
+Una pagina clear cut, o di priorità 64 o inferiore, mostra nella finestra di
+aiuto il pulsante **Aiuto generale**: apre la pagina generale di priorità 64 o
+superiore con la priorità più alta, per lo stesso record, di solito la pagina
+del modulo.
+
+Esempio: ordini di vendita con un aiuto diverso per ogni *sale_order_type* OCA.
+Creare una pagina per tipo (*Pagine di aiuto ‣ Nuovo*: chiave, titolo, modello
+``sale.order``, tipo vista ``form``, contenuto), spuntare *Clear cut* e
+aggiungere la regola *Tipo è <il tipo>*. Gli ordini degli altri tipi mantengono l'aiuto standard dell'ordine
+di vendita. Una pagina creata così, o con **Duplica** della pagina standard
+(chiave seguita da " (copy)"), non ha sorgente: è conservata dalla
+ricostruzione delle pagine.
 
 ``:position:`` vale ``before``, ``after``, ``replace`` o ``remove``.
 ``:auto:`` costruisce le domande dall'aiuto dei campi del modello della pagina.

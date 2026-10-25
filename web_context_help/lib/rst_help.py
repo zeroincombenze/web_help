@@ -19,6 +19,7 @@ Custom directives::
        :view: base.view_partner_form, base.view_partner_tree
        :view-type: form
        :when: move_type != entry       see when_match()
+       :priority: 96                    1 the highest; 96 when missing
 
     .. help-include:: file.rst          group dir, then common/ fallback
 
@@ -140,20 +141,31 @@ def parse_when(spec):
 def when_match(spec, values):
     """True when the Odoo context ``values`` satisfy every condition of spec.
 
-    ``values`` holds the selection / boolean fields of the open record and the
-    ``default_<name>`` keys of the action context (as ``<name>``). A missing
-    value never matches, so the page is not shown where the condition cannot
-    be checked. An empty spec always matches."""
+    ``values`` holds the selection / boolean / many2one fields of the open
+    record and the ``default_<name>`` keys of the action context (as
+    ``<name>``). A value may be a list of equivalent forms, e.g. the id and
+    the xmlid of a many2one record: ``=`` matches when any form is wanted.
+    A missing value never matches, so the page is not shown where the
+    condition cannot be checked. An empty spec always matches."""
     values = values or {}
     for name, op, wanted in parse_when(spec):
         if name not in values:
             return False
         value = values[name]
-        # an empty selection or a false boolean compares as "False"
-        value = "False" if value in (None, False, "") else "%s" % value
-        if (value in wanted) != (op == "="):
+        forms = value if isinstance(value, (list, tuple, set)) else [value]
+        # an empty value or a false boolean compares as "False"
+        forms = [
+            "False" if v is None or v is False or v == "" else "%s" % v for v in forms
+        ] or ["False"]
+        if any(f in wanted for f in forms) != (op == "="):
             return False
     return True
+
+
+def when_count(spec):
+    """Number of conditions of spec: a page with more conditions met is more
+    specific and wins over a page with fewer"""
+    return len(parse_when(spec))
 
 
 def version_group(major):
@@ -264,6 +276,7 @@ class HelpPage(Directive):
         "view": directives.unchanged,
         "view-type": directives.unchanged,
         "when": directives.unchanged,
+        "priority": directives.positive_int,
     }
 
     def run(self):
@@ -280,6 +293,7 @@ class HelpPage(Directive):
             ),
             "view_type": self.options.get("view-type", ""),
             "when": self.options.get("when", "").strip(),
+            "priority": self.options.get("priority"),
         }
         self.state.document.wch_page = page
         return []

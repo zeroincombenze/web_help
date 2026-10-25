@@ -3,6 +3,7 @@
    :model: account.payment.term
    :view: account.view_payment_term_form
    :view-type: form
+   :priority: 96
 
 Payment Terms
 =============

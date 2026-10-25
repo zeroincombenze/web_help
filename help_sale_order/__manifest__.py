@@ -6,7 +6,7 @@
 #
 {
     "name": "Help for sale order",
-    "version": "18.0.1.0.2",
+    "version": "18.0.1.0.3",
     "category": "Hidden/Tools",
     "summary": "Context help pages for sale orders",
     "author": "Zeroincombenze srls",

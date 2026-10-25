@@ -6,7 +6,7 @@
 #
 {
     "name": "Help for payment terms",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Hidden/Tools",
     "summary": "Context help pages for payment terms",
     "author": "Zeroincombenze srls",

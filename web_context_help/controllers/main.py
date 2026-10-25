@@ -71,8 +71,16 @@ class ContextHelp(http.Controller):
 
     @http.route("/web_context_help/lookup", type="json", auth="user")
     def lookup(
-        self, model=None, view_type=None, view_id=None, lang=None, values=None, **kw
+        self,
+        model=None,
+        view_type=None,
+        view_id=None,
+        lang=None,
+        values=None,
+        loose_from=None,
+        **kw
     ):
+        """loose_from: key of the page shown, for its Loose help button"""
         lang = self._lang(lang)
         Page = request.env["context.help.page"]
         page = Page.lookup(
@@ -81,12 +89,29 @@ class ContextHelp(http.Controller):
             view_id=view_id,
             lang=lang,
             values=values if isinstance(values, dict) else None,
+            loose_from=loose_from if isinstance(loose_from, str) else None,
         )
         if page:
             return {"url": Page.page_url(page.key, lang), "key": page.key}
         if model and model in request.env:
             return {"url": "/web_context_help/auto/%s?lang=%s" % (model, lang)}
         return {"url": False}
+
+    @http.route("/web_context_help/loose/<string:key>", type="http", auth="user")
+    def loose(self, key, lang=None, **kw):
+        """Loose help of a page opened without the Odoo tab: the record is
+        unknown, the general page is looked up by the model of the page"""
+        lang = self._lang(lang)
+        Page = request.env["context.help.page"]
+        page = Page.get_page(key, lang)
+        if not page or not page.model:
+            raise NotFound()
+        found = Page.lookup(
+            model=page.model, view_type=page.view_type, lang=lang, loose_from=key
+        )
+        if found:
+            return request.redirect(Page.page_url(found.key, lang))
+        return request.redirect("/web_context_help/auto/%s?lang=%s" % (page.model, lang))
 
     @http.route("/web_context_help/page/<string:key>", type="http", auth="user")
     def page(self, key, lang=None, view=None, **kw):
@@ -117,6 +142,8 @@ class ContextHelp(http.Controller):
             for name in ("help", "faq", "fields")
             if name != (view or "help") and pages[None if name == "help" else name]
         }
+        if page.model and page.has_loose_help():
+            nav["loose"] = "/web_context_help/loose/%s?lang=%s" % (page.key, lang)
         nav.update(self._nav(lang, "home" if page.key == HOME_KEY else None))
         if page.has_access("write"):
             nav["edit"] = Page.edit_url(page)
@@ -127,7 +154,7 @@ class ContextHelp(http.Controller):
             page_key=page.key,
             model=page.model or "",
             warning=page.source_changed
-            and request.env.user.has_group("base.group_system"),
+            and request.env.user.has_group("web_context_help.group_help_editor"),
             nav=nav,
         )
         return self._html(body)
@@ -161,8 +188,8 @@ class ContextHelp(http.Controller):
 
     @http.route("/web_context_help/videos", type="json", auth="user")
     def videos(self, **kw):
-        """Videos that the administrator can insert in a help page"""
-        if not request.env.user.has_group("base.group_system"):
+        """Videos that a help editor can insert in a help page"""
+        if not request.env.user.has_group("web_context_help.group_help_editor"):
             raise Forbidden()
         return request.env["context.help.page"].video_list()
 

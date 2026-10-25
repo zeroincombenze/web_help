@@ -51,6 +51,7 @@ LABELS = {
         "home": "Home",
         "summary": "Summary",
         "edit": "Edit",
+        "loose": "Loose help",
         "summary_title": "Help summary",
         "summary_none": "No help page available.",
         "view_list": "list",
@@ -72,6 +73,7 @@ LABELS = {
         "home": "Inizio",
         "summary": "Sommario",
         "edit": "Modifica",
+        "loose": "Aiuto generale",
         "summary_title": "Sommario dell'aiuto",
         "summary_none": "Nessuna pagina di aiuto disponibile.",
         "view_list": "elenco",
@@ -204,7 +206,7 @@ def split_faq(body_html):
     return body, faq
 
 
-NAV = ("home", "help", "faq", "fields", "summary", "edit")
+NAV = ("home", "help", "loose", "faq", "fields", "summary", "edit")
 # Opened in a new tab: the Odoo backend, not a help page
 NAV_BLANK = ("edit",)
 

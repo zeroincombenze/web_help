@@ -100,6 +100,12 @@ class TestRstHelp(common.BaseCase):
             doc.wch_page["view"], "base.view_partner_form,base.view_partner_tree"
         )
         self.assertEqual(doc.wch_page["view_type"], "form")
+        # no :priority: the pages of the modules get 96 when stored
+        self.assertIsNone(doc.wch_page["priority"])
+        doc_priority = rst_help.parse(
+            ".. help-page:: p\n   :priority: 80\n", "<t>", self.help_dir, "v16_20"
+        )
+        self.assertEqual(doc_priority.wch_page["priority"], 80)
         self.assertEqual(rst_help.page_title(doc, doc.wch_page), "Partner")
         html = rst_help.to_html(doc)
         self.assertIn("<strong>intro</strong>", html)
@@ -289,6 +295,15 @@ Press :version:`16|**View Invoice**;17|*Draft Invoice*;*|Create Draft` now.
         self.assertTrue(match("t = a, b and c = True", {"t": "b", "c": True}))
         self.assertFalse(match("t = a, b and c = True", {"t": "b", "c": False}))
         self.assertTrue(match("c = False", {"c": False}))
+        # several forms of one value: id and xmlid of a many2one record
+        self.assertTrue(match("p = base.it", {"p": ["7", "base.it"]}))
+        self.assertTrue(match("p = 7", {"p": ["7", "base.it"]}))
+        self.assertFalse(match("p != base.it", {"p": ["7", "base.it"]}))
+        self.assertTrue(match("p != base.it", {"p": ["8", "base.fr"]}))
+        self.assertTrue(match("p = False", {"p": []}))
+        self.assertTrue(match("n = 0", {"n": 0}))
+        self.assertEqual(rst_help.when_count("a = 1 and b != 2"), 2)
+        self.assertEqual(rst_help.when_count(""), 0)
         doc = rst_help.parse(
             ".. help-page:: p\n   :when: move_type != entry\n",
             "<t>",
