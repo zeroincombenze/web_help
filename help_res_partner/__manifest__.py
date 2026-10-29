@@ -1,0 +1,20 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright 2026 Zeroincombenze srls <https://www.zeroincombenze.it>
+#
+# License LGPL-3.0-or-later (https://www.gnu.org/licenses/lgpl).
+#
+{
+    "name": "Help for partner",
+    "version": "10.0.1.0.0",
+    "category": "Hidden/Tools",
+    "summary": "Context help pages for contacts (partners)",
+    "author": "Zeroincombenze srls",
+    "website": "https://github.com/zeroincombenze/web_help",
+    "development_status": "Alpha",
+    "license": "LGPL-3",
+    "depends": ["base", "web_context_help"],
+    "data": [],
+    "maintainer": "Antonio M. Vigliotti <antoniomaria.vigliotti@gmail.com>",
+    "installable": True,
+}
