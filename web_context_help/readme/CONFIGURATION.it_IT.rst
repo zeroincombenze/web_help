@@ -1,12 +1,12 @@
 Non serve configurazione. Le pagine sono ricostruite all'avvio del server
 quando cambia una sorgente di aiuto; un editor dell'aiuto può forzarlo con
-**Ricostruisci tutte le pagine** in *Editor dell'aiuto > Pagine di aiuto*.
+**Ricostruisci tutte le pagine** in *Aiuto > Editor dell'aiuto > Pagine di aiuto*.
 
 Ogni utente interno legge l'aiuto. Le pagine di aiuto e le loro regole sono
 scritte dagli utenti del gruppo **Editor dell'aiuto** (*Impostazioni > Utenti*,
-sezione *Aiuto contestuale*), senza diritti di amministratore: hanno l'app
-*Editor dell'aiuto* (pagine, regole, domande poste) e il pulsante **Modifica**
-della finestra di aiuto. Anche gli amministratori sono editor dell'aiuto.
+sezione *Aiuto contestuale*), senza diritti di amministratore: aprendo l'app
+**Aiuto**, hanno il suo menu *Editor dell'aiuto* nella barra in alto (pagine,
+regole, domande poste) e il pulsante **Modifica** della finestra di aiuto. Anche gli amministratori sono editor dell'aiuto.
 
 I video inseriti nelle pagine di aiuto sono letti dalla cartella del parametro
 di sistema ``web_help_video_path`` (predefinito ``~/Video``, la home

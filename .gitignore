@@ -121,8 +121,4 @@ stdout.log
 *.z0i
 #
 # tools building path
-#
-#
-# odoo repositories
-#
 !static/lib/

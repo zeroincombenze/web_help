@@ -92,7 +92,7 @@ Regole
 ~~~~~~
 
 Senza scrivere RST, un editor dell'aiuto sceglie quale pagina mostrare da
-*Editor dell'aiuto ‣ Regole di aiuto* o dalla scheda
+*Aiuto ‣ Editor dell'aiuto ‣ Regole di aiuto* o dalla scheda
 **Regole** di una pagina: campo del modello della pagina (selezione, booleano o
 many2one), *è* o *non è*, e i valori (selezione), la casella (booleano) o il
 record (many2one). Una pagina con regole è mostrata quando una di esse è

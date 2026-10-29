@@ -152,9 +152,7 @@ class TestContextHelp(common.TransactionCase):
         self.assertEqual(html.count('id="wildcard"'), 1)
         self.assertLess(html.index("Type the name"), html.index("S%Maria%C%V"))
         self.assertLess(html.index("S%Maria%C%V"), html.index("Page created"))
-        self.assertIn(
-            "Searching with the wildcard", page.section_ids.mapped("title")
-        )
+        self.assertIn("Searching with the wildcard", page.section_ids.mapped("title"))
         # form pages do not get it
         form = self.Page.search([("key", "=", "wch_test_a.partner")])
         self.assertNotIn("S%Maria%C%V", form.html)
@@ -432,7 +430,9 @@ class TestContextHelp(common.TransactionCase):
         own = self.Page.create(dict(values, key="custom.own", name="Own", priority=50))
         values["clear_cut"] = True
         low = self.Page.create(dict(values, key="custom.low", name="Low", priority=90))
-        high = self.Page.create(dict(values, key="custom.high", name="High", priority=10))
+        high = self.Page.create(
+            dict(values, key="custom.high", name="High", priority=10)
+        )
         for page in (low, high):
             self.env["context.help.rule"].create(
                 {
@@ -478,7 +478,9 @@ class TestContextHelp(common.TransactionCase):
         self.assertEqual(loose({"country_id": italy}, "custom.low"), "custom.high")
         # pages of priority under 64 and clear cut pages are not general enough
         high.priority = 60
-        self.assertEqual(loose({"country_id": italy}, "custom.low"), "wch_test_a.partner")
+        self.assertEqual(
+            loose({"country_id": italy}, "custom.low"), "wch_test_a.partner"
+        )
         self.assertEqual(
             loose({"country_id": fr}, "wch_test_a.partner (copy)"), "wch_test_a.partner"
         )

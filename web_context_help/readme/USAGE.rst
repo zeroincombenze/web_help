@@ -88,7 +88,7 @@ Rules
 ~~~~~
 
 Without writing RST, a help editor chooses which page is shown from
-*Help Editor ‣ Help Rules* or from the **Rules** tab of
+*Help ‣ Help Editor ‣ Help Rules* or from the **Rules** tab of
 a page: field of the page model (selection, boolean or many2one), *is* or *is
 not*, and the values (selection), the checkbox (boolean) or the record
 (many2one). A page with rules is shown when one of them is met, and the

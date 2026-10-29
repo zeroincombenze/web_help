@@ -333,7 +333,9 @@ class ContextHelpPage(models.Model):
                     level.setdefault(page.id, 0)
         if model and view_type:
             types = VIEW_TYPE_ALIASES.get(view_type, (view_type,))
-            for page in self.search([("model", "=", model), ("view_type", "in", types)]):
+            for page in self.search(
+                [("model", "=", model), ("view_type", "in", types)]
+            ):
                 level.setdefault(page.id, 1)
         if model:
             for page in self.search(

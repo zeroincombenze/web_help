@@ -17,7 +17,6 @@ from odoo.http import Stream, request
 from ..lib import html_page
 from ..models.context_help_page import HOME_KEY
 
-
 RE_LANG = re.compile(r"^[a-z]{2,3}(_[A-Za-z0-9]+)?(@\w+)?$")
 
 
@@ -111,7 +110,9 @@ class ContextHelp(http.Controller):
         )
         if found:
             return request.redirect(Page.page_url(found.key, lang))
-        return request.redirect("/web_context_help/auto/%s?lang=%s" % (page.model, lang))
+        return request.redirect(
+            "/web_context_help/auto/%s?lang=%s" % (page.model, lang)
+        )
 
     @http.route("/web_context_help/page/<string:key>", type="http", auth="user")
     def page(self, key, lang=None, view=None, **kw):

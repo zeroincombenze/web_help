@@ -179,7 +179,17 @@ export const contextHelpService = {
 
 registry.category("services").add("context_help", contextHelpService);
 
-// Client action of the Help menu: opens the window, the current view stays
+const HELP_MENU_XMLID = "web_context_help.menu_help_root";
+
+// Client action of the Help menu: opens the window, the current view stays.
+// The action shows no view, so Odoo does not switch to the Help app: for the
+// help editors (the only users with Help sub-menus) it is switched here, so
+// the top bar shows the Help Editor menus
 registry.category("actions").add("web_context_help.home", (env) => {
     env.services.context_help.openHome();
+    const menus = env.services.menu;
+    const help = menus.getApps().find((app) => app.xmlid === HELP_MENU_XMLID);
+    if (help && help.children.length) {
+        menus.setCurrentMenu(help);
+    }
 });

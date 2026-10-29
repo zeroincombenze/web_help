@@ -21,7 +21,10 @@ STATIC = "/web_context_help/static/src/common"
 # The question box is hidden until the ask feature is released
 ASK_ENABLED = False
 STATIC_DIR = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "static", "src", "common"
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "static",
+    "src",
+    "common",
 )
 
 
@@ -81,7 +84,7 @@ LABELS = {
         "ask": "Fai una domanda",
         "none": "Nessuna risposta trovata",
         "auto": "Campi di questa maschera",
-        "changed": "La sorgente originale è cambiata dopo la modifica di questa pagina.",
+        "changed": "L'originale è cambiato dopo la modifica di questa pagina.",
     },
 }
 
@@ -233,8 +236,10 @@ def render(
   <div class="wch-find">
     <input type="search" id="wch_find" placeholder="%(find)s" autocomplete="off"/>
     <span id="wch_find_count" class="wch-find-count"></span>
-    <button type="button" id="wch_find_prev" class="wch-find-nav" title="%(prev)s">&#9650;</button>
-    <button type="button" id="wch_find_next" class="wch-find-nav" title="%(next)s">&#9660;</button>
+    <button type="button" id="wch_find_prev" class="wch-find-nav"
+            title="%(prev)s">&#9650;</button>
+    <button type="button" id="wch_find_next" class="wch-find-nav"
+            title="%(next)s">&#9660;</button>
   </div>
 %(nav)s%(ask_form)s</header>
 %(answers)s%(warning)s<main class="wch-content">
@@ -273,9 +278,7 @@ def render(
             else ""
         ),
         "answers": (
-            '<div id="wch_answers" class="wch-answers"></div>\n'
-            if ASK_ENABLED
-            else ""
+            '<div id="wch_answers" class="wch-answers"></div>\n' if ASK_ENABLED else ""
         ),
         "warning": (
             '<div class="wch-warning">%s</div>\n' % escape(tr["changed"])

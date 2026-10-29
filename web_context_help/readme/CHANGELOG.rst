@@ -1,3 +1,8 @@
+18.0.1.0.7 (2026-10-29)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] The Help Editor menus are in the Help app, no longer an app of their own: the Help app still opens the help window and, for the help editors, shows the Help Editor menu in the top bar
+
 18.0.1.0.6 (2026-10-22)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

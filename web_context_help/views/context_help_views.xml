@@ -256,11 +256,11 @@
     <menuitem id="menu_help_root" name="Help" action="action_context_help_home"
         web_icon="web_context_help,static/description/icon.png"
         groups="base.group_user" sequence="990"/>
-    <!-- App of the help editors: the Help app only opens the help window,
-         the Technical menu is for the administrators in debug mode -->
-    <menuitem id="menu_help_editor_root" name="Help Editor"
-        web_icon="web_context_help,static/description/icon.png"
-        groups="group_help_editor" sequence="991"/>
+    <!-- Menus of the help editors, in the Help app, the Technical menu being
+         for the administrators in debug mode. The Help app opens the help
+         window; for the editors it also shows these menus in the top bar -->
+    <menuitem id="menu_help_editor_root" name="Help Editor" parent="menu_help_root"
+        groups="group_help_editor" sequence="10"/>
     <menuitem id="menu_help_editor_page" name="Help Pages" action="action_context_help_page"
         parent="menu_help_editor_root" sequence="10"/>
     <menuitem id="menu_help_editor_rule" name="Help Rules" action="action_context_help_rule"
