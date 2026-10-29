@@ -8,7 +8,10 @@ import logging
 import os
 import re
 
+from werkzeug.urls import url_quote
+
 from odoo import api, fields, models, release
+from odoo.exceptions import AccessError
 from odoo.modules.module import get_module_path
 
 from ..lib import html_page, rst_help
@@ -31,6 +34,13 @@ PRIORITY_LOOSE = 64
 VIDEO_PATH_PARAM = "web_help_video_path"
 VIDEO_PATH_DEFAULT = "~/Video"
 VIDEO_EXTS = (".mp4", ".m4v", ".webm", ".ogv", ".ogg", ".mov")
+
+try:  # pragma: no cover
+    STRING_TYPES = (basestring,)  # noqa: F821 - Python 2
+    INT_TYPES = (int, long)  # noqa: F821 - Python 2
+except NameError:  # pragma: no cover
+    STRING_TYPES = (str,)
+    INT_TYPES = (int,)
 
 
 class ContextHelpSource(models.Model):
@@ -122,16 +132,16 @@ class ContextHelpPage(models.Model):
     # ------------------------------------------------------------------
     # Admin editing
     # ------------------------------------------------------------------
-    @api.model_create_multi
-    def create(self, vals_list):
-        pages = super(ContextHelpPage, self).create(vals_list)
+    @api.model
+    def create(self, vals):
+        page = super(ContextHelpPage, self).create(vals)
         # a page created by the administrator has no source: its sections
         # come from its content
         if not self.env.context.get("wch_sync"):
-            for page in pages:
-                page._wch_set_sections(html_page.extract_sections(page.html))
-        return pages
+            page._wch_set_sections(html_page.extract_sections(page.html))
+        return page
 
+    @api.multi
     def write(self, vals):
         if "html" in vals and not self.env.context.get("wch_sync"):
             vals = dict(vals, edited=True)
@@ -141,9 +151,11 @@ class ContextHelpPage(models.Model):
                 page._wch_set_sections(html_page.extract_sections(page.html))
         return res
 
+    @api.multi
+    @api.returns(None, lambda value: value[0])
     def copy_data(self, default=None):
         """The copy key ends with " (copy)", the key being unique per language"""
-        vals_list = super().copy_data(default=default)
+        vals_list = super(ContextHelpPage, self).copy_data(default=default)
         if default and "key" in default:
             return vals_list
         for page, vals in zip(self, vals_list):
@@ -157,6 +169,7 @@ class ContextHelpPage(models.Model):
             vals["key"] = key
         return vals_list
 
+    @api.multi
     def _wch_set_sections(self, sections):
         """Replace the sections used by the full-text search"""
         self.ensure_one()
@@ -166,11 +179,13 @@ class ContextHelpPage(models.Model):
                 dict(section, page_id=self.id, sequence=seq)
             )
 
+    @api.multi
     def has_loose_help(self):
         """Loose help button: the page is clear cut or of high priority"""
         self.ensure_one()
         return self.clear_cut or self.priority <= PRIORITY_LOOSE
 
+    @api.multi
     def action_reset_to_source(self):
         # a page created by the administrator has no source to go back to
         for page in self.filtered("source_file"):
@@ -180,13 +195,16 @@ class ContextHelpPage(models.Model):
             page._wch_set_sections(html_page.extract_sections(page.html))
         return True
 
+    @api.multi
     def action_source_seen(self):
         return self.write({"source_changed": False})
 
+    @api.multi
     def action_rebuild(self):
         self.sudo().sync_sources(force=True)
         return True
 
+    @api.multi
     def action_open(self):
         self.ensure_one()
         return {
@@ -198,7 +216,7 @@ class ContextHelpPage(models.Model):
     @api.model
     def page_url(self, key, lang=None, view=None):
         """URL of a page; view: "faq" or "fields" for its FAQ or Fields page"""
-        url = "/web_context_help/page/%s" % key
+        url = "/web_context_help/page/%s" % url_quote(key)
         params = ["lang=%s" % lang] if lang else []
         if view:
             params.append("view=%s" % view)
@@ -207,7 +225,24 @@ class ContextHelpPage(models.Model):
     @api.model
     def edit_url(self, page):
         """URL of the backend form of a page"""
-        return "/odoo/action-web_context_help.action_context_help_page/%s" % page.id
+        action = self.env.ref("web_context_help.action_context_help_page")
+        return "/web#id=%d&model=%s&view_type=form&action=%d" % (
+            page.id,
+            self._name,
+            action.id,
+        )
+
+    @api.multi
+    def can_write(self):
+        """True when the user may change the page"""
+        self.ensure_one()
+        if not self.check_access_rights("write", raise_exception=False):
+            return False
+        try:
+            self.check_access_rule("write")
+        except AccessError:
+            return False
+        return True
 
     @api.model
     def summary(self, lang=None):
@@ -276,9 +311,9 @@ class ContextHelpPage(models.Model):
             value = values[name]
             if isinstance(value, (list, tuple)):
                 value = value[0] if value else False
-            if isinstance(value, str) and value.isdigit():
+            if isinstance(value, STRING_TYPES) and value.isdigit():
                 value = int(value)
-            if isinstance(value, bool) or not isinstance(value, int) or not value:
+            if isinstance(value, bool) or not isinstance(value, INT_TYPES) or not value:
                 values[name] = False
                 continue
             values[name] = [str(value)]
@@ -333,7 +368,9 @@ class ContextHelpPage(models.Model):
                     level.setdefault(page.id, 0)
         if model and view_type:
             types = VIEW_TYPE_ALIASES.get(view_type, (view_type,))
-            for page in self.search([("model", "=", model), ("view_type", "in", types)]):
+            for page in self.search(
+                [("model", "=", model), ("view_type", "in", types)]
+            ):
                 level.setdefault(page.id, 1)
         if model:
             for page in self.search(
@@ -402,7 +439,7 @@ class ContextHelpPage(models.Model):
 
     @api.model
     def _wch_with_lang(self, lang):
-        """Self in lang when installed: Odoo 17+ rejects any other code"""
+        """Self in lang when installed, the other codes are not translated"""
         if lang in dict(self.env["res.lang"].get_installed()):
             return self.with_context(lang=lang)
         return self
@@ -498,9 +535,9 @@ class ContextHelpPage(models.Model):
                         self.page_url(
                             page.key,
                             page.lang,
-                            view="faq"
-                            if section.label == html_page.FAQ_LABEL
-                            else None,
+                            view=(
+                                "faq" if section.label == html_page.FAQ_LABEL else None
+                            ),
                         ),
                         section.label,
                     ),
@@ -558,6 +595,7 @@ class ContextHelpPage(models.Model):
     # ------------------------------------------------------------------
     # Build from RST sources
     # ------------------------------------------------------------------
+    @api.model_cr
     def _register_hook(self):
         res = super(ContextHelpPage, self)._register_hook()
         try:

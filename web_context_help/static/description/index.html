@@ -91,12 +91,13 @@ utilizzabile.
             </p>
             <p class="oe_mt16" align="justify">No configuration is needed. Pages are rebuilt at server start when a help
 source changes; a help editor can force it with <b>Rebuild all pages</b> in
-<i>Help Editor &gt; Help Pages</i>.
+<i>Help &gt; Help Editor &gt; Help Pages</i>.
 <p align="justify">
 Every internal user reads the help. The help pages and their rules are written
 by the users of the group <b>Help Editor</b> (<i>Settings &gt; Users</i>, section
-<i>Context Help</i>), with no administrator rights: they get the <i>Help Editor</i> app
-(pages, rules, questions asked) and the <b>Edit</b> button of the help window.
+<i>Context Help</i>), with no administrator rights: they get the <i>Help Editor</i>
+section in the left bar of the <b>Help</b> menu (pages, rules, questions asked)
+and the <b>Edit</b> button of the help window.
 The administrators are help editors too.
 </p><p align="justify">
 The videos inserted in the help pages are read from the directory of the system
@@ -111,13 +112,13 @@ System Parameters</i>.
             </p>
             <p class="oe_mt16" align="justify">Non serve configurazione. Le pagine sono ricostruite all'avvio del server
 quando cambia una sorgente di aiuto; un editor dell'aiuto pu&#242; forzarlo con
-<b>Ricostruisci tutte le pagine</b> in <i>Editor dell'aiuto &gt; Pagine di aiuto</i>.
+<b>Ricostruisci tutte le pagine</b> in <i>Aiuto &gt; Editor dell'aiuto &gt; Pagine di aiuto</i>.
 <p align="justify">
 Ogni utente interno legge l'aiuto. Le pagine di aiuto e le loro regole sono
 scritte dagli utenti del gruppo <b>Editor dell'aiuto</b> (<i>Impostazioni &gt; Utenti</i>,
-sezione <i>Aiuto contestuale</i>), senza diritti di amministratore: hanno l'app
-<i>Editor dell'aiuto</i> (pagine, regole, domande poste) e il pulsante <b>Modifica</b>
-della finestra di aiuto. Anche gli amministratori sono editor dell'aiuto.
+sezione <i>Aiuto contestuale</i>), senza diritti di amministratore: hanno la
+sezione <i>Editor dell'aiuto</i> nella barra a sinistra del menu <b>Aiuto</b> (pagine,
+regole, domande poste) e il pulsante <b>Modifica</b> della finestra di aiuto. Anche gli amministratori sono editor dell'aiuto.
 </p><p align="justify">
 I video inseriti nelle pagine di aiuto sono letti dalla cartella del parametro
 di sistema <code>web_help_video_path</code> (predefinito <code>~/Video</code>, la home
@@ -132,8 +133,23 @@ dell'utente che esegue Odoo), sottocartelle comprese; si cambia in
     <div class="oe_row oe_spaced">
         <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">ChangeLog History | Cronologia modifiche</h3>
         <div class="oe_span12">
-<h4>18.0.1.0.6 (2026-10-22)</h4>
+<h4>10.0.1.0.7 (2026-10-29)</h4>
 <p align="justify">
+<ul>
+<li>[IMP] Migrated from 18.0 to 10.0: Python 2.7, Odoo 10 ORM, list views as tree and attrs, assets and QWeb templates of the Odoo 10 web client</li>
+<li>[IMP] Odoo 10 adapter of the control panel: the [?] button opens the help of the view shown, the help window follows the views and the records (pager, save), highlights the fields and runs the tours</li>
+<li>[IMP] Odoo 10: the Insert video button of the page form inserts a video of the video directory at the end of the page or after a paragraph, in place of the editor plugin of 18.0</li>
+<li>[IMP] Odoo 10: the selection values of a help rule are written as their keys, comma separated, checked against the allowed values shown in the rule form</li>
+<li>[IMP] Odoo 10: help page of the Help pages form in help/v10</li>
+<li>[IMP] Odoo 10: the Help Editor menus are in the left bar of the Help menu, Odoo 10 having no apps menu; the Help menu still opens the help window</li>
+<li>[FIX] Videos streamed with HTTP range support without the 18.0 Stream class</li>
+<li>[FIX] Page keys quoted in the URLs: a duplicated page (key ending with " (copy)") opens</li>
+<li>[QUA] Test coverage 90% (1241: 120+1121) [0 TestPoints] - quality rating 51 (target 100)</li>
+<li>[FIX] RST engine on Python 2: byte strings accepted, icons out of the basic plane (e.g. U+1F6DF) rendered on narrow builds, global search text copied without the docutils 0.16 system messages</li>
+</ul>
+</p><p align="justify">
+<h4>10.0.0</h4>
+</p><p align="justify">
 <ul>
 <li>[IMP] help-page :when: condition on many2one fields too, the record named by xmlid or id, e.g. type_id = sale_order_type.normal_sale_type</li>
 <li>[IMP] Help rules (Settings &#8227; Technical &#8227; Context Help &#8227; Help Rules, or the Rules tab of a page): the administrator chooses which page is shown by a selection, boolean or many2one field of the record, no RST source needed; several rules of a page are alternatives; in the rule form field, operator and value are shown together</li>
@@ -146,7 +162,7 @@ dell'utente che esegue Odoo), sottocartelle comprese; si cambia in
 <li>[FIX] Help pages: Duplicate no longer fails on the duplicate key: the copy key ends with " (copy)" (" (copy 2)" and so on for further copies); the copy has no source file, so it is a page of the administrator kept by the rebuild</li>
 </ul>
 </p><p align="justify">
-<h4>18.0.1.0.5 (2026-10-14)</h4>
+<h4>10.0.0</h4>
 </p><p align="justify">
 <ul>
 <li>[IMP] Help pages: Help video button in the floating toolbar of the editor (and /Help video command): inserts a video of the directory set by the system parameter web_help_video_path (default ~/Video), played on click; Backspace or Delete next to a video removes it</li>
@@ -154,7 +170,7 @@ dell'utente che esegue Odoo), sottocartelle comprese; si cambia in
 <li>[FIX] Help pages: the Sections of a page edited by the administrator (editor or HTML code view) are rebuilt from its content, so the added headings and text are listed and found by the search; a reset to source rebuilds them too</li>
 </ul>
 </p><p align="justify">
-<h4>18.0.1.0.4 (2026-10-14)</h4>
+<h4>10.0.0</h4>
 </p><p align="justify">
 <ul>
 <li>[IMP] Help menu at the top of the menu tree: opens the help home page, editable by the administrator; HTML code view (&lt;/&gt;) on the content of the help pages, also without developer mode and as wide as the page</li>
@@ -162,7 +178,7 @@ dell'utente che esegue Odoo), sottocartelle comprese; si cambia in
 <li>[FIX] Help window: a malformed lang in the URL (e.g. ?lang=it_IT?debug=1) no longer falls back to the English page</li>
 </ul>
 </p><p align="justify">
-<h4>18.0.1.0.3 (2026-10-02)</h4>
+<h4>10.0.0</h4>
 </p><p align="justify">
 <ul>
 <li>[IMP] Help window: find in page box, like the browser Ctrl+F, with previous / next buttons; several words found when near each other, phrase in quotes</li>
@@ -172,25 +188,25 @@ dell'utente che esegue Odoo), sottocartelle comprese; si cambia in
 <li>[FIX] RST: a :field: role wrapped on two lines was printed as text; a :version: role with a stray ";" now fails on every version instead of cutting the text</li>
 </ul>
 </p><p align="justify">
-<h4>18.0.1.0.2 (2026-10-01)</h4>
+<h4>10.0.0</h4>
 </p><p align="justify">
 <ul>
 <li>[IMP] Version specific help: help-version directive and :version: role, pages built for the running Odoo version</li>
 </ul>
 </p><p align="justify">
-<h4>18.0.1.0.1 (2026-09-27)</h4>
+<h4>10.0.0</h4>
 </p><p align="justify">
 <ul>
 <li>[IMP] Field labels highlighted too, dialogs keep the help of the main view</li>
 </ul>
 </p><p align="justify">
-<h4>18.0.1.0.0 (2026-09-27)</h4>
+<h4>10.0.0</h4>
 </p><p align="justify">
 <ul>
 <li>[IMP] Migrated from 16.0: list views, invisible expressions, Odoo 18 control panel adapter</li>
 </ul>
 </p><p align="justify">
-<h4>18.0.0</h4>
+<h4>10.0.0</h4>
 </p><p align="justify">
 <ul>
 <li>[NEW] Context help button, help pages built from the RST sources of each module</li>
@@ -206,8 +222,7 @@ dell'utente che esegue Odoo), sottocartelle comprese; si cambia in
         <div class="oe_span6" align="left">
             <p class="oe_mt16"><b>Authors | Autori:</b></p>
             <p class="oe_mt16"><ul>
-<li>Zeroincombenze srls &lt;False&gt;</li>
-<li><a href="https://www.zeroincombenze.it">SHS-AV s.r.l.</a></li>
+<li><a href="https://www.zeroincombenze.it">Zeroincombenze srls</a></li>
 </ul></p>
         </div>
         <div class="oe_span6" align="left">
@@ -224,6 +239,6 @@ dell'utente che esegue Odoo), sottocartelle comprese; si cambia in
     </div>
     <div class="oe_row oe_spaced">
         <p>This module is part of <a href="https://github.com/zeroincombenze/web_help">web_help</a> project.</p>
-        <p>Published information on | Informazioni pubblicate: 2026-10-25</p>
+        <p>Published information on | Informazioni pubblicate: 2026-10-29</p>
     </div>
 </section>

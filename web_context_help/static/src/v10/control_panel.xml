@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 Zeroincombenze srls <https://www.zeroincombenze.it>
+     License LGPL-3.0-or-later (https://www.gnu.org/licenses/lgpl).
+     VERSION-DEPENDENT: Odoo 10 adapter, [?] button in the control panel. -->
+<templates xml:space="preserve">
+    <t t-extend="ControlPanel">
+        <t t-jquery="div.o_cp_right" t-operation="append">
+            <button type="button" class="btn btn-sm btn-link o_wch_button"
+                title="Help" aria-label="Help" accesskey="h">
+                <i class="fa fa-life-ring text-danger"/>
+            </button>
+        </t>
+    </t>
+</templates>

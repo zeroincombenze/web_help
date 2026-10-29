@@ -9,9 +9,16 @@ import os
 import shutil
 import tempfile
 
+try:  # pragma: no cover
+    from urllib.request import Request
+except ImportError:  # pragma: no cover - Python 2
+    from urllib2 import Request
+
+from odoo import api
 from odoo.exceptions import AccessError, ValidationError
 from odoo.modules.module import get_module_path
-from odoo.tests import common, tagged
+from odoo.tests import common
+from odoo.tools.misc import mute_logger
 
 BASE = """.. help-page:: partner
    :model: res.partner
@@ -86,7 +93,8 @@ INHERIT = """.. help-inherit:: wch_test_a.partner
 """
 
 
-@tagged("post_install", "-at_install")
+@common.at_install(False)
+@common.post_install(True)
 class TestContextHelp(common.TransactionCase):
     def setUp(self):
         super(TestContextHelp, self).setUp()
@@ -152,9 +160,7 @@ class TestContextHelp(common.TransactionCase):
         self.assertEqual(html.count('id="wildcard"'), 1)
         self.assertLess(html.index("Type the name"), html.index("S%Maria%C%V"))
         self.assertLess(html.index("S%Maria%C%V"), html.index("Page created"))
-        self.assertIn(
-            "Searching with the wildcard", page.section_ids.mapped("title")
-        )
+        self.assertIn("Searching with the wildcard", page.section_ids.mapped("title"))
         # form pages do not get it
         form = self.Page.search([("key", "=", "wch_test_a.partner")])
         self.assertNotIn("S%Maria%C%V", form.html)
@@ -300,7 +306,9 @@ class TestContextHelp(common.TransactionCase):
         self.assertEqual(lookup({"country_id": False}).key, "wch_test_a.partner")
 
     def _field(self, name):
-        return self.env["ir.model.fields"]._get("res.partner", name)
+        return self.env["ir.model.fields"].search(
+            [("model", "=", "res.partner"), ("name", "=", name)]
+        )
 
     def test_rules(self):
         self._rebuild()
@@ -313,12 +321,15 @@ class TestContextHelp(common.TransactionCase):
             {"page_id": company.id, "field_id": self._field("country_id").id}
         )
         self.assertEqual(rule.condition, "country_id = False")
-        self.assertEqual(rule.relation_model_id.model, "res.country")
+        self.assertEqual(rule.relation, "res.country")
         # the record is picked by the reference field, like the server actions
         rule.record_ref = "res.country,%d" % italy
         self.assertEqual(rule.res_id, italy)
         self.assertEqual(rule.condition, "country_id = %d" % italy)
         self.assertEqual(rule.record_ref, self.env.ref("base.it"))
+        # the record must be of the comodel of the field
+        with self.assertRaises(ValidationError), self.cr.savepoint():
+            rule.record_ref = "res.partner,%d" % self.env.ref("base.main_partner").id
 
         def lookup(values):
             return self.Page.lookup(
@@ -337,19 +348,22 @@ class TestContextHelp(common.TransactionCase):
             {
                 "page_id": company.id,
                 "field_id": self._field("type").id,
-                "selection_ids": [
-                    (
-                        6,
-                        0,
-                        self._field("type")
-                        .selection_ids.filtered(
-                            lambda s: s.value in ("invoice", "delivery")
-                        )
-                        .ids,
-                    )
-                ],
+                "selection_values": "invoice, delivery",
             }
         )
+        self.assertEqual(
+            Rule.search([], limit=1, order="id desc").condition,
+            "type = invoice, delivery",
+        )
+        # a value not of the selection is refused
+        with self.assertRaises(ValidationError), self.cr.savepoint():
+            Rule.create(
+                {
+                    "page_id": company.id,
+                    "field_id": self._field("type").id,
+                    "selection_values": "invoice, nowhere",
+                }
+            )
         self.assertEqual(
             lookup({"is_company": True, "country_id": fr, "type": "delivery"}).key,
             "wch_test_c.company",
@@ -367,12 +381,12 @@ class TestContextHelp(common.TransactionCase):
             }
         )
         self.assertEqual(rule.condition, "active != True")
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(ValidationError), self.cr.savepoint():
             Rule.create(
                 {
                     "page_id": company.id,
                     "field_id": self.env["ir.model.fields"]
-                    ._get("res.country", "code")
+                    .search([("model", "=", "res.country"), ("name", "=", "code")])
                     .id,
                 }
             )
@@ -432,7 +446,9 @@ class TestContextHelp(common.TransactionCase):
         own = self.Page.create(dict(values, key="custom.own", name="Own", priority=50))
         values["clear_cut"] = True
         low = self.Page.create(dict(values, key="custom.low", name="Low", priority=90))
-        high = self.Page.create(dict(values, key="custom.high", name="High", priority=10))
+        high = self.Page.create(
+            dict(values, key="custom.high", name="High", priority=10)
+        )
         for page in (low, high):
             self.env["context.help.rule"].create(
                 {
@@ -478,7 +494,9 @@ class TestContextHelp(common.TransactionCase):
         self.assertEqual(loose({"country_id": italy}, "custom.low"), "custom.high")
         # pages of priority under 64 and clear cut pages are not general enough
         high.priority = 60
-        self.assertEqual(loose({"country_id": italy}, "custom.low"), "wch_test_a.partner")
+        self.assertEqual(
+            loose({"country_id": italy}, "custom.low"), "wch_test_a.partner"
+        )
         self.assertEqual(
             loose({"country_id": fr}, "wch_test_a.partner (copy)"), "wch_test_a.partner"
         )
@@ -505,12 +523,51 @@ class TestContextHelp(common.TransactionCase):
         self.assertEqual(log.mapped("found"), [False, True])
 
 
-@tagged("post_install", "-at_install")
+class _Response(object):
+    """The answer of the urllib opener of the Odoo 10 HttpCase, with the
+    attributes of a requests response used by these tests"""
+
+    def __init__(self, res):
+        self.status_code = res.code
+        self.url = res.geturl()
+        self.content = res.read()
+        self.text = self.content.decode("utf-8", "replace")
+
+    def json(self):
+        return json.loads(self.text)
+
+
+@common.at_install(False)
+@common.post_install(True)
 class TestContextHelpHttp(common.HttpCase):
-    def _json(self, url, params):
+    def setUp(self):
+        super(TestContextHelpHttp, self).setUp()
+        # Odoo 10: the requests run on the test cursor of the registry, not on
+        # the cursor of the test: the test works on it, so the requests see
+        # its data. Not acquired: url_open waits for the request to end
+        self._wch_cr = self.cr
+        self.cr = self.registry.test_cr
+        self.env = api.Environment(self.cr, self.uid, {})
+
+    def tearDown(self):
+        self.cr = self._wch_cr
+        self.env = api.Environment(self.cr, self.uid, {})
+        super(TestContextHelpHttp, self).tearDown()
+
+    def url_open(self, url, data=None, timeout=10, headers=None):
+        if url.startswith("/"):
+            url = "http://%s:%s%s" % (common.HOST, common.PORT, url)
+        if data is not None and not isinstance(data, bytes):
+            data = data.encode("utf-8")
+        request = Request(url, data, headers or {})
+        return _Response(self.opener.open(request, timeout=timeout))
+
+    def _json(self, url, params=None):
         res = self.url_open(
             url,
-            data=json.dumps({"jsonrpc": "2.0", "method": "call", "params": params}),
+            data=json.dumps(
+                {"jsonrpc": "2.0", "method": "call", "params": params or {}}
+            ),
             headers={"Content-Type": "application/json"},
         )
         return res.json()["result"]
@@ -590,7 +647,9 @@ class TestContextHelpHttp(common.HttpCase):
             },
         )
         self.assertEqual(res["key"], standard.key)
-        res = self.url_open("/web_context_help/loose/%s?lang=en_US" % own.key)
+        res = self.url_open(
+            "/web_context_help/loose/%s?lang=en_US" % own.key.replace(" ", "%20")
+        )
         self.assertIn("/web_context_help/page/%s" % standard.key, res.url)
         self.assertEqual(
             self.url_open("/web_context_help/loose/no.page").status_code, 404
@@ -668,27 +727,29 @@ class TestContextHelpHttp(common.HttpCase):
         self.assertFalse(editor.has_group("base.group_system"))
         page = Page.search([("key", "=", "web_context_help.context_help_page")])[0]
         with self.assertRaises(AccessError):
-            page.with_user(reader).write({"html": "<p>no</p>"})
-        own = page.with_user(editor).copy()
+            page.sudo(reader).write({"html": "<p>no</p>"})
+        own = page.sudo(editor).copy()
         own.write({"html": "<h2>Mine</h2><p>text</p>", "clear_cut": True})
         self.assertTrue(own.edited)
         rule = (
             self.env["context.help.rule"]
-            .with_user(editor)
+            .sudo(editor)
             .create(
                 {
                     "page_id": own.id,
                     "field_id": self.env["ir.model.fields"]
-                    ._get("context.help.page", "edited")
+                    .search(
+                        [("model", "=", "context.help.page"), ("name", "=", "edited")]
+                    )
                     .id,
                     "value_boolean": True,
                 }
             )
         )
         self.assertEqual(rule.condition, "edited = True")
-        self.env["context.help.question"].with_user(editor).search([])
+        self.env["context.help.question"].sudo(editor).search([])
         with self.assertRaises(AccessError):
-            self.env["context.help.rule"].with_user(reader).search([])
+            self.env["context.help.rule"].sudo(reader).search([])
 
     def test_videos(self):
         tmp = tempfile.mkdtemp()
@@ -724,8 +785,19 @@ class TestContextHelpHttp(common.HttpCase):
         self.assertEqual(res.content, b"webm")
         res = self.url_open("/web_context_help/video/..%2Fsecret.mp4")
         self.assertEqual(res.status_code, 404)
-        res = self.make_jsonrpc_request("/web_context_help/videos")
+        res = self._json("/web_context_help/videos")
         self.assertEqual(len(res["videos"]), 2)
+        # the editor inserts a video in a page, after a paragraph
+        Page.sync_sources(force=True)
+        page = Page.search([("key", "=", "web_context_help.home")], limit=1)
+        page.html = "<p>First</p><ul><li>item two</li></ul><p>Last</p>"
+        wizard = self.env["context.help.video.wizard"].create(
+            {"page_id": page.id, "video": "sale/order.webm", "after_text": "Item  two"}
+        )
+        wizard.action_insert()
+        self.assertIn('src="/web_context_help/video/sale/order.webm"', page.html)
+        self.assertLess(page.html.index("</ul>"), page.html.index("<video"))
+        self.assertLess(page.html.index("<video"), page.html.index("Last"))
         # only the administrator lists the videos
         self.env["res.users"].create(
             {
@@ -738,5 +810,6 @@ class TestContextHelpHttp(common.HttpCase):
         self.authenticate("wch_video", "wch_video_pwd")
         res = self.url_open("/web_context_help/video/intro.mp4")
         self.assertEqual(res.status_code, 200)
-        with self.assertRaises(Exception):
-            self.make_jsonrpc_request("/web_context_help/videos")
+        # the refusal is expected: Odoo 10 logs it as an ERROR
+        with self.assertRaises(Exception), mute_logger("odoo.http"):
+            self._json("/web_context_help/videos")

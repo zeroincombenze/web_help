@@ -9,33 +9,23 @@
 #
 {
     "name": "Context help",
-    "version": "18.0.1.0.6",
+    "version": "10.0.1.0.7",
     "category": "Hidden/Tools",
     "summary": "Context help button, pages written in RST by each module",
     "author": "Zeroincombenze srls",
     "website": "https://github.com/zeroincombenze/zerobug-test",
     "development_status": "Alpha",
     "license": "LGPL-3",
-    "depends": ["web", "html_editor"],
+    "depends": ["web", "web_editor"],
     "external_dependencies": {"python": ["docutils"]},
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
         "data/ir_config_parameter.xml",
+        "views/assets.xml",
         "views/context_help_views.xml",
     ],
-    "assets": {
-        "web.assets_backend": [
-            "web_context_help/static/src/v18/context_help_service.js",
-            "web_context_help/static/src/v18/control_panel.js",
-            "web_context_help/static/src/v18/control_panel.xml",
-            "web_context_help/static/src/v18/context_help.scss",
-            "web_context_help/static/src/v18/help_video_dialog.js",
-            "web_context_help/static/src/v18/help_video_dialog.xml",
-            "web_context_help/static/src/v18/help_video_plugin.js",
-            "web_context_help/static/src/v18/help_html_field.js",
-        ],
-    },
+    "qweb": ["static/src/v10/control_panel.xml"],
     "maintainer": "Antonio M. Vigliotti <antoniomaria.vigliotti@gmail.com>",
     "installable": True,
 }

@@ -8,7 +8,9 @@ import os
 import shutil
 import tempfile
 
-from odoo.tests import common, tagged
+import unittest
+
+from odoo.tests import common
 
 from ..lib import html_page, rst_help
 
@@ -43,8 +45,10 @@ Bye.
 """
 
 
-@tagged("post_install", "-at_install")
-class TestRstHelp(common.BaseCase):
+@common.at_install(False)
+@common.post_install(True)
+class TestRstHelp(unittest.TestCase):
+    # no database: Odoo 10 BaseCase.assertRaises needs an environment
     def setUp(self):
         super(TestRstHelp, self).setUp()
         self.help_dir = tempfile.mkdtemp()
@@ -261,9 +265,7 @@ Press :version:`16|**View Invoice**;17|*Draft Invoice*;*|Create Draft` now.
 """
         html = {}
         for version in (16, 17, 18):
-            doc = rst_help.parse(
-                text, "<t>", self.help_dir, "v16_20", version=version
-            )
+            doc = rst_help.parse(text, "<t>", self.help_dir, "v16_20", version=version)
             html[version] = rst_help.to_html(doc)
         self.assertNotIn("Create Draft</strong>", html[16])
         self.assertIn('data-field="x"', html[16])
@@ -411,7 +413,7 @@ Press :version:`16|**View Invoice**;17|*Draft Invoice*;*|Create Draft` now.
         self.assertEqual(body.count("<button"), 2)
         self.assertIn('title="Occorrenza successiva"', body)
         self.assertEqual(html_page.ASK_ENABLED, "wch_ask" in body)
-        self.assertRegex(body, r"help_window\.css\?v=[0-9]+")
+        self.assertRegexpMatches(body, r"help_window\.css\?v=[0-9]+")
         body = html_page.render_auto(
             "P", [("name", "Name", "a<b")], model="res.partner"
         )

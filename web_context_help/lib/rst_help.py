@@ -56,6 +56,7 @@ import io
 import logging
 import os
 import re
+import sys
 
 from docutils import core, io as docio, nodes
 from docutils.parsers.rst import Directive, directives, roles
@@ -197,7 +198,7 @@ def list_sources(help_dir, group):
 
 
 # Bumped when the HTML built from the same sources changes: pages are rebuilt
-BUILD = 5
+BUILD = 6
 
 
 def checksum(help_dir, group, version=None):
@@ -466,6 +467,29 @@ roles.register_local_role("field", _data_role("field"))
 roles.register_local_role("tour", _data_role("tour"))
 
 
+# Python 2 narrow builds (Odoo 10) cannot build a character out of the
+# basic plane, e.g. the U+1F6DF icon: its substitution becomes an HTML entity
+NARROW_UNICODE = sys.maxunicode < 0x10FFFF
+RE_ASTRAL_SUBST = re.compile(
+    r"^(?P<indent>[ \t]*)\.\.[ \t]+\|(?P<name>[^|]+)\|[ \t]+unicode::[ \t]+"
+    r"(?:U\+|u\+|0x|x|\\x|\\u|\\U)?(?P<code>[0-9A-Fa-f]{5,6})[ \t]*$",
+    re.MULTILINE,
+)
+
+
+def _narrow_unicode(text):
+    """Astral unicode substitutions turned into raw HTML entities"""
+
+    def raw(x):
+        return "%(indent)s.. |%(name)s| raw:: html\n\n%(indent)s   &#x%(code)s;" % {
+            "indent": x.group("indent"),
+            "name": x.group("name"),
+            "code": x.group("code").upper(),
+        }
+
+    return RE_ASTRAL_SUBST.sub(raw, text)
+
+
 def parse(
     text,
     source_path,
@@ -479,6 +503,10 @@ def parse(
 
     ``document.wch_page`` holds the help-page options (or None),
     ``document.wch_inherits`` the help-inherit instructions."""
+    if isinstance(text, bytes):  # pragma: no cover - Python 2 str
+        text = text.decode("utf-8")
+    if NARROW_UNICODE:  # pragma: no cover - Python 2 narrow build
+        text = _narrow_unicode(text)
     document = core.publish_doctree(
         text,
         source_path=source_path,
@@ -552,12 +580,32 @@ LIST_VIEW_TYPES = ("list", "tree")
 GLOBAL_SEARCH = "search_wildcard.rst"
 
 
+def _deepcopy(node):
+    """node.deepcopy() without the system messages: docutils 0.16 (Odoo 10)
+    cannot copy them, and they never reach the HTML"""
+    if isinstance(node, nodes.Text):
+        return node.deepcopy()
+    copy = node.copy()
+    copy.extend(
+        [
+            _deepcopy(child)
+            for child in node.children
+            if not isinstance(child, nodes.system_message)
+        ]
+    )
+    return copy
+
+
 def insert_global(document, new_nodes, label, section, fallback="footer"):
     """Put a global section in a page doctree; return where it went.
 
     A section with the same ``label`` is replaced; else the nodes are appended
     to ``section``, else placed before ``fallback``, else at the end."""
-    new_nodes = [node.deepcopy() for node in new_nodes]
+    new_nodes = [
+        _deepcopy(node)
+        for node in new_nodes
+        if not isinstance(node, nodes.system_message)
+    ]
     old = find_section(document, label)
     if old is not None:
         parent, index = old.parent, old.parent.index(old)

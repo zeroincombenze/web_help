@@ -1,3 +1,17 @@
+10.0.1.0.7 (2026-10-29)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Migrated from 18.0 to 10.0: Python 2.7, Odoo 10 ORM, list views as tree and attrs, assets and QWeb templates of the Odoo 10 web client
+* [IMP] Odoo 10 adapter of the control panel: the [?] button opens the help of the view shown, the help window follows the views and the records (pager, save), highlights the fields and runs the tours
+* [IMP] Odoo 10: the Insert video button of the page form inserts a video of the video directory at the end of the page or after a paragraph, in place of the editor plugin of 18.0
+* [IMP] Odoo 10: the selection values of a help rule are written as their keys, comma separated, checked against the allowed values shown in the rule form
+* [IMP] Odoo 10: help page of the Help pages form in help/v10
+* [IMP] Odoo 10: the Help Editor menus are in the left bar of the Help menu, Odoo 10 having no apps menu; the Help menu still opens the help window
+* [FIX] Videos streamed with HTTP range support without the 18.0 Stream class
+* [FIX] Page keys quoted in the URLs: a duplicated page (key ending with " (copy)") opens
+* [QUA] Test coverage 90% (1241: 120+1121) [0 TestPoints] - quality rating 51 (target 100)
+* [FIX] RST engine on Python 2: byte strings accepted, icons out of the basic plane (e.g. U+1F6DF) rendered on narrow builds, global search text copied without the docutils 0.16 system messages
+
 18.0.1.0.6 (2026-10-22)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

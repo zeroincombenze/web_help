@@ -1,10 +1,10 @@
 ================================================
-|icon| Context help/Aiuto contestuale 18.0.1.0.6
+|icon| Context help/Aiuto contestuale 10.0.1.0.7
 ================================================
 
 **Context help button, pages written in RST by each module**
 
-.. |icon| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/18.0/web_context_help/static/description/icon.png
+.. |icon| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/10.0/web_context_help/static/description/icon.png
 
 
 .. contents::
@@ -59,7 +59,7 @@ utilizzabile.
 
 |thumbnail|
 
-.. |thumbnail| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/18.0/web_context_help/static/description/
+.. |thumbnail| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/10.0/web_context_help/static/description/
 
 
 Configuration | Configurazione
@@ -67,12 +67,13 @@ Configuration | Configurazione
 
 No configuration is needed. Pages are rebuilt at server start when a help
 source changes; a help editor can force it with **Rebuild all pages** in
-*Help Editor > Help Pages*.
+*Help > Help Editor > Help Pages*.
 
 Every internal user reads the help. The help pages and their rules are written
 by the users of the group **Help Editor** (*Settings > Users*, section
-*Context Help*), with no administrator rights: they get the *Help Editor* app
-(pages, rules, questions asked) and the **Edit** button of the help window.
+*Context Help*), with no administrator rights: they get the *Help Editor*
+section in the left bar of the **Help** menu (pages, rules, questions asked)
+and the **Edit** button of the help window.
 The administrators are help editors too.
 
 The videos inserted in the help pages are read from the directory of the system
@@ -90,11 +91,11 @@ the help window. The **Summary** button in the header lists, grouped by module,
 the pages of every installed help module; **Home** goes back to the home page.
 Users allowed to change the help pages also see **Edit**, which opens the page
 in the backend: the home page itself can be adapted like any other page.
-In the editor, the film button of the floating toolbar (or the */Help video*
-command) lists the videos of the video directory: the chosen one is inserted
-after the current paragraph, as a player started by a click. To remove a
-video, press Backspace in the line after it or Delete in the line before it. In developer mode
-the **</>** button shows the HTML code of the page.
+In the page form, the **Insert video** button lists the videos of the video
+directory: the chosen one is inserted, as a player started by a click, at the
+end of the page or after the paragraph holding the text written in *After the
+text*. In developer mode the **</>** button of the editor shows the HTML code
+of the page, where a video can be moved or removed.
 
 Press the |sos| button in the control panel. Pages are looked up by view xmlid,
 then by model and view type, then by model; otherwise an automatic page lists
@@ -175,10 +176,11 @@ Rules
 ~~~~~
 
 Without writing RST, a help editor chooses which page is shown from
-*Help Editor ‣ Help Rules* or from the **Rules** tab of
+*Help ‣ Help Editor ‣ Help Rules* or from the **Rules** tab of
 a page: field of the page model (selection, boolean or many2one), *is* or *is
-not*, and the values (selection), the checkbox (boolean) or the record
-(many2one). A page with rules is shown when one of them is met, and the
+not*, and the values (selection: their keys comma separated, e.g.
+``draft, sent``, listed in *Allowed values*), the checkbox (boolean) or the
+record (many2one). A page with rules is shown when one of them is met, and the
 ``:when:`` of its source too.
 
 The rules apply to the **Clear cut** pages only: a clear cut page is shown only
@@ -237,6 +239,9 @@ Getting started | Primi passi
 Prerequisites | Prerequisiti
 ----------------------------
 
+* python 2.7+ (best 2.7.5+)
+* postgresql 9.2+ (best 9.5)
+
 ::
 
     cd $HOME
@@ -265,15 +270,15 @@ Installation | Installazione
 +---------------------------------+------------------------------------------+
 | Suggested deployment is:        | Posizione suggerita per l'installazione: |
 +---------------------------------+------------------------------------------+
-| $HOME/18.0 |
+| $HOME/10.0 |
 +----------------------------------------------------------------------------+
 
 ::
 
     # Odoo repository installation; OCB repository must be installed
-    deploy_odoo clone -r web_help -b 18.0 -G zero -p $HOME/18.0
+    deploy_odoo clone -r web_help -b 10.0 -G zero -p $HOME/10.0
     # Upgrade virtual environment
-    vem amend $HOME/18.0/venv_odoo
+    vem amend $HOME/10.0/venv_odoo
 
 
 
@@ -282,8 +287,8 @@ Upgrade | Aggiornamento
 
 ::
 
-    deploy_odoo update -r web_help -b 18.0 -G zero -p $HOME/18.0
-    vem amend $HOME/18.0/venv_odoo
+    deploy_odoo update -r web_help -b 10.0 -G zero -p $HOME/10.0
+    vem amend $HOME/10.0/venv_odoo
     # Adjust following statements as per your system
     sudo systemctl restart odoo
 
@@ -320,8 +325,22 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
-18.0.1.0.6 (2026-10-22)
+10.0.1.0.7 (2026-10-29)
 ~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Migrated from 18.0 to 10.0: Python 2.7, Odoo 10 ORM, list views as tree and attrs, assets and QWeb templates of the Odoo 10 web client
+* [IMP] Odoo 10 adapter of the control panel: the [?] button opens the help of the view shown, the help window follows the views and the records (pager, save), highlights the fields and runs the tours
+* [IMP] Odoo 10: the Insert video button of the page form inserts a video of the video directory at the end of the page or after a paragraph, in place of the editor plugin of 18.0
+* [IMP] Odoo 10: the selection values of a help rule are written as their keys, comma separated, checked against the allowed values shown in the rule form
+* [IMP] Odoo 10: help page of the Help pages form in help/v10
+* [IMP] Odoo 10: the Help Editor menus are in the left bar of the Help menu, Odoo 10 having no apps menu; the Help menu still opens the help window
+* [FIX] Videos streamed with HTTP range support without the 18.0 Stream class
+* [FIX] Page keys quoted in the URLs: a duplicated page (key ending with " (copy)") opens
+* [QUA] Test coverage 90% (1241: 120+1121) [0 TestPoints] - quality rating 51 (target 100)
+* [FIX] RST engine on Python 2: byte strings accepted, icons out of the basic plane (e.g. U+1F6DF) rendered on narrow builds, global search text copied without the docutils 0.16 system messages
+
+10.0.0
+~~~~~~
 
 * [IMP] help-page :when: condition on many2one fields too, the record named by xmlid or id, e.g. type_id = sale_order_type.normal_sale_type
 * [IMP] Help rules (Settings ‣ Technical ‣ Context Help ‣ Help Rules, or the Rules tab of a page): the administrator chooses which page is shown by a selection, boolean or many2one field of the record, no RST source needed; several rules of a page are alternatives; in the rule form field, operator and value are shown together
@@ -333,22 +352,22 @@ ChangeLog History | Cronologia modifiche
 * [FIX] Odoo 18 form views: the help sees the fields of the open record (the form view did not share its record with the control panel), so the :when: conditions and the rules work on the record; the help window follows the record when it is saved or the pager moves to another one
 * [FIX] Help pages: Duplicate no longer fails on the duplicate key: the copy key ends with " (copy)" (" (copy 2)" and so on for further copies); the copy has no source file, so it is a page of the administrator kept by the rebuild
 
-18.0.1.0.5 (2026-10-14)
-~~~~~~~~~~~~~~~~~~~~~~~
+10.0.0
+~~~~~~
 
 * [IMP] Help pages: Help video button in the floating toolbar of the editor (and /Help video command): inserts a video of the directory set by the system parameter web_help_video_path (default ~/Video), played on click; Backspace or Delete next to a video removes it
 * [UPD] Help pages: HTML code view (</>) shown only in developer mode, as in standard Odoo; the custom field widget is removed
 * [FIX] Help pages: the Sections of a page edited by the administrator (editor or HTML code view) are rebuilt from its content, so the added headings and text are listed and found by the search; a reset to source rebuilds them too
 
-18.0.1.0.4 (2026-10-14)
-~~~~~~~~~~~~~~~~~~~~~~~
+10.0.0
+~~~~~~
 
 * [IMP] Help menu at the top of the menu tree: opens the help home page, editable by the administrator; HTML code view (</>) on the content of the help pages, also without developer mode and as wide as the page
 * [IMP] Help window: Summary button, page listing the help pages of every installed help module, each title followed by its view type (list) or (form); Home and Edit buttons
 * [FIX] Help window: a malformed lang in the URL (e.g. ?lang=it_IT?debug=1) no longer falls back to the English page
 
-18.0.1.0.3 (2026-10-02)
-~~~~~~~~~~~~~~~~~~~~~~~
+10.0.0
+~~~~~~
 
 * [IMP] Help window: find in page box, like the browser Ctrl+F, with previous / next buttons; several words found when near each other, phrase in quotes
 * [IMP] Help window: FAQ and fields help on their own pages, opened by the FAQ and Fields buttons
@@ -356,22 +375,22 @@ ChangeLog History | Cronologia modifiche
 * [IMP] help-page :when: condition on the open record or the menu context, e.g. move_type != entry
 * [FIX] RST: a :field: role wrapped on two lines was printed as text; a :version: role with a stray ";" now fails on every version instead of cutting the text
 
-18.0.1.0.2 (2026-10-01)
-~~~~~~~~~~~~~~~~~~~~~~~
+10.0.0
+~~~~~~
 
 * [IMP] Version specific help: help-version directive and :version: role, pages built for the running Odoo version
 
-18.0.1.0.1 (2026-09-27)
-~~~~~~~~~~~~~~~~~~~~~~~
+10.0.0
+~~~~~~
 
 * [IMP] Field labels highlighted too, dialogs keep the help of the main view
 
-18.0.1.0.0 (2026-09-27)
-~~~~~~~~~~~~~~~~~~~~~~~
+10.0.0
+~~~~~~
 
 * [IMP] Migrated from 16.0: list views, invisible expressions, Odoo 18 control panel adapter
 
-18.0.0
+10.0.0
 ~~~~~~
 
 * [NEW] Context help button, help pages built from the RST sources of each module
@@ -390,8 +409,7 @@ Odoo is a trademark of `Odoo S.A. <https://www.odoo.com/>`__ (formerly OpenERP)
 Authors | Autori
 ----------------
 
-* Zeroincombenze srls <False>
-* `SHS-AV s.r.l. <https://www.zeroincombenze.it>`__
+* `Zeroincombenze srls <https://www.zeroincombenze.it>`__
 
 
 
@@ -426,7 +444,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-25
+Last Update / Ultimo aggiornamento: 2026-10-29
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status
@@ -437,8 +455,8 @@ Last Update / Ultimo aggiornamento: 2026-10-25
 .. |license opl| image:: https://img.shields.io/badge/licence-OPL-7379c3.svg
     :target: https://www.odoo.com/documentation/user/14.0/legal/licenses/licenses.html
     :alt: License: OPL
-.. |Try Me| image:: https://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-18.svg
-    :target: https://erp18.zeroincombenze.it
+.. |Try Me| image:: https://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-10.svg
+    :target: https://erp10.zeroincombenze.it
     :alt: Try Me
 .. |Zeroincombenze| image:: https://avatars0.githubusercontent.com/u/6972555?s=460&v=4
    :target: https://www.zeroincombenze.it/

@@ -3,11 +3,37 @@
      License LGPL-3.0-or-later (https://www.gnu.org/licenses/lgpl). -->
 <odoo>
 
+    <record id="context_help_video_wizard_form" model="ir.ui.view">
+        <field name="name">context.help.video.wizard.form</field>
+        <field name="model">context.help.video.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Insert a help video">
+                <group>
+                    <field name="page_id" invisible="1"/>
+                    <field name="video_path"/>
+                    <field name="video"/>
+                    <field name="after_text"/>
+                </group>
+                <footer>
+                    <button name="action_insert" type="object" string="Insert" class="btn-primary"/>
+                    <button special="cancel" string="Cancel" class="btn-default"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_context_help_video_wizard" model="ir.actions.act_window">
+        <field name="name">Insert a help video</field>
+        <field name="res_model">context.help.video.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
     <record id="context_help_page_tree" model="ir.ui.view">
         <field name="name">context.help.page.list</field>
         <field name="model">context.help.page</field>
         <field name="arch" type="xml">
-            <list>
+            <tree>
                 <field name="key"/>
                 <field name="lang"/>
                 <field name="name"/>
@@ -18,7 +44,7 @@
                 <field name="clear_cut"/>
                 <field name="edited"/>
                 <field name="source_changed"/>
-            </list>
+            </tree>
         </field>
     </record>
 
@@ -29,16 +55,19 @@
             <form>
                 <header>
                     <button name="action_open" type="object" string="Open" class="oe_highlight"/>
+                    <button name="%(action_context_help_video_wizard)d" type="action"
+                        string="Insert video" context="{'default_page_id': id}"
+                        groups="web_context_help.group_help_editor"/>
                     <button name="action_reset_to_source" type="object" string="Reset to source"
-                        invisible="not edited or not source_file"
+                        attrs="{'invisible': ['|', ('edited', '=', False), ('source_file', '=', False)]}"
                         confirm="Discard the changes made to this page?"/>
                     <button name="action_source_seen" type="object" string="Keep my version"
-                        invisible="not source_changed"/>
+                        attrs="{'invisible': [('source_changed', '=', False)]}"/>
                     <button name="action_rebuild" type="object" string="Rebuild all pages"/>
                 </header>
                 <sheet>
                     <div class="alert alert-warning" role="alert"
-                        invisible="not source_changed">
+                        attrs="{'invisible': [('source_changed', '=', False)]}">
                         The source of this page changed after it was edited:
                         reset to source or keep your version.
                     </div>
@@ -54,9 +83,9 @@
                             <field name="model"/>
                             <field name="view_xmlid"/>
                             <field name="view_type"/>
-                            <field name="when" readonly="1" invisible="not when"/>
+                            <field name="when" readonly="1" attrs="{'invisible': [('when', '=', False)]}"/>
                             <!-- the rebuild sets the pages of the modules back to 96 -->
-                            <field name="priority" readonly="source_file"/>
+                            <field name="priority" attrs="{'readonly': [('source_file', '!=', False)]}"/>
                             <field name="clear_cut"/>
                             <field name="edited"/>
                             <field name="source_changed"/>
@@ -65,12 +94,13 @@
                     </group>
                     <notebook>
                         <page name="content" string="Content">
-                            <field name="html" widget="wch_html" options="{'codeview': true}" class="o_wch_html"/>
+                            <field name="html" widget="html" class="o_wch_html"/>
                         </page>
                         <page name="source" string="Source">
-                            <field name="source_html" widget="html" options="{'codeview': true}" class="o_wch_html"/>
+                            <field name="source_html" widget="html" class="o_wch_html"/>
                         </page>
-                        <page name="rules" string="Rules" invisible="not model or not clear_cut">
+                        <page name="rules" string="Rules"
+                            attrs="{'invisible': ['|', ('model', '=', False), ('clear_cut', '=', False)]}">
                             <p class="text-muted">
                                 This clear cut page is shown only when the open record
                                 meets one of these rules. Clear cut pages are checked
@@ -79,34 +109,32 @@
                                 is shown, the pages of the modules being the last.
                             </p>
                             <field name="rule_ids" context="{'default_page_id': id}">
-                                <list editable="bottom">
+                                <tree editable="bottom">
                                     <field name="sequence" widget="handle"/>
-                                    <field name="model" column_invisible="1"/>
-                                    <field name="field_type" column_invisible="1"/>
-                                    <field name="relation" column_invisible="1"/>
+                                    <field name="model" invisible="1"/>
+                                    <field name="field_type" invisible="1"/>
+                                    <field name="relation" invisible="1"/>
                                     <field name="field_id" options="{'no_create': True}"/>
                                     <field name="operator"/>
-                                    <field name="selection_ids" widget="many2many_tags"
-                                        options="{'no_create': True}"
-                                        invisible="field_type != 'selection'"/>
+                                    <field name="selection_values"
+                                        attrs="{'invisible': [('field_type', '!=', 'selection')]}"/>
                                     <field name="value_boolean"
-                                        invisible="field_type != 'boolean'"/>
-                                    <field name="relation_model_id" column_invisible="1"/>
+                                        attrs="{'invisible': [('field_type', '!=', 'boolean')]}"/>
                                     <field name="record_ref"
-                                        options="{'model_field': 'relation_model_id', 'no_create': True, 'no_open': True}"
-                                        invisible="field_type != 'many2one'"/>
+                                        options="{'no_create': True, 'no_open': True}"
+                                        attrs="{'invisible': [('field_type', '!=', 'many2one')]}"/>
                                     <field name="condition"/>
-                                    <field name="active" widget="boolean_toggle"/>
-                                </list>
+                                    <field name="active"/>
+                                </tree>
                             </field>
                         </page>
                         <page name="sections" string="Sections">
                             <field name="section_ids">
-                                <list>
+                                <tree>
                                     <field name="label"/>
                                     <field name="title"/>
                                     <field name="question"/>
-                                </list>
+                                </tree>
                             </field>
                         </page>
                     </notebook>
@@ -140,7 +168,7 @@
         <field name="name">context.help.question.list</field>
         <field name="model">context.help.question</field>
         <field name="arch" type="xml">
-            <list create="false" edit="false">
+            <tree create="false" edit="false">
                 <field name="create_date"/>
                 <field name="user_id"/>
                 <field name="question"/>
@@ -149,7 +177,7 @@
                 <field name="found"/>
                 <field name="answer_page_id"/>
                 <field name="provider"/>
-            </list>
+            </tree>
         </field>
     </record>
 
@@ -170,12 +198,12 @@
         <field name="name">context.help.rule.list</field>
         <field name="model">context.help.rule</field>
         <field name="arch" type="xml">
-            <list>
+            <tree>
                 <field name="page_id"/>
                 <field name="model"/>
                 <field name="condition"/>
-                <field name="active" widget="boolean_toggle"/>
-            </list>
+                <field name="active"/>
+            </tree>
         </field>
     </record>
 
@@ -190,19 +218,19 @@
                         <group>
                             <field name="page_id" options="{'no_create': True}"/>
                             <field name="field_id" options="{'no_create': True}"
-                                readonly="not model"/>
+                                attrs="{'readonly': [('model', '=', False)]}"/>
                             <field name="field_type" invisible="1"/>
                             <field name="relation" invisible="1"/>
                             <field name="operator"/>
-                            <field name="selection_ids" widget="many2many_tags"
-                                options="{'no_create': True}"
-                                invisible="field_type != 'selection'"/>
+                            <field name="selection_values"
+                                attrs="{'invisible': [('field_type', '!=', 'selection')]}"/>
+                            <field name="selection_help"
+                                attrs="{'invisible': [('field_type', '!=', 'selection')]}"/>
                             <field name="value_boolean"
-                                invisible="field_type != 'boolean'"/>
-                            <field name="relation_model_id" invisible="1"/>
+                                attrs="{'invisible': [('field_type', '!=', 'boolean')]}"/>
                             <field name="record_ref"
-                                options="{'model_field': 'relation_model_id', 'no_create': True, 'no_open': True}"
-                                invisible="field_type != 'many2one'"/>
+                                options="{'no_create': True, 'no_open': True}"
+                                attrs="{'invisible': [('field_type', '!=', 'many2one')]}"/>
                         </group>
                         <group>
                             <field name="model"/>
@@ -232,19 +260,19 @@
     <record id="action_context_help_page" model="ir.actions.act_window">
         <field name="name">Help Pages</field>
         <field name="res_model">context.help.page</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <record id="action_context_help_rule" model="ir.actions.act_window">
         <field name="name">Help Rules</field>
         <field name="res_model">context.help.rule</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <record id="action_context_help_question" model="ir.actions.act_window">
         <field name="name">Help Questions</field>
         <field name="res_model">context.help.question</field>
-        <field name="view_mode">list</field>
+        <field name="view_mode">tree</field>
     </record>
 
     <record id="action_context_help_home" model="ir.actions.client">
@@ -256,11 +284,13 @@
     <menuitem id="menu_help_root" name="Help" action="action_context_help_home"
         web_icon="web_context_help,static/description/icon.png"
         groups="base.group_user" sequence="990"/>
-    <!-- App of the help editors: the Help app only opens the help window,
-         the Technical menu is for the administrators in debug mode -->
-    <menuitem id="menu_help_editor_root" name="Help Editor"
-        web_icon="web_context_help,static/description/icon.png"
-        groups="group_help_editor" sequence="991"/>
+    <!-- Menus of the help editors, the Technical menu being for the
+         administrators in debug mode. Odoo 10 has no apps menu, every top
+         menu is in the top bar: the editor menus live in the left bar of the
+         Help menu, which still opens the help window (a top menu runs its
+         own action when it has one) -->
+    <menuitem id="menu_help_editor_root" name="Help Editor" parent="menu_help_root"
+        groups="group_help_editor" sequence="10"/>
     <menuitem id="menu_help_editor_page" name="Help Pages" action="action_context_help_page"
         parent="menu_help_editor_root" sequence="10"/>
     <menuitem id="menu_help_editor_rule" name="Help Rules" action="action_context_help_rule"

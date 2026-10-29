@@ -10,15 +10,31 @@ import re
 
 from markupsafe import escape
 from werkzeug.exceptions import Forbidden, NotFound
+from werkzeug.urls import url_quote
+from werkzeug.utils import redirect
+from werkzeug.wrappers import Response
 
 from odoo import http
-from odoo.http import Stream, request
+from odoo.http import request
 
 from ..lib import html_page
-from ..models.context_help_page import HOME_KEY
-
+from ..models.context_help_page import HOME_KEY, STRING_TYPES
 
 RE_LANG = re.compile(r"^[a-z]{2,3}(_[A-Za-z0-9]+)?(@\w+)?$")
+RE_RANGE = re.compile(r"^bytes=(\d*)-(\d*)$")
+CHUNK = 65536
+
+
+def _read(path, start, length):
+    """Bytes of path from start, length bytes, by chunks"""
+    with open(path, "rb") as fd:
+        fd.seek(start)
+        while length > 0:
+            data = fd.read(min(CHUNK, length))
+            if not data:
+                break
+            length -= len(data)
+            yield data
 
 
 class ContextHelp(http.Controller):
@@ -52,8 +68,8 @@ class ContextHelp(http.Controller):
         lang = self._lang(lang)
         Page = request.env["context.help.page"]
         if Page.get_page(HOME_KEY, lang):
-            return request.redirect(Page.page_url(HOME_KEY, lang))
-        return request.redirect("/web_context_help/summary?lang=%s" % lang)
+            return redirect(Page.page_url(HOME_KEY, lang))
+        return redirect("/web_context_help/summary?lang=%s" % lang)
 
     @http.route("/web_context_help/summary", type="http", auth="user")
     def summary(self, lang=None, **kw):
@@ -89,7 +105,7 @@ class ContextHelp(http.Controller):
             view_id=view_id,
             lang=lang,
             values=values if isinstance(values, dict) else None,
-            loose_from=loose_from if isinstance(loose_from, str) else None,
+            loose_from=loose_from if isinstance(loose_from, STRING_TYPES) else None,
         )
         if page:
             return {"url": Page.page_url(page.key, lang), "key": page.key}
@@ -110,8 +126,8 @@ class ContextHelp(http.Controller):
             model=page.model, view_type=page.view_type, lang=lang, loose_from=key
         )
         if found:
-            return request.redirect(Page.page_url(found.key, lang))
-        return request.redirect("/web_context_help/auto/%s?lang=%s" % (page.model, lang))
+            return redirect(Page.page_url(found.key, lang))
+        return redirect("/web_context_help/auto/%s?lang=%s" % (page.model, lang))
 
     @http.route("/web_context_help/page/<string:key>", type="http", auth="user")
     def page(self, key, lang=None, view=None, **kw):
@@ -128,7 +144,7 @@ class ContextHelp(http.Controller):
         )
         pages = {None: True, "faq": faq_html, "fields": fields_help}
         if view not in pages or not pages[view]:
-            return request.redirect(Page.page_url(page.key, lang))
+            return redirect(Page.page_url(page.key, lang))
         tr = html_page.labels(lang)
         title = page.name
         if view == "faq":
@@ -143,9 +159,12 @@ class ContextHelp(http.Controller):
             if name != (view or "help") and pages[None if name == "help" else name]
         }
         if page.model and page.has_loose_help():
-            nav["loose"] = "/web_context_help/loose/%s?lang=%s" % (page.key, lang)
+            nav["loose"] = "/web_context_help/loose/%s?lang=%s" % (
+                url_quote(page.key),
+                lang,
+            )
         nav.update(self._nav(lang, "home" if page.key == HOME_KEY else None))
-        if page.has_access("write"):
+        if page.can_write():
             nav["edit"] = Page.edit_url(page)
         body = html_page.render(
             title,
@@ -195,18 +214,49 @@ class ContextHelp(http.Controller):
 
     @http.route("/web_context_help/video/<path:name>", type="http", auth="user")
     def video(self, name, **kw):
-        """A video of the video directory, streamed with HTTP range support"""
+        """A video of the video directory, streamed with HTTP range support:
+        the browser asks for parts of the video to seek in it"""
         path = request.env["context.help.page"].video_file(name)
         if not path:
             raise NotFound()
         stat = os.stat(path)
-        stream = Stream(
-            type="path",
-            path=path,
-            mimetype=mimetypes.guess_type(path)[0] or "application/octet-stream",
-            download_name=os.path.basename(path),
-            etag="%d-%d" % (int(stat.st_mtime), stat.st_size),
-            last_modified=stat.st_mtime,
-            size=stat.st_size,
+        size = stat.st_size
+        headers = [
+            (
+                "Content-Type",
+                mimetypes.guess_type(path)[0] or "application/octet-stream",
+            ),
+            ("Accept-Ranges", "bytes"),
+            ("ETag", '"%d-%d"' % (int(stat.st_mtime), size)),
+        ]
+        if kw.get("download"):
+            headers.append(
+                (
+                    "Content-Disposition",
+                    http.content_disposition(os.path.basename(path)),
+                )
+            )
+        start, end, status = 0, size - 1, 200
+        x = RE_RANGE.match(request.httprequest.headers.get("Range") or "")
+        if x and (x.group(1) or x.group(2)):
+            if x.group(1):
+                start = int(x.group(1))
+                if x.group(2):
+                    end = min(int(x.group(2)), size - 1)
+            else:
+                start = max(size - int(x.group(2)), 0)
+            if start > end:
+                return Response(
+                    status=416,
+                    headers=headers + [("Content-Range", "bytes */%d" % size)],
+                )
+            status = 206
+            headers.append(("Content-Range", "bytes %d-%d/%d" % (start, end, size)))
+        length = end - start + 1 if size else 0
+        headers.append(("Content-Length", str(length)))
+        return Response(
+            _read(path, start, length),
+            status=status,
+            headers=headers,
+            direct_passthrough=True,
         )
-        return stream.get_response(as_attachment=bool(kw.get("download")))

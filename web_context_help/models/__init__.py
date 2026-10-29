@@ -6,3 +6,4 @@
 #
 from . import context_help_page
 from . import context_help_rule
+from . import context_help_video

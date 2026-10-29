@@ -3,11 +3,11 @@ the help window. The **Summary** button in the header lists, grouped by module,
 the pages of every installed help module; **Home** goes back to the home page.
 Users allowed to change the help pages also see **Edit**, which opens the page
 in the backend: the home page itself can be adapted like any other page.
-In the editor, the film button of the floating toolbar (or the */Help video*
-command) lists the videos of the video directory: the chosen one is inserted
-after the current paragraph, as a player started by a click. To remove a
-video, press Backspace in the line after it or Delete in the line before it. In developer mode
-the **</>** button shows the HTML code of the page.
+In the page form, the **Insert video** button lists the videos of the video
+directory: the chosen one is inserted, as a player started by a click, at the
+end of the page or after the paragraph holding the text written in *After the
+text*. In developer mode the **</>** button of the editor shows the HTML code
+of the page, where a video can be moved or removed.
 
 Press the |sos| button in the control panel. Pages are looked up by view xmlid,
 then by model and view type, then by model; otherwise an automatic page lists
@@ -88,10 +88,11 @@ Rules
 ~~~~~
 
 Without writing RST, a help editor chooses which page is shown from
-*Help Editor ‣ Help Rules* or from the **Rules** tab of
+*Help ‣ Help Editor ‣ Help Rules* or from the **Rules** tab of
 a page: field of the page model (selection, boolean or many2one), *is* or *is
-not*, and the values (selection), the checkbox (boolean) or the record
-(many2one). A page with rules is shown when one of them is met, and the
+not*, and the values (selection: their keys comma separated, e.g.
+``draft, sent``, listed in *Allowed values*), the checkbox (boolean) or the
+record (many2one). A page with rules is shown when one of them is met, and the
 ``:when:`` of its source too.
 
 The rules apply to the **Clear cut** pages only: a clear cut page is shown only

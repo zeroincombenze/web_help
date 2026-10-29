@@ -1,0 +1,26 @@
+/* Copyright 2026 Zeroincombenze srls <https://www.zeroincombenze.it>
+ * License LGPL-3.0-or-later (https://www.gnu.org/licenses/lgpl).
+ * VERSION-DEPENDENT: Odoo 10 adapter.
+ */
+.o_control_panel .o_wch_button {
+    font-size: 18px;
+    padding: 0 0 0 8px;
+    line-height: 1;
+}
+.o_wch_highlight {
+    outline: 3px solid #7c7bad;
+    outline-offset: 2px;
+    transition: outline-color 0.3s;
+}
+/* Help page content: the field uses the whole page width */
+.o_form_field.o_wch_html {
+    display: block;
+    width: 100%;
+}
+.o_form_field.o_wch_html video {
+    max-width: 100%;
+}
+/* Dialogs keep the help of the main view */
+.modal .o_wch_button {
+    display: none;
+}

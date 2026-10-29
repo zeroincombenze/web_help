@@ -9,4 +9,3 @@ access_context_help_question_admin,context.help.question admin,model_context_hel
 access_context_help_rule_editor,context.help.rule editor,model_context_help_rule,group_help_editor,1,1,1,1
 access_ir_model_help_editor,ir.model help editor,base.model_ir_model,group_help_editor,1,0,0,0
 access_ir_model_fields_help_editor,ir.model.fields help editor,base.model_ir_model_fields,group_help_editor,1,0,0,0
-access_ir_model_fields_selection_help_editor,ir.model.fields.selection help editor,base.model_ir_model_fields_selection,group_help_editor,1,0,0,0
