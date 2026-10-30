@@ -12,15 +12,30 @@ Prodotto
 Descrizione
 -----------
 
-Un prodotto è qualsiasi cosa l'azienda vende, acquista o tiene in magazzino.
-Il :field:`tipo di prodotto <type>` distingue le merci **Consumabile** e
-**Prodotto Stoccabile** da un **Servizio**; :field:`Può essere venduto
-<sale_ok>` e :field:`Può essere acquistato <purchase_ok>` decidono dove viene
-proposto. Un prodotto può avere più **varianti** (ad es. taglie e colori),
-costruite dai suoi attributi; le schede mostrano i dati delle applicazioni
-installate: vendite, acquisti, magazzino e fatturazione.
+I prodotti sono i beni o i servizi acquistati e venduti da un'azienda.
+Possono avere un codice specifico o esserne privi, essere gestiti a magazzino,
+tracciati con numeri di serie o numeri di lotto, oppure gestiti senza alcuna
+identificazione specifica, e influiscono sulle registrazioni contabili
+dell'azienda. Possono avere una data di scadenza ed essere quantificati con
+una o più unità di misura. Possono inoltre avere un prezzo di acquisto e/o un
+prezzo di vendita. Infine, possono essere gestiti come articoli monolitici
+oppure come prodotti con varianti.
+
+In Odoo il :field:`tipo di prodotto <type>` distingue le merci
+**Consumabile** e **Prodotto Stoccabile** da un **Servizio**; :field:`Può
+essere venduto <sale_ok>` e :field:`Può essere acquistato <purchase_ok>`
+decidono dove il prodotto viene proposto. Il :field:`riferimento interno
+<default_code>` è il codice, il :field:`costo <standard_price>` e il
+:field:`prezzo di vendita <list_price>` sono i prezzi, l':field:`unità di
+misura <uom_id>` la quantità. Le schede mostrano i dati delle applicazioni
+installate: vendite, acquisti, magazzino (lotti e numeri di serie; date di
+scadenza con il modulo *Product Expiry*) e fatturazione (imposte e conti). Le
+**varianti** (ad es. taglie e colori) sono costruite dagli attributi del
+prodotto.
 
 .. help-include:: product_fields.rst
+
+.. help-include:: product_variants.rst
 
 .. help-include:: product_new.rst
 

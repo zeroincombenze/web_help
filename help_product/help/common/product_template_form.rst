@@ -12,15 +12,29 @@ Product
 Description
 -----------
 
-A product is anything the company sells, buys or keeps in stock. Its
-:field:`product type <type>` tells **Consumable** and **Stockable Product**
-goods from a **Service**; :field:`Can be Sold <sale_ok>` and :field:`Can be
-Purchased <purchase_ok>` decide where it is proposed. A product can come in
-several **variants** (e.g. sizes and colours), built from its attributes; the
-tabs show the data of the installed applications: sales, purchase, inventory
-and invoicing.
+Products are the items or services purchased and sold by a company. They
+may be assigned specific codes or left uncoded, managed as inventory stock,
+tracked via serial numbers or batch numbers—or handled without any specific
+identification—and they impact the company's accounting records. They may
+have an expiration date and can be quantified using one or more units of
+measurement. They may also have a purchase price and/or a selling price.
+Furthermore, they can be managed either as monolithic items or as products
+with variants.
+
+In Odoo the :field:`product type <type>` tells **Consumable** and **Stockable
+Product** goods from a **Service**; :field:`Can be Sold <sale_ok>` and
+:field:`Can be Purchased <purchase_ok>` decide where the product is proposed.
+The :field:`internal reference <default_code>` is the code, the
+:field:`cost <standard_price>` and the :field:`sale price <list_price>` are the
+prices, the :field:`unit of measure <uom_id>` the quantity. The tabs show the
+data of the installed applications: sales, purchase, inventory (lots and
+serial numbers; expiration dates with the *Product Expiry* module) and
+invoicing (taxes and accounts). The **variants** (e.g. sizes and colours) are
+built from the attributes of the product.
 
 .. help-include:: product_fields.rst
+
+.. help-include:: product_variants.rst
 
 .. help-include:: product_new.rst
 

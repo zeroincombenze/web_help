@@ -35,6 +35,18 @@ La casella nell'intestazione cerca un testo nella pagina, come Ctrl+F del
 browser. Maiuscole e accenti sono ignorati; il testo tra virgolette è cercato
 come frase esatta.
 
+.. _developer_mode:
+
+Attivare la modalità sviluppatore
+---------------------------------
+
+In alcuni menu viene richiesto di "Attivare la modalità sviluppatore". Questa
+modalità mostra alcuni menu e funzioni che altrimenti sono nascosti.
+
+.. image:: /web_context_help/static/description/devel_mode.png
+   :alt: Attiva la modalità sviluppatore
+   :width: 100%
+
 .. _configure:
 
 Modificare questa pagina

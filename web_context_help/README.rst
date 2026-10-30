@@ -1,5 +1,5 @@
 ================================================
-|icon| Context help/Aiuto contestuale 10.0.1.0.7
+|icon| Context help/Aiuto contestuale 10.0.1.0.8
 ================================================
 
 **Context help button, pages written in RST by each module**
@@ -325,6 +325,12 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+10.0.1.0.8 (2026-10-30)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [QUA] Test coverage 90% (1241: 120+1121) [0 TestPoints] - quality rating 51 (target 100)
+* [IMP] Help home page: new chapter "Activate developer mode", with picture, before "Changing this page"
+
 10.0.1.0.7 (2026-10-29)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -444,7 +450,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-29
+Last Update / Ultimo aggiornamento: 2026-10-30
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

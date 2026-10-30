@@ -1,3 +1,9 @@
+10.0.1.0.8 (2026-10-30)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [QUA] Test coverage 90% (1241: 120+1121) [0 TestPoints] - quality rating 51 (target 100)
+* [IMP] Help home page: new chapter "Activate developer mode", with picture, before "Changing this page"
+
 10.0.1.0.7 (2026-10-29)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

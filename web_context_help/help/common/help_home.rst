@@ -33,6 +33,18 @@ Finding text
 The box in the header finds text in the page, like the browser Ctrl+F.
 Case and accents are ignored; text in quotes is searched as an exact phrase.
 
+.. _developer_mode:
+
+Activate developer mode
+-----------------------
+
+In some menus, you are prompted to "Activate developer mode." This mode
+reveals certain menus and functions that are otherwise hidden.
+
+.. image:: /web_context_help/static/description/devel_mode.png
+   :alt: Activate developer mode
+   :width: 100%
+
 .. _configure:
 
 Changing this page
