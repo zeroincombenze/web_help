@@ -1,5 +1,5 @@
 ==================================================================
-|icon| Help for purchase order/Aiuto ordini di acquisto 10.0.1.0.0
+|icon| Help for purchase order/Aiuto ordini di acquisto 10.0.1.0.1
 ==================================================================
 
 **Context help pages for purchase orders**
@@ -150,6 +150,11 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+10.0.1.0.1 (2026-10-30)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Help pages shared with 18.0: the common pages hold the text of every Odoo version in help-version blocks, the help directory carries both v10 and v16_20
+
 10.0.1.0.0 (2026-10-29)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -204,7 +209,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-29
+Last Update / Ultimo aggiornamento: 2026-10-30
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

@@ -1,3 +1,12 @@
+10.0.1.0.9 (2026-10-30)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] List pages no longer get the "Searching with the wildcard" text at the end of their How to search section: the wildcard search is explained once, in the "Ready help" part of the help home page
+* [FIX] Documentation: the Usage section is shown again in the module page (index.html)
+* [IMP] Help window: the Home button is renamed Ready (Pronto in Italian)
+* [QUA] Test coverage 90% (1241: 120+1121) [0 TestPoints] - quality rating 51 (target 100)
+* [IMP] Help home page: new part "Ready help", before "Help on help", with the chapters "Activate developer mode" (with picture), "Finding, filtering and grouping a list" (search bar picture, searching, searching several words, wildcard search, filters, groups, favorites, breadcrumbs, view switcher and pager) and "Import and Export data" (export, import, updating records by External ID)
+
 10.0.1.0.8 (2026-10-30)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

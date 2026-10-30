@@ -1,6 +1,6 @@
 The **Help** menu, at the top of the menu tree, opens the help home page in
 the help window. The **Summary** button in the header lists, grouped by module,
-the pages of every installed help module; **Home** goes back to the home page.
+the pages of every installed help module; **Ready** goes back to the home page.
 Users allowed to change the help pages also see **Edit**, which opens the page
 in the backend: the home page itself can be adapted like any other page.
 In the page form, the **Insert video** button lists the videos of the video
@@ -43,10 +43,6 @@ Every page has these sections, in this order, with their label:
 ``faq`` (frequently asked questions, ``help-question`` blocks),
 ``footer`` (date and time of page creation and copyright notice).
 A section that does not apply keeps one line saying so.
-Every list page gets the *Searching with the wildcard* text of
-web_context_help (``help/common/search_wildcard.rst``) at the end of its
-``search`` section: do not write it in the module; a page section labelled
-``wildcard`` is replaced by it.
 
 ::
 
@@ -130,7 +126,7 @@ role; the version directories remain for whole files that differ.
 
        RST shown on Odoo 17 and later (sections allowed)
 
-    Press :version:`16|**Create and View Invoice**;17|**Create Draft Invoice**;*|**Create Draft**`.
+    Press :version:`16|**Create and View Invoice**;17|**Create Draft Invoice**;>=18|**Create Draft**`.
 
 Conditions: ``16``, ``16-18``, ``>=17``, ``>17``, ``<=16``, ``<17``, ``*``
 (any version), several joined by comma (``10,16``). The role shows the text of

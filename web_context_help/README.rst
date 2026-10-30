@@ -1,5 +1,5 @@
 ================================================
-|icon| Context help/Aiuto contestuale 10.0.1.0.8
+|icon| Context help/Aiuto contestuale 10.0.1.0.9
 ================================================
 
 **Context help button, pages written in RST by each module**
@@ -88,7 +88,7 @@ Usage | Utilizzo
 
 The **Help** menu, at the top of the menu tree, opens the help home page in
 the help window. The **Summary** button in the header lists, grouped by module,
-the pages of every installed help module; **Home** goes back to the home page.
+the pages of every installed help module; **Ready** goes back to the home page.
 Users allowed to change the help pages also see **Edit**, which opens the page
 in the backend: the home page itself can be adapted like any other page.
 In the page form, the **Insert video** button lists the videos of the video
@@ -131,10 +131,6 @@ Every page has these sections, in this order, with their label:
 ``faq`` (frequently asked questions, ``help-question`` blocks),
 ``footer`` (date and time of page creation and copyright notice).
 A section that does not apply keeps one line saying so.
-Every list page gets the *Searching with the wildcard* text of
-web_context_help (``help/common/search_wildcard.rst``) at the end of its
-``search`` section: do not write it in the module; a page section labelled
-``wildcard`` is replaced by it.
 
 ::
 
@@ -218,7 +214,7 @@ role; the version directories remain for whole files that differ.
 
        RST shown on Odoo 17 and later (sections allowed)
 
-    Press :version:`16|**Create and View Invoice**;17|**Create Draft Invoice**;*|**Create Draft**`.
+    Press :version:`16|**Create and View Invoice**;17|**Create Draft Invoice**;>=18|**Create Draft**`.
 
 Conditions: ``16``, ``16-18``, ``>=17``, ``>17``, ``<=16``, ``<17``, ``*``
 (any version), several joined by comma (``10,16``). The role shows the text of
@@ -324,6 +320,15 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
+
+10.0.1.0.9 (2026-10-30)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] List pages no longer get the "Searching with the wildcard" text at the end of their How to search section: the wildcard search is explained once, in the "Ready help" part of the help home page
+* [FIX] Documentation: the Usage section is shown again in the module page (index.html)
+* [IMP] Help window: the Home button is renamed Ready (Pronto in Italian)
+* [QUA] Test coverage 90% (1241: 120+1121) [0 TestPoints] - quality rating 51 (target 100)
+* [IMP] Help home page: new part "Ready help", before "Help on help", with the chapters "Activate developer mode" (with picture), "Finding, filtering and grouping a list" (search bar picture, searching, searching several words, wildcard search, filters, groups, favorites, breadcrumbs, view switcher and pager) and "Import and Export data" (export, import, updating records by External ID)
 
 10.0.1.0.8 (2026-10-30)
 ~~~~~~~~~~~~~~~~~~~~~~~

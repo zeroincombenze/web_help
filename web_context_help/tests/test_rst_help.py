@@ -175,47 +175,6 @@ class TestRstHelp(unittest.TestCase):
         self.assertTrue(rst_help.to_html(doc).strip().endswith("</div>"))
         self.assertIn("extra text", rst_help.to_html(doc))
 
-    def test_insert_global(self):
-        glob = rst_help.parse(
-            ".. _wildcard:\n\nWildcard\n~~~~~~~~\n\nUse the percent.\n",
-            "g",
-            self.help_dir,
-            "v16_20",
-        ).children[:]
-        cases = {
-            # no search section, no footer: at the end
-            "end": (
-                "nothing",
-                lambda h: h.index("Bye") < h.index("percent"),
-            ),
-            # appended inside the search section, before the next section
-            "append": (
-                "usage",
-                lambda h: h.index("Fill") < h.index("percent") < h.index("Bye"),
-            ),
-            "before": (
-                "nothing",
-                lambda h: h.index("percent") < h.index("Bye"),
-            ),
-        }
-        for where, (section, check) in cases.items():
-            doc = self._parse()
-            fallback = "other" if where == "before" else "footer"
-            self.assertEqual(
-                rst_help.insert_global(doc, glob, "wildcard", section, fallback),
-                where,
-            )
-            html = rst_help.to_html(doc)
-            self.assertTrue(check(html), where)
-            self.assertEqual(html.count("percent"), 1)
-        # a page section with the same label is replaced
-        doc = self._parse()
-        rst_help.insert_global(doc, glob, "wildcard", "usage")
-        self.assertEqual(
-            rst_help.insert_global(doc, glob, "wildcard", "usage"), "replace"
-        )
-        self.assertEqual(rst_help.to_html(doc).count("percent"), 1)
-
     def test_sections(self):
         sections = rst_help.extract_sections(self._parse())
         labels = [s["label"] for s in sections]

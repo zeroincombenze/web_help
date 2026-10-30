@@ -38,10 +38,6 @@ Custom directives::
 
        RST content (sections allowed)
 
-List pages (``:view-type: list``) get the global *wildcard* text of
-web_context_help (``help/common/search_wildcard.rst``) at the end of their
-*How to search* section, see insert_global().
-
 Roles: :field:`name` (highlight field in Odoo tab), :tour:`name` (run tour),
 :version:`16|text;17-18|text;*|text` (text of the first matching version).
 
@@ -198,7 +194,7 @@ def list_sources(help_dir, group):
 
 
 # Bumped when the HTML built from the same sources changes: pages are rebuilt
-BUILD = 6
+BUILD = 7
 
 
 def checksum(help_dir, group, version=None):
@@ -574,57 +570,6 @@ def apply_inherit(
         for node in reversed(new_nodes):
             parent.insert(index + 1, node)
     return True
-
-
-LIST_VIEW_TYPES = ("list", "tree")
-GLOBAL_SEARCH = "search_wildcard.rst"
-
-
-def _deepcopy(node):
-    """node.deepcopy() without the system messages: docutils 0.16 (Odoo 10)
-    cannot copy them, and they never reach the HTML"""
-    if isinstance(node, nodes.Text):
-        return node.deepcopy()
-    copy = node.copy()
-    copy.extend(
-        [
-            _deepcopy(child)
-            for child in node.children
-            if not isinstance(child, nodes.system_message)
-        ]
-    )
-    return copy
-
-
-def insert_global(document, new_nodes, label, section, fallback="footer"):
-    """Put a global section in a page doctree; return where it went.
-
-    A section with the same ``label`` is replaced; else the nodes are appended
-    to ``section``, else placed before ``fallback``, else at the end."""
-    new_nodes = [
-        _deepcopy(node)
-        for node in new_nodes
-        if not isinstance(node, nodes.system_message)
-    ]
-    old = find_section(document, label)
-    if old is not None:
-        parent, index = old.parent, old.parent.index(old)
-        parent.remove(old)
-        for node in reversed(new_nodes):
-            parent.insert(index, node)
-        return "replace"
-    target = find_section(document, section)
-    if target is not None:
-        target.extend(new_nodes)
-        return "append"
-    target = find_section(document, fallback)
-    if target is not None:
-        parent, index = target.parent, target.parent.index(target)
-        for node in reversed(new_nodes):
-            parent.insert(index, node)
-        return "before"
-    document.extend(new_nodes)
-    return "end"
 
 
 def to_html(document):
