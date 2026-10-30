@@ -12,10 +12,20 @@ Ordini di acquisto
 Descrizione
 -----------
 
-L'elenco delle richieste di preventivo e degli ordini di acquisto. Ogni riga
-mostra il :field:`riferimento <name>`, il :field:`fornitore <partner_id>`,
-l':field:`acquirente <user_id>`, il :field:`totale <amount_total>` e
-l'avanzamento del documento. Fare clic su una riga per aprire l'ordine.
+.. help-version:: <16
+
+   L'elenco delle richieste di preventivo e degli ordini di acquisto. Ogni riga
+   mostra il :field:`riferimento <name>`, la :field:`data ordine <date_order>`,
+   il :field:`fornitore <partner_id>`, il :field:`documento di origine <origin>`,
+   il :field:`totale <amount_total>` e lo :field:`stato <state>` del documento.
+   Fare clic su una riga per aprire l'ordine.
+
+.. help-version:: >=16
+
+   L'elenco delle richieste di preventivo e degli ordini di acquisto. Ogni riga
+   mostra il :field:`riferimento <name>`, il :field:`fornitore <partner_id>`,
+   l':field:`acquirente <user_id>`, il :field:`totale <amount_total>` e
+   l'avanzamento del documento. Fare clic su una riga per aprire l'ordine.
 
 .. help-include:: purchase_order_list_search.rst
 
@@ -30,19 +40,40 @@ l'avanzamento del documento. Fare clic su una riga per aprire l'ordine.
 Domande frequenti
 -----------------
 
-.. help-question:: Perché non vedo gli ordini dei colleghi?
+.. help-version:: <16
 
-   Togliere il filtro *I miei acquisti* o *I miei ordini* dalla barra di
-   ricerca.
+   .. help-question:: Perché non trovo una richiesta di preventivo tra gli ordini di acquisto?
 
-.. help-question:: Dove sono gli ordini annullati?
+      I menu separano i documenti: *Richieste di preventivo* elenca le RdP non
+      ancora confermate, *Ordini di acquisto* gli ordini da approvare,
+      confermati, bloccati o annullati.
 
-   I filtri *RdP* e *Ordini di acquisto* li nascondono: togliere i filtri e
-   raggruppare per stato, o aggiungere un filtro personalizzato sullo stato.
+   .. help-question:: Dove sono gli ordini annullati?
+
+      Gli ordini annullati sono mostrati in grigio: togliere i filtri, oppure
+      raggrupparli per stato con un raggruppamento personalizzato.
+
+   .. help-question:: Chi ha creato queste richieste di preventivo?
+
+      Molte RdP sono create automaticamente da Odoo dalle regole di
+      riapprovvigionamento del magazzino o dalla rotta *Acquista*: il
+      :field:`documento di origine <origin>` indica cosa le ha generate.
+
+.. help-version:: >=16
+
+   .. help-question:: Perché non vedo gli ordini dei colleghi?
+
+      Togliere il filtro *I miei acquisti* o *I miei ordini* dalla barra di
+      ricerca.
+
+   .. help-question:: Dove sono gli ordini annullati?
+
+      I filtri *RdP* e *Ordini di acquisto* li nascondono: togliere i filtri e
+      raggruppare per stato, o aggiungere un filtro personalizzato sullo stato.
 
 .. _footer:
 
 Piè di pagina
 -------------
 
-Pagina creata il 2026-10-29 22:00 · © 2026 Zeroincombenze srls <https://www.zeroincombenze.it>
+Pagina creata il 2026-10-30 12:00 · © 2026 Zeroincombenze srls <https://www.zeroincombenze.it>

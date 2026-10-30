@@ -33,7 +33,7 @@
 Every page follows the help rule of web_context_help:
 </p><p align="justify">
 <ul>
-<li><b>Description</b>: what products and variants are, with the main fields</li>
+<li><b>Description</b>: products, product types and variants, with the main fields</li>
 <li><b>New record</b> (form): step-by-step guide to create a product and its variants</li>
 <li><b>Update record</b> (form): changing prices, units and types, archiving and deleting</li>
 <li><b>How to search</b> (list and kanban): menus, search, filters and groupings</li>
@@ -57,7 +57,7 @@ prodotto (product.product): lista, kanban e maschera, mostrate da web_context_he
 Ogni pagina segue la regola di aiuto di web_context_help:
 </p><p align="justify">
 <ul>
-<li><b>Descrizione</b>: cosa sono prodotti e varianti, con i campi principali</li>
+<li><b>Descrizione</b>: prodotti, tipi di prodotto e varianti, con i campi principali</li>
 <li><b>Nuovo record</b> (maschera): guida passo passo per creare un prodotto e le sue varianti</li>
 <li><b>Modifica record</b> (maschera): modifica di prezzi, unit&#224; e tipologia, archiviazione ed eliminazione</li>
 <li><b>Come cercare</b> (lista e kanban): menu, ricerca, filtri e raggruppamenti</li>
@@ -78,8 +78,18 @@ versione di Odoo in uso.
     <div class="oe_row oe_spaced">
         <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">ChangeLog History | Cronologia modifiche</h3>
         <div class="oe_span12">
-<h4>18.0.1.0.0 (2026-10-29)</h4>
+<h4>18.0.1.0.1 (2026-10-30)</h4>
 <p align="justify">
+<ul>
+<li>[IMP] Product form: description extended with what a product is (codes, stock, lots and serial numbers, accounting, expiration, units of measure, prices, variants)</li>
+<li>[IMP] Product form: new chapter Product variants, with the cautions and the fields shared by all the variants</li>
+<li>[IMP] Kanban pages titled "Products (kanban)" and "Product variants (kanban)", apart from the list pages</li>
+<li>[IMP] Help pages shared with 10.0: the common pages hold the text of every Odoo version in help-version blocks, the help directory carries both v10 and v16_20</li>
+<li>[FIX] Website of the repository</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.0 (2026-10-29)</h4>
+</p><p align="justify">
 <ul>
 <li>[NEW] Help pages for product and product variant list, kanban and form, English and Italian</li>
 </ul>
@@ -111,6 +121,6 @@ versione di Odoo in uso.
     </div>
     <div class="oe_row oe_spaced">
         <p>This module is part of <a href="https://github.com/zeroincombenze/web_help">web_help</a> project.</p>
-        <p>Published information on | Informazioni pubblicate: 2026-10-29</p>
+        <p>Published information on | Informazioni pubblicate: 2026-10-30</p>
     </div>
 </section>

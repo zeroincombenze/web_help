@@ -91,12 +91,13 @@ utilizzabile.
             </p>
             <p class="oe_mt16" align="justify">No configuration is needed. Pages are rebuilt at server start when a help
 source changes; a help editor can force it with <b>Rebuild all pages</b> in
-<i>Help Editor &gt; Help Pages</i>.
+<i>Help &gt; Help Editor &gt; Help Pages</i>.
 <p align="justify">
 Every internal user reads the help. The help pages and their rules are written
 by the users of the group <b>Help Editor</b> (<i>Settings &gt; Users</i>, section
-<i>Context Help</i>), with no administrator rights: they get the <i>Help Editor</i> app
-(pages, rules, questions asked) and the <b>Edit</b> button of the help window.
+<i>Context Help</i>), with no administrator rights: opening the <b>Help</b> app, they
+get its <i>Help Editor</i> menu in the top bar (pages, rules, questions asked) and
+the <b>Edit</b> button of the help window.
 The administrators are help editors too.
 </p><p align="justify">
 The videos inserted in the help pages are read from the directory of the system
@@ -111,13 +112,13 @@ System Parameters</i>.
             </p>
             <p class="oe_mt16" align="justify">Non serve configurazione. Le pagine sono ricostruite all'avvio del server
 quando cambia una sorgente di aiuto; un editor dell'aiuto pu&#242; forzarlo con
-<b>Ricostruisci tutte le pagine</b> in <i>Editor dell'aiuto &gt; Pagine di aiuto</i>.
+<b>Ricostruisci tutte le pagine</b> in <i>Aiuto &gt; Editor dell'aiuto &gt; Pagine di aiuto</i>.
 <p align="justify">
 Ogni utente interno legge l'aiuto. Le pagine di aiuto e le loro regole sono
 scritte dagli utenti del gruppo <b>Editor dell'aiuto</b> (<i>Impostazioni &gt; Utenti</i>,
-sezione <i>Aiuto contestuale</i>), senza diritti di amministratore: hanno l'app
-<i>Editor dell'aiuto</i> (pagine, regole, domande poste) e il pulsante <b>Modifica</b>
-della finestra di aiuto. Anche gli amministratori sono editor dell'aiuto.
+sezione <i>Aiuto contestuale</i>), senza diritti di amministratore: aprendo l'app
+<b>Aiuto</b>, hanno il suo menu <i>Editor dell'aiuto</i> nella barra in alto (pagine,
+regole, domande poste) e il pulsante <b>Modifica</b> della finestra di aiuto. Anche gli amministratori sono editor dell'aiuto.
 </p><p align="justify">
 I video inseriti nelle pagine di aiuto sono letti dalla cartella del parametro
 di sistema <code>web_help_video_path</code> (predefinito <code>~/Video</code>, la home
@@ -130,10 +131,328 @@ dell'utente che esegue Odoo), sottocartelle comprese; si cambia in
 
 <section>
     <div class="oe_row oe_spaced">
+        <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">Usage | Utilizzo</h3>
+        <div class="oe_span6">
+            <p align="center">
+                <img src="l10n_uk.png" alt="English" style="width:28px;height:16px;"/>
+                <img src="l10n_us.png" alt="English" style="width:28px;height:16px;"/>
+            </p>
+            <p class="oe_mt16" align="justify">The <b>Help</b> menu, at the top of the menu tree, opens the help home page in
+the help window. The <b>Summary</b> button in the header lists, grouped by module,
+the pages of every installed help module; <b>Ready</b> goes back to the home page.
+Users allowed to change the help pages also see <b>Edit</b>, which opens the page
+in the backend: the home page itself can be adapted like any other page.
+In the editor, the film button of the floating toolbar (or the <i>/Help video</i>
+command) lists the videos of the video directory: the chosen one is inserted
+after the current paragraph, as a player started by a click. To remove a
+video, press Backspace in the line after it or Delete in the line before it. In developer mode
+the <b>&lt;/&gt;</b> button shows the HTML code of the page.
+<p align="justify">
+Press the |sos| button in the control panel. Pages are looked up by view xmlid,
+then by model and view type, then by model; otherwise an automatic page lists
+the fields help.
+</p><p align="justify">
+The box in the help window header finds text in the page, like the browser
+Ctrl+F (which focuses it). Case and accents are ignored, line breaks and bold or
+linked words too. With several words, words of 1-2 letters are ignored and only the places where all of them are
+within 12 words in the same paragraph are shown; when there is no such place,
+every occurrence of every word is shown and the counter says <i>any word</i>. Text
+in quotes (<code>"draft invoice"</code>) is searched as an exact phrase.
+<b>Enter</b> / &#9660; and <b>Shift+Enter</b> / &#9650; go to the next / previous match,
+<b>Esc</b> clears the search.
+</p><p align="justify">
+The <i>FAQ</i> section of a page and the fields help of its model are shown on
+their own pages, opened by the <b>FAQ</b> and <b>Fields</b> buttons in the help
+window header; the <b>Help</b> button goes back to the page. The questions built by
+<code>help-question</code> <code>:auto:</code> are left to the <b>Fields</b> page.
+</p><p align="justify">
+Writing help for a module: put RST files in <code>help/common/</code> or in the
+directory of a group of Odoo versions (<code>help/v10</code>, <code>help/v11_14</code>,
+<code>help/v15</code>, <code>help/v16_20</code>); a group file overrides the common one with the
+same name. Italian twins are named <code>page.it_IT.rst</code>.
+</p><p align="justify">
+Every page has these sections, in this order, with their label:
+<code>description</code> (summary of the view / model),
+<code>new_record</code> (form only: steps to insert a record),
+<code>update_record</code> (form only: steps to update a record),
+<code>search</code> (list only: how to search and group by),
+<code>configure</code> (how to configure the model),
+<code>report</code> (how to show the report or the pdf attachment),
+<code>example</code> (useful examples),
+<code>faq</code> (frequently asked questions, <code>help-question</code> blocks),
+<code>footer</code> (date and time of page creation and copyright notice).
+A section that does not apply keeps one line saying so.
+</p><p align="justify">
+
+<code>
+    .. help-page:: partner
+       :title: Partners
+       :model: res.partner
+       :view: base.view_partner_form
+       :view-type: form
+       :when: is_company = True
+       :priority: 96
+</code>
+</p><p align="justify">
+    .. help-include:: common_part.rst
+</p><p align="justify">
+    .. help-inherit:: other_module.partner
+       :section: usage
+       :position: after
+</p><p align="justify">
+       RST added after the section labelled "usage"
+</p><p align="justify">
+    .. help-question:: How do I add a tag?
+</p><p align="justify">
+       Use the :field:`Tags &lt;category_id&gt;` field.
+</p><p align="justify">
+    .. help-question::
+       :auto:
+</p><p align="justify">
+<code>:when:</code> shows the page only when the open record (its selection, boolean
+and many2one fields) or the menu (its <code>default_&lt;field&gt;</code> context keys) match:
+conditions <code>field = value</code>, <code>field != value</code>, several values joined by
+comma, several conditions joined by <code>and</code>. When the value is unknown the page
+is not used, e.g. <code>move_type != entry</code> keeps the invoice help away from the
+journal entries, which share the invoice form. A many2one value is the xmlid
+or the id of the record, e.g. <code>type_id = sale_order_type.normal_sale_type</code>;
+<code>False</code> means empty. Among the pages of the same priority that can be shown,
+the one meeting more conditions wins: a page with <code>:when:</code> beats the page
+without it.
+</p><p align="justify">
+<h4>Rules</h4>
+</p><p align="justify">
+Without writing RST, a help editor chooses which page is shown from
+<i>Help &#8227; Help Editor &#8227; Help Rules</i> or from the <b>Rules</b> tab of
+a page: field of the page model (selection, boolean or many2one), *is* or <i>is
+not</i>, and the values (selection), the checkbox (boolean) or the record
+(many2one). A page with rules is shown when one of them is met, and the
+<code>:when:</code> of its source too.
+</p><p align="justify">
+The rules apply to the <b>Clear cut</b> pages only: a clear cut page is shown only
+when one of its rules is met. Every page has a <b>Priority</b>, 1 being the
+highest. The clear cut pages are checked first, in priority order: the first
+one with a rule met is shown. With no rule met, the general page (not clear
+cut, its rules ignored) with the highest priority is shown. The pages of the
+administrator get 32 by default, the pages built from the modules 96: these are
+the last fallback, always available. The priority of a module page is set by
+the <code>:priority:</code> option of its <code>help-page</code>, 96 when missing.
+</p><p align="justify">
+A clear cut page, or a page of priority 64 or less, shows the <b>Loose help</b>
+button in the help window: it opens the general page of priority 64 or more
+with the highest priority, for the same record, usually the page of the
+module.
+</p><p align="justify">
+Example: sale orders with a different help for each OCA <i>sale_order_type</i>.
+Create a page per type (<i>Help Pages &#8227; New</i>: key, title, model <code>sale.order</code>,
+view type <code>form</code>, content), check <i>Clear cut</i> and add to it the rule
+<i>Type is &lt;the type&gt;</i>.
+Orders of the other types keep the standard sale order help. A page created
+this way, or by <b>Duplicate</b> of the standard page (key followed by " (copy)"),
+has no source: it is kept by the rebuild of the pages.
+</p><p align="justify">
+<code>:position:</code> is one of <code>before</code>, <code>after</code>, <code>replace</code>, <code>remove</code>.
+<code>:auto:</code> builds the questions from the fields help of the page model.
+</p><p align="justify">
+A page shows only the text of the running Odoo version: put version specific
+blocks in <code>help-version</code> and version specific words in the <code>:version:</code>
+role; the version directories remain for whole files that differ.
+</p><p align="justify">
+
+<code>
+    .. help-version:: &gt;=17
+</code>
+</p><p align="justify">
+       RST shown on Odoo 17 and later (sections allowed)
+</p><p align="justify">
+    Press :version:`16|<b>Create and View Invoice</b>;17|<b>Create Draft Invoice</b>;&gt;=18|<b>Create Draft</b>`.
+</p><p align="justify">
+Conditions: <code>16</code>, <code>16-18</code>, <code>&gt;=17</code>, <code>&gt;17</code>, <code>&lt;=16</code>, <code>&lt;17</code>, <code>*</code>
+(any version), several joined by comma (<code>10,16</code>). The role shows the text of
+the first matching condition, inline markup allowed, roles not allowed; write
+<code>\ </code> before the role when it is glued to the previous word.
+Roles <code>:field:</code> and <code>:tour:</code> highlight a field or run a tour in the Odoo tab.
+</p><p align="justify">
+</p>
+.. |sos| unicode:: U+1F6DF</p>
+        </div>
+        <div class="oe_span6">
+            <p align="center">
+                <img src="l10n_it.png" alt="Italiano" style="width:28px;height:16px;"/>
+            </p>
+            <p class="oe_mt16" align="justify">Il menu <b>Aiuto</b>, in cima all'albero dei menu, apre la pagina iniziale
+dell'aiuto nella finestra di aiuto. Il pulsante <b>Sommario</b> nell'intestazione
+elenca, raggruppate per modulo, le pagine di ogni modulo di aiuto installato;
+<b>Pronto</b> torna alla pagina iniziale. Gli utenti abilitati a modificare le
+pagine di aiuto vedono anche <b>Modifica</b>, che apre la pagina nel backend:
+anche la pagina iniziale pu&#242; essere adattata come ogni altra pagina.
+Nell'editor, il pulsante con la pellicola della barra mobile (o il comando
+<i>/Video di aiuto</i>) elenca i video della cartella dei video: quello scelto &#232;
+inserito dopo il paragrafo corrente, come lettore avviato con un clic. Per
+togliere un video, premere Backspace nella riga dopo o Canc nella riga prima. In
+modalit&#224; sviluppatore il pulsante <b>&lt;/&gt;</b> mostra il codice HTML della pagina.
+<p align="justify">
+Premere il pulsante |sos| del pannello di controllo. La pagina &#232; cercata per
+xmlid della vista, poi per modello e tipo vista, poi per modello; altrimenti
+una pagina automatica elenca l'aiuto dei campi.
+</p><p align="justify">
+La casella nell'intestazione della finestra di aiuto cerca un testo nella
+pagina, come Ctrl+F del browser (che la seleziona). Maiuscole e accenti sono
+ignorati, come gli a capo e le parole in grassetto o con link. Con pi&#249; parole
+quelle di 1-2 lettere sono ignorate e sono mostrati solo i punti in cui sono tutte entro 12 parole nello stesso
+paragrafo; se non ce ne sono, &#232; mostrata ogni occorrenza di ogni parola e il
+contatore indica <i>qualsiasi parola</i>. Il testo tra virgolette
+(<code>"bozza fattura"</code>) &#232; cercato come frase esatta.
+<b>Invio</b> / &#9660; e <b>Maiusc+Invio</b> / &#9650; passano all'occorrenza successiva /
+precedente, <b>Esc</b> annulla la ricerca.
+</p><p align="justify">
+La sezione <i>Domande frequenti</i> di una pagina e l'aiuto dei campi del suo
+modello sono mostrati in pagine a parte, aperte dai pulsanti <b>FAQ</b> e
+<b>Campi</b> nell'intestazione della finestra di aiuto; il pulsante <b>Aiuto</b>
+torna alla pagina. Le domande costruite da <code>help-question</code> <code>:auto:</code> sono
+lasciate alla pagina <b>Campi</b>.
+</p><p align="justify">
+Scrivere l'aiuto di un modulo: mettere i file RST in <code>help/common/</code> o nella
+cartella di un gruppo di versioni Odoo (<code>help/v10</code>, <code>help/v11_14</code>,
+<code>help/v15</code>, <code>help/v16_20</code>); il file del gruppo prevale su quello comune con
+lo stesso nome. I gemelli italiani si chiamano <code>pagina.it_IT.rst</code>.
+</p><p align="justify">
+Ogni pagina ha queste sezioni, in quest'ordine, con la loro etichetta:
+<code>description</code> (sintesi della vista / modello),
+<code>new_record</code> (solo form: passi per inserire un record),
+<code>update_record</code> (solo form: passi per modificare un record),
+<code>search</code> (solo lista: come cercare e raggruppare),
+<code>configure</code> (come configurare il modello),
+<code>report</code> (come visualizzare la stampa o l'allegato pdf),
+<code>example</code> (esempi utili),
+<code>faq</code> (domande frequenti, blocchi <code>help-question</code>),
+<code>footer</code> (data e ora di creazione della pagina e nota di copyright).
+Una sezione che non si applica contiene una riga che lo dice.
+</p><p align="justify">
+
+<code>
+    .. help-page:: partner
+       :title: Partner
+       :model: res.partner
+       :view: base.view_partner_form
+       :view-type: form
+       :when: is_company = True
+       :priority: 96
+</code>
+</p><p align="justify">
+    .. help-include:: parte_comune.rst
+</p><p align="justify">
+    .. help-inherit:: altro_modulo.partner
+       :section: usage
+       :position: after
+</p><p align="justify">
+       RST aggiunto dopo la sezione con etichetta "usage"
+</p><p align="justify">
+    .. help-question:: Come aggiungo un'etichetta?
+</p><p align="justify">
+       Usare il campo :field:`Etichette &lt;category_id&gt;`.
+</p><p align="justify">
+    .. help-question::
+       :auto:
+</p><p align="justify">
+<code>:when:</code> mostra la pagina solo quando il record aperto (i suoi campi di
+selezione, booleani e many2one) o il menu (le sue chiavi di contesto
+<code>default_&lt;campo&gt;</code>) corrispondono: condizioni <code>campo = valore</code>,
+<code>campo != valore</code>, pi&#249; valori separati da virgola, pi&#249; condizioni unite da
+<code>and</code>. Quando il valore non &#232; noto la pagina non &#232; usata, ad es.
+<code>move_type != entry</code> tiene l'aiuto delle fatture lontano dalle registrazioni
+contabili, che usano la stessa maschera delle fatture. Il valore di un many2one
+&#232; l'xmlid o l'id del record, ad es.
+<code>type_id = sale_order_type.normal_sale_type</code>; <code>False</code> significa vuoto. Tra
+le pagine della stessa priorit&#224; che possono essere mostrate vince quella che
+soddisfa pi&#249; condizioni: una pagina con <code>:when:</code> prevale sulla pagina senza.
+</p><p align="justify">
+<h4>Regole</h4>
+</p><p align="justify">
+Senza scrivere RST, un editor dell'aiuto sceglie quale pagina mostrare da
+<i>Aiuto &#8227; Editor dell'aiuto &#8227; Regole di aiuto</i> o dalla scheda
+<b>Regole</b> di una pagina: campo del modello della pagina (selezione, booleano o
+many2one), *&#232;* o <i>non &#232;</i>, e i valori (selezione), la casella (booleano) o il
+record (many2one). Una pagina con regole &#232; mostrata quando una di esse &#232;
+soddisfatta, e anche il <code>:when:</code> della sua sorgente.
+</p><p align="justify">
+Le regole valgono solo per le pagine <b>Clear cut</b>: una pagina clear cut &#232;
+mostrata solo quando una delle sue regole &#232; soddisfatta. Ogni pagina ha una
+<b>Priorit&#224;</b>, 1 &#232; la pi&#249; alta. Le pagine clear cut sono controllate per prime,
+in ordine di priorit&#224;: &#232; mostrata la prima con una regola soddisfatta. Se
+nessuna regola &#232; soddisfatta, &#232; mostrata la pagina generale (non clear cut, le
+sue regole sono ignorate) con la priorit&#224; pi&#249; alta. Le pagine
+dell'amministratore hanno 32 come predefinito, quelle costruite dai moduli 96:
+sono l'ultima alternativa, sempre disponibile. La priorit&#224; di una pagina di
+modulo &#232; data dall'opzione <code>:priority:</code> del suo <code>help-page</code>, 96 se manca.
+</p><p align="justify">
+Una pagina clear cut, o di priorit&#224; 64 o inferiore, mostra nella finestra di
+aiuto il pulsante <b>Aiuto generale</b>: apre la pagina generale di priorit&#224; 64 o
+superiore con la priorit&#224; pi&#249; alta, per lo stesso record, di solito la pagina
+del modulo.
+</p><p align="justify">
+Esempio: ordini di vendita con un aiuto diverso per ogni <i>sale_order_type</i> OCA.
+Creare una pagina per tipo (<i>Pagine di aiuto &#8227; Nuovo</i>: chiave, titolo, modello
+<code>sale.order</code>, tipo vista <code>form</code>, contenuto), spuntare <i>Clear cut</i> e
+aggiungere la regola <i>Tipo &#232; &lt;il tipo&gt;</i>. Gli ordini degli altri tipi mantengono l'aiuto standard dell'ordine
+di vendita. Una pagina creata cos&#236;, o con <b>Duplica</b> della pagina standard
+(chiave seguita da " (copy)"), non ha sorgente: &#232; conservata dalla
+ricostruzione delle pagine.
+</p><p align="justify">
+<code>:position:</code> vale <code>before</code>, <code>after</code>, <code>replace</code> o <code>remove</code>.
+<code>:auto:</code> costruisce le domande dall'aiuto dei campi del modello della pagina.
+</p><p align="justify">
+Una pagina mostra solo il testo della versione di Odoo in uso: mettere i
+blocchi specifici di una versione in <code>help-version</code> e le parole specifiche
+nel ruolo <code>:version:</code>; le cartelle per versione restano per i file interi
+che cambiano.
+</p><p align="justify">
+
+<code>
+    .. help-version:: &gt;=17
+</code>
+</p><p align="justify">
+       RST mostrato da Odoo 17 in poi (sezioni ammesse)
+</p><p align="justify">
+    Premere :version:`16|<b>Crea e visualizza fattura</b>;17|<b>Crea bozza fattura</b>;&gt;=18|<b>Crea bozza</b>`.
+</p><p align="justify">
+Condizioni: <code>16</code>, <code>16-18</code>, <code>&gt;=17</code>, <code>&gt;17</code>, <code>&lt;=16</code>, <code>&lt;17</code>, <code>*</code>
+(qualsiasi versione), pi&#249; condizioni separate da virgola (<code>10,16</code>). Il ruolo
+mostra il testo della prima condizione soddisfatta, con il markup in linea ma
+senza altri ruoli; scrivere <code>\ </code> prima del ruolo quando &#232; attaccato alla
+parola precedente.
+I ruoli <code>:field:</code> e <code>:tour:</code> evidenziano un campo o avviano un tour nella scheda di Odoo.
+</p><p align="justify">
+</p>
+.. |sos| unicode:: U+1F6DF</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="oe_row oe_spaced">
         <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">ChangeLog History | Cronologia modifiche</h3>
         <div class="oe_span12">
-<h4>18.0.1.0.6 (2026-10-22)</h4>
+<h4>18.0.1.0.8 (2026-10-30)</h4>
 <p align="justify">
+<ul>
+<li>[IMP] List pages no longer get the "Searching with the wildcard" text at the end of their How to search section: the wildcard search is explained once, in the "Ready help" part of the help home page</li>
+<li>[FIX] Documentation: the Usage section is shown again in the module page (index.html)</li>
+<li>[IMP] Help window: the Home button is renamed Ready (Pronto in Italian)</li>
+<li>[IMP] Help home page: new part "Ready help", before "Help on help", with the chapters "Activate developer mode" (with picture), "Finding, filtering and grouping a list" (search bar picture, searching, searching several words, wildcard search, filters, groups, favorites, breadcrumbs, view switcher and pager) and "Import and Export data" (export, import, updating records by External ID)</li>
+<li>[FIX] Page keys quoted in the URLs: a duplicated page (key ending with " (copy)") opens</li>
+<li>[IMP] RST engine aligned with 10.0</li>
+<li>[IMP] Help page of the Help pages form for Odoo 10 (help/v10), shared with 10.0</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.7 (2026-10-29)</h4>
+</p><p align="justify">
+<ul>
+<li>[IMP] The Help Editor menus are in the Help app, no longer an app of their own: the Help app still opens the help window and, for the help editors, shows the Help Editor menu in the top bar</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.6 (2026-10-22)</h4>
+</p><p align="justify">
 <ul>
 <li>[IMP] help-page :when: condition on many2one fields too, the record named by xmlid or id, e.g. type_id = sale_order_type.normal_sale_type</li>
 <li>[IMP] Help rules (Settings &#8227; Technical &#8227; Context Help &#8227; Help Rules, or the Rules tab of a page): the administrator chooses which page is shown by a selection, boolean or many2one field of the record, no RST source needed; several rules of a page are alternatives; in the rule form field, operator and value are shown together</li>
@@ -206,8 +525,7 @@ dell'utente che esegue Odoo), sottocartelle comprese; si cambia in
         <div class="oe_span6" align="left">
             <p class="oe_mt16"><b>Authors | Autori:</b></p>
             <p class="oe_mt16"><ul>
-<li>Zeroincombenze srls &lt;False&gt;</li>
-<li><a href="https://www.zeroincombenze.it">SHS-AV s.r.l.</a></li>
+<li><a href="https://www.zeroincombenze.it">Zeroincombenze srls</a></li>
 </ul></p>
         </div>
         <div class="oe_span6" align="left">
@@ -224,6 +542,6 @@ dell'utente che esegue Odoo), sottocartelle comprese; si cambia in
     </div>
     <div class="oe_row oe_spaced">
         <p>This module is part of <a href="https://github.com/zeroincombenze/web_help">web_help</a> project.</p>
-        <p>Published information on | Informazioni pubblicate: 2026-10-25</p>
+        <p>Published information on | Informazioni pubblicate: 2026-10-30</p>
     </div>
 </section>

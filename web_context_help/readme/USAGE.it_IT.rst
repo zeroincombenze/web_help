@@ -1,7 +1,7 @@
 Il menu **Aiuto**, in cima all'albero dei menu, apre la pagina iniziale
 dell'aiuto nella finestra di aiuto. Il pulsante **Sommario** nell'intestazione
 elenca, raggruppate per modulo, le pagine di ogni modulo di aiuto installato;
-**Inizio** torna alla pagina iniziale. Gli utenti abilitati a modificare le
+**Pronto** torna alla pagina iniziale. Gli utenti abilitati a modificare le
 pagine di aiuto vedono anche **Modifica**, che apre la pagina nel backend:
 anche la pagina iniziale può essere adattata come ogni altra pagina.
 Nell'editor, il pulsante con la pellicola della barra mobile (o il comando
@@ -46,10 +46,6 @@ Ogni pagina ha queste sezioni, in quest'ordine, con la loro etichetta:
 ``faq`` (domande frequenti, blocchi ``help-question``),
 ``footer`` (data e ora di creazione della pagina e nota di copyright).
 Una sezione che non si applica contiene una riga che lo dice.
-Ogni pagina lista riceve il testo *Ricerche con il carattere jolly* di
-web_context_help (``help/common/search_wildcard.it_IT.rst``) in fondo alla
-sezione ``search``: non scriverlo nel modulo; una sezione della pagina con
-etichetta ``wildcard`` viene sostituita.
 
 ::
 
@@ -135,7 +131,7 @@ che cambiano.
 
        RST mostrato da Odoo 17 in poi (sezioni ammesse)
 
-    Premere :version:`16|**Crea e visualizza fattura**;17|**Crea bozza fattura**;*|**Crea bozza**`.
+    Premere :version:`16|**Crea e visualizza fattura**;17|**Crea bozza fattura**;>=18|**Crea bozza**`.
 
 Condizioni: ``16``, ``16-18``, ``>=17``, ``>17``, ``<=16``, ``<17``, ``*``
 (qualsiasi versione), più condizioni separate da virgola (``10,16``). Il ruolo

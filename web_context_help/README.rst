@@ -1,5 +1,5 @@
 ================================================
-|icon| Context help/Aiuto contestuale 18.0.1.0.6
+|icon| Context help/Aiuto contestuale 18.0.1.0.8
 ================================================
 
 **Context help button, pages written in RST by each module**
@@ -67,12 +67,13 @@ Configuration | Configurazione
 
 No configuration is needed. Pages are rebuilt at server start when a help
 source changes; a help editor can force it with **Rebuild all pages** in
-*Help Editor > Help Pages*.
+*Help > Help Editor > Help Pages*.
 
 Every internal user reads the help. The help pages and their rules are written
 by the users of the group **Help Editor** (*Settings > Users*, section
-*Context Help*), with no administrator rights: they get the *Help Editor* app
-(pages, rules, questions asked) and the **Edit** button of the help window.
+*Context Help*), with no administrator rights: opening the **Help** app, they
+get its *Help Editor* menu in the top bar (pages, rules, questions asked) and
+the **Edit** button of the help window.
 The administrators are help editors too.
 
 The videos inserted in the help pages are read from the directory of the system
@@ -87,7 +88,7 @@ Usage | Utilizzo
 
 The **Help** menu, at the top of the menu tree, opens the help home page in
 the help window. The **Summary** button in the header lists, grouped by module,
-the pages of every installed help module; **Home** goes back to the home page.
+the pages of every installed help module; **Ready** goes back to the home page.
 Users allowed to change the help pages also see **Edit**, which opens the page
 in the backend: the home page itself can be adapted like any other page.
 In the editor, the film button of the floating toolbar (or the */Help video*
@@ -130,10 +131,6 @@ Every page has these sections, in this order, with their label:
 ``faq`` (frequently asked questions, ``help-question`` blocks),
 ``footer`` (date and time of page creation and copyright notice).
 A section that does not apply keeps one line saying so.
-Every list page gets the *Searching with the wildcard* text of
-web_context_help (``help/common/search_wildcard.rst``) at the end of its
-``search`` section: do not write it in the module; a page section labelled
-``wildcard`` is replaced by it.
 
 ::
 
@@ -175,7 +172,7 @@ Rules
 ~~~~~
 
 Without writing RST, a help editor chooses which page is shown from
-*Help Editor ‣ Help Rules* or from the **Rules** tab of
+*Help ‣ Help Editor ‣ Help Rules* or from the **Rules** tab of
 a page: field of the page model (selection, boolean or many2one), *is* or *is
 not*, and the values (selection), the checkbox (boolean) or the record
 (many2one). A page with rules is shown when one of them is met, and the
@@ -216,7 +213,7 @@ role; the version directories remain for whole files that differ.
 
        RST shown on Odoo 17 and later (sections allowed)
 
-    Press :version:`16|**Create and View Invoice**;17|**Create Draft Invoice**;*|**Create Draft**`.
+    Press :version:`16|**Create and View Invoice**;17|**Create Draft Invoice**;>=18|**Create Draft**`.
 
 Conditions: ``16``, ``16-18``, ``>=17``, ``>17``, ``<=16``, ``<17``, ``*``
 (any version), several joined by comma (``10,16``). The role shows the text of
@@ -320,6 +317,22 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+18.0.1.0.8 (2026-10-30)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] List pages no longer get the "Searching with the wildcard" text at the end of their How to search section: the wildcard search is explained once, in the "Ready help" part of the help home page
+* [FIX] Documentation: the Usage section is shown again in the module page (index.html)
+* [IMP] Help window: the Home button is renamed Ready (Pronto in Italian)
+* [IMP] Help home page: new part "Ready help", before "Help on help", with the chapters "Activate developer mode" (with picture), "Finding, filtering and grouping a list" (search bar picture, searching, searching several words, wildcard search, filters, groups, favorites, breadcrumbs, view switcher and pager) and "Import and Export data" (export, import, updating records by External ID)
+* [FIX] Page keys quoted in the URLs: a duplicated page (key ending with " (copy)") opens
+* [IMP] RST engine aligned with 10.0
+* [IMP] Help page of the Help pages form for Odoo 10 (help/v10), shared with 10.0
+
+18.0.1.0.7 (2026-10-29)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] The Help Editor menus are in the Help app, no longer an app of their own: the Help app still opens the help window and, for the help editors, shows the Help Editor menu in the top bar
+
 18.0.1.0.6 (2026-10-22)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -390,8 +403,7 @@ Odoo is a trademark of `Odoo S.A. <https://www.odoo.com/>`__ (formerly OpenERP)
 Authors | Autori
 ----------------
 
-* Zeroincombenze srls <False>
-* `SHS-AV s.r.l. <https://www.zeroincombenze.it>`__
+* `Zeroincombenze srls <https://www.zeroincombenze.it>`__
 
 
 
@@ -426,7 +438,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-25
+Last Update / Ultimo aggiornamento: 2026-10-30
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

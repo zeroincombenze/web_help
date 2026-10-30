@@ -1,3 +1,14 @@
+18.0.1.0.8 (2026-10-30)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] List pages no longer get the "Searching with the wildcard" text at the end of their How to search section: the wildcard search is explained once, in the "Ready help" part of the help home page
+* [FIX] Documentation: the Usage section is shown again in the module page (index.html)
+* [IMP] Help window: the Home button is renamed Ready (Pronto in Italian)
+* [IMP] Help home page: new part "Ready help", before "Help on help", with the chapters "Activate developer mode" (with picture), "Finding, filtering and grouping a list" (search bar picture, searching, searching several words, wildcard search, filters, groups, favorites, breadcrumbs, view switcher and pager) and "Import and Export data" (export, import, updating records by External ID)
+* [FIX] Page keys quoted in the URLs: a duplicated page (key ending with " (copy)") opens
+* [IMP] RST engine aligned with 10.0
+* [IMP] Help page of the Help pages form for Odoo 10 (help/v10), shared with 10.0
+
 18.0.1.0.7 (2026-10-29)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

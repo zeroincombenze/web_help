@@ -7,6 +7,7 @@
 import mimetypes
 import os
 import re
+from urllib.parse import quote
 
 from markupsafe import escape
 from werkzeug.exceptions import Forbidden, NotFound
@@ -144,7 +145,10 @@ class ContextHelp(http.Controller):
             if name != (view or "help") and pages[None if name == "help" else name]
         }
         if page.model and page.has_loose_help():
-            nav["loose"] = "/web_context_help/loose/%s?lang=%s" % (page.key, lang)
+            nav["loose"] = "/web_context_help/loose/%s?lang=%s" % (
+                quote(page.key),
+                lang,
+            )
         nav.update(self._nav(lang, "home" if page.key == HOME_KEY else None))
         if page.has_access("write"):
             nav["edit"] = Page.edit_url(page)

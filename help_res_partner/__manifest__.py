@@ -6,11 +6,11 @@
 #
 {
     "name": "Help for partner",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Hidden/Tools",
     "summary": "Context help pages for partners (contacts)",
     "author": "Zeroincombenze srls",
-    "website": "https://github.com/zeroincombenze/zerobug-test",
+    "website": "https://github.com/zeroincombenze/web_help",
     "development_status": "Alpha",
     "license": "LGPL-3",
     "depends": ["contacts", "web_context_help"],

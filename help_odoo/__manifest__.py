@@ -6,14 +6,15 @@
 #
 {
     "name": "Help for Odoo",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Hidden/Tools",
     "summary": "Installs all the context help modules",
     "author": "Zeroincombenze srls",
-    "website": "https://github.com/zeroincombenze/zerobug-test",
+    "website": "https://github.com/zeroincombenze/web_help",
     "development_status": "Alpha",
     "license": "LGPL-3",
     "depends": [
+        "web_context_help",
         "help_account_invoice",
         "help_payment_term",
         "help_product",

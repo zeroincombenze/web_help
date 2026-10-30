@@ -1,5 +1,5 @@
 ==========================================
-|icon| Help for Odoo/Aiuto Odoo 18.0.1.0.0
+|icon| Help for Odoo/Aiuto Odoo 18.0.1.0.1
 ==========================================
 
 **Installs all the context help modules**
@@ -137,6 +137,12 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+18.0.1.0.1 (2026-10-30)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [FIX] web_context_help in the dependencies
+* [FIX] Website of the repository
+
 18.0.1.0.0 (2026-10-29)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -191,7 +197,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-29
+Last Update / Ultimo aggiornamento: 2026-10-30
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

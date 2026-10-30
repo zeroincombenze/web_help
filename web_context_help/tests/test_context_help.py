@@ -65,7 +65,7 @@ Type the name.
 Searching with the wildcard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Module text replaced by the global one.
+Module text of its own.
 
 .. _footer:
 
@@ -142,20 +142,17 @@ class TestContextHelp(common.TransactionCase):
         self.assertLess(html.index("invoice address"), html.index("carrier notes"))
         self.assertIn("extra", page.section_ids.mapped("label"))
 
-    def test_list_global_wildcard(self):
+    def test_list_no_global_wildcard(self):
+        """The wildcard text is in the home page only: list pages keep their
+        own sections and get nothing added"""
         self._rebuild()
         page = self.Page.search(
             [("key", "=", "wch_test_a.partner_list"), ("lang", "=", "en_US")]
         )
         html = page.html
-        self.assertNotIn("Module text replaced", html)
+        self.assertIn("Module text of its own", html)
         self.assertEqual(html.count('id="wildcard"'), 1)
-        self.assertLess(html.index("Type the name"), html.index("S%Maria%C%V"))
-        self.assertLess(html.index("S%Maria%C%V"), html.index("Page created"))
-        self.assertIn("Searching with the wildcard", page.section_ids.mapped("title"))
-        # form pages do not get it
-        form = self.Page.search([("key", "=", "wch_test_a.partner")])
-        self.assertNotIn("S%Maria%C%V", form.html)
+        self.assertNotIn("S%Maria%C%V", html)
 
     def test_edit_and_source_change(self):
         self._rebuild()

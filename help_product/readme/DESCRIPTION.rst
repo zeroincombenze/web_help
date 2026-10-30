@@ -3,7 +3,7 @@ Context help pages for products (product.template) and product variants
 
 Every page follows the help rule of web_context_help:
 
-* **Description**: what products and variants are, with the main fields
+* **Description**: products, product types and variants, with the main fields
 * **New record** (form): step-by-step guide to create a product and its variants
 * **Update record** (form): changing prices, units and types, archiving and deleting
 * **How to search** (list and kanban): menus, search, filters and groupings

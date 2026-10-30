@@ -5,6 +5,7 @@
 # License LGPL-3.0-or-later (https://www.gnu.org/licenses/lgpl).
 #
 """Standalone HTML document of the help window; no QWeb, version independent"""
+
 from __future__ import unicode_literals
 
 import json
@@ -51,7 +52,7 @@ LABELS = {
         "faq": "FAQ",
         "fields": "Fields",
         "help": "Help",
-        "home": "Home",
+        "home": "Ready",
         "summary": "Summary",
         "edit": "Edit",
         "loose": "Loose help",
@@ -73,7 +74,7 @@ LABELS = {
         "faq": "FAQ",
         "fields": "Campi",
         "help": "Aiuto",
-        "home": "Inizio",
+        "home": "Pronto",
         "summary": "Sommario",
         "edit": "Modifica",
         "loose": "Aiuto generale",

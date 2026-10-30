@@ -1,5 +1,5 @@
 =================================================
-|icon| Help for product/Aiuto prodotti 18.0.1.0.0
+|icon| Help for product/Aiuto prodotti 18.0.1.0.1
 =================================================
 
 **Context help pages for products and product variants**
@@ -19,7 +19,7 @@ Overview | Panoramica
 
 Every page follows the help rule of web_context_help:
 
-* **Description**: what products and variants are, with the main fields
+* **Description**: products, product types and variants, with the main fields
 * **New record** (form): step-by-step guide to create a product and its variants
 * **Update record** (form): changing prices, units and types, archiving and deleting
 * **How to search** (list and kanban): menus, search, filters and groupings
@@ -37,7 +37,7 @@ prodotto (product.product): lista, kanban e maschera, mostrate da web_context_he
 
 Ogni pagina segue la regola di aiuto di web_context_help:
 
-* **Descrizione**: cosa sono prodotti e varianti, con i campi principali
+* **Descrizione**: prodotti, tipi di prodotto e varianti, con i campi principali
 * **Nuovo record** (maschera): guida passo passo per creare un prodotto e le sue varianti
 * **Modifica record** (maschera): modifica di prezzi, unità e tipologia, archiviazione ed eliminazione
 * **Come cercare** (lista e kanban): menu, ricerca, filtri e raggruppamenti
@@ -147,6 +147,15 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+18.0.1.0.1 (2026-10-30)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Product form: description extended with what a product is (codes, stock, lots and serial numbers, accounting, expiration, units of measure, prices, variants)
+* [IMP] Product form: new chapter Product variants, with the cautions and the fields shared by all the variants
+* [IMP] Kanban pages titled "Products (kanban)" and "Product variants (kanban)", apart from the list pages
+* [IMP] Help pages shared with 10.0: the common pages hold the text of every Odoo version in help-version blocks, the help directory carries both v10 and v16_20
+* [FIX] Website of the repository
+
 18.0.1.0.0 (2026-10-29)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -201,7 +210,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-29
+Last Update / Ultimo aggiornamento: 2026-10-30
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

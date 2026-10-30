@@ -7,6 +7,7 @@
 import logging
 import os
 import re
+from urllib.parse import quote
 
 from odoo import api, fields, models, release
 from odoo.modules.module import get_module_path
@@ -198,7 +199,7 @@ class ContextHelpPage(models.Model):
     @api.model
     def page_url(self, key, lang=None, view=None):
         """URL of a page; view: "faq" or "fields" for its FAQ or Fields page"""
-        url = "/web_context_help/page/%s" % key
+        url = "/web_context_help/page/%s" % quote(key)
         params = ["lang=%s" % lang] if lang else []
         if view:
             params.append("view=%s" % view)
@@ -689,17 +690,10 @@ class ContextHelpPage(models.Model):
             pages.extend(p)
             inherits.extend(i)
         inherits.sort(key=lambda i: order.get(i["module"], 0))
-        globals_ = {}
         built = {}
         for item in pages:
             key = "%s.%s" % (item["module"], item["page"]["name"])
             doc = item["doc"]
-            if item["page"]["view_type"] in rst_help.LIST_VIEW_TYPES:
-                lang = item["lang"]
-                if lang not in globals_:
-                    globals_[lang] = self._wch_global_search(group, lang, version)
-                if globals_[lang]:
-                    rst_help.insert_global(doc, globals_[lang], "wildcard", "search")
             for inherit in self._wch_inherits_for(inherits, key, item["lang"]):
                 ok = rst_help.apply_inherit(
                     doc,
@@ -738,20 +732,6 @@ class ContextHelpPage(models.Model):
                 "sections": rst_help.extract_sections(doc),
             }
         self._wch_store(built)
-
-    @api.model
-    def _wch_global_search(self, group, lang, version=None):
-        """Nodes of the wildcard text added to the search of every list page"""
-        help_dir = os.path.join(get_module_path("web_context_help"), "help")
-        path = rst_help.resolve_include(help_dir, group, rst_help.GLOBAL_SEARCH, lang)
-        if not path:
-            return []
-        try:
-            doc = rst_help.parse_file(path, help_dir, group, lang, version=version)
-        except Exception as e:
-            _logger.warning("web_context_help: %s not parsed: %s", path, e)
-            return []
-        return doc.children[:]
 
     @api.model
     def _wch_store(self, built):
