@@ -1,7 +1,7 @@
 .. _new_record:
 
-New record
-----------
+How to insert a new record
+--------------------------
 
 #. Open **Contacts**, or **Sales ‣ Sales ‣ Customers**, or **Purchases ‣
    Purchase ‣ Vendors**, and press **Create**.

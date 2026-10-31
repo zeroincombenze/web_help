@@ -1,7 +1,7 @@
 .. _report:
 
-Stampe
-------
+Stampe ed esportazione
+----------------------
 
 * Non c'è un PDF del contatto. I pulsanti intelligenti in alto nella maschera,
   aggiunti dalle app installate (*Riunioni*, *Vendite*, *Acquisti*,

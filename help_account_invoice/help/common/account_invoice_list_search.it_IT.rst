@@ -1,7 +1,7 @@
 .. _search:
 
-Come cercare
-------------
+Suggerimenti per la ricerca
+---------------------------
 
 * :version:`10|**Fatturazione ‣ Vendite ‣ Fatture clienti**;11|**Fatturazione
   ‣ Vendite ‣ Fatture cliente**;*|**Fatturazione ‣ Clienti ‣ Fatture**` elenca

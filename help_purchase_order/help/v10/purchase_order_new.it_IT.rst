@@ -1,7 +1,7 @@
 .. _new_record:
 
-Nuovo record
-------------
+Come inserire un nuovo record
+-----------------------------
 
 #. Aprire **Acquisti ‣ Acquisto ‣ Richieste di preventivo** e premere **Crea**.
 #. Scegliere il :field:`fornitore <partner_id>` (obbligatorio): digitare alcune

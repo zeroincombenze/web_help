@@ -1,7 +1,7 @@
 .. _report:
 
-Stampe
-------
+Stampe ed esportazione
+----------------------
 
 * **Stampare etichette** (nell'intestazione della maschera, oppure dall'elenco
   dopo aver selezionato i prodotti): scegliere la quantità e il formato per
@@ -13,3 +13,7 @@ Stampe
 * I pulsanti intelligenti in alto nella maschera (*Vendute*, *Acquistati*,
   *Giacenza fisica*, …, aggiunti dalle app installate) aprono i documenti e la
   giacenza del prodotto.
+* Per ottenere un file dei prodotti, selezionarli nella vista elenco, poi
+  :version:`<=16|**Azione ‣ Esporta**;*|**Azioni ‣ Esporta**`: scegliere i
+  campi e il formato (xlsx o csv). Vedere *Importare ed esportare dati* nella
+  pagina **Pronto** dell'aiuto.

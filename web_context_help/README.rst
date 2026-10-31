@@ -1,6 +1,6 @@
-================================================
-|icon| Context help/Aiuto contestuale 10.0.1.0.9
-================================================
+=================================================
+|icon| Context help/Aiuto contestuale 10.0.1.0.10
+=================================================
 
 **Context help button, pages written in RST by each module**
 
@@ -110,26 +110,44 @@ in quotes (``"draft invoice"``) is searched as an exact phrase.
 **Enter** / ▼ and **Shift+Enter** / ▲ go to the next / previous match,
 **Esc** clears the search.
 
-The *FAQ* section of a page and the fields help of its model are shown on
-their own pages, opened by the **FAQ** and **Fields** buttons in the help
-window header; the **Help** button goes back to the page. The questions built by
+The *Example* and *FAQ* sections of a page and the fields help of its model
+are shown on their own pages, opened by the **Example**, **FAQ** and **Fields**
+buttons in the help window header; the **Help** button goes back to the page
+(on the Example, FAQ and Fields pages it is labelled **Topic**). The questions built by
 ``help-question`` ``:auto:`` are left to the **Fields** page.
+
+Moving from page to page of the help window, the **Topic** button goes back to
+the help page of the view open in Odoo; it is hidden when that page (or its
+Example / FAQ / Fields page) is the one shown.
 
 Writing help for a module: put RST files in ``help/common/`` or in the
 directory of a group of Odoo versions (``help/v10``, ``help/v11_14``,
 ``help/v15``, ``help/v16_20``); a group file overrides the common one with the
 same name. Italian twins are named ``page.it_IT.rst``.
 
-Every page has these sections, in this order, with their label:
-``description`` (summary of the view / model),
-``new_record`` (form only: steps to insert a record),
-``update_record`` (form only: steps to update a record),
-``search`` (list only: how to search and group by),
-``configure`` (how to configure the model),
-``report`` (how to show the report or the pdf attachment),
-``example`` (useful examples),
-``faq`` (frequently asked questions, ``help-question`` blocks),
-``footer`` (date and time of page creation and copyright notice).
+Standard layout: every page has these sections, in this order, with their
+label and title; some apply only to the form or only to the list view (a
+kanban view follows the list rules):
+
+* *Contents*: table of contents, built by the help window, not written in RST;
+  it lists the sections left on the page, footer excepted; the sections of a
+  page with several parts (titles of first level) are grouped by part
+* ``description`` *Description*: summary of the view / model
+* ``new_record`` *How to insert a new record*: form only, steps to insert a
+  record
+* ``search`` *Suggestions for search*: list / kanban only, how to find, filter
+  and group
+* ``update_record`` *How to update a record*: form only, steps to update a
+  record
+* ``configure`` *How to set up*: settings and configuration
+* ``report`` *Report and export file*: prints, pdf attachment, export
+* ``example`` *Example*: useful examples, on their own page opened by the
+  **Example** button
+* ``faq`` *FAQ*: ``help-question`` blocks, on their own page opened by the
+  **FAQ** button
+* ``footer`` *Footer*: date and time of page creation and copyright notice,
+  not in the table of contents
+
 A section that does not apply keeps one line saying so.
 
 ::
@@ -321,6 +339,18 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+10.0.1.0.10 (2026-10-31)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [QUA] Test coverage 91% (1259: 116+1143) [0 TestPoints] - quality rating 51 (target 100)
+* [IMP] Help pages: standard layout: Contents, Description, How to insert a new record (form only), Suggestions for search (list and kanban only), How to update a record (form only), How to set up, Report and export file; Example and FAQ on their own pages, footer last
+* [IMP] Help window: the page starts with its table of contents (Indice in Italian), built from its sections, footer excepted
+* [IMP] Help window: new **Example** button (Esempio in Italian): the Example section is shown on its own page, like the FAQ
+* [IMP] Help window: Font Awesome icons on the header buttons: Topic (anchor), Ready (life saver), FAQ (question), Loose help (globe), Example (eye), Fields (map), Summary (table), Edit (edit)
+* [IMP] Help window: on the Example, FAQ and Fields pages the button back to the page is labelled **Topic** (Argomento in Italian), and the Loose help button is not shown
+* [QUA] HTML escape from markupsafe only: no more import of the deprecated cgi module
+* [IMP] Help window: new **Topic** button (Argomento in Italian), back to the help page of the current Odoo view after moving to other pages; hidden when that page, or its FAQ / Fields page, is shown
+
 10.0.1.0.9 (2026-10-30)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -455,7 +485,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-30
+Last Update / Ultimo aggiornamento: 2026-10-31
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

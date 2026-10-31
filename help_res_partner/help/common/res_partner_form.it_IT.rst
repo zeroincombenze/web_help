@@ -96,7 +96,7 @@ Domande frequenti
    .. help-question:: Odoo avvisa che esiste un partner con la stessa partita IVA.
 
       Probabilmente il contatto è un doppione: aprire quello esistente, oppure
-      unire i due dall'elenco (vedere *Modifica record*).
+      unire i due dall'elenco (vedere *Come modificare un record*).
 
    .. help-question:: Perché non riesco a eliminare il contatto?
 

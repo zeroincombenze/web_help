@@ -1,7 +1,7 @@
 .. _update_record:
 
-Update record
--------------
+How to update a record
+----------------------
 
 #. Open the contact, press **Edit**, change the fields and press **Save**
    (**Discard** drops the changes).

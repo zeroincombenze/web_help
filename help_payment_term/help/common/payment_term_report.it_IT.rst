@@ -1,7 +1,7 @@
 .. _report:
 
-Stampe
-------
+Stampe ed esportazione
+----------------------
 
 I termini di pagamento non hanno una stampa propria; sono stampati sui
 documenti che li usano:
@@ -13,3 +13,8 @@ documenti che li usano:
 * L'ordine di vendita e l'ordine di acquisto mostrano il termine scelto.
 * La lista delle fatture mostra la *Data di scadenza* di ogni fattura; il
   filtro *Scadute* mostra quelle in ritardo.
+* Per ottenere un file dei termini di pagamento, selezionarli nella vista
+  elenco, poi
+  :version:`<=16|**Azione ‣ Esporta**;*|**Azioni ‣ Esporta**`: scegliere i
+  campi e il formato (xlsx o csv). Vedere *Importare ed esportare dati* nella
+  pagina **Pronto** dell'aiuto.

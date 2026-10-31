@@ -1,7 +1,7 @@
 .. _report:
 
-Report
-------
+Report and export file
+----------------------
 
 * The contact has no print of its own: its name and address are printed on
   quotations, orders, deliveries and invoices, using the invoice or shipping
@@ -11,3 +11,7 @@ Report
   opportunities, depending on the installed applications.
 * The chatter at the bottom keeps the messages and the emails exchanged with
   the contact.
+* To get a file of the contacts, select them in the list view, then
+  :version:`<=16|**Action ‣ Export**;*|**Actions ‣ Export**`: choose the
+  fields and the format (xlsx or csv). See *Import and Export data* in the
+  **Ready** page of the help.

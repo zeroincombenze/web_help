@@ -1,7 +1,7 @@
 .. _new_record:
 
-New record
-----------
+How to insert a new record
+--------------------------
 
 #. Open **Purchase ‣ Orders ‣ Requests for Quotation** and press **New**. RFQs
    are also created automatically by the reordering rules and by the

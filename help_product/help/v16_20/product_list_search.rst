@@ -1,7 +1,7 @@
 .. _search:
 
-How to search
--------------
+Suggestions for search
+----------------------
 
 * **Sales ‣ Products ‣ Products**, **Purchase ‣ Products ‣ Products** and
   **Inventory ‣ Products ‣ Products** list the same products.

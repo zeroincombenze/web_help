@@ -1,7 +1,7 @@
 .. _search:
 
-How to search
--------------
+Suggestions for search
+----------------------
 
 * **Purchase ‣ Orders ‣ Requests for Quotation** lists the RFQs, **Purchase ‣
   Orders ‣ Purchase Orders** the confirmed orders.

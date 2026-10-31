@@ -1,7 +1,7 @@
 .. _new_record:
 
-Nuovo record
-------------
+Come inserire un nuovo record
+-----------------------------
 
 #. Aprire **Acquisti ‣ Ordini ‣ Richieste di preventivo** e premere **Nuovo**.
    Le RdP sono create anche automaticamente dalle regole di riordino e dal

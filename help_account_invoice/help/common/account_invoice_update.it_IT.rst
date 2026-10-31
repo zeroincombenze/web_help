@@ -1,7 +1,7 @@
 .. _update_record:
 
-Modifica record
----------------
+Come modificare un record
+-------------------------
 
 .. help-version:: <13
 
@@ -13,7 +13,7 @@ Modifica record
       modificarla e premere di nuovo :version:`10|**Validare**;*|**Valida**`:
       mantiene il suo numero. L'annullamento richiede l'opzione
       :version:`10|*Consenti cancellazione registrazioni*;*|*Consentire
-      annullamento registrazioni*` del registro, vedere *Configurazione*.
+      annullamento registrazioni*` del registro, vedere *Come configurare*.
    #. Per registrare un pagamento premere
       :version:`10|**Registrare pagamento**;*|**Registra pagamento**`:
       controllare il registro di pagamento (banca o cassa), l'importo, la data

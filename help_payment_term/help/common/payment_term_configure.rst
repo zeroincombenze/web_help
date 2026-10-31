@@ -1,7 +1,7 @@
 .. _configure:
 
-Configure
----------
+How to set up
+-------------
 
 * Payment terms are in **Invoicing ‣ Configuration ‣**
   :version:`<13|**Management**;*|**Invoicing**` **‣ Payment Terms**, for the

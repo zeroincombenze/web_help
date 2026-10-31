@@ -1,7 +1,7 @@
 .. _search:
 
-Come cercare
-------------
+Suggerimenti per la ricerca
+---------------------------
 
 * **Vendite ‣ Vendite ‣ Preventivi** elenca i preventivi, **Vendite ‣ Vendite ‣
   Ordini di Vendita** gli ordini confermati, **Vendite ‣ Fatturazione ‣ Vendite

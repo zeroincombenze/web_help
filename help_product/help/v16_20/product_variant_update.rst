@@ -1,7 +1,7 @@
 .. _update_record:
 
-Update record
--------------
+How to update a record
+----------------------
 
 #. Open the variant and change reference, barcode, cost, weight or volume;
    the record is saved when you leave it, or press the cloud icon.

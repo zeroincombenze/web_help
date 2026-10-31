@@ -1,7 +1,7 @@
 .. _configure:
 
-Configure
----------
+How to set up
+-------------
 
 * **Sales ‣ Configuration ‣ Settings** (or Inventory, Purchase) section
   **Product Catalog** / **Products**: *Variants*, *Units of Measure*,

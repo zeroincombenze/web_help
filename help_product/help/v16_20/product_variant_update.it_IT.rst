@@ -1,7 +1,7 @@
 .. _update_record:
 
-Modifica record
----------------
+Come modificare un record
+-------------------------
 
 #. Aprire la variante e modificare riferimento, codice a barre, costo, peso o
    volume; il record si salva quando si esce, oppure premere l'icona della

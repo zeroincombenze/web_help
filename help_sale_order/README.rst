@@ -1,10 +1,10 @@
 =============================================================
-|icon| Help for sale order/Aiuto ordini di vendita 18.0.1.0.0
+|icon| Help for sale order/Aiuto ordini di vendita 10.0.1.0.5
 =============================================================
 
 **Context help pages for sale orders**
 
-.. |icon| image:: https://raw.githubusercontent.com/zeroincombenze/zerobug-test/18.0/help_sale_order/static/description/icon.png
+.. |icon| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/10.0/help_sale_order/static/description/icon.png
 
 
 .. contents::
@@ -16,13 +16,43 @@ Overview | Panoramica
 
 |en| Context help pages for the sale order list and form, shown by web_context_help.
 
+Every page follows the help rule of web_context_help:
+
+* **Description**: what quotations and sales orders are, with the main fields
+* **New record** (form): step-by-step guide to create a quotation and confirm it
+* **Update record** (form): what can be changed in each status, invoicing,
+  locking, cancelling and deleting
+* **How to search** (list): menus, search, filters and groupings
+* **Configure**: the Sales settings that affect sale orders
+* **Report**: the quotation / order PDF, the pro-forma and the sales analysis
+* **Example**: common cases, e.g. down payments or changes after confirmation
+* **FAQ** and **Footer**
+
+Pages are in English and Italian, with the menus and settings of the running
+Odoo version.
+
 
 |it| Pagine di aiuto contestuale per la lista e la maschera degli ordini di vendita, mostrate da web_context_help.
+
+Ogni pagina segue la regola di aiuto di web_context_help:
+
+* **Descrizione**: cosa sono preventivi e ordini di vendita, con i campi principali
+* **Nuovo record** (maschera): guida passo passo per creare un preventivo e confermarlo
+* **Modifica record** (maschera): cosa si può cambiare in ogni stato,
+  fatturazione, blocco, annullamento ed eliminazione
+* **Come cercare** (lista): menu, ricerca, filtri e raggruppamenti
+* **Configurazione**: le impostazioni di Vendite che influenzano gli ordini
+* **Stampe**: il PDF di preventivo / ordine, la pro-forma e l'analisi vendite
+* **Esempi**: casi comuni, ad es. acconti o modifiche dopo la conferma
+* **Domande frequenti** e **Piè di pagina**
+
+Le pagine sono in inglese e in italiano, con i menu e le impostazioni della
+versione di Odoo in uso.
 
 
 |thumbnail|
 
-.. |thumbnail| image:: https://raw.githubusercontent.com/zeroincombenze/zerobug-test/18.0/help_sale_order/static/description/
+.. |thumbnail| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/10.0/help_sale_order/static/description/
 
 
 Getting started | Primi passi
@@ -33,6 +63,9 @@ Getting started | Primi passi
 
 Prerequisites | Prerequisiti
 ----------------------------
+
+* python 2.7+ (best 2.7.5+)
+* postgresql 9.2+ (best 9.5)
 
 ::
 
@@ -62,15 +95,15 @@ Installation | Installazione
 +---------------------------------+------------------------------------------+
 | Suggested deployment is:        | Posizione suggerita per l'installazione: |
 +---------------------------------+------------------------------------------+
-| $HOME/18.0 |
+| $HOME/10.0 |
 +----------------------------------------------------------------------------+
 
 ::
 
     # Odoo repository installation; OCB repository must be installed
-    deploy_odoo clone -r zerobug-test -b 18.0 -G zero -p $HOME/18.0
+    deploy_odoo clone -r web_help -b 10.0 -G zero -p $HOME/10.0
     # Upgrade virtual environment
-    vem amend $HOME/18.0/venv_odoo
+    vem amend $HOME/10.0/venv_odoo
 
 
 
@@ -79,8 +112,8 @@ Upgrade | Aggiornamento
 
 ::
 
-    deploy_odoo update -r zerobug-test -b 18.0 -G zero -p $HOME/18.0
-    vem amend $HOME/18.0/venv_odoo
+    deploy_odoo update -r web_help -b 10.0 -G zero -p $HOME/10.0
+    vem amend $HOME/10.0/venv_odoo
     # Adjust following statements as per your system
     sudo systemctl restart odoo
 
@@ -98,7 +131,7 @@ Get involved | Ci mettiamo in gioco
 
 Bug reports are welcome! You can use the issue tracker to report bugs,
 and/or submit pull requests on `GitHub Issues
-<https://github.com/zeroincombenze/zerobug-test/issues>`_.
+<https://github.com/zeroincombenze/web_help/issues>`_.
 
 In case of trouble, please check there if your issue has already been reported.
 
@@ -117,12 +150,39 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
-18.0.1.0.0 (2026-09-27)
+10.0.1.0.5 (2026-10-31)
 ~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Help pages for Odoo 11-14 (help/v11_14) and 15 (help/v15): menus, buttons, fields and settings of each version, from 11.0 to 15.0, in English and Italian
+* [IMP] Help pages in the standard layout: sections renamed How to insert a new record, How to update a record, Suggestions for search, How to set up, Report and export file (Italian titles too); the Report section explains how to export the records to a file
+
+10.0.1.0.4 (2026-10-29)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Migrated from 18.0 to 10.0 (requires web_context_help 10.0.1.0.7)
+
+10.0.0
+~~~~~~
+
+* [IMP] Help pages declared with :priority: 96, the priority of the module pages: the last fallback after the pages of the administrator (requires web_context_help 18.0.1.0.6)
+
+10.0.0
+~~~~~~
+
+* [IMP] Help pages restructured on the help rule: new record, update record, how to search, report, example, FAQ and footer sections
+* [IMP] Wildcard search explained; version specific text shown only on its Odoo version
+
+10.0.0
+~~~~~~
+
+* [IMP] Help pages rewritten: description, usage, options and configuration of sale orders
+
+10.0.0
+~~~~~~
 
 * [IMP] Migrated from 16.0
 
-18.0.0
+10.0.0
 ~~~~~~
 
 * [NEW] Help pages for sale order list and form, English and Italian
@@ -141,8 +201,7 @@ Odoo is a trademark of `Odoo S.A. <https://www.odoo.com/>`__ (formerly OpenERP)
 Authors | Autori
 ----------------
 
-* Zeroincombenze srls <False>
-* `SHS-AV s.r.l. <https://www.zeroincombenze.it>`__
+* `Zeroincombenze srls <https://www.zeroincombenze.it>`__
 
 
 
@@ -175,9 +234,9 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 |
 |
 
-This module is part of zerobug-test project.
+This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-09-27
+Last Update / Ultimo aggiornamento: 2026-10-31
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status
@@ -188,8 +247,8 @@ Last Update / Ultimo aggiornamento: 2026-09-27
 .. |license opl| image:: https://img.shields.io/badge/licence-OPL-7379c3.svg
     :target: https://www.odoo.com/documentation/user/14.0/legal/licenses/licenses.html
     :alt: License: OPL
-.. |Try Me| image:: https://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-18.svg
-    :target: https://erp18.zeroincombenze.it
+.. |Try Me| image:: https://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-10.svg
+    :target: https://erp10.zeroincombenze.it
     :alt: Try Me
 .. |Zeroincombenze| image:: https://avatars0.githubusercontent.com/u/6972555?s=460&v=4
    :target: https://www.zeroincombenze.it/

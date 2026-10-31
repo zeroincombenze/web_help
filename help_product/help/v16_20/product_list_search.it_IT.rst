@@ -1,7 +1,7 @@
 .. _search:
 
-Come cercare
-------------
+Suggerimenti per la ricerca
+---------------------------
 
 * **Vendite ‣ Prodotti ‣ Prodotti**, **Acquisti ‣ Prodotti ‣ Prodotti** e
   **Magazzino ‣ Prodotti ‣ Prodotti** elencano gli stessi prodotti.

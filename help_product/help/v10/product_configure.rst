@@ -1,7 +1,7 @@
 .. _configure:
 
-Configure
----------
+How to set up
+-------------
 
 * **Sales ‣ Configuration ‣ Settings**: *Product Variants*, *Units of
   Measure*, *Pricing* (one price, pricelists per customer segment or

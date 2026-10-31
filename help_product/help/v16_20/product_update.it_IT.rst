@@ -1,7 +1,7 @@
 .. _update_record:
 
-Modifica record
----------------
+Come modificare un record
+-------------------------
 
 #. Aprire il prodotto e modificare i campi; il record si salva quando si esce,
    oppure premere l'icona della nuvola. Ordini e fatture già fatti conservano

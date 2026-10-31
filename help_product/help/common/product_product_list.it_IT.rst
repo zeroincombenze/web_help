@@ -12,13 +12,21 @@ Varianti prodotto
 Descrizione
 -----------
 
-.. help-version:: <16
+.. help-version:: <13
 
    L'elenco delle varianti di prodotto. Ogni riga mostra il :field:`riferimento
    interno <default_code>`, il :field:`nome <name>`, i :field:`valori attributo
    <attribute_value_ids>`, il :field:`prezzo di vendita <lst_price>`, l'unità di
    misura e il :field:`codice a barre <barcode>`. Fare clic su una riga per
    aprire la variante.
+
+.. help-version:: 13-15
+
+   L'elenco delle varianti di prodotto. Ogni riga mostra il :field:`riferimento
+   interno <default_code>`, il :field:`nome <name>`, i :field:`valori attributo
+   <product_template_attribute_value_ids>`, il :field:`prezzo di vendita
+   <lst_price>`, l'unità di misura e il :field:`codice a barre <barcode>`. Fare
+   clic su una riga per aprire la variante.
 
 .. help-version:: >=16
 
@@ -50,8 +58,9 @@ Domande frequenti
 
    .. help-question:: Perché non vedo tutti i prodotti?
 
-      Il menu può partire con un filtro, ad es. **Acquisti ‣ Acquisto ‣
-      Prodotti** mostra i prodotti che *Può essere acquistato*: togliere il filtro
+      Il menu può partire con un filtro, ad es.
+      :version:`<=11|**Acquisti ‣ Acquisto ‣ Prodotti**;12|**Acquisti ‣ Acquisti
+      ‣ Prodotti**;*|**Acquisti ‣ Prodotti ‣ Prodotti**` mostra i prodotti che *Può essere acquistato*: togliere il filtro
       dalla barra di ricerca. I prodotti archiviati si vedono solo con il filtro
       *Archiviato*.
 

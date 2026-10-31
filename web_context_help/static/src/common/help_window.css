@@ -45,9 +45,11 @@ body.wch-body {
 .wch-find-nav { padding: 2px 6px; font-size: 11px; line-height: 1; cursor: pointer;
     border: 1px solid var(--wch-border); border-radius: 4px; background: var(--wch-bg); color: var(--wch-fg); }
 .wch-find-nav:hover { border-color: var(--wch-accent); color: var(--wch-accent); }
-.wch-nav { padding: 3px 10px; font-size: 13px; white-space: nowrap; text-decoration: none;
+.wch-nav, .wch-topic { padding: 3px 10px; font-size: 13px; white-space: nowrap; text-decoration: none;
     border: 1px solid var(--wch-accent); border-radius: 4px; color: var(--wch-accent); }
-.wch-nav:hover { background: var(--wch-accent); color: var(--wch-bg); }
+.wch-topic[hidden] { display: none; }
+.wch-nav .fa, .wch-topic .fa { margin-right: 2px; }
+.wch-nav:hover, .wch-topic:hover { background: var(--wch-accent); color: var(--wch-bg); }
 .wch-find-count { font-size: 13px; color: var(--wch-muted); white-space: nowrap; }
 mark.wch-match { background: #fff3a3; color: inherit; border-radius: 2px; }
 mark.wch-match.wch-current { background: #ff9632; }
@@ -67,4 +69,8 @@ a.wch-tour::before { content: "▶ "; }
 .wch-auto dt { font-weight: 600; margin-top: 8px; }
 .wch-auto dd { margin-left: 16px; color: var(--wch-muted); }
 ul.wch-summary { padding-left: 20px; }
+.wch-toc { margin: 8px 0 16px; padding: 8px 12px; background: var(--wch-panel); border-radius: 4px; }
+.wch-toc .wch-toc-title { margin: 0 0 4px; font-weight: 600; }
+.wch-toc ul { margin: 0; padding-left: 20px; }
+.wch-toc li { margin: 2px 0; }
 ul.wch-summary li { margin: 2px 0; }

@@ -1,7 +1,7 @@
 .. _new_record:
 
-Nuovo record
-------------
+Come inserire un nuovo record
+-----------------------------
 
 Le varianti non si creano una per una: sono generate dagli attributi del
 prodotto.

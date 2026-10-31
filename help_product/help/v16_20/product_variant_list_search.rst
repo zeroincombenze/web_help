@@ -1,7 +1,7 @@
 .. _search:
 
-How to search
--------------
+Suggestions for search
+----------------------
 
 * **Sales ‣ Products ‣ Product Variants** (*Variants* setting) lists all the
   variants; the **Variants** smart button of a product lists its own.

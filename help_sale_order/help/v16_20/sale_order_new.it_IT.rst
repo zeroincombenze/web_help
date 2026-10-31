@@ -1,7 +1,7 @@
 .. _new_record:
 
-Nuovo record
-------------
+Come inserire un nuovo record
+-----------------------------
 
 #. Aprire **Vendite ‣ Ordini ‣ Preventivi** e premere **Nuovo**. Un preventivo
    si può creare anche da un'opportunità CRM con **Nuovo preventivo**.

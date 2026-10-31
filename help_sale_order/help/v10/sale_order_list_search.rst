@@ -1,7 +1,7 @@
 .. _search:
 
-How to search
--------------
+Suggestions for search
+----------------------
 
 * **Sales ‣ Sales ‣ Quotations** lists the quotations, **Sales ‣ Sales ‣ Sales
   Orders** the confirmed orders, **Sales ‣ Invoicing ‣ Sales to Invoice** the

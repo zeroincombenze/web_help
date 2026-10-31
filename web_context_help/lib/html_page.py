@@ -13,10 +13,7 @@ import os
 
 from lxml import html as lxml_html
 
-try:  # pragma: no cover
-    from markupsafe import escape
-except ImportError:  # pragma: no cover
-    from cgi import escape
+from markupsafe import escape
 
 STATIC = "/web_context_help/static/src/common"
 # The question box is hidden until the ask feature is released
@@ -45,11 +42,15 @@ def asset_version():
 LABELS = {
     "en_US": {
         "follow": "Follow Odoo",
+        "topic": "Topic",
+        "topic_title": "Back to the help page of the current Odoo view",
         "find": "Find in page",
         "prev": "Previous match",
         "next": "Next match",
         "any_word": "any word",
         "faq": "FAQ",
+        "example": "Example",
+        "toc": "Contents",
         "fields": "Fields",
         "help": "Help",
         "home": "Ready",
@@ -67,11 +68,15 @@ LABELS = {
     },
     "it_IT": {
         "follow": "Segui Odoo",
+        "topic": "Argomento",
+        "topic_title": "Torna alla pagina di aiuto della vista Odoo corrente",
         "find": "Cerca nella pagina",
         "prev": "Occorrenza precedente",
         "next": "Occorrenza successiva",
         "any_word": "qualsiasi parola",
         "faq": "FAQ",
+        "example": "Esempio",
+        "toc": "Indice",
         "fields": "Campi",
         "help": "Aiuto",
         "home": "Pronto",
@@ -95,6 +100,10 @@ def labels(lang):
 
 
 FAQ_LABEL = "faq"
+EXAMPLE_LABEL = "example"
+FOOTER_LABEL = "footer"
+# Sections shown on their own page, opened by a header button: view -> label
+OWN_PAGE = {"faq": FAQ_LABEL, "example": EXAMPLE_LABEL}
 
 
 def _section(el):
@@ -183,15 +192,15 @@ def extract_sections(body_html):
     return sections + questions
 
 
-def split_faq(body_html):
-    """Return (body without the FAQ section, FAQ section html or "").
+def split_section(body_html, label):
+    """Return (body without the section labelled label, section html or "").
 
     The questions built from the fields help (wch-auto-q) are dropped: the
-    Fields page shows them. A FAQ left with its title only is ""."""
-    if not body_html or ('id="%s"' % FAQ_LABEL) not in body_html:
+    Fields page shows them. A section left with its title only is ""."""
+    if not body_html or ('id="%s"' % label) not in body_html:
         return body_html, ""
     root = lxml_html.fragment_fromstring(body_html, create_parent="div")
-    found = root.xpath("//*[@id=$label]", label=FAQ_LABEL)
+    found = root.xpath("//*[@id=$label]", label=label)
     section = _section(found[0]) if found else None
     if section is None or section is root:
         return body_html, ""
@@ -203,23 +212,137 @@ def split_faq(body_html):
     rest = section.text_content()
     if title:
         rest = rest.replace(title[0].text_content(), "", 1)
-    faq = lxml_html.tostring(section, encoding="unicode") if rest.strip() else ""
-    body = (root.text or "") + "".join(
+    html = lxml_html.tostring(section, encoding="unicode") if rest.strip() else ""
+    return _inner(root), html
+
+
+def split_faq(body_html):
+    """Return (body without the FAQ section, FAQ section html or "")"""
+    return split_section(body_html, FAQ_LABEL)
+
+
+def _inner(root):
+    return (root.text or "") + "".join(
         lxml_html.tostring(child, encoding="unicode") for child in root
     )
-    return body, faq
 
 
-NAV = ("home", "help", "loose", "faq", "fields", "summary", "edit")
+def _toc_entries(root):
+    """[(level, label, title)] of the TOC: the h2 sections, under their h1
+    part when the page has more parts; the footer is left out"""
+    h1 = root.xpath(".//h1")
+    entries = []
+    for el in root.xpath(".//h1|.//h2"):
+        label = _label_of(el)
+        if not label or label == FOOTER_LABEL:
+            continue
+        if el.tag == "h2":
+            entries.append((2, label, _text(el)))
+        elif len(h1) > 1:
+            entries.append((1, label, _text(el)))
+    return entries
+
+
+def add_toc(body_html, lang="en_US"):
+    """Body with the table of contents after the page title"""
+    if not body_html or not body_html.strip():
+        return body_html
+    root = lxml_html.fragment_fromstring(body_html, create_parent="div")
+    entries = _toc_entries(root)
+    if len([e for e in entries if e[0] == 2]) < 2:
+        return body_html
+    parts = [
+        '<nav class="wch-toc"><p class="wch-toc-title">%s</p><ul>'
+        % escape(labels(lang)["toc"])
+    ]
+    nested = False
+    for level, label, title in entries:
+        if level == 1:
+            if nested:
+                parts.append("</ul></li>")
+            parts.append(
+                '<li><a href="#%s">%s</a><ul>' % (escape(label), escape(title))
+            )
+            nested = True
+        else:
+            parts.append(
+                '<li><a href="#%s">%s</a></li>' % (escape(label), escape(title))
+            )
+    if nested:
+        parts.append("</ul></li>")
+    parts.append("</ul></nav>")
+    toc = lxml_html.fragment_fromstring("".join(parts))
+    first = root.xpath(".//h1")
+    if len(first) == 1:
+        first[0].addnext(toc)
+    else:
+        root.insert(0, toc)
+        toc.tail, root.text = root.text, None
+    return _inner(root)
+
+
+# Font Awesome 4 icon of a header button
+ICONS = {
+    "topic": "fa-anchor",
+    "home": "fa-life-saver",
+    "faq": "fa-question-circle",
+    "loose": "fa-globe",
+    "example": "fa-eye",
+    "fields": "fa-map",
+    "summary": "fa-table",
+    "edit": "fa-edit",
+}
+
+
+def fontawesome_css():
+    """Font Awesome of the web module: moved to src/libs in Odoo 16"""
+    try:
+        from odoo import release
+
+        major = release.version_info[0]
+    except ImportError:  # pragma: no cover - outside Odoo
+        major = 18
+    return "/web/static/%s/fontawesome/css/font-awesome.css" % (
+        "lib" if major < 16 else "src/libs"
+    )
+
+
+def icon(name):
+    """<i> tag of the icon of a header button, "" without icon"""
+    if name not in ICONS:
+        return ""
+    return '<i class="fa %s" aria-hidden="true"></i> ' % ICONS[name]
+
+
+NAV = (
+    "home",
+    "help",
+    "loose",
+    "example",
+    "faq",
+    "fields",
+    "summary",
+    "edit",
+)
 # Opened in a new tab: the Odoo backend, not a help page
 NAV_BLANK = ("edit",)
 
 
 def render(
-    title, body_html, lang="en_US", page_key="", model="", warning=False, nav=None
+    title,
+    body_html,
+    lang="en_US",
+    page_key="",
+    model="",
+    warning=False,
+    nav=None,
+    nav_label=None,
 ):
-    """nav: {name: url} buttons in the header, in NAV order"""
+    """nav: {name: url} buttons in the header, in NAV order
+    nav_label: {name: other name} button shown with the label and icon of another
+    """
     tr = labels(lang)
+    shown = nav_label or {}
     config = json.dumps(
         {"page_key": page_key, "model": model, "lang": lang, "labels": tr}
     ).replace("</", "<\\/")
@@ -229,6 +352,7 @@ def render(
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>%(title)s</title>
+<link rel="stylesheet" href="%(fontawesome)s"/>
 <link rel="stylesheet" href="%(static)s/help_window.css?v=%(version)s"/>
 </head>
 <body class="wch-body">
@@ -242,6 +366,8 @@ def render(
     <button type="button" id="wch_find_next" class="wch-find-nav"
             title="%(next)s">&#9660;</button>
   </div>
+  <a class="wch-topic" id="wch_topic" href="#" title="%(topic_title)s"
+     hidden>%(topic_icon)s%(topic)s</a>
 %(nav)s%(ask_form)s</header>
 %(answers)s%(warning)s<main class="wch-content">
 %(body)s
@@ -256,13 +382,18 @@ def render(
         "static": STATIC,
         "version": asset_version(),
         "follow": escape(tr["follow"]),
+        "topic": escape(tr["topic"]),
+        "topic_icon": icon("topic"),
+        "fontawesome": fontawesome_css(),
+        "topic_title": escape(tr["topic_title"]),
         "nav": "".join(
-            '  <a class="wch-nav" id="wch_%s" href="%s"%s>%s</a>\n'
+            '  <a class="wch-nav" id="wch_%s" href="%s"%s>%s%s</a>\n'
             % (
                 name,
                 escape(nav[name]),
                 ' target="_blank" rel="noopener"' if name in NAV_BLANK else "",
-                escape(tr[name]),
+                icon(shown.get(name, name)),
+                escape(tr[shown.get(name, name)]),
             )
             for name in NAV
             if (nav or {}).get(name)

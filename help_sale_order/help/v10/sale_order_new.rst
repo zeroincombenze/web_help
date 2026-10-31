@@ -1,7 +1,7 @@
 .. _new_record:
 
-New record
-----------
+How to insert a new record
+--------------------------
 
 #. Open **Sales ‣ Sales ‣ Quotations** and press **Create**.
 #. Choose the :field:`customer <partner_id>` (required): type a few letters of

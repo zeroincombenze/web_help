@@ -23,6 +23,8 @@ RE_WORD = re.compile(r"\w{3,}", re.UNICODE)
 VIEW_TYPE_ALIASES = {"list": ("list", "tree"), "tree": ("list", "tree")}
 # Page opened by the Help menu; the summary lists all the other pages
 HOME_KEY = "web_context_help.home"
+# Label of a section shown on its own page -> view of that page
+OWN_VIEW = dict((label, view) for view, label in html_page.OWN_PAGE.items())
 # 1 is the highest priority: the pages built from the sources of the modules
 # are the last fallback, the pages of the administrator come before them
 PRIORITY_DEFAULT = 32
@@ -215,7 +217,8 @@ class ContextHelpPage(models.Model):
 
     @api.model
     def page_url(self, key, lang=None, view=None):
-        """URL of a page; view: "faq" or "fields" for its FAQ or Fields page"""
+        """URL of a page; view: "example", "faq" or "fields" for its Example,
+        FAQ or Fields page"""
         url = "/web_context_help/page/%s" % url_quote(key)
         params = ["lang=%s" % lang] if lang else []
         if view:
@@ -535,9 +538,7 @@ class ContextHelpPage(models.Model):
                         self.page_url(
                             page.key,
                             page.lang,
-                            view=(
-                                "faq" if section.label == html_page.FAQ_LABEL else None
-                            ),
+                            view=OWN_VIEW.get(section.label),
                         ),
                         section.label,
                     ),

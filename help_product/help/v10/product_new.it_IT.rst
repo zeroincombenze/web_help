@@ -1,7 +1,7 @@
 .. _new_record:
 
-Nuovo record
-------------
+Come inserire un nuovo record
+-----------------------------
 
 #. Aprire **Vendite ‣ Vendite ‣ Prodotti**, **Acquisti ‣ Acquisto ‣ Prodotti**
    o **Magazzino ‣ Controllo inventario ‣ Prodotti** e premere **Crea**.

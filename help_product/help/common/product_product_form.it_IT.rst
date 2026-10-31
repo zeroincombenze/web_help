@@ -12,7 +12,7 @@ Variante prodotto
 Descrizione
 -----------
 
-.. help-version:: <16
+.. help-version:: <13
 
    Una variante di prodotto è una versione di un prodotto, definita dai suoi
    :field:`valori attributo <attribute_value_ids>`, ad es. *Maglietta (L,
@@ -21,6 +21,17 @@ Descrizione
    categoria, tipo e quasi tutte le impostazioni appartengono al prodotto e sono
    condivisi da tutte le sue varianti; riferimento, codice a barre, costo, peso,
    volume e giacenza appartengono a ogni variante.
+
+.. help-version:: 13-15
+
+   Una variante di prodotto è una versione di un prodotto, definita dai suoi
+   :field:`valori attributo <product_template_attribute_value_ids>`, ad es.
+   *Maglietta (L, Rosso)*. Ordini, fatture e movimenti di magazzino usano
+   sempre la variante. Un prodotto senza attributi ha un'unica variante, creata
+   automaticamente. Nome, categoria, tipo e quasi tutte le impostazioni
+   appartengono al prodotto e sono condivisi da tutte le sue varianti;
+   riferimento, codice a barre, costo, peso, volume e giacenza appartengono a
+   ogni variante.
 
 .. help-version:: >=16
 
@@ -33,6 +44,18 @@ Descrizione
    varianti. Un prodotto senza attributi ha esattamente una variante.
 
 .. help-include:: product_variant_fields.rst
+
+.. help-version:: <16
+
+   .. _new_record:
+
+   Come inserire un nuovo record
+   -----------------------------
+
+   Le varianti nascono dal loro prodotto: aggiungere gli attributi e i loro
+   valori nella scheda **Varianti** della maschera del prodotto, e Odoo crea
+   una variante per ogni combinazione. **Crea** qui crea un nuovo prodotto con
+   la sua unica variante.
 
 .. help-version:: >=16
 
@@ -69,13 +92,16 @@ Domande frequenti
    .. help-question:: Perché il prezzo di vendita della variante non è modificabile?
 
       Con più varianti è calcolato: prezzo di vendita del prodotto più il prezzo
-      extra dei valori attributo, impostato con **Prezzi Variante** sul prodotto.
+      extra dei valori attributo, impostato con :version:`<=11|**Prezzi
+      Variante**;12-14|**Configura varianti**;*|**Configura** sulla riga
+      dell'attributo` sul prodotto.
 
    .. help-question:: Perché non riesco a eliminare una variante?
 
       Una variante usata da ordini, fatture o movimenti di magazzino non si può
-      eliminare: archiviarla invece (**Attivo**); per non crearla più, togliere il
-      suo valore attributo dalla scheda **Varianti** del prodotto.
+      eliminare: archiviarla invece (:version:`<=12|**Attivo**;*|**Azione ‣
+      Archivia**`); per non crearla più, togliere il suo valore attributo dalla
+      scheda :version:`<=14|**Varianti**;*|**Attributi & varianti**` del prodotto.
 
 .. help-version:: >=16
 

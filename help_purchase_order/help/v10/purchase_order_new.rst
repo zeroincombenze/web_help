@@ -1,7 +1,7 @@
 .. _new_record:
 
-New record
-----------
+How to insert a new record
+--------------------------
 
 #. Open **Purchases ‣ Purchase ‣ Requests for Quotation** and press
    **Create**.

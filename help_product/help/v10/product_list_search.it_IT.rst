@@ -1,7 +1,7 @@
 .. _search:
 
-Come cercare
-------------
+Suggerimenti per la ricerca
+---------------------------
 
 * **Vendite ‣ Vendite ‣ Prodotti** parte con il filtro *Può essere venduto*,
   **Acquisti ‣ Acquisto ‣ Prodotti** con *Può essere acquistato*, **Magazzino

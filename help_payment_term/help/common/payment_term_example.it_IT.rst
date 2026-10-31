@@ -11,7 +11,8 @@ fattura:
 * fattura del 15 gennaio → 14 febbraio → scadenza **28 febbraio**;
 * fattura del 31 gennaio → 2 marzo → scadenza **31 marzo**.
 
-Creare il termine come in *Nuovo record*, chiamarlo *30 giorni fine mese*,
+Creare il termine come in *Come inserire un nuovo record*, chiamarlo *30 giorni
+fine mese*,
 poi impostare la riga come segue.
 
 .. help-version:: <12

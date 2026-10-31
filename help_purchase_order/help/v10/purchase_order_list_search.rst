@@ -1,7 +1,7 @@
 .. _search:
 
-How to search
--------------
+Suggestions for search
+----------------------
 
 * **Purchases ‣ Purchase ‣ Requests for Quotation** lists the RFQs,
   **Purchases ‣ Purchase ‣ Purchase Orders** the orders to approve and the

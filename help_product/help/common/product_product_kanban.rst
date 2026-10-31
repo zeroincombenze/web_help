@@ -12,12 +12,20 @@ Product variants (kanban)
 Description
 -----------
 
-.. help-version:: <16
+.. help-version:: <13
 
    The product variants as cards. Each card shows the picture, the :field:`name
    <name>`, the :field:`attribute values <attribute_value_ids>` and the price.
    Click a card to open the variant; the buttons at the top right of the search
    bar switch to the list.
+
+.. help-version:: 13-15
+
+   The product variants as cards. Each card shows the picture, the :field:`name
+   <name>`, the :field:`attribute values
+   <product_template_attribute_value_ids>` and the price. Click a card to open
+   the variant; the buttons at the top right of the search bar switch to the
+   list.
 
 .. help-version:: >=16
 
@@ -49,8 +57,9 @@ FAQ
 
    .. help-question:: Why don't I see all the products?
 
-      The menu may start with a filter, e.g. **Purchases ‣ Purchase ‣ Products**
-      shows the products that *Can be Purchased*: remove the filter from the
+      The menu may start with a filter, e.g.
+      :version:`<=11|**Purchases ‣ Purchase ‣ Products**;12|**Purchase ‣ Purchase
+      ‣ Products**;*|**Purchase ‣ Products ‣ Products**` shows the products that *Can be Purchased*: remove the filter from the
       search bar. Archived products are shown by the *Archived* filter only.
 
    .. help-question:: Why does the same product appear several times?

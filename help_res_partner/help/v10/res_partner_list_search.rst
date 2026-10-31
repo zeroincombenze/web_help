@@ -1,7 +1,7 @@
 .. _search:
 
-How to search
--------------
+Suggestions for search
+----------------------
 
 * **Contacts** lists all the contacts, **Sales ‣ Sales ‣ Customers** starts
   with the *Customers* filter, **Purchases ‣ Purchase ‣ Vendors** with the

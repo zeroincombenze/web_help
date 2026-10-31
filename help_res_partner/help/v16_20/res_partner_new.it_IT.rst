@@ -1,7 +1,7 @@
 .. _new_record:
 
-Nuovo record
-------------
+Come inserire un nuovo record
+-----------------------------
 
 #. Aprire **Contatti** e premere **Nuovo**. I contatti si creano anche al
    volo da qualsiasi documento, ad es. digitando un nuovo cliente in un ordine

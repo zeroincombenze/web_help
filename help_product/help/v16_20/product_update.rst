@@ -1,7 +1,7 @@
 .. _update_record:
 
-Update record
--------------
+How to update a record
+----------------------
 
 #. Open the product and change the fields; the record is saved when you leave
    it, or press the cloud icon. Orders and invoices already made keep their

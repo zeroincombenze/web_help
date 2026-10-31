@@ -57,6 +57,7 @@ import sys
 from docutils import core, io as docio, nodes
 from docutils.parsers.rst import Directive, directives, roles
 from docutils.readers.doctree import Reader as DoctreeReader
+from markupsafe import escape
 
 _logger = logging.getLogger(__name__)
 
@@ -72,11 +73,6 @@ POSITIONS = ("before", "after", "replace", "remove")
 RE_LANG = re.compile(r"^(?P<base>.+?)\.(?P<lang>[a-z]{2}_[A-Z]{2})\.rst$")
 RE_VERSION_CMP = re.compile(r"^(>=|<=|>|<)\s*(\d+)$")
 RE_VERSION_RANGE = re.compile(r"^(\d+)(?:\s*-\s*(\d+))?$")
-
-try:  # pragma: no cover
-    from markupsafe import escape
-except ImportError:  # pragma: no cover
-    from cgi import escape
 
 
 def group_version(group):

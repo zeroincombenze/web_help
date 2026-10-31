@@ -1,7 +1,7 @@
 .. _configure:
 
-Configurazione
---------------
+Come configurare
+----------------
 
 .. help-version:: <13
 

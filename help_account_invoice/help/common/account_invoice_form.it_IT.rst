@@ -117,7 +117,7 @@ Domande frequenti
       Una fattura validata è bloccata. Annullarla con **Annullare fattura** e
       premere :version:`10|**Riportare in bozza**;*|**Reimposta a bozza**`: il
       registro deve consentire l'annullamento delle registrazioni, vedere
-      *Configurazione*. Se è pagata, togliere prima il pagamento.
+      *Come configurare*. Se è pagata, togliere prima il pagamento.
 
    .. help-version:: >=13
 

@@ -1,7 +1,7 @@
 .. _configure:
 
-Configurazione
---------------
+Come configurare
+----------------
 
 Aprire **Contatti ‣ Configurazione** (diritti di amministrazione):
 

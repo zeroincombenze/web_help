@@ -22,6 +22,8 @@ odoo.define("web_context_help.context_help", function (require) {
 
     var helpWindow = null;
     var lastContext = null;
+    // Page of the current Odoo view: the Topic button of the help window
+    var topicUrl = false;
     // View manager of the main action: dialogs and x2many keep its help
     var current = null;
 
@@ -116,6 +118,16 @@ odoo.define("web_context_help.context_help", function (require) {
         });
     }
 
+    // The help window shows its Topic button when on another page
+    function sendTopic() {
+        if (isOpen()) {
+            helpWindow.postMessage(
+                {type: "wch_topic", url: topicUrl || false},
+                window.location.origin
+            );
+        }
+    }
+
     // Loose help button of the help window: the general page of the open
     // record, the page shown being clear cut or of high priority
     function loose(pageKey) {
@@ -139,6 +151,7 @@ odoo.define("web_context_help.context_help", function (require) {
         // Open synchronously in the click handler, or popup blockers bite
         helpWindow = window.open("", WINDOW_NAME);
         lookup(ctx).then(function (result) {
+            topicUrl = result.url;
             if (helpWindow) {
                 helpWindow.location = result.url || "/web_context_help/home";
                 helpWindow.focus();
@@ -156,11 +169,16 @@ odoo.define("web_context_help.context_help", function (require) {
 
     function notify(ctx) {
         lastContext = ctx;
-        if (!isOpen() || !isFollowing()) {
+        if (!isOpen()) {
             return;
         }
         lookup(ctx).then(function (result) {
-            if (!result.url || !isOpen()) {
+            if (ctx !== lastContext || !isOpen()) {
+                return; // a newer view was opened meanwhile
+            }
+            topicUrl = result.url;
+            if (!result.url || !isFollowing()) {
+                sendTopic();
                 return;
             }
             // The FAQ and Fields pages of the current page are not left
@@ -174,6 +192,8 @@ odoo.define("web_context_help.context_help", function (require) {
             }
             if (result.url !== current_url) {
                 helpWindow.location = result.url;
+            } else {
+                sendTopic();
             }
         });
     }
@@ -225,6 +245,14 @@ odoo.define("web_context_help.context_help", function (require) {
             helpWindow = ev.source;
         }
         switch (ev.data.type) {
+            case "wch_ready":
+                if (!topicUrl && lastContext) {
+                    // Odoo tab reloaded with the help window open
+                    notify(lastContext);
+                } else {
+                    sendTopic();
+                }
+                break;
             case "wch_highlight":
                 highlight(ev.data.field);
                 break;

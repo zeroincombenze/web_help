@@ -1,7 +1,7 @@
 .. _update_record:
 
-Update record
--------------
+How to update a record
+----------------------
 
 .. help-version:: <13
 
@@ -10,7 +10,7 @@ Update record
    #. A validated (*Open*) invoice cannot be changed. To correct it, press
       **Cancel Invoice**, then **Reset to Draft**, change it and press
       **Validate** again: it keeps its number. Cancelling needs the
-      *Allow Cancelling Entries* option of the journal, see *Configure*.
+      *Allow Cancelling Entries* option of the journal, see *How to set up*.
    #. To register a payment press **Register Payment**: check the payment
       journal (bank or cash), the amount, the date and the memo, then press
       **Validate**. A lower amount leaves the rest open (*Keep open*) or writes

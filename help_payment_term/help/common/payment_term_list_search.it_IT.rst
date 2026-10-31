@@ -1,7 +1,7 @@
 .. _search:
 
-Come cercare
-------------
+Suggerimenti per la ricerca
+---------------------------
 
 * **Fatturazione ‣ Configurazione ‣**
   :version:`<12|**Gestione**;12|**Amministrazione**;*|**Fatturazione**` **‣

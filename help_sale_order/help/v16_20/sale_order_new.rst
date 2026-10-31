@@ -1,7 +1,7 @@
 .. _new_record:
 
-New record
-----------
+How to insert a new record
+--------------------------
 
 #. Open **Sales ‣ Orders ‣ Quotations** and press **New**. A quotation can also
    be started from a CRM opportunity with **New Quotation**.

@@ -1,7 +1,7 @@
 .. _configure:
 
-Configurazione
---------------
+Come configurare
+----------------
 
 * **Vendite ‣ Configurazione ‣ Contatti** (modalità sviluppatore): *Tag
   Contatti*, *Qualifiche Contatti* (Sig., Sig.ra, …), *Localizzazione*

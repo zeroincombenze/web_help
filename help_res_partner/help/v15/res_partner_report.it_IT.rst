@@ -1,0 +1,16 @@
+.. _report:
+
+Stampe ed esportazione
+----------------------
+
+* Il contatto non ha una stampa propria: nome e indirizzo sono stampati su
+  preventivi, ordini, consegne e fatture, usando l'indirizzo di fatturazione o
+  di consegna dell'azienda quando c'è.
+* I pulsanti in alto a destra della maschera aprono i documenti del contatto:
+  *Vendite*, *Acquisti*, *Fatturato*, *Fatture fornitore*, appuntamenti e
+  opportunità, secondo le applicazioni installate.
+* Il chatter in fondo conserva i messaggi e le email scambiati con il
+  contatto.
+* Per ottenere un file dei contatti, selezionarli nella vista elenco, poi
+  **Azione ‣ Esporta**: scegliere i campi e il formato (xlsx o csv). Vedere
+  *Importare ed esportare dati* nella pagina **Pronto** dell'aiuto.

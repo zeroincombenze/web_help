@@ -12,7 +12,7 @@ Product variant
 Description
 -----------
 
-.. help-version:: <16
+.. help-version:: <13
 
    A product variant is one version of a product, defined by its
    :field:`attribute values <attribute_value_ids>`, e.g. *T-shirt (L, Red)*.
@@ -21,6 +21,16 @@ Description
    category, the type and most settings belong to the product and are shared by
    all its variants; reference, barcode, cost, weight, volume and stock belong to
    each variant.
+
+.. help-version:: 13-15
+
+   A product variant is one version of a product, defined by its
+   :field:`attribute values <product_template_attribute_value_ids>`, e.g.
+   *T-shirt (L, Red)*. Orders, invoices and stock moves always use the variant.
+   A product without attributes has a single variant, created automatically.
+   The name, the category, the type and most settings belong to the product and
+   are shared by all its variants; reference, barcode, cost, weight, volume and
+   stock belong to each variant.
 
 .. help-version:: >=16
 
@@ -33,6 +43,18 @@ Description
    without attributes has exactly one variant.
 
 .. help-include:: product_variant_fields.rst
+
+.. help-version:: <16
+
+   .. _new_record:
+
+   How to insert a new record
+   --------------------------
+
+   Variants are made from their product: add the attributes and their values
+   in the **Variants** tab of the product form, and Odoo creates one variant
+   for each combination. **Create** here makes a new product with its single
+   variant.
 
 .. help-version:: >=16
 
@@ -69,14 +91,16 @@ FAQ
    .. help-question:: Why is the sale price of the variant read-only?
 
       With several variants it is computed: sale price of the product plus the
-      extra price of the attribute values, set with **Variant Prices** on the
-      product.
+      extra price of the attribute values, set with :version:`<=11|**Variant
+      Prices**;12-14|**Configure Variants**;*|**Configure** on the attribute line`
+      on the product.
 
    .. help-question:: Why can't I delete a variant?
 
       A variant used by orders, invoices or stock moves cannot be deleted:
-      archive it instead (**Active**); to stop creating it, remove its attribute
-      value from the **Variants** tab of the product.
+      archive it instead (:version:`<=12|**Active**;*|**Action ‣ Archive**`); to
+      stop creating it, remove its attribute value from the
+      :version:`<=14|**Variants**;*|**Attributes & Variants**` tab of the product.
 
 .. help-version:: >=16
 

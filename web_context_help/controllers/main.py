@@ -131,34 +131,45 @@ class ContextHelp(http.Controller):
 
     @http.route("/web_context_help/page/<string:key>", type="http", auth="user")
     def page(self, key, lang=None, view=None, **kw):
-        """view: None for the page, "faq" or "fields" for its FAQ (section of
-        the page) or Fields (fields help of its model) page"""
+        """view: None for the page, "example" / "faq" / "fields" for its
+        Example or FAQ (sections of the page) or Fields (fields help of its
+        model) page. The page itself starts with its table of contents"""
         lang = self._lang(lang)
         Page = request.env["context.help.page"]
         page = Page.get_page(key, lang)
         if not page:
             raise NotFound()
-        content, faq_html = html_page.split_faq(page.html or "")
+        content = page.html or ""
+        own = {}
+        for name, label in html_page.OWN_PAGE.items():
+            content, own[name] = html_page.split_section(content, label)
         fields_help = (
             Page._wch_with_lang(lang).fields_help(page.model) if page.model else []
         )
-        pages = {None: True, "faq": faq_html, "fields": fields_help}
+        pages = {None: True, "fields": fields_help}
+        pages.update(own)
         if view not in pages or not pages[view]:
             return redirect(Page.page_url(page.key, lang))
         tr = html_page.labels(lang)
         title = page.name
-        if view == "faq":
-            title = "%s - %s" % (page.name, tr["faq"])
-            content = "<h1>%s</h1>\n%s" % (escape(page.name), faq_html)
+        if view in own:
+            title = "%s - %s" % (page.name, tr[view])
+            content = "<h1>%s</h1>\n%s" % (escape(page.name), own[view])
         elif view == "fields":
             title = "%s - %s" % (page.name, tr["fields"])
             content = html_page.fields_body(page.name, fields_help, lang)
+        else:
+            content = html_page.add_toc(content, lang)
         nav = {
             name: Page.page_url(page.key, lang, view=None if name == "help" else name)
-            for name in ("help", "faq", "fields")
+            for name in ("help", "example", "faq", "fields")
             if name != (view or "help") and pages[None if name == "help" else name]
         }
-        if page.model and page.has_loose_help():
+        nav_label = None
+        if view:
+            # Example, FAQ and Fields: Topic goes back to the help page; no Loose help
+            nav_label = {"help": "topic"}
+        elif page.model and page.has_loose_help():
             nav["loose"] = "/web_context_help/loose/%s?lang=%s" % (
                 url_quote(page.key),
                 lang,
@@ -175,6 +186,7 @@ class ContextHelp(http.Controller):
             warning=page.source_changed
             and request.env.user.has_group("web_context_help.group_help_editor"),
             nav=nav,
+            nav_label=nav_label,
         )
         return self._html(body)
 

@@ -1,7 +1,7 @@
 .. _update_record:
 
-Modifica record
----------------
+Come modificare un record
+-------------------------
 
 #. Le varianti sono create dal prodotto: aggiungere valori attributo nella
    scheda **Varianti** del prodotto, mai creare una variante a mano.

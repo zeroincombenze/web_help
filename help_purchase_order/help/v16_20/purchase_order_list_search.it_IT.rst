@@ -1,7 +1,7 @@
 .. _search:
 
-Come cercare
-------------
+Suggerimenti per la ricerca
+---------------------------
 
 * **Acquisti ‣ Ordini ‣ Richieste di preventivo** elenca le RdP, **Acquisti ‣
   Ordini ‣ Ordini di acquisto** gli ordini confermati.
