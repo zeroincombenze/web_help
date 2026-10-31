@@ -1,7 +1,7 @@
 .. _update_record:
 
-Update record
--------------
+How to update a record
+----------------------
 
 #. Open the payment terms from the list.
    :version:`<17|Press **Edit**, change them and press **Save**.;*|Change

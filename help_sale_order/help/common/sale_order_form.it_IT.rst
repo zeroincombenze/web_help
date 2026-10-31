@@ -44,7 +44,8 @@ Domande frequenti
 
 .. help-question:: Come si modifica un ordine confermato?
 
-   Quantità e nuove righe si modificano direttamente, vedere *Modifica record*.
+   Quantità e nuove righe si modificano direttamente, vedere *Come modificare
+   un record*.
    Se l'ordine è bloccato, sbloccarlo prima. Per modifiche importanti,
    annullarlo, premere :version:`10|**Converti in preventivo**;*|**Imposta a
    preventivo**`, modificarlo e confermarlo di nuovo.

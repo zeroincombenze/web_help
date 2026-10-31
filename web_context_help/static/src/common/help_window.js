@@ -63,6 +63,35 @@
         }
     }
 
+    // Path and query of a URL, without the FAQ / Fields view of a page: they
+    // belong to the same topic
+    function topicKey(url) {
+        var loc = new URL(url, window.location.href);
+        loc.searchParams.delete("view");
+        loc.searchParams.sort();
+        return loc.pathname + "?" + loc.searchParams.toString();
+    }
+
+    // Topic button: back to the page of the Odoo view, hidden when on it
+    function onMessage(ev) {
+        if (ev.origin !== window.location.origin || !ev.data ||
+            ev.data.type !== "wch_topic" || !hasOpener() ||
+            ev.source !== window.opener) {
+            return;
+        }
+        var button = document.getElementById("wch_topic");
+        var url = ev.data.url;
+        if (!button) {
+            return;
+        }
+        if (url && topicKey(url) !== topicKey(window.location.href)) {
+            button.href = url;
+            button.hidden = false;
+        } else {
+            button.hidden = true;
+        }
+    }
+
     function text(tag, value, cls) {
         var el = document.createElement(tag);
         el.textContent = value;
@@ -443,6 +472,7 @@
             askForm.addEventListener("submit", ask);
         }
         document.addEventListener("click", onClick);
+        window.addEventListener("message", onMessage);
         post({type: "wch_ready", page_key: config.page_key});
     });
 })();

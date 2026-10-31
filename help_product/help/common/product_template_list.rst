@@ -44,8 +44,9 @@ FAQ
 
    .. help-question:: Why don't I see all the products?
 
-      The menu may start with a filter, e.g. **Purchases ‣ Purchase ‣ Products**
-      shows the products that *Can be Purchased*: remove the filter from the
+      The menu may start with a filter, e.g.
+      :version:`<=11|**Purchases ‣ Purchase ‣ Products**;12|**Purchase ‣ Purchase
+      ‣ Products**;*|**Purchase ‣ Products ‣ Products**` shows the products that *Can be Purchased*: remove the filter from the
       search bar. Archived products are shown by the *Archived* filter only.
 
    .. help-question:: Why does the same product appear several times?

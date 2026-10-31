@@ -1,7 +1,7 @@
 .. _report:
 
-Report
-------
+Report and export file
+----------------------
 
 * **Request for Quotation** and **Purchase Order**: the PDF of the RFQ or of
   the confirmed order. Press **Print RFQ** in the header, or print it from the
@@ -13,3 +13,7 @@ Report
 * Purchase analysis: **Purchase ‣ Reporting ‣ Purchase** shows the ordered,
   received and billed quantities and amounts by period, vendor, buyer or
   product, as graph or pivot.
+* To get a file of the purchase orders, select them in the list view, then
+  :version:`<=16|**Action ‣ Export**;*|**Actions ‣ Export**`: choose the
+  fields and the format (xlsx or csv). See *Import and Export data* in the
+  **Ready** page of the help.

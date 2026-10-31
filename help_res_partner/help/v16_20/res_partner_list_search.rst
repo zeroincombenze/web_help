@@ -1,7 +1,7 @@
 .. _search:
 
-How to search
--------------
+Suggestions for search
+----------------------
 
 * **Contacts** lists all the contacts; **Sales ‣ Orders ‣ Customers**,
   **Purchase ‣ Orders ‣ Vendors** and the **Customers** / **Vendors** menus of

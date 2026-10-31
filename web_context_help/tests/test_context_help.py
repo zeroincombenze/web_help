@@ -6,6 +6,7 @@
 #
 import json
 import os
+import re
 import shutil
 import tempfile
 
@@ -534,17 +535,28 @@ class TestContextHelpHttp(common.HttpCase):
         self.assertIn('id="wch_fields"', res.text)
         self.assertNotIn('id="wch_help"', res.text)
         self.assertNotIn('id="faq"', res.text)
+        # the page starts with its table of contents; it has no example
+        self.assertIn('class="wch-toc"', res.text)
+        self.assertNotIn('href="#footer"', res.text)
+        self.assertNotIn('id="wch_example"', res.text)
         res = self.url_open(url + "&view=faq")
         self.assertEqual(res.status_code, 200)
         self.assertIn('id="faq"', res.text)
         self.assertNotIn("wch-auto-q", res.text)
         self.assertIn('id="wch_help"', res.text)
         self.assertNotIn('id="wch_faq"', res.text)
+        # back to the page with the Topic label; no general Loose help button
+        help_button = re.search(r'id="wch_help" href="[^"]*">(<i [^>]*>)', res.text)
+        self.assertIn("fa-anchor", help_button.group(1))
+        self.assertNotIn('id="wch_loose"', res.text)
         res = self.url_open(url + "&view=fields")
         self.assertEqual(res.status_code, 200)
         self.assertIn('class="wch-field"', res.text)
         self.assertIn('id="wch_faq"', res.text)
         self.assertNotIn('id="wch_fields"', res.text)
+        help_button = re.search(r'id="wch_help" href="[^"]*">(<i [^>]*>)', res.text)
+        self.assertIn("fa-anchor", help_button.group(1))
+        self.assertNotIn('id="wch_loose"', res.text)
         res = self.url_open(url + "&view=other")
         self.assertEqual(res.status_code, 200)
         self.assertIn('id="wch_fields"', res.text)

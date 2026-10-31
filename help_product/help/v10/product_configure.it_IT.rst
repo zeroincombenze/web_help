@@ -1,7 +1,7 @@
 .. _configure:
 
-Configurazione
---------------
+Come configurare
+----------------
 
 * **Vendite ‣ Configurazione ‣ Configurazione**: *Varianti Prodotto*, *Unità
   di Misura*, *Prezzo* (un solo prezzo, listini per segmento di clientela o

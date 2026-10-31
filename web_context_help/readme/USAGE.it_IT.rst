@@ -24,27 +24,44 @@ contatore indica *qualsiasi parola*. Il testo tra virgolette
 **Invio** / ▼ e **Maiusc+Invio** / ▲ passano all'occorrenza successiva /
 precedente, **Esc** annulla la ricerca.
 
-La sezione *Domande frequenti* di una pagina e l'aiuto dei campi del suo
-modello sono mostrati in pagine a parte, aperte dai pulsanti **FAQ** e
-**Campi** nell'intestazione della finestra di aiuto; il pulsante **Aiuto**
-torna alla pagina. Le domande costruite da ``help-question`` ``:auto:`` sono
+Le sezioni *Esempio* e *Domande frequenti* di una pagina e l'aiuto dei campi
+del suo modello sono mostrati in pagine a parte, aperte dai pulsanti
+**Esempio**, **FAQ** e **Campi** nell'intestazione della finestra di aiuto; il pulsante **Aiuto**
+torna alla pagina (nelle pagine Esempio, FAQ e Campi si chiama **Argomento**). Le domande costruite da ``help-question`` ``:auto:`` sono
 lasciate alla pagina **Campi**.
+
+Passando da una pagina all'altra della finestra di aiuto, il pulsante
+**Argomento** torna alla pagina di aiuto della vista aperta in Odoo; è nascosto
+quando è mostrata proprio quella pagina (o la sua pagina Esempio / FAQ / Campi).
 
 Scrivere l'aiuto di un modulo: mettere i file RST in ``help/common/`` o nella
 cartella di un gruppo di versioni Odoo (``help/v10``, ``help/v11_14``,
 ``help/v15``, ``help/v16_20``); il file del gruppo prevale su quello comune con
 lo stesso nome. I gemelli italiani si chiamano ``pagina.it_IT.rst``.
 
-Ogni pagina ha queste sezioni, in quest'ordine, con la loro etichetta:
-``description`` (sintesi della vista / modello),
-``new_record`` (solo form: passi per inserire un record),
-``update_record`` (solo form: passi per modificare un record),
-``search`` (solo lista: come cercare e raggruppare),
-``configure`` (come configurare il modello),
-``report`` (come visualizzare la stampa o l'allegato pdf),
-``example`` (esempi utili),
-``faq`` (domande frequenti, blocchi ``help-question``),
-``footer`` (data e ora di creazione della pagina e nota di copyright).
+Struttura standard: ogni pagina ha queste sezioni, in quest'ordine, con la loro
+etichetta e il loro titolo; alcune valgono solo per la maschera o solo per
+l'elenco (una vista kanban segue le regole dell'elenco):
+
+* *Indice*: costruito dalla finestra di aiuto, non si scrive in RST; elenca le
+  sezioni rimaste nella pagina, tranne il piè di pagina; le sezioni di una
+  pagina con più parti (titoli di primo livello) sono raggruppate per parte
+* ``description`` *Descrizione*: sintesi della vista / modello
+* ``new_record`` *Come inserire un nuovo record*: solo maschera, passi per
+  inserire un record
+* ``search`` *Suggerimenti per la ricerca*: solo elenco / kanban, come trovare,
+  filtrare e raggruppare
+* ``update_record`` *Come modificare un record*: solo maschera, passi per
+  modificare un record
+* ``configure`` *Come configurare*: impostazioni e configurazione
+* ``report`` *Stampe ed esportazione*: stampe, allegato pdf, esportazione
+* ``example`` *Esempi*: esempi utili, in una pagina a parte aperta dal pulsante
+  **Esempio**
+* ``faq`` *Domande frequenti*: blocchi ``help-question``, in una pagina a parte
+  aperta dal pulsante **FAQ**
+* ``footer`` *Piè di pagina*: data e ora di creazione della pagina e nota di
+  copyright, non nell'indice
+
 Una sezione che non si applica contiene una riga che lo dice.
 
 ::

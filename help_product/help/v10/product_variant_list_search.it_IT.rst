@@ -1,7 +1,7 @@
 .. _search:
 
-Come cercare
-------------
+Suggerimenti per la ricerca
+---------------------------
 
 * **Vendite ‣ Vendite ‣ Varianti Prodotto**, **Acquisti ‣ Acquisto ‣ Varianti
   Prodotto** e **Magazzino ‣ Controllo inventario ‣ Varianti Prodotto**

@@ -1,7 +1,7 @@
 .. _report:
 
-Report
-------
+Report and export file
+----------------------
 
 * **Quotation / Order**: the PDF of the quotation or of the confirmed order.
   Print it from the **Print** menu\ :version:`>=17| (under the gear icon next
@@ -13,3 +13,7 @@ Report
   **Print** menu or send it with **Send PRO-FORMA Invoice**.
 * Sales analysis: **Sales ‣ Reporting ‣ Sales** shows the ordered and invoiced
   amounts by period, salesperson, customer or product, as graph or pivot.
+* To get a file of the sale orders, select them in the list view, then
+  :version:`<=16|**Action ‣ Export**;*|**Actions ‣ Export**`: choose the
+  fields and the format (xlsx or csv). See *Import and Export data* in the
+  **Ready** page of the help.

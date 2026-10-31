@@ -1,7 +1,7 @@
 .. _new_record:
 
-Nuovo record
-------------
+Come inserire un nuovo record
+-----------------------------
 
 #. Aprire **Contatti**, oppure **Vendite ‣ Vendite ‣ Clienti**, oppure
    **Acquisti ‣ Acquisto ‣ Fornitori**, e premere **Crea**.

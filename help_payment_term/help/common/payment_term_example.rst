@@ -11,7 +11,8 @@ invoice date falls:
 * invoice of 15 January → 14 February → due on **28 February**;
 * invoice of 31 January → 2 March → due on **31 March**.
 
-Create the terms as in *New record*, name them *30 Days End of Month*, then
+Create the terms as in *How to insert a new record*, name them *30 Days End of
+Month*, then
 set the line as follows.
 
 .. help-version:: <12

@@ -1,5 +1,5 @@
 =================================================
-|icon| Help for partner/Aiuto contatti 18.0.1.0.1
+|icon| Help for partner/Aiuto contatti 18.0.1.0.2
 =================================================
 
 **Context help pages for partners (contacts)**
@@ -147,6 +147,12 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+18.0.1.0.2 (2026-10-31)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Help pages for Odoo 11-14 (help/v11_14) and 15 (help/v15): menus, buttons, fields and settings of each version, from 11.0 to 15.0, in English and Italian
+* [IMP] Help pages in the standard layout: sections renamed How to insert a new record, How to update a record, Suggestions for search, How to set up, Report and export file (Italian titles too); the Report section explains how to export the records to a file
+
 18.0.1.0.1 (2026-10-30)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -208,7 +214,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-30
+Last Update / Ultimo aggiornamento: 2026-10-31
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

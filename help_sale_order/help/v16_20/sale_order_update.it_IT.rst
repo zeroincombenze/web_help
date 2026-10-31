@@ -1,7 +1,7 @@
 .. _update_record:
 
-Modifica record
----------------
+Come modificare un record
+-------------------------
 
 #. Aprire l'ordine da **Vendite ‣ Ordini ‣ Preventivi** o **Vendite ‣ Ordini ‣
    Ordini** e modificare i campi; il record si salva quando si esce, oppure

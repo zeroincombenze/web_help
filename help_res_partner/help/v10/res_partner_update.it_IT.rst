@@ -1,7 +1,7 @@
 .. _update_record:
 
-Modifica record
----------------
+Come modificare un record
+-------------------------
 
 #. Aprire il contatto, premere **Modifica**, cambiare i campi e premere
    **Salva** (**Annulla** scarta le modifiche).

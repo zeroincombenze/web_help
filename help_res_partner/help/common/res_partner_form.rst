@@ -93,7 +93,7 @@ FAQ
    .. help-question:: Odoo warns that a partner with the same Tax ID exists.
 
       The contact is probably a duplicate: open the existing one instead, or
-      merge the two from the list (see *Update record*).
+      merge the two from the list (see *How to update a record*).
 
    .. help-question:: Why can't I delete the contact?
 

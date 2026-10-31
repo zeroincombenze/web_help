@@ -1,7 +1,7 @@
 .. _variants:
 
 Product variants
-----------------
+~~~~~~~~~~~~~~~~
 
 Variants are products that include additional characteristics beyond the
 original product, for example colour, size, an extra option or other

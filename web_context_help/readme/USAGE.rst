@@ -22,26 +22,44 @@ in quotes (``"draft invoice"``) is searched as an exact phrase.
 **Enter** / ▼ and **Shift+Enter** / ▲ go to the next / previous match,
 **Esc** clears the search.
 
-The *FAQ* section of a page and the fields help of its model are shown on
-their own pages, opened by the **FAQ** and **Fields** buttons in the help
-window header; the **Help** button goes back to the page. The questions built by
+The *Example* and *FAQ* sections of a page and the fields help of its model
+are shown on their own pages, opened by the **Example**, **FAQ** and **Fields**
+buttons in the help window header; the **Help** button goes back to the page
+(on the Example, FAQ and Fields pages it is labelled **Topic**). The questions built by
 ``help-question`` ``:auto:`` are left to the **Fields** page.
+
+Moving from page to page of the help window, the **Topic** button goes back to
+the help page of the view open in Odoo; it is hidden when that page (or its
+Example / FAQ / Fields page) is the one shown.
 
 Writing help for a module: put RST files in ``help/common/`` or in the
 directory of a group of Odoo versions (``help/v10``, ``help/v11_14``,
 ``help/v15``, ``help/v16_20``); a group file overrides the common one with the
 same name. Italian twins are named ``page.it_IT.rst``.
 
-Every page has these sections, in this order, with their label:
-``description`` (summary of the view / model),
-``new_record`` (form only: steps to insert a record),
-``update_record`` (form only: steps to update a record),
-``search`` (list only: how to search and group by),
-``configure`` (how to configure the model),
-``report`` (how to show the report or the pdf attachment),
-``example`` (useful examples),
-``faq`` (frequently asked questions, ``help-question`` blocks),
-``footer`` (date and time of page creation and copyright notice).
+Standard layout: every page has these sections, in this order, with their
+label and title; some apply only to the form or only to the list view (a
+kanban view follows the list rules):
+
+* *Contents*: table of contents, built by the help window, not written in RST;
+  it lists the sections left on the page, footer excepted; the sections of a
+  page with several parts (titles of first level) are grouped by part
+* ``description`` *Description*: summary of the view / model
+* ``new_record`` *How to insert a new record*: form only, steps to insert a
+  record
+* ``search`` *Suggestions for search*: list / kanban only, how to find, filter
+  and group
+* ``update_record`` *How to update a record*: form only, steps to update a
+  record
+* ``configure`` *How to set up*: settings and configuration
+* ``report`` *Report and export file*: prints, pdf attachment, export
+* ``example`` *Example*: useful examples, on their own page opened by the
+  **Example** button
+* ``faq`` *FAQ*: ``help-question`` blocks, on their own page opened by the
+  **FAQ** button
+* ``footer`` *Footer*: date and time of page creation and copyright notice,
+  not in the table of contents
+
 A section that does not apply keeps one line saying so.
 
 ::

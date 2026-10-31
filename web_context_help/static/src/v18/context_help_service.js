@@ -16,6 +16,8 @@ export const contextHelpService = {
     start(env) {
         let helpWindow = null;
         let lastContext = null;
+        // Page of the current Odoo view: the Topic button of the help window
+        let topicUrl = false;
 
         function isFollowing() {
             try {
@@ -39,6 +41,16 @@ export const contextHelpService = {
             });
         }
 
+        // The help window shows its Topic button when on another page
+        function sendTopic() {
+            if (isOpen()) {
+                helpWindow.postMessage(
+                    {type: "wch_topic", url: topicUrl || false},
+                    browser.location.origin
+                );
+            }
+        }
+
         // Loose help button of the help window: the general page of the
         // open record, the page shown being clear cut or of high priority
         async function loose(pageKey) {
@@ -60,6 +72,7 @@ export const contextHelpService = {
             // Open synchronously in the click handler, or popup blockers bite
             helpWindow = browser.open("", WINDOW_NAME);
             const result = await lookup(ctx);
+            topicUrl = result.url;
             if (result.url && helpWindow) {
                 helpWindow.location = result.url;
                 helpWindow.focus();
@@ -76,16 +89,26 @@ export const contextHelpService = {
 
         async function notify(ctx) {
             lastContext = ctx;
-            if (!isOpen() || !isFollowing()) {
+            if (!isOpen()) {
                 return;
             }
             const result = await lookup(ctx);
+            if (ctx !== lastContext) {
+                return; // a newer view was opened meanwhile
+            }
+            topicUrl = result.url;
+            if (!isFollowing()) {
+                sendTopic();
+                return;
+            }
             // The FAQ and Fields pages of the current page are not left
             const location = new URL(helpWindow.location.href);
             location.searchParams.delete("view");
             const current = location.pathname + location.search;
             if (result.url && result.url !== current) {
                 helpWindow.location = result.url;
+            } else {
+                sendTopic();
             }
         }
 
@@ -156,6 +179,14 @@ export const contextHelpService = {
                 helpWindow = ev.source;
             }
             switch (ev.data.type) {
+                case "wch_ready":
+                    if (!topicUrl && lastContext) {
+                        // Odoo tab reloaded with the help window open
+                        notify(lastContext);
+                    } else {
+                        sendTopic();
+                    }
+                    break;
                 case "wch_highlight":
                     highlight(ev.data.field);
                     break;

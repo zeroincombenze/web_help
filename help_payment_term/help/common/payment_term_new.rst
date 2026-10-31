@@ -1,7 +1,7 @@
 .. _new_record:
 
-New record
-----------
+How to insert a new record
+--------------------------
 
 The steps load the terms *30 Days*: the whole amount is due 30 days after the
 invoice date (invoice of 15 January, due on 14 February).

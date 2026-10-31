@@ -1,7 +1,7 @@
 .. _variants:
 
 Varianti prodotto
------------------
+~~~~~~~~~~~~~~~~~
 
 Le varianti sono prodotti che hanno caratteristiche aggiuntive rispetto al
 prodotto originale, ad esempio colore, taglia, un'opzione aggiuntiva o altri

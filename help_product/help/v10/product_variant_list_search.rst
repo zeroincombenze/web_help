@@ -1,7 +1,7 @@
 .. _search:
 
-How to search
--------------
+Suggestions for search
+----------------------
 
 * **Sales ‣ Sales ‣ Product Variants**, **Purchases ‣ Purchase ‣ Product
   Variants** and **Inventory ‣ Inventory Control ‣ Product Variants** list

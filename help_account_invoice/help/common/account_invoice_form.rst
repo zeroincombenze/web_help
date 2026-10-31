@@ -115,7 +115,7 @@ FAQ
 
       A validated invoice is locked. Cancel it with **Cancel Invoice** and
       press **Reset to Draft**: the journal must allow cancelling entries, see
-      *Configure*. If it is paid, remove the payment first.
+      *How to set up*. If it is paid, remove the payment first.
 
    .. help-version:: >=13
 

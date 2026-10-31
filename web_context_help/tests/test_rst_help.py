@@ -314,6 +314,67 @@ Press :version:`16|**View Invoice**;17|*Draft Invoice*;*|Create Draft` now.
         self.assertEqual(sections[-1]["question"], "Why?")
         self.assertEqual(html_page.extract_sections(""), [])
 
+    def test_split_example_toc(self):
+        html = (
+            '<div class="section" id="page"><h1>P</h1>\n'
+            '<div class="section" id="description-1"><span id="description"></span>'
+            "<h2>D</h2><p>d</p></div>\n"
+            '<div class="section" id="search-1"><span id="search"></span>'
+            "<h2>S</h2><p>s</p></div>\n"
+            '<div class="section" id="example-1"><span id="example"></span>'
+            "<h2>E</h2><p>an example</p></div>\n"
+            '<div class="section" id="footer-1"><span id="footer"></span>'
+            "<h2>F</h2></div></div>"
+        )
+        body, example = html_page.split_section(html, "example")
+        self.assertNotIn("an example", body)
+        self.assertIn("an example", example)
+        # example with its title only: no Example page
+        self.assertEqual(
+            html_page.split_section(
+                '<section id="example"><h2>E</h2></section><p>b</p>', "example"
+            ),
+            ("<p>b</p>", ""),
+        )
+        body = html_page.add_toc(body, lang="it_IT")
+        self.assertIn('<p class="wch-toc-title">Indice</p>', body)
+        self.assertIn('<a href="#description">D</a>', body)
+        self.assertIn('<a href="#search">S</a>', body)
+        self.assertNotIn('href="#footer"', body)
+        self.assertLess(body.index("</h1>"), body.index('class="wch-toc"'))
+        self.assertLess(body.index('class="wch-toc"'), body.index('id="description"'))
+        # one section: no TOC
+        one = '<div class="section" id="p"><h1>P</h1><div class="section" id="d">'
+        one += "<h2>D</h2></div></div>"
+        self.assertEqual(html_page.add_toc(one), one)
+        # several parts (h1): sections grouped by part, TOC on top
+        body = html_page.add_toc(
+            '<div class="section" id="a"><h1>A</h1>'
+            '<div class="section" id="a1"><h2>A1</h2></div></div>'
+            '<div class="section" id="b"><h1>B</h1>'
+            '<div class="section" id="b1"><h2>B1</h2></div></div>'
+        )
+        self.assertTrue(body.startswith('<nav class="wch-toc">'))
+        self.assertIn('<li><a href="#a">A</a><ul><li><a href="#a1">A1</a>', body)
+        eye = '<i class="fa fa-eye" aria-hidden="true"></i> '
+        nav = {"example": "/p?view=example", "faq": "/p?view=faq"}
+        body = html_page.render("T", "<p/>", lang="it_IT", nav=nav)
+        example = 'id="wch_example" href="/p?view=example">%sEsempio</a>' % eye
+        self.assertIn(example, body)
+        self.assertLess(body.index("wch_example"), body.index("wch_faq"))
+        # Font Awesome icons on the header buttons
+        self.assertIn("fontawesome/css/font-awesome.css", body)
+        faq_icon = '<i class="fa fa-question-circle" aria-hidden="true"></i> FAQ'
+        self.assertIn(faq_icon, body)
+        self.assertIn('<i class="fa fa-anchor" aria-hidden="true"></i>', body)
+        # Example and FAQ pages: the button back to the page reads Topic
+        body = html_page.render(
+            "T", "<p/>", nav={"help": "/p"}, nav_label={"help": "topic"}
+        )
+        topic = '<i class="fa fa-anchor" aria-hidden="true"></i> Topic</a>'
+        self.assertIn('id="wch_help" href="/p">' + topic, body)
+        self.assertNotIn(">Help</a>", body)
+
     def test_split_faq(self):
         html = (
             '<div class="section" id="page"><h1>P</h1>\n'

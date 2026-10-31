@@ -1,7 +1,7 @@
 .. _configure:
 
-Configurazione
---------------
+Come configurare
+----------------
 
 Aprire **Acquisti ‣ Configurazione ‣ Configurazione**:
 

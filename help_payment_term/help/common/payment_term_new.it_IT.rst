@@ -1,7 +1,7 @@
 .. _new_record:
 
-Nuovo record
-------------
+Come inserire un nuovo record
+-----------------------------
 
 I passi caricano il termine *30 giorni*: l'intero importo scade 30 giorni dopo
 la data fattura (fattura del 15 gennaio, scadenza 14 febbraio).

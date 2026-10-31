@@ -1,3 +1,14 @@
+18.0.1.0.9 (2026-10-31)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Help pages: standard layout: Contents, Description, How to insert a new record (form only), Suggestions for search (list and kanban only), How to update a record (form only), How to set up, Report and export file; Example and FAQ on their own pages, footer last
+* [IMP] Help window: the page starts with its table of contents (Indice in Italian), built from its sections, footer excepted
+* [IMP] Help window: new **Example** button (Esempio in Italian): the Example section is shown on its own page, like the FAQ
+* [IMP] Help window: Font Awesome icons on the header buttons: Topic (anchor), Ready (life saver), FAQ (question), Loose help (globe), Example (eye), Fields (map), Summary (table), Edit (edit)
+* [IMP] Help window: on the Example, FAQ and Fields pages the button back to the page is labelled **Topic** (Argomento in Italian), and the Loose help button is not shown
+* [QUA] Test coverage 95% (1135: 59+1076) [0 TestPoints] - quality rating 54 (target 100)
+* [IMP] Help window: new **Topic** button (Argomento in Italian), back to the help page of the current Odoo view after moving to other pages; hidden when that page, or its FAQ / Fields page, is shown
+
 18.0.1.0.8 (2026-10-30)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

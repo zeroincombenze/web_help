@@ -41,17 +41,22 @@ load the most common terms:
 <li><b>30 days end of month + 5 days</b>: due on the 5th of the following month</li>
 </ul>
 </p><p align="justify">
-Every page follows the help rule of web_context_help:
+Every page follows the standard layout of web_context_help:
 </p><p align="justify">
 <ul>
+<li><b>Contents</b>: the sections of the page, built by the help window</li>
 <li><b>Description</b>: what payment terms are and how the lines work</li>
-<li><b>New record</b> (form): step-by-step guide to load the <i>30 days</i> terms</li>
-<li><b>Update record</b> (form): changing, archiving and deleting payment terms</li>
-<li><b>How to search</b> (list): menu, search, filters and groupings</li>
-<li><b>Configure</b>: where payment terms are used and the OCA module</li>
-<li><b>Report</b>: the due dates printed on the invoice</li>
-<li><b>Example</b>: <i>30 days end of month</i> and <i>30 days end of month + 5 days</i></li>
-<li><b>FAQ</b> and <b>Footer</b></li>
+<li><b>How to insert a new record</b> (form): step-by-step guide to load the
+  <i>30 days</i> terms</li>
+<li><b>Suggestions for search</b> (list): menu, search, filters and groupings</li>
+<li><b>How to update a record</b> (form): changing, archiving and deleting payment
+  terms</li>
+<li><b>How to set up</b>: where payment terms are used and the OCA module</li>
+<li><b>Report and export file</b>: the due dates printed on the invoice and the
+  export of the payment terms to a file</li>
+<li><b>Example</b> button: <i>30 days end of month</i> and <i>30 days end of month + 5
+  days</i></li>
+<li><b>FAQ</b> button and <b>Footer</b></li>
 </ul>
 </p><p align="justify">
 Pages are in English and Italian, with the fields and options of the running
@@ -76,19 +81,23 @@ come caricare i termini pi&#249; comuni:
 <li><b>30 giorni fine mese + 5 giorni</b>: scadenza il 5 del mese successivo</li>
 </ul>
 </p><p align="justify">
-Ogni pagina segue la regola di aiuto di web_context_help:
+Ogni pagina segue la struttura standard di web_context_help:
 </p><p align="justify">
 <ul>
+<li><b>Indice</b>: le sezioni della pagina, costruito dalla finestra di aiuto</li>
 <li><b>Descrizione</b>: cosa sono i termini di pagamento e come funzionano le righe</li>
-<li><b>Nuovo record</b> (maschera): guida passo passo per caricare il termine
-  <i>30 giorni</i></li>
-<li><b>Modifica record</b> (maschera): modificare, archiviare ed eliminare i
-  termini di pagamento</li>
-<li><b>Come cercare</b> (lista): menu, ricerca, filtri e raggruppamenti</li>
-<li><b>Configurazione</b>: dove si usano i termini di pagamento e il modulo OCA</li>
-<li><b>Stampe</b>: le scadenze stampate sulla fattura</li>
-<li><b>Esempi</b>: <i>30 giorni fine mese</i> e <i>30 giorni fine mese + 5 giorni</i></li>
-<li><b>Domande frequenti</b> e <b>Pi&#232; di pagina</b></li>
+<li><b>Come inserire un nuovo record</b> (maschera): guida passo passo per caricare
+  il termine <i>30 giorni</i></li>
+<li><b>Suggerimenti per la ricerca</b> (lista): menu, ricerca, filtri e
+  raggruppamenti</li>
+<li><b>Come modificare un record</b> (maschera): modificare, archiviare ed
+  eliminare i termini di pagamento</li>
+<li><b>Come configurare</b>: dove si usano i termini di pagamento e il modulo OCA</li>
+<li><b>Stampe ed esportazione</b>: le scadenze stampate sulla fattura e
+  l'esportazione dei termini di pagamento in un file</li>
+<li>Pulsante <b>Esempio</b>: <i>30 giorni fine mese</i> e <i>30 giorni fine mese + 5
+  giorni</i></li>
+<li>Pulsante <b>FAQ</b> e <b>Pi&#232; di pagina</b></li>
 </ul>
 </p><p align="justify">
 Le pagine sono in inglese e in italiano, con i campi e le opzioni della
@@ -102,8 +111,20 @@ versione di Odoo in uso.
     <div class="oe_row oe_spaced">
         <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">ChangeLog History | Cronologia modifiche</h3>
         <div class="oe_span12">
-<h4>18.0.1.0.0 (2026-10-12)</h4>
+<h4>18.0.1.0.2 (2026-10-31)</h4>
 <p align="justify">
+<ul>
+<li>[IMP] Help pages in the standard layout: sections renamed How to insert a new record, How to update a record, Suggestions for search, How to set up, Report and export file (Italian titles too); the Report section explains how to export the records to a file</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.1 (2026-10-25)</h4>
+</p><p align="justify">
+<ul>
+<li>[IMP] Help pages declared with :priority: 96, the priority of the module pages: the last fallback after the pages of the administrator (requires web_context_help 18.0.1.0.6)</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.0 (2026-10-12)</h4>
+</p><p align="justify">
 <ul>
 <li>[NEW] Help pages for payment terms list and form, English and Italian, Odoo 10 to 18: 30 days, 30 days end of month (native and OCA account_payment_term_extension) and 30 days end of month + 5 days</li>
 </ul>
@@ -118,8 +139,7 @@ versione di Odoo in uso.
         <div class="oe_span6" align="left">
             <p class="oe_mt16"><b>Authors | Autori:</b></p>
             <p class="oe_mt16"><ul>
-<li>Zeroincombenze srls &lt;False&gt;</li>
-<li><a href="https://www.zeroincombenze.it">SHS-AV s.r.l.</a></li>
+<li><a href="https://www.zeroincombenze.it">Zeroincombenze srls</a></li>
 </ul></p>
         </div>
         <div class="oe_span6" align="left">
@@ -136,6 +156,6 @@ versione di Odoo in uso.
     </div>
     <div class="oe_row oe_spaced">
         <p>This module is part of <a href="https://github.com/zeroincombenze/web_help">web_help</a> project.</p>
-        <p>Published information on | Informazioni pubblicate: 2026-10-12</p>
+        <p>Published information on | Informazioni pubblicate: 2026-10-31</p>
     </div>
 </section>

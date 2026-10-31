@@ -1,7 +1,7 @@
 .. _search:
 
-How to search
--------------
+Suggestions for search
+----------------------
 
 * **Sales ‣ Sales ‣ Products** starts with the *Can be Sold* filter,
   **Purchases ‣ Purchase ‣ Products** with *Can be Purchased*, **Inventory ‣

@@ -1,7 +1,7 @@
 .. _report:
 
-Stampe
-------
+Stampe ed esportazione
+----------------------
 
 .. help-version:: <13
 
@@ -40,3 +40,8 @@ Stampe
      Amministrazione ‣ Fatture**;*|**Fatturazione ‣ Rendicontazione ‣ Gestione
      ‣ Analisi fatture**` mostra gli importi fatturati per periodo, partner,
      prodotto o addetto vendite, come grafico o tabella pivot.
+
+* Per ottenere un file delle fatture, selezionarli nella vista elenco, poi
+  :version:`<=16|**Azione ‣ Esporta**;*|**Azioni ‣ Esporta**`: scegliere i
+  campi e il formato (xlsx o csv). Vedere *Importare ed esportare dati* nella
+  pagina **Pronto** dell'aiuto.

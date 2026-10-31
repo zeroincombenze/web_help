@@ -1,3 +1,8 @@
+18.0.1.0.2 (2026-10-31)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Help pages in the standard layout: sections renamed How to insert a new record, How to update a record, Suggestions for search, How to set up, Report and export file (Italian titles too); the Report section explains how to export the records to a file
+
 18.0.1.0.1 (2026-10-25)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

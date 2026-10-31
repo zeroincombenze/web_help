@@ -1,7 +1,7 @@
 .. _new_record:
 
-New record
-----------
+How to insert a new record
+--------------------------
 
 #. Open **Contacts** and press **New**. Contacts are also created on the fly
    from any document, e.g. typing a new customer in a sales order and

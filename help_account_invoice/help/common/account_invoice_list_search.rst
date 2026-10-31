@@ -1,7 +1,7 @@
 .. _search:
 
-How to search
--------------
+Suggestions for search
+----------------------
 
 * :version:`<12|**Invoicing ‣ Sales ‣ Customer Invoices**;*|**Invoicing ‣
   Customers ‣ Invoices**` lists the customer invoices,

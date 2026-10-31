@@ -1,7 +1,7 @@
 .. _report:
 
-Report
-------
+Report and export file
+----------------------
 
 * There is no PDF report of a contact. The smart buttons at the top of the
   form, added by the installed apps (*Meetings*, *Sales*, *Purchases*,

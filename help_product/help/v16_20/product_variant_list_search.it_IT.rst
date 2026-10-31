@@ -1,7 +1,7 @@
 .. _search:
 
-Come cercare
-------------
+Suggerimenti per la ricerca
+---------------------------
 
 * **Vendite ‣ Prodotti ‣ Varianti prodotto** (impostazione *Varianti*) elenca
   tutte le varianti; il pulsante intelligente **Varianti** di un prodotto

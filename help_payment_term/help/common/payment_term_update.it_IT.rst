@@ -1,7 +1,7 @@
 .. _update_record:
 
-Modifica record
----------------
+Come modificare un record
+-------------------------
 
 #. Aprire il termine di pagamento dalla lista.
    :version:`<17|Premere **Modifica**, cambiarlo e premere **Salva**.;*|Cambiarlo:

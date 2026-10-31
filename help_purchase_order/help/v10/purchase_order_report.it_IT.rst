@@ -1,7 +1,7 @@
 .. _report:
 
-Stampe
-------
+Stampe ed esportazione
+----------------------
 
 * **Richiesta Preventivo**: il PDF della RdP. Premere **Stampa RdP**
   nell'intestazione, oppure usare il menu **Stampa** sopra il modulo.
@@ -13,3 +13,8 @@ Stampe
 * Analisi degli acquisti: **Acquisti ‣ Report** (responsabili acquisti) mostra
   quantità e importi ordinati per periodo, fornitore, prodotto o categoria,
   come grafico o tabella pivot.
+* Per ottenere un file degli ordini di acquisto, selezionarli nella vista
+  elenco, poi
+  :version:`<=16|**Azione ‣ Esporta**;*|**Azioni ‣ Esporta**`: scegliere i
+  campi e il formato (xlsx o csv). Vedere *Importare ed esportare dati* nella
+  pagina **Pronto** dell'aiuto.

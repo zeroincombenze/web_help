@@ -1,7 +1,7 @@
 .. _update_record:
 
-Modifica record
----------------
+Come modificare un record
+-------------------------
 
 #. Aprire il contatto da **Contatti** e modificare i campi; il record si salva
    quando si esce, oppure premere l'icona della nuvola. Le modifiche dei campi

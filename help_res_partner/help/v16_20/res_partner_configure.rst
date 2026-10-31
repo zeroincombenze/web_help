@@ -1,7 +1,7 @@
 .. _configure:
 
-Configure
----------
+How to set up
+-------------
 
 Open **Contacts ‣ Configuration** (Administration rights):
 

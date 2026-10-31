@@ -1,7 +1,7 @@
 .. _report:
 
-Report
-------
+Report and export file
+----------------------
 
 * **Request for Quotation**: the PDF of the RFQ.
   Press **Print RFQ** in the header, or use the **Print** menu above the form.
@@ -12,3 +12,7 @@ Report
 * Purchase analysis: **Purchases ‣ Reports** (purchase managers) shows the
   ordered quantities and amounts by period, vendor, product or category, as
   graph or pivot.
+* To get a file of the purchase orders, select them in the list view, then
+  :version:`<=16|**Action ‣ Export**;*|**Actions ‣ Export**`: choose the
+  fields and the format (xlsx or csv). See *Import and Export data* in the
+  **Ready** page of the help.

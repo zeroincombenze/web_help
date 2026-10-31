@@ -1,7 +1,7 @@
 .. _configure:
 
-Configurazione
---------------
+Come configurare
+----------------
 
 * **Vendite ‣ Configurazione ‣ Impostazioni** (oppure Magazzino, Acquisti)
   sezione **Catalogo prodotto** / **Prodotti**: *Varianti*, *Unità di misura*,

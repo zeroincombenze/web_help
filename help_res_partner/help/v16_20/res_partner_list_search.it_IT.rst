@@ -1,7 +1,7 @@
 .. _search:
 
-Come cercare
-------------
+Suggerimenti per la ricerca
+---------------------------
 
 * **Contatti** elenca tutti i contatti; **Vendite ‣ Ordini ‣ Clienti**,
   **Acquisti ‣ Ordini ‣ Fornitori** e i menu **Clienti** / **Fornitori** di

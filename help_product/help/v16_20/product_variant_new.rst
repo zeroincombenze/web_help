@@ -1,7 +1,7 @@
 .. _new_record:
 
-New record
-----------
+How to insert a new record
+--------------------------
 
 Variants are not created one by one: they are generated from the attributes
 of the product.

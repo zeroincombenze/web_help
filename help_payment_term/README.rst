@@ -1,5 +1,5 @@
 ===================================================================
-|icon| Help for payment terms/Aiuto termini di pagamento 18.0.1.0.0
+|icon| Help for payment terms/Aiuto termini di pagamento 18.0.1.0.2
 ===================================================================
 
 **Context help pages for payment terms**
@@ -26,16 +26,21 @@ load the most common terms:
   *Payment day(s)* of the OCA module ``account_payment_term_extension``
 * **30 days end of month + 5 days**: due on the 5th of the following month
 
-Every page follows the help rule of web_context_help:
+Every page follows the standard layout of web_context_help:
 
+* **Contents**: the sections of the page, built by the help window
 * **Description**: what payment terms are and how the lines work
-* **New record** (form): step-by-step guide to load the *30 days* terms
-* **Update record** (form): changing, archiving and deleting payment terms
-* **How to search** (list): menu, search, filters and groupings
-* **Configure**: where payment terms are used and the OCA module
-* **Report**: the due dates printed on the invoice
-* **Example**: *30 days end of month* and *30 days end of month + 5 days*
-* **FAQ** and **Footer**
+* **How to insert a new record** (form): step-by-step guide to load the
+  *30 days* terms
+* **Suggestions for search** (list): menu, search, filters and groupings
+* **How to update a record** (form): changing, archiving and deleting payment
+  terms
+* **How to set up**: where payment terms are used and the OCA module
+* **Report and export file**: the due dates printed on the invoice and the
+  export of the payment terms to a file
+* **Example** button: *30 days end of month* and *30 days end of month + 5
+  days*
+* **FAQ** button and **Footer**
 
 Pages are in English and Italian, with the fields and options of the running
 Odoo version.
@@ -53,18 +58,22 @@ come caricare i termini più comuni:
   *Giorni di pagamento* del modulo OCA ``account_payment_term_extension``
 * **30 giorni fine mese + 5 giorni**: scadenza il 5 del mese successivo
 
-Ogni pagina segue la regola di aiuto di web_context_help:
+Ogni pagina segue la struttura standard di web_context_help:
 
+* **Indice**: le sezioni della pagina, costruito dalla finestra di aiuto
 * **Descrizione**: cosa sono i termini di pagamento e come funzionano le righe
-* **Nuovo record** (maschera): guida passo passo per caricare il termine
-  *30 giorni*
-* **Modifica record** (maschera): modificare, archiviare ed eliminare i
-  termini di pagamento
-* **Come cercare** (lista): menu, ricerca, filtri e raggruppamenti
-* **Configurazione**: dove si usano i termini di pagamento e il modulo OCA
-* **Stampe**: le scadenze stampate sulla fattura
-* **Esempi**: *30 giorni fine mese* e *30 giorni fine mese + 5 giorni*
-* **Domande frequenti** e **Piè di pagina**
+* **Come inserire un nuovo record** (maschera): guida passo passo per caricare
+  il termine *30 giorni*
+* **Suggerimenti per la ricerca** (lista): menu, ricerca, filtri e
+  raggruppamenti
+* **Come modificare un record** (maschera): modificare, archiviare ed
+  eliminare i termini di pagamento
+* **Come configurare**: dove si usano i termini di pagamento e il modulo OCA
+* **Stampe ed esportazione**: le scadenze stampate sulla fattura e
+  l'esportazione dei termini di pagamento in un file
+* Pulsante **Esempio**: *30 giorni fine mese* e *30 giorni fine mese + 5
+  giorni*
+* Pulsante **FAQ** e **Piè di pagina**
 
 Le pagine sono in inglese e in italiano, con i campi e le opzioni della
 versione di Odoo in uso.
@@ -167,6 +176,16 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+18.0.1.0.2 (2026-10-31)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Help pages in the standard layout: sections renamed How to insert a new record, How to update a record, Suggestions for search, How to set up, Report and export file (Italian titles too); the Report section explains how to export the records to a file
+
+18.0.1.0.1 (2026-10-25)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Help pages declared with :priority: 96, the priority of the module pages: the last fallback after the pages of the administrator (requires web_context_help 18.0.1.0.6)
+
 18.0.1.0.0 (2026-10-12)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -186,8 +205,7 @@ Odoo is a trademark of `Odoo S.A. <https://www.odoo.com/>`__ (formerly OpenERP)
 Authors | Autori
 ----------------
 
-* Zeroincombenze srls <False>
-* `SHS-AV s.r.l. <https://www.zeroincombenze.it>`__
+* `Zeroincombenze srls <https://www.zeroincombenze.it>`__
 
 
 
@@ -222,7 +240,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-12
+Last Update / Ultimo aggiornamento: 2026-10-31
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

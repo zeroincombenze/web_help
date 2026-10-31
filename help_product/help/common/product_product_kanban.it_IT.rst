@@ -12,12 +12,20 @@ Varianti prodotto (kanban)
 Descrizione
 -----------
 
-.. help-version:: <16
+.. help-version:: <13
 
    Le varianti di prodotto come schede. Ogni scheda mostra l'immagine, il
    :field:`nome <name>`, i :field:`valori attributo <attribute_value_ids>` e il
    prezzo. Fare clic su una scheda per aprire la variante; i pulsanti in alto a
    destra della barra di ricerca passano alla lista.
+
+.. help-version:: 13-15
+
+   Le varianti di prodotto come schede. Ogni scheda mostra l'immagine, il
+   :field:`nome <name>`, i :field:`valori attributo
+   <product_template_attribute_value_ids>` e il prezzo. Fare clic su una scheda
+   per aprire la variante; i pulsanti in alto a destra della barra di ricerca
+   passano alla lista.
 
 .. help-version:: >=16
 
@@ -49,8 +57,9 @@ Domande frequenti
 
    .. help-question:: Perché non vedo tutti i prodotti?
 
-      Il menu può partire con un filtro, ad es. **Acquisti ‣ Acquisto ‣
-      Prodotti** mostra i prodotti che *Può essere acquistato*: togliere il filtro
+      Il menu può partire con un filtro, ad es.
+      :version:`<=11|**Acquisti ‣ Acquisto ‣ Prodotti**;12|**Acquisti ‣ Acquisti
+      ‣ Prodotti**;*|**Acquisti ‣ Prodotti ‣ Prodotti**` mostra i prodotti che *Può essere acquistato*: togliere il filtro
       dalla barra di ricerca. I prodotti archiviati si vedono solo con il filtro
       *Archiviato*.
 

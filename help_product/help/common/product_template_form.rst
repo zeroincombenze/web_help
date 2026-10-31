@@ -75,7 +75,7 @@ FAQ
    .. help-question:: What is the difference between a consumable and a stockable product?
 
       Both are goods delivered and received. Odoo counts the quantity on hand of
-      a *Stockable Product* only (Inventory installed); a *Consumable* is assumed
+      a :version:`<=11|*Stockable Product*;*|*Storable Product*` only (Inventory installed); a *Consumable* is assumed
       to be always available. A *Service* is never delivered.
 
    .. help-question:: Why can't I change the product type or the unit of measure?
@@ -86,12 +86,13 @@ FAQ
    .. help-question:: Why can't I delete the product?
 
       A product used by orders, invoices or stock moves cannot be deleted:
-      archive it instead with the **Active** button at the top right.
+      archive it instead :version:`<=12|with the **Active** button at the top
+      right;*|with **Action ‣ Archive**`.
 
    .. help-question:: Why is the sale price read-only?
 
       The product has several variants: the price of each variant is the sale
-      price of the product plus its extra price, see *Update record*.
+      price of the product plus its extra price, see *How to update a record*.
 
 .. help-version:: >=16
 

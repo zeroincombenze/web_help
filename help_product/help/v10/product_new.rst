@@ -1,7 +1,7 @@
 .. _new_record:
 
-New record
-----------
+How to insert a new record
+--------------------------
 
 #. Open **Sales ‣ Sales ‣ Products**, **Purchases ‣ Purchase ‣ Products** or
    **Inventory ‣ Inventory Control ‣ Products** and press **Create**.

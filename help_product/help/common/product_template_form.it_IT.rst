@@ -76,7 +76,8 @@ Domande frequenti
    .. help-question:: Che differenza c'è tra un prodotto consumabile e uno stoccabile?
 
       Entrambi sono merci consegnate e ricevute. Odoo conta la quantità in
-      possesso solo del *Prodotto Stoccabile* (con Magazzino installato); un
+      possesso solo del :version:`<=11|*Prodotto Stoccabile*;12-13|*Prodotto
+      immagazzinabile*;*|*Prodotto stoccabile*` (con Magazzino installato); un
       *Consumabile* è considerato sempre disponibile. Un *Servizio* non viene mai
       consegnato.
 
@@ -89,12 +90,14 @@ Domande frequenti
    .. help-question:: Perché non riesco a eliminare il prodotto?
 
       Un prodotto usato da ordini, fatture o movimenti di magazzino non si può
-      eliminare: archiviarlo invece con il pulsante **Attivo** in alto a destra.
+      eliminare: archiviarlo invece :version:`<=12|con il pulsante **Attivo** in
+      alto a destra;*|con **Azione ‣ Archivia**`.
 
    .. help-question:: Perché il prezzo di vendita non è modificabile?
 
       Il prodotto ha più varianti: il prezzo di ogni variante è il prezzo di
-      vendita del prodotto più il suo prezzo extra, vedere *Modifica record*.
+      vendita del prodotto più il suo prezzo extra, vedere *Come modificare un
+      record*.
 
 .. help-version:: >=16
 

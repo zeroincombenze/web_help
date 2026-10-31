@@ -1,7 +1,7 @@
 .. _configure:
 
-Configurazione
---------------
+Come configurare
+----------------
 
 * I termini di pagamento sono in **Fatturazione ‣ Configurazione ‣**
   :version:`<12|**Gestione**;12|**Amministrazione**;*|**Fatturazione**` **‣

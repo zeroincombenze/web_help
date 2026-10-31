@@ -1,7 +1,7 @@
 .. _update_record:
 
-Update record
--------------
+How to update a record
+----------------------
 
 #. Open the order from **Sales ‣ Orders ‣ Quotations** or **Sales ‣ Orders ‣
    Orders** and change the fields; the record is saved when you leave it, or

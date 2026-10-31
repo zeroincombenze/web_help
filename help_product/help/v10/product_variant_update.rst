@@ -1,7 +1,7 @@
 .. _update_record:
 
-Update record
--------------
+How to update a record
+----------------------
 
 #. Variants are created by the product: add attribute values in the
    **Variants** tab of the product, never create a variant by hand.

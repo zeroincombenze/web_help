@@ -1,7 +1,7 @@
 .. _search:
 
-How to search
--------------
+Suggestions for search
+----------------------
 
 * **Invoicing ‣ Configuration ‣**
   :version:`<13|**Management**;*|**Invoicing**` **‣ Payment Terms** lists

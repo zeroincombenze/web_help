@@ -161,26 +161,46 @@ in quotes (<code>"draft invoice"</code>) is searched as an exact phrase.
 <b>Enter</b> / &#9660; and <b>Shift+Enter</b> / &#9650; go to the next / previous match,
 <b>Esc</b> clears the search.
 </p><p align="justify">
-The <i>FAQ</i> section of a page and the fields help of its model are shown on
-their own pages, opened by the <b>FAQ</b> and <b>Fields</b> buttons in the help
-window header; the <b>Help</b> button goes back to the page. The questions built by
+The <i>Example</i> and <i>FAQ</i> sections of a page and the fields help of its model
+are shown on their own pages, opened by the <b>Example</b>, <b>FAQ</b> and <b>Fields</b>
+buttons in the help window header; the <b>Help</b> button goes back to the page
+(on the Example, FAQ and Fields pages it is labelled <b>Topic</b>). The questions built by
 <code>help-question</code> <code>:auto:</code> are left to the <b>Fields</b> page.
+</p><p align="justify">
+Moving from page to page of the help window, the <b>Topic</b> button goes back to
+the help page of the view open in Odoo; it is hidden when that page (or its
+Example / FAQ / Fields page) is the one shown.
 </p><p align="justify">
 Writing help for a module: put RST files in <code>help/common/</code> or in the
 directory of a group of Odoo versions (<code>help/v10</code>, <code>help/v11_14</code>,
 <code>help/v15</code>, <code>help/v16_20</code>); a group file overrides the common one with the
 same name. Italian twins are named <code>page.it_IT.rst</code>.
 </p><p align="justify">
-Every page has these sections, in this order, with their label:
-<code>description</code> (summary of the view / model),
-<code>new_record</code> (form only: steps to insert a record),
-<code>update_record</code> (form only: steps to update a record),
-<code>search</code> (list only: how to search and group by),
-<code>configure</code> (how to configure the model),
-<code>report</code> (how to show the report or the pdf attachment),
-<code>example</code> (useful examples),
-<code>faq</code> (frequently asked questions, <code>help-question</code> blocks),
-<code>footer</code> (date and time of page creation and copyright notice).
+Standard layout: every page has these sections, in this order, with their
+label and title; some apply only to the form or only to the list view (a
+kanban view follows the list rules):
+</p><p align="justify">
+<ul>
+<li><i>Contents</i>: table of contents, built by the help window, not written in RST;
+  it lists the sections left on the page, footer excepted; the sections of a
+  page with several parts (titles of first level) are grouped by part</li>
+<li><code>description</code> <i>Description</i>: summary of the view / model</li>
+<li><code>new_record</code> <i>How to insert a new record</i>: form only, steps to insert a
+  record</li>
+<li><code>search</code> <i>Suggestions for search</i>: list / kanban only, how to find, filter
+  and group</li>
+<li><code>update_record</code> <i>How to update a record</i>: form only, steps to update a
+  record</li>
+<li><code>configure</code> <i>How to set up</i>: settings and configuration</li>
+<li><code>report</code> <i>Report and export file</i>: prints, pdf attachment, export</li>
+<li><code>example</code> <i>Example</i>: useful examples, on their own page opened by the
+  <b>Example</b> button</li>
+<li><code>faq</code> <i>FAQ</i>: <code>help-question</code> blocks, on their own page opened by the
+  <b>FAQ</b> button</li>
+<li><code>footer</code> <i>Footer</i>: date and time of page creation and copyright notice,
+  not in the table of contents</li>
+</ul>
+</p><p align="justify">
 A section that does not apply keeps one line saying so.
 </p><p align="justify">
 
@@ -306,27 +326,46 @@ contatore indica <i>qualsiasi parola</i>. Il testo tra virgolette
 <b>Invio</b> / &#9660; e <b>Maiusc+Invio</b> / &#9650; passano all'occorrenza successiva /
 precedente, <b>Esc</b> annulla la ricerca.
 </p><p align="justify">
-La sezione <i>Domande frequenti</i> di una pagina e l'aiuto dei campi del suo
-modello sono mostrati in pagine a parte, aperte dai pulsanti <b>FAQ</b> e
-<b>Campi</b> nell'intestazione della finestra di aiuto; il pulsante <b>Aiuto</b>
-torna alla pagina. Le domande costruite da <code>help-question</code> <code>:auto:</code> sono
+Le sezioni <i>Esempio</i> e <i>Domande frequenti</i> di una pagina e l'aiuto dei campi
+del suo modello sono mostrati in pagine a parte, aperte dai pulsanti
+<b>Esempio</b>, <b>FAQ</b> e <b>Campi</b> nell'intestazione della finestra di aiuto; il pulsante <b>Aiuto</b>
+torna alla pagina (nelle pagine Esempio, FAQ e Campi si chiama <b>Argomento</b>). Le domande costruite da <code>help-question</code> <code>:auto:</code> sono
 lasciate alla pagina <b>Campi</b>.
+</p><p align="justify">
+Passando da una pagina all'altra della finestra di aiuto, il pulsante
+<b>Argomento</b> torna alla pagina di aiuto della vista aperta in Odoo; &#232; nascosto
+quando &#232; mostrata proprio quella pagina (o la sua pagina Esempio / FAQ / Campi).
 </p><p align="justify">
 Scrivere l'aiuto di un modulo: mettere i file RST in <code>help/common/</code> o nella
 cartella di un gruppo di versioni Odoo (<code>help/v10</code>, <code>help/v11_14</code>,
 <code>help/v15</code>, <code>help/v16_20</code>); il file del gruppo prevale su quello comune con
 lo stesso nome. I gemelli italiani si chiamano <code>pagina.it_IT.rst</code>.
 </p><p align="justify">
-Ogni pagina ha queste sezioni, in quest'ordine, con la loro etichetta:
-<code>description</code> (sintesi della vista / modello),
-<code>new_record</code> (solo form: passi per inserire un record),
-<code>update_record</code> (solo form: passi per modificare un record),
-<code>search</code> (solo lista: come cercare e raggruppare),
-<code>configure</code> (come configurare il modello),
-<code>report</code> (come visualizzare la stampa o l'allegato pdf),
-<code>example</code> (esempi utili),
-<code>faq</code> (domande frequenti, blocchi <code>help-question</code>),
-<code>footer</code> (data e ora di creazione della pagina e nota di copyright).
+Struttura standard: ogni pagina ha queste sezioni, in quest'ordine, con la loro
+etichetta e il loro titolo; alcune valgono solo per la maschera o solo per
+l'elenco (una vista kanban segue le regole dell'elenco):
+</p><p align="justify">
+<ul>
+<li><i>Indice</i>: costruito dalla finestra di aiuto, non si scrive in RST; elenca le
+  sezioni rimaste nella pagina, tranne il pi&#232; di pagina; le sezioni di una
+  pagina con pi&#249; parti (titoli di primo livello) sono raggruppate per parte</li>
+<li><code>description</code> <i>Descrizione</i>: sintesi della vista / modello</li>
+<li><code>new_record</code> <i>Come inserire un nuovo record</i>: solo maschera, passi per
+  inserire un record</li>
+<li><code>search</code> <i>Suggerimenti per la ricerca</i>: solo elenco / kanban, come trovare,
+  filtrare e raggruppare</li>
+<li><code>update_record</code> <i>Come modificare un record</i>: solo maschera, passi per
+  modificare un record</li>
+<li><code>configure</code> <i>Come configurare</i>: impostazioni e configurazione</li>
+<li><code>report</code> <i>Stampe ed esportazione</i>: stampe, allegato pdf, esportazione</li>
+<li><code>example</code> <i>Esempi</i>: esempi utili, in una pagina a parte aperta dal pulsante
+  <b>Esempio</b></li>
+<li><code>faq</code> <i>Domande frequenti</i>: blocchi <code>help-question</code>, in una pagina a parte
+  aperta dal pulsante <b>FAQ</b></li>
+<li><code>footer</code> <i>Pi&#232; di pagina</i>: data e ora di creazione della pagina e nota di
+  copyright, non nell'indice</li>
+</ul>
+</p><p align="justify">
 Una sezione che non si applica contiene una riga che lo dice.
 </p><p align="justify">
 
@@ -433,8 +472,20 @@ I ruoli <code>:field:</code> e <code>:tour:</code> evidenziano un campo o avvian
     <div class="oe_row oe_spaced">
         <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">ChangeLog History | Cronologia modifiche</h3>
         <div class="oe_span12">
-<h4>18.0.1.0.8 (2026-10-30)</h4>
+<h4>18.0.1.0.9 (2026-10-31)</h4>
 <p align="justify">
+<ul>
+<li>[IMP] Help pages: standard layout: Contents, Description, How to insert a new record (form only), Suggestions for search (list and kanban only), How to update a record (form only), How to set up, Report and export file; Example and FAQ on their own pages, footer last</li>
+<li>[IMP] Help window: the page starts with its table of contents (Indice in Italian), built from its sections, footer excepted</li>
+<li>[IMP] Help window: new <b>Example</b> button (Esempio in Italian): the Example section is shown on its own page, like the FAQ</li>
+<li>[IMP] Help window: Font Awesome icons on the header buttons: Topic (anchor), Ready (life saver), FAQ (question), Loose help (globe), Example (eye), Fields (map), Summary (table), Edit (edit)</li>
+<li>[IMP] Help window: on the Example, FAQ and Fields pages the button back to the page is labelled <b>Topic</b> (Argomento in Italian), and the Loose help button is not shown</li>
+<li>[QUA] Test coverage 95% (1135: 59+1076) [0 TestPoints] - quality rating 54 (target 100)</li>
+<li>[IMP] Help window: new <b>Topic</b> button (Argomento in Italian), back to the help page of the current Odoo view after moving to other pages; hidden when that page, or its FAQ / Fields page, is shown</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.8 (2026-10-30)</h4>
+</p><p align="justify">
 <ul>
 <li>[IMP] List pages no longer get the "Searching with the wildcard" text at the end of their How to search section: the wildcard search is explained once, in the "Ready help" part of the help home page</li>
 <li>[FIX] Documentation: the Usage section is shown again in the module page (index.html)</li>
@@ -542,6 +593,6 @@ I ruoli <code>:field:</code> e <code>:tour:</code> evidenziano un campo o avvian
     </div>
     <div class="oe_row oe_spaced">
         <p>This module is part of <a href="https://github.com/zeroincombenze/web_help">web_help</a> project.</p>
-        <p>Published information on | Informazioni pubblicate: 2026-10-30</p>
+        <p>Published information on | Informazioni pubblicate: 2026-10-31</p>
     </div>
 </section>

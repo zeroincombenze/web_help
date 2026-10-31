@@ -43,7 +43,8 @@ FAQ
 
 .. help-question:: How do I change a confirmed order?
 
-   Quantities and new lines can be changed directly, see *Update record*.
+   Quantities and new lines can be changed directly, see *How to update a
+   record*.
    If the order is locked, unlock it first. To change it a lot, cancel it,
    press **Set to Quotation**, change it and confirm it again.
 

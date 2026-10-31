@@ -1,7 +1,7 @@
 .. _report:
 
-Report
-------
+Report and export file
+----------------------
 
 .. help-version:: <13
 
@@ -37,3 +37,8 @@ Report
      Invoices**;*|**Invoicing ‣ Reporting ‣ Management ‣ Invoice Analysis**`
      shows the invoiced amounts by period, partner, product or salesperson, as
      graph or pivot.
+
+* To get a file of the invoices, select them in the list view, then
+  :version:`<=16|**Action ‣ Export**;*|**Actions ‣ Export**`: choose the
+  fields and the format (xlsx or csv). See *Import and Export data* in the
+  **Ready** page of the help.

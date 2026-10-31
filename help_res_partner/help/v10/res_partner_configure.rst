@@ -1,7 +1,7 @@
 .. _configure:
 
-Configure
----------
+How to set up
+-------------
 
 * **Sales ‣ Configuration ‣ Contacts** (developer mode): *Contact Tags*,
   *Contact Titles* (Mr., Mrs., …), *Localization* (countries, states,

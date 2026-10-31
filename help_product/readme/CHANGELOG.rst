@@ -1,3 +1,11 @@
+18.0.1.0.2 (2026-10-31)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Help pages for Odoo 11-14 (help/v11_14) and 15 (help/v15): menus, buttons, fields and settings of each version, from 11.0 to 15.0, in English and Italian
+* [FIX] Product variant pages of Odoo 12-15: attribute values field, archive, variant prices and purchase menu of the running version
+* [IMP] Help pages in the standard layout: sections renamed How to insert a new record, How to update a record, Suggestions for search, How to set up, Report and export file (Italian titles too); the Report section explains how to export the records to a file
+* [IMP] Product variants is a sub-section of the product Description; the variant form of Odoo 10-15 gets its How to insert a new record section
+
 18.0.1.0.1 (2026-10-30)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -1,7 +1,7 @@
 .. _update_record:
 
-Update record
--------------
+How to update a record
+----------------------
 
 #. Open the order from **Purchases ‣ Purchase ‣ Requests for Quotation** or
    **Purchases ‣ Purchase ‣ Purchase Orders**, press **Edit**, change the

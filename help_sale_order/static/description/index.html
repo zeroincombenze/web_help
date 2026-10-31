@@ -27,13 +27,49 @@
                 <img src="l10n_uk.png" alt="English" style="width:28px;height:16px;"/>
                 <img src="l10n_us.png" alt="English" style="width:28px;height:16px;"/>
             </p>
-            <p class="oe_mt16" align="justify">Context help pages for the sale order list and form, shown by web_context_help.</p>
+            <p class="oe_mt16" align="justify">Context help pages for the sale order list and form, shown by web_context_help.
+<p align="justify">
+Every page follows the help rule of web_context_help:
+</p><p align="justify">
+<ul>
+<li><b>Description</b>: what quotations and sales orders are, with the main fields</li>
+<li><b>New record</b> (form): step-by-step guide to create a quotation and confirm it</li>
+<li><b>Update record</b> (form): what can be changed in each status, invoicing,
+  locking, cancelling and deleting</li>
+<li><b>How to search</b> (list): menus, search, filters and groupings</li>
+<li><b>Configure</b>: the Sales settings that affect sale orders</li>
+<li><b>Report</b>: the quotation / order PDF, the pro-forma and the sales analysis</li>
+<li><b>Example</b>: common cases, e.g. down payments or changes after confirmation</li>
+<li><b>FAQ</b> and <b>Footer</b></li>
+</ul>
+</p><p align="justify">
+Pages are in English and Italian, with the menus and settings of the running
+Odoo version.
+</p></p>
         </div>
         <div class="oe_span6">
             <p align="center">
                 <img src="l10n_it.png" alt="Italiano" style="width:28px;height:16px;"/>
             </p>
-            <p class="oe_mt16" align="justify">Pagine di aiuto contestuale per la lista e la maschera degli ordini di vendita, mostrate da web_context_help.</p>
+            <p class="oe_mt16" align="justify">Pagine di aiuto contestuale per la lista e la maschera degli ordini di vendita, mostrate da web_context_help.
+<p align="justify">
+Ogni pagina segue la regola di aiuto di web_context_help:
+</p><p align="justify">
+<ul>
+<li><b>Descrizione</b>: cosa sono preventivi e ordini di vendita, con i campi principali</li>
+<li><b>Nuovo record</b> (maschera): guida passo passo per creare un preventivo e confermarlo</li>
+<li><b>Modifica record</b> (maschera): cosa si pu&#242; cambiare in ogni stato,
+  fatturazione, blocco, annullamento ed eliminazione</li>
+<li><b>Come cercare</b> (lista): menu, ricerca, filtri e raggruppamenti</li>
+<li><b>Configurazione</b>: le impostazioni di Vendite che influenzano gli ordini</li>
+<li><b>Stampe</b>: il PDF di preventivo / ordine, la pro-forma e l'analisi vendite</li>
+<li><b>Esempi</b>: casi comuni, ad es. acconti o modifiche dopo la conferma</li>
+<li><b>Domande frequenti</b> e <b>Pi&#232; di pagina</b></li>
+</ul>
+</p><p align="justify">
+Le pagine sono in inglese e in italiano, con i menu e le impostazioni della
+versione di Odoo in uso.
+</p></p>
         </div>
     </div>
 </section>
@@ -42,8 +78,34 @@
     <div class="oe_row oe_spaced">
         <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">ChangeLog History | Cronologia modifiche</h3>
         <div class="oe_span12">
-<h4>18.0.1.0.0 (2026-09-27)</h4>
+<h4>18.0.1.0.4 (2026-10-31)</h4>
 <p align="justify">
+<ul>
+<li>[IMP] Help pages for Odoo 11-14 (help/v11_14) and 15 (help/v15): menus, buttons, fields and settings of each version, from 11.0 to 15.0, in English and Italian</li>
+<li>[IMP] Help pages in the standard layout: sections renamed How to insert a new record, How to update a record, Suggestions for search, How to set up, Report and export file (Italian titles too); the Report section explains how to export the records to a file</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.3 (2026-10-25)</h4>
+</p><p align="justify">
+<ul>
+<li>[IMP] Help pages declared with :priority: 96, the priority of the module pages: the last fallback after the pages of the administrator (requires web_context_help 18.0.1.0.6)</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.2 (2026-10-01)</h4>
+</p><p align="justify">
+<ul>
+<li>[IMP] Help pages restructured on the help rule: new record, update record, how to search, report, example, FAQ and footer sections</li>
+<li>[IMP] Wildcard search explained; version specific text shown only on its Odoo version</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.1 (2026-09-27)</h4>
+</p><p align="justify">
+<ul>
+<li>[IMP] Help pages rewritten: description, usage, options and configuration of sale orders</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.0 (2026-09-27)</h4>
+</p><p align="justify">
 <ul>
 <li>[IMP] Migrated from 16.0</li>
 </ul>
@@ -64,8 +126,7 @@
         <div class="oe_span6" align="left">
             <p class="oe_mt16"><b>Authors | Autori:</b></p>
             <p class="oe_mt16"><ul>
-<li>Zeroincombenze srls &lt;False&gt;</li>
-<li><a href="https://www.zeroincombenze.it">SHS-AV s.r.l.</a></li>
+<li><a href="https://www.zeroincombenze.it">Zeroincombenze srls</a></li>
 </ul></p>
         </div>
         <div class="oe_span6" align="left">
@@ -81,7 +142,7 @@
         </div>
     </div>
     <div class="oe_row oe_spaced">
-        <p>This module is part of <a href="https://github.com/zeroincombenze/zerobug-test">zerobug-test</a> project.</p>
-        <p>Published information on | Informazioni pubblicate: 2026-09-27</p>
+        <p>This module is part of <a href="https://github.com/zeroincombenze/web_help">web_help</a> project.</p>
+        <p>Published information on | Informazioni pubblicate: 2026-10-31</p>
     </div>
 </section>

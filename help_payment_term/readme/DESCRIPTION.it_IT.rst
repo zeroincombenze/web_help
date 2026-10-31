@@ -10,18 +10,22 @@ come caricare i termini più comuni:
   *Giorni di pagamento* del modulo OCA ``account_payment_term_extension``
 * **30 giorni fine mese + 5 giorni**: scadenza il 5 del mese successivo
 
-Ogni pagina segue la regola di aiuto di web_context_help:
+Ogni pagina segue la struttura standard di web_context_help:
 
+* **Indice**: le sezioni della pagina, costruito dalla finestra di aiuto
 * **Descrizione**: cosa sono i termini di pagamento e come funzionano le righe
-* **Nuovo record** (maschera): guida passo passo per caricare il termine
-  *30 giorni*
-* **Modifica record** (maschera): modificare, archiviare ed eliminare i
-  termini di pagamento
-* **Come cercare** (lista): menu, ricerca, filtri e raggruppamenti
-* **Configurazione**: dove si usano i termini di pagamento e il modulo OCA
-* **Stampe**: le scadenze stampate sulla fattura
-* **Esempi**: *30 giorni fine mese* e *30 giorni fine mese + 5 giorni*
-* **Domande frequenti** e **Piè di pagina**
+* **Come inserire un nuovo record** (maschera): guida passo passo per caricare
+  il termine *30 giorni*
+* **Suggerimenti per la ricerca** (lista): menu, ricerca, filtri e
+  raggruppamenti
+* **Come modificare un record** (maschera): modificare, archiviare ed
+  eliminare i termini di pagamento
+* **Come configurare**: dove si usano i termini di pagamento e il modulo OCA
+* **Stampe ed esportazione**: le scadenze stampate sulla fattura e
+  l'esportazione dei termini di pagamento in un file
+* Pulsante **Esempio**: *30 giorni fine mese* e *30 giorni fine mese + 5
+  giorni*
+* Pulsante **FAQ** e **Piè di pagina**
 
 Le pagine sono in inglese e in italiano, con i campi e le opzioni della
 versione di Odoo in uso.
