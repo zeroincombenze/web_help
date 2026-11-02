@@ -151,4 +151,25 @@ the first matching condition, inline markup allowed, roles not allowed; write
 ``\ `` before the role when it is glued to the previous word.
 Roles ``:field:`` and ``:tour:`` highlight a field or run a tour in the Odoo tab.
 
+Text that makes sense only with another module goes in ``help-if``: it is
+shown only when the module is installed, or the model exists. The pages are
+rebuilt when a module or model named by a condition is installed or removed,
+in whatever order the modules are installed.
+
+::
+
+    .. help-if:: module = sale
+
+       Invoicing from sale order
+       -------------------------
+
+       RST shown only when sale is installed (sections allowed)
+
+    .. help-if:: model = sale.order and module != purchase
+
+       RST shown when sale.order exists and purchase is not installed
+
+Conditions: ``module`` or ``model``, ``=`` (any of the names joined by comma
+is installed / exists) or ``!=`` (none of them), several joined by ``and``.
+
 .. |sos| unicode:: U+1F6DF

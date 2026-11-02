@@ -1,6 +1,6 @@
-================================================
-|icon| Context help/Aiuto contestuale 18.0.1.0.9
-================================================
+=================================================
+|icon| Context help/Aiuto contestuale 18.0.1.0.10
+=================================================
 
 **Context help button, pages written in RST by each module**
 
@@ -239,6 +239,27 @@ the first matching condition, inline markup allowed, roles not allowed; write
 ``\ `` before the role when it is glued to the previous word.
 Roles ``:field:`` and ``:tour:`` highlight a field or run a tour in the Odoo tab.
 
+Text that makes sense only with another module goes in ``help-if``: it is
+shown only when the module is installed, or the model exists. The pages are
+rebuilt when a module or model named by a condition is installed or removed,
+in whatever order the modules are installed.
+
+::
+
+    .. help-if:: module = sale
+
+       Invoicing from sale order
+       -------------------------
+
+       RST shown only when sale is installed (sections allowed)
+
+    .. help-if:: model = sale.order and module != purchase
+
+       RST shown when sale.order exists and purchase is not installed
+
+Conditions: ``module`` or ``model``, ``=`` (any of the names joined by comma
+is installed / exists) or ``!=`` (none of them), several joined by ``and``.
+
 .. |sos| unicode:: U+1F6DF
 
 
@@ -334,6 +355,12 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
+
+18.0.1.0.10 (2026-11-01)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [QUA] Test coverage 95% (1194: 60+1134) [0 TestPoints] - quality rating 54 (target 100)
+* [IMP] Help sources: new ``help-if`` directive: content shown only when a module is installed or a model exists (``module = sale``, ``model != sale.order``); the pages are rebuilt when a module or model named by a condition is installed or removed
 
 18.0.1.0.9 (2026-10-31)
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -467,7 +494,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-31
+Last Update / Ultimo aggiornamento: 2026-11-01
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

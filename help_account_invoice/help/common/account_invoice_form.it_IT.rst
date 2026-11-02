@@ -97,6 +97,8 @@ Descrizione
 
 .. help-include:: account_invoice_new.rst
 
+.. help-include:: account_invoice_sale.rst
+
 .. help-include:: account_invoice_update.rst
 
 .. help-include:: account_invoice_configure.rst

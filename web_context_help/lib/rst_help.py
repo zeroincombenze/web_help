@@ -38,6 +38,10 @@ Custom directives::
 
        RST content (sections allowed)
 
+    .. help-if:: module = sale          content kept only when the modules /
+                                        models condition is met, see
+       RST content (sections allowed)   installed_match()
+
 Roles: :field:`name` (highlight field in Odoo tab), :tour:`name` (run tour),
 :version:`16|text;17-18|text;*|text` (text of the first matching version).
 
@@ -161,6 +165,53 @@ def when_count(spec):
     return len(parse_when(spec))
 
 
+INSTALLED_KINDS = ("module", "model")
+RE_HELP_IF = re.compile(
+    r"^[ \t]*\.\.[ \t]+help-if::[ \t]*(.*?)[ \t]*$", re.MULTILINE
+)
+
+
+def parse_installed(spec):
+    """Conditions of help-if: like parse_when(), names module or model only"""
+    conditions = parse_when(spec)
+    if not conditions:
+        raise ValueError("empty help-if condition")
+    for kind, dummy, dummy in conditions:
+        if kind not in INSTALLED_KINDS:
+            raise ValueError("invalid help-if condition %r" % kind)
+    return conditions
+
+
+def installed_match(spec, installed):
+    """True when every condition of spec is met by ``installed``.
+
+    ``installed`` is {"module": installed module names, "model": existing
+    model names}. ``module = sale, purchase`` is met when any of them is
+    installed, ``module != sale`` when none is; ``model`` likewise. Unknown
+    (None) means nothing installed."""
+    installed = installed or {}
+    for kind, op, wanted in parse_installed(spec):
+        present = installed.get(kind) or ()
+        if any(name in present for name in wanted) != (op == "="):
+            return False
+    return True
+
+
+def installed_names(help_dir, group):
+    """{(kind, name)} named by the help-if conditions of the visible sources:
+    the pages are rebuilt when one of them is installed or removed"""
+    names = set()
+    for dummy, path in list_sources(help_dir, group).items():
+        for spec in RE_HELP_IF.findall(read_text(path)):
+            try:
+                conditions = parse_installed(spec)
+            except ValueError:
+                continue
+            for kind, dummy, wanted in conditions:
+                names.update((kind, name) for name in wanted)
+    return names
+
+
 def version_group(major):
     for lo, hi, group in VERSION_GROUPS:
         if lo <= major <= hi:
@@ -225,7 +276,7 @@ class _LogStream(object):
         _logger.debug(text.strip())
 
 
-def _settings(help_dir, group, lang, fields_help, version=None):
+def _settings(help_dir, group, lang, fields_help, version=None, installed=None):
     return {
         "doctitle_xform": False,
         "sectsubtitle_xform": False,
@@ -244,6 +295,7 @@ def _settings(help_dir, group, lang, fields_help, version=None):
         "wch_version": version or group_version(group),
         "wch_lang": lang,
         "wch_fields_help": fields_help,
+        "wch_installed": installed,
     }
 
 
@@ -399,6 +451,26 @@ class HelpVersion(Directive):
         return []
 
 
+class HelpIf(Directive):
+    """Keep the content only when the modules / models condition is met"""
+
+    required_arguments = 1
+    final_argument_whitespace = True
+    has_content = True
+
+    def run(self):
+        installed = self.state.document.settings.wch_installed
+        try:
+            matched = installed_match(self.arguments[0], installed)
+        except ValueError as e:
+            raise self.error("help-if: %s" % e)
+        if matched and self.content:
+            self.state_machine.insert_input(
+                list(self.content), self.content.source(0) or "<help-if>"
+            )
+        return []
+
+
 def version_role(name, rawtext, text, lineno, inliner, options=None, content=None):
     """:version:`16|text;>=17|text`: inline text of the first matching version"""
     version = inliner.document.settings.wch_version
@@ -454,6 +526,7 @@ directives.register_directive("help-include", HelpInclude)
 directives.register_directive("help-inherit", HelpInherit)
 directives.register_directive("help-question", HelpQuestion)
 directives.register_directive("help-version", HelpVersion)
+directives.register_directive("help-if", HelpIf)
 roles.register_local_role("version", version_role)
 roles.register_local_role("field", _data_role("field"))
 roles.register_local_role("tour", _data_role("tour"))
@@ -490,8 +563,11 @@ def parse(
     lang=DEFAULT_LANG,
     fields_help=None,
     version=None,
+    installed=None,
 ):
     """Parse RST text for the Odoo major ``version``; return the doctree.
+
+    ``installed`` holds the installed modules and models, see installed_match().
 
     ``document.wch_page`` holds the help-page options (or None),
     ``document.wch_inherits`` the help-inherit instructions."""
@@ -502,7 +578,9 @@ def parse(
     document = core.publish_doctree(
         text,
         source_path=source_path,
-        settings_overrides=_settings(help_dir, group, lang, fields_help, version),
+        settings_overrides=_settings(
+            help_dir, group, lang, fields_help, version, installed
+        ),
     )
     _store(document, "wch_page", None)
     _store(document, "wch_inherits", [])
@@ -510,9 +588,17 @@ def parse(
 
 
 def parse_file(
-    path, help_dir, group, lang=DEFAULT_LANG, fields_help=None, version=None
+    path,
+    help_dir,
+    group,
+    lang=DEFAULT_LANG,
+    fields_help=None,
+    version=None,
+    installed=None,
 ):
-    return parse(read_text(path), path, help_dir, group, lang, fields_help, version)
+    return parse(
+        read_text(path), path, help_dir, group, lang, fields_help, version, installed
+    )
 
 
 def find_section(document, label):
@@ -523,7 +609,14 @@ def find_section(document, label):
 
 
 def apply_inherit(
-    document, inherit, help_dir, group, lang, fields_help=None, version=None
+    document,
+    inherit,
+    help_dir,
+    group,
+    lang,
+    fields_help=None,
+    version=None,
+    installed=None,
 ):
     """Apply one help-inherit instruction to a page doctree; return success"""
     position = inherit["position"]
@@ -543,6 +636,7 @@ def apply_inherit(
             lang,
             fields_help,
             version,
+            installed,
         ).children[:]
     if target is None:
         if position == "before":

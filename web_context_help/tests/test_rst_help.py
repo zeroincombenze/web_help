@@ -275,6 +275,59 @@ Press :version:`16|**View Invoice**;17|*Draft Invoice*;*|Create Draft` now.
         )
         self.assertIsNone(doc.wch_page)
 
+    def test_help_if(self):
+        match = rst_help.installed_match
+        installed = {"module": {"account", "sale"}, "model": {"sale.order"}}
+        self.assertTrue(match("module = sale", installed))
+        self.assertTrue(match("module = purchase, sale", installed))
+        self.assertFalse(match("module = purchase", installed))
+        self.assertTrue(match("module != purchase", installed))
+        self.assertFalse(match("module != purchase, sale", installed))
+        self.assertTrue(match("model = sale.order and module = account", installed))
+        self.assertFalse(match("model = sale.order and module != account", installed))
+        # unknown: nothing installed
+        self.assertFalse(match("module = sale", None))
+        self.assertTrue(match("module != sale", None))
+        self.assertRaises(ValueError, match, "move_type = entry", installed)
+        self.assertRaises(ValueError, match, "", installed)
+        text = """Invoice
+=======
+
+.. help-if:: module = sale
+
+   From sale order
+   ---------------
+
+   Press **Create Invoice**.
+
+.. help-if:: model != sale.order
+
+   No sale.
+
+.. help-if:: state = draft
+
+   Wrong.
+"""
+        doc = rst_help.parse(
+            text, "<t>", self.help_dir, "v16_20", installed=installed
+        )
+        html = rst_help.to_html(doc)
+        self.assertIn("<h2>From sale order</h2>", html)
+        self.assertNotIn("No sale", html)
+        # an invalid condition keeps nothing
+        self.assertNotIn("Wrong.", html)
+        html = rst_help.to_html(
+            rst_help.parse(text, "<t>", self.help_dir, "v16_20", installed={})
+        )
+        self.assertNotIn("From sale order", html)
+        self.assertIn("No sale", html)
+        # names of the conditions, also inside included files and inherits
+        self._write("common/inc.rst", "   .. help-if:: model = a.b, c.d\n\n      x\n")
+        self.assertEqual(
+            rst_help.installed_names(self.help_dir, "v16_20"),
+            {("model", "a.b"), ("model", "c.d")},
+        )
+
     def test_version_role_semicolon(self):
         text = "Press :version:`<17|**Edit**; then **Save**;*|nothing`."
         for version in (16, 18):

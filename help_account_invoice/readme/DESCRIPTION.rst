@@ -11,6 +11,9 @@ Every page follows the standard layout of web_context_help:
 * **Description**: what invoices are, their statuses and the main fields
 * **How to insert a new record** (form): step-by-step guide to create, validate
   and send an invoice or a vendor bill
+* **Invoicing from sale order** (form, only when the Sales app is installed):
+  invoicing policy, invoice status, regular invoices and down payments,
+  several orders at once
 * **Suggestions for search** (list): menus, search, filters and groupings
 * **How to update a record** (form): changing an invoice, registering payments,
   credit notes, cancelling and deleting
@@ -20,6 +23,9 @@ Every page follows the standard layout of web_context_help:
 * **Example** button: common cases, e.g. partial payments or correcting a
   posted invoice
 * **FAQ** button and **Footer**
+
+A page for the Accounting Dashboard (journal kanban) explains the cards of
+the journals, their buttons and figures, and the **⋮** menu.
 
 Pages are in English and Italian, with the menus, buttons and statuses of the
 running Odoo version.

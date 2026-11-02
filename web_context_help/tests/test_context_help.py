@@ -76,6 +76,18 @@ Footer
 Page created.
 """
 
+IF_SALE = """.. help-inherit:: wch_test_a.partner
+   :section: usage
+   :position: after
+
+   .. help-if:: module = wch_test_sale
+
+      Sale
+      ----
+
+      Invoice the sale orders.
+"""
+
 INHERIT = """.. help-inherit:: wch_test_a.partner
    :section: usage
    :position: after
@@ -194,6 +206,40 @@ class TestContextHelp(common.TransactionCase):
         page.action_reset_to_source()
         self.assertNotIn("Ordinary invoice", page.section_ids.mapped("title"))
         self.assertIn("extra", page.section_ids.mapped("label"))
+
+    def test_help_if(self):
+        """A help-if chapter appears when its module is installed later"""
+        self.modules.append(
+            ("wch_test_d", self._help_dir("d", {"common/sale.rst": IF_SALE}))
+        )
+        installed = {"module": set(), "model": set()}
+        Page = self.Page
+        group = Page._wch_group()
+        before = Page._wch_installed_checksum(self.modules, group, installed)
+        Page._wch_rebuild(self.modules, group, installed=installed)
+        page = Page.search(
+            [("key", "=", "wch_test_a.partner"), ("lang", "=", "en_US")]
+        )
+        self.assertNotIn("sale orders", page.html)
+        installed["module"].add("wch_test_sale")
+        after = Page._wch_installed_checksum(self.modules, group, installed)
+        self.assertNotEqual(before, after)
+        # a module not named by any condition does not change the checksum
+        installed["module"].add("other")
+        self.assertEqual(
+            after, Page._wch_installed_checksum(self.modules, group, installed)
+        )
+        Page._wch_rebuild(self.modules, group, installed=installed)
+        self.assertIn("sale orders", page.html)
+        self.assertIn("sale", page.section_ids.mapped("label"))
+        # the real installed modules and models
+        real = Page._wch_installed()
+        self.assertIn("web_context_help", real["module"])
+        self.assertIn("res.partner", real["model"])
+        Page.sync_sources(force=True)
+        Source = Page.env["context.help.source"]
+        self.assertTrue(Source.search([("module", "=", "__installed__")]))
+        self.assertFalse(Page.sync_sources())
 
     def test_removed_source(self):
         self._rebuild()
