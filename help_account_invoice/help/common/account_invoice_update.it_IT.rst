@@ -8,7 +8,7 @@ Come modificare un record
    #. Aprire la fattura dalla lista e premere **Modifica**. Una fattura in
       *Bozza* si modifica liberamente; premere **Salva** alla fine.
    #. Una fattura validata (*Aperta*) non si può modificare. Per correggerla
-      premere **Annullare fattura**, poi
+      premere :version:`10|**Annullare fattura**;11|**Cancel Invoice**;*|**Annulla**`, poi
       :version:`10|**Riportare in bozza**;*|**Reimposta a bozza**`,
       modificarla e premere di nuovo :version:`10|**Validare**;*|**Valida**`:
       mantiene il suo numero. L'annullamento richiede l'opzione

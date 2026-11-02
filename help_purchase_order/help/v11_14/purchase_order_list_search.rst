@@ -8,8 +8,8 @@ Suggestions for search
    * In the :version:`11|**Purchases**;*|**Purchase**` app, **Purchase ‣
      Requests for Quotation** lists the RFQs, **Purchase ‣ Purchase Orders**
      the orders to approve and the confirmed ones, **Control ‣ Vendor Bills**
-     the bills and **Control ‣ Incoming Products** the goods still to
-     receive.
+     the bills\ :version:`11| and **Control ‣ Incoming Products** the goods
+     still to receive`.
 
 .. help-version:: >=13
 

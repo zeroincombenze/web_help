@@ -6,7 +6,7 @@
 #
 {
     "name": "Help for Odoo",
-    "version": "18.0.1.0.1",
+    "version": "12.0.1.0.2",
     "category": "Hidden/Tools",
     "summary": "Installs all the context help modules",
     "author": "Zeroincombenze srls",

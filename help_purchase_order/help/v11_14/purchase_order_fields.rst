@@ -12,9 +12,13 @@ Main fields
 * :field:`Scheduled date <date_planned>` (:version:`<=12|*Scheduled
   Date*;*|*Receipt Date*`): when the goods are expected; each line has its own
   date, computed from the vendor lead time.
-* :field:`Deliver To <picking_type_id>`: the warehouse receipt operation (with
-  multiple locations); with dropshipping, the :field:`drop ship address
-  <dest_address_id>` of the customer.
+
+.. help-if:: module = stock
+
+   * :field:`Deliver To <picking_type_id>`: the warehouse receipt operation
+     (with multiple locations); with dropshipping, the :field:`drop ship
+     address <dest_address_id>` of the customer.
+
 * :field:`Incoterm <incoterm_id>`: the international commercial terms of the
   delivery.
 * :field:`Payment terms <payment_term_id>`: proposed on the vendor bill.

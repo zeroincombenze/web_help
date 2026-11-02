@@ -4,11 +4,12 @@ elenca, raggruppate per modulo, le pagine di ogni modulo di aiuto installato;
 **Pronto** torna alla pagina iniziale. Gli utenti abilitati a modificare le
 pagine di aiuto vedono anche **Modifica**, che apre la pagina nel backend:
 anche la pagina iniziale può essere adattata come ogni altra pagina.
-Nell'editor, il pulsante con la pellicola della barra mobile (o il comando
-*/Video di aiuto*) elenca i video della cartella dei video: quello scelto è
-inserito dopo il paragrafo corrente, come lettore avviato con un clic. Per
-togliere un video, premere Backspace nella riga dopo o Canc nella riga prima. In
-modalità sviluppatore il pulsante **</>** mostra il codice HTML della pagina.
+Nella maschera della pagina, il pulsante **Inserisci video** elenca i video
+della cartella dei video: quello scelto è inserito, come lettore avviato con un
+clic, in fondo alla pagina oppure dopo il paragrafo che contiene il testo
+scritto in *Dopo il testo*. In modalità sviluppatore il pulsante **</>**
+dell'editor mostra il codice HTML della pagina, dove un video può essere
+spostato o tolto.
 
 Premere il pulsante |sos| del pannello di controllo. La pagina è cercata per
 xmlid della vista, poi per modello e tipo vista, poi per modello; altrimenti
@@ -107,8 +108,9 @@ Regole
 Senza scrivere RST, un editor dell'aiuto sceglie quale pagina mostrare da
 *Aiuto ‣ Editor dell'aiuto ‣ Regole di aiuto* o dalla scheda
 **Regole** di una pagina: campo del modello della pagina (selezione, booleano o
-many2one), *è* o *non è*, e i valori (selezione), la casella (booleano) o il
-record (many2one). Una pagina con regole è mostrata quando una di esse è
+many2one), *è* o *non è*, e i valori (selezione: le loro chiavi separate da
+virgola, ad es. ``draft, sent``, elencate in *Valori ammessi*), la casella
+(booleano) o il record (many2one). Una pagina con regole è mostrata quando una di esse è
 soddisfatta, e anche il ``:when:`` della sua sorgente.
 
 Le regole valgono solo per le pagine **Clear cut**: una pagina clear cut è
@@ -156,5 +158,27 @@ mostra il testo della prima condizione soddisfatta, con il markup in linea ma
 senza altri ruoli; scrivere ``\ `` prima del ruolo quando è attaccato alla
 parola precedente.
 I ruoli ``:field:`` e ``:tour:`` evidenziano un campo o avviano un tour nella scheda di Odoo.
+
+Il testo che ha senso solo con un altro modulo va in ``help-if``: è mostrato
+solo quando il modulo è installato, o il modello esiste. Le pagine sono
+ricostruite quando un modulo o un modello citato da una condizione è
+installato o rimosso, in qualunque ordine siano installati i moduli.
+
+::
+
+    .. help-if:: module = sale
+
+       Fatturazione da ordine di vendita
+       ---------------------------------
+
+       RST mostrato solo quando sale è installato (sezioni ammesse)
+
+    .. help-if:: model = sale.order and module != purchase
+
+       RST mostrato quando sale.order esiste e purchase non è installato
+
+Condizioni: ``module`` o ``model``, ``=`` (almeno uno dei nomi separati da
+virgola è installato / esiste) o ``!=`` (nessuno di essi), più condizioni
+unite da ``and``.
 
 .. |sos| unicode:: U+1F6DF

@@ -128,9 +128,9 @@ Filters, groups and favorites
   columns. :version:`<=10|**Add custom group**;*|**Add Custom Group**` groups
   by any field.
 * **Favorites**: **Save current search** keeps the search, filters and
-  groups under a name; :version:`<=10|*Use by default*;*|*Default filter*`
+  groups under a name; :version:`<=13|*Use by default*;*|*Default filter*`
   applies it every time the menu opens and
-  :version:`<=10|*Share with all users*;*|*Shared*` makes it visible to
+  :version:`<=13|*Share with all users*;*|*Shared*` makes it visible to
   everyone.
 
 .. _navigation:
@@ -196,7 +196,7 @@ Import
    :version:`<=12|the **Import** button next to **Create**;13-16|**Favorites ‣
    Import records**;*|**⚙ ‣ Import records** (the gear next to the view
    title)`.
-#. Press :version:`<=10|**Load File**;*|**Upload Data File**` and choose the
+#. Press :version:`<=14|**Load File**;*|**Upload Data File**` and choose the
    file, :version:`<=10|CSV or Excel;*|XLSX, XLS, ODS or CSV`. For a CSV file
    check the encoding, the separator and the text delimiter
    (:version:`<=10|options;*|**Formatting**`): Odoo expects commas and double

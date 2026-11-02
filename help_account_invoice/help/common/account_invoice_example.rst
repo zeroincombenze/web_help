@@ -8,7 +8,7 @@ Example
 .. help-version:: <13
 
    If the customer has not paid yet and the journal allows cancelling entries,
-   press **Cancel Invoice**, **Reset to Draft**, correct the price and press
+   press :version:`<12|**Cancel Invoice**;*|**Cancel**`, **Reset to Draft**, correct the price and press
    **Validate**: the invoice keeps its number. Otherwise press
    :version:`10|**Refund Invoice**;*|**Add Credit Note**`, choose the *Modify*
    method and correct the new draft invoice.

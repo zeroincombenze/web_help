@@ -15,7 +15,7 @@ Come inserire un nuovo record
 #. In :version:`11|**Vendite**;13|**Vendite**;*|**Vendita**` scegliere la
    :field:`politica di fatturazione <invoice_policy>`.
 #. In **Acquisto**, sotto **Fornitori**, premere :version:`11|**Aggiungi
-   voce**;*|**Aggiungi una riga**` per aggiungere ogni fornitore con il suo
+   voce**;12|**Aggiungi riga**;*|**Aggiungi una riga**` per aggiungere ogni fornitore con il suo
    prezzo, la quantità minima e il tempo di consegna.
 #. In :version:`11|**Inventario**;*|**Magazzino**` scegliere i percorsi; in
    :version:`11|**Fatturazione**;*|**Contabilità**` controllare le imposte

@@ -96,6 +96,8 @@ Description
 
 .. help-include:: account_invoice_new.rst
 
+.. help-include:: account_invoice_sale.rst
+
 .. help-include:: account_invoice_update.rst
 
 .. help-include:: account_invoice_configure.rst
@@ -113,7 +115,7 @@ FAQ
 
    .. help-version:: <13
 
-      A validated invoice is locked. Cancel it with **Cancel Invoice** and
+      A validated invoice is locked. Cancel it with :version:`<12|**Cancel Invoice**;*|**Cancel**` and
       press **Reset to Draft**: the journal must allow cancelling entries, see
       *How to set up*. If it is paid, remove the payment first.
 

@@ -97,6 +97,8 @@ Descrizione
 
 .. help-include:: account_invoice_new.rst
 
+.. help-include:: account_invoice_sale.rst
+
 .. help-include:: account_invoice_update.rst
 
 .. help-include:: account_invoice_configure.rst
@@ -114,7 +116,7 @@ Domande frequenti
 
    .. help-version:: <13
 
-      Una fattura validata è bloccata. Annullarla con **Annullare fattura** e
+      Una fattura validata è bloccata. Annullarla con :version:`10|**Annullare fattura**;11|**Cancel Invoice**;*|**Annulla**` e
       premere :version:`10|**Riportare in bozza**;*|**Reimposta a bozza**`: il
       registro deve consentire l'annullamento delle registrazioni, vedere
       *Come configurare*. Se è pagata, togliere prima il pagamento.

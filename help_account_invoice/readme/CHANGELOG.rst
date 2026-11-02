@@ -1,3 +1,11 @@
+12.0.1.0.3 (2026-11-01)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Migrated from 18.0 to 12.0 (requires web_context_help 12.0.1.0.10)
+* [IMP] Invoice form: new section Invoicing from sale order (Fatturazione da ordine di vendita), shown only when the sale module is installed
+* [NEW] Accounting Overview (journal kanban) help page: cards of sale, purchase, bank, cash and miscellaneous journals, the ⋮ menu, search, set up and FAQ
+* [FIX] Italian invoice search: label of Add Custom Filter as translated by each Odoo version
+
 18.0.1.0.2 (2026-10-31)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

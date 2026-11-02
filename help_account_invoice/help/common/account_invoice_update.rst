@@ -8,7 +8,7 @@ How to update a record
    #. Open the invoice from the list and press **Edit**. A *Draft* invoice can
       be changed freely; press **Save** when done.
    #. A validated (*Open*) invoice cannot be changed. To correct it, press
-      **Cancel Invoice**, then **Reset to Draft**, change it and press
+      :version:`<12|**Cancel Invoice**;*|**Cancel**`, then **Reset to Draft**, change it and press
       **Validate** again: it keeps its number. Cancelling needs the
       *Allow Cancelling Entries* option of the journal, see *How to set up*.
    #. To register a payment press **Register Payment**: check the payment

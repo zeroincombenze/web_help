@@ -10,7 +10,7 @@ Come modificare un record
 #. **RdP** o **RdP inviata**: ogni campo si può cambiare. Modificare una RdP
    inviata non la rinvia: premere :version:`11|**Rispedisci RDP per
    email**;*|**Reinvia con e-mail**`.
-#. **Da approvare**: un responsabile acquisti preme **Approva ordine** per
+#. **Da approvare**: un responsabile acquisti preme :version:`12|**Approva Ordine**;*|**Approva ordine**` per
    confermarlo.
 #. **Ordine di acquisto**: fornitore, data ordine, valuta e il prodotto delle
    righe diventano di sola lettura. Si possono ancora cambiare quantità e
@@ -18,8 +18,8 @@ Come modificare un record
    non si possono eliminare: mettere la quantità a 0.
    :version:`11|**Invia PO per email**;12|**Invia OA con e-mail**;*|**Invia
    OdA con e-mail**` invia l'ordine confermato al fornitore.
-#. :version:`<=14|**Ricevi prodotti** (o il pulsante del ricevimento)
-   apre;*|Il pulsante **Ricezione** apre` il ricevimento: indicare le
+#. :version:`12|**Ricevi Prodotti** (o il pulsante del ricevimento)
+   apre;<=14|**Ricevi prodotti** (o il pulsante del ricevimento) apre;*|Il pulsante **Ricezione** apre` il ricevimento: indicare le
    quantità ricevute e premere **Valida**. Un ricevimento parziale crea un
    ordine residuo per la merce mancante.
 #. :version:`11|Il pulsante **Fatture fornitore** crea la fattura fornitore

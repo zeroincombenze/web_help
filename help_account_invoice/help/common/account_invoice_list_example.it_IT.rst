@@ -22,7 +22,8 @@ registro.
 :version:`<13|Scegliere i filtri *Aperta* e *Pagata*;13|Scegliere il filtro
 *Confermato*;*|Scegliere il filtro *Confermata*`, poi **Raggruppa per ‣ Data
 fattura ‣ Mese**: ogni gruppo mostra il suo subtotale. Salvare la ricerca con
-**Preferiti ‣ Salva ricerca attuale** per riusarla.
+:version:`<=12|**Preferiti ‣ Salva la ricerca corrente**;*|**Preferiti ‣ Salva
+ricerca attuale**` per riusarla.
 
 **Stampare più fatture**
 

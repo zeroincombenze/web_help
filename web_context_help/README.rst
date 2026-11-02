@@ -1,10 +1,10 @@
-================================================
-|icon| Context help/Aiuto contestuale 18.0.1.0.9
-================================================
+=================================================
+|icon| Context help/Aiuto contestuale 12.0.1.0.10
+=================================================
 
 **Context help button, pages written in RST by each module**
 
-.. |icon| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/18.0/web_context_help/static/description/icon.png
+.. |icon| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/12.0/web_context_help/static/description/icon.png
 
 
 .. contents::
@@ -59,7 +59,7 @@ utilizzabile.
 
 |thumbnail|
 
-.. |thumbnail| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/18.0/web_context_help/static/description/
+.. |thumbnail| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/12.0/web_context_help/static/description/
 
 
 Configuration | Configurazione
@@ -91,11 +91,11 @@ the help window. The **Summary** button in the header lists, grouped by module,
 the pages of every installed help module; **Ready** goes back to the home page.
 Users allowed to change the help pages also see **Edit**, which opens the page
 in the backend: the home page itself can be adapted like any other page.
-In the editor, the film button of the floating toolbar (or the */Help video*
-command) lists the videos of the video directory: the chosen one is inserted
-after the current paragraph, as a player started by a click. To remove a
-video, press Backspace in the line after it or Delete in the line before it. In developer mode
-the **</>** button shows the HTML code of the page.
+In the page form, the **Insert video** button lists the videos of the video
+directory: the chosen one is inserted, as a player started by a click, at the
+end of the page or after the paragraph holding the text written in *After the
+text*. In developer mode the **</>** button of the editor shows the HTML code
+of the page, where a video can be moved or removed.
 
 Press the |sos| button in the control panel. Pages are looked up by view xmlid,
 then by model and view type, then by model; otherwise an automatic page lists
@@ -192,8 +192,9 @@ Rules
 Without writing RST, a help editor chooses which page is shown from
 *Help ‣ Help Editor ‣ Help Rules* or from the **Rules** tab of
 a page: field of the page model (selection, boolean or many2one), *is* or *is
-not*, and the values (selection), the checkbox (boolean) or the record
-(many2one). A page with rules is shown when one of them is met, and the
+not*, and the values (selection: their keys comma separated, e.g.
+``draft, sent``, listed in *Allowed values*), the checkbox (boolean) or the
+record (many2one). A page with rules is shown when one of them is met, and the
 ``:when:`` of its source too.
 
 The rules apply to the **Clear cut** pages only: a clear cut page is shown only
@@ -239,6 +240,27 @@ the first matching condition, inline markup allowed, roles not allowed; write
 ``\ `` before the role when it is glued to the previous word.
 Roles ``:field:`` and ``:tour:`` highlight a field or run a tour in the Odoo tab.
 
+Text that makes sense only with another module goes in ``help-if``: it is
+shown only when the module is installed, or the model exists. The pages are
+rebuilt when a module or model named by a condition is installed or removed,
+in whatever order the modules are installed.
+
+::
+
+    .. help-if:: module = sale
+
+       Invoicing from sale order
+       -------------------------
+
+       RST shown only when sale is installed (sections allowed)
+
+    .. help-if:: model = sale.order and module != purchase
+
+       RST shown when sale.order exists and purchase is not installed
+
+Conditions: ``module`` or ``model``, ``=`` (any of the names joined by comma
+is installed / exists) or ``!=`` (none of them), several joined by ``and``.
+
 .. |sos| unicode:: U+1F6DF
 
 
@@ -251,6 +273,9 @@ Getting started | Primi passi
 
 Prerequisites | Prerequisiti
 ----------------------------
+
+* python 3.7
+* postgresql 9.6+ (best 10.0+)
 
 ::
 
@@ -280,15 +305,15 @@ Installation | Installazione
 +---------------------------------+------------------------------------------+
 | Suggested deployment is:        | Posizione suggerita per l'installazione: |
 +---------------------------------+------------------------------------------+
-| $HOME/18.0 |
+| $HOME/12.0 |
 +----------------------------------------------------------------------------+
 
 ::
 
     # Odoo repository installation; OCB repository must be installed
-    deploy_odoo clone -r web_help -b 18.0 -G zero -p $HOME/18.0
+    deploy_odoo clone -r web_help -b 12.0 -G zero -p $HOME/12.0
     # Upgrade virtual environment
-    vem amend $HOME/18.0/venv_odoo
+    vem amend $HOME/12.0/venv_odoo
 
 
 
@@ -297,8 +322,8 @@ Upgrade | Aggiornamento
 
 ::
 
-    deploy_odoo update -r web_help -b 18.0 -G zero -p $HOME/18.0
-    vem amend $HOME/18.0/venv_odoo
+    deploy_odoo update -r web_help -b 12.0 -G zero -p $HOME/12.0
+    vem amend $HOME/12.0/venv_odoo
     # Adjust following statements as per your system
     sudo systemctl restart odoo
 
@@ -335,8 +360,15 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
-18.0.1.0.9 (2026-10-31)
-~~~~~~~~~~~~~~~~~~~~~~~
+12.0.1.0.10 (2026-11-01)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Migrated from 18.0 to 12.0: control panel button and form tracking for the Odoo 12 web client, Insert video wizard, rule values of selection fields written as keys
+* [QUA] Test coverage 91% (1318: 122+1196) [0 TestPoints] - quality rating 51 (target 100)
+* [IMP] Help sources: new ``help-if`` directive: content shown only when a module is installed or a model exists (``module = sale``, ``model != sale.order``); the pages are rebuilt when a module or model named by a condition is installed or removed
+
+12.0.0
+~~~~~~
 
 * [IMP] Help pages: standard layout: Contents, Description, How to insert a new record (form only), Suggestions for search (list and kanban only), How to update a record (form only), How to set up, Report and export file; Example and FAQ on their own pages, footer last
 * [IMP] Help window: the page starts with its table of contents (Indice in Italian), built from its sections, footer excepted
@@ -346,8 +378,8 @@ ChangeLog History | Cronologia modifiche
 * [QUA] Test coverage 95% (1135: 59+1076) [0 TestPoints] - quality rating 54 (target 100)
 * [IMP] Help window: new **Topic** button (Argomento in Italian), back to the help page of the current Odoo view after moving to other pages; hidden when that page, or its FAQ / Fields page, is shown
 
-18.0.1.0.8 (2026-10-30)
-~~~~~~~~~~~~~~~~~~~~~~~
+12.0.0
+~~~~~~
 
 * [IMP] List pages no longer get the "Searching with the wildcard" text at the end of their How to search section: the wildcard search is explained once, in the "Ready help" part of the help home page
 * [FIX] Documentation: the Usage section is shown again in the module page (index.html)
@@ -357,13 +389,13 @@ ChangeLog History | Cronologia modifiche
 * [IMP] RST engine aligned with 10.0
 * [IMP] Help page of the Help pages form for Odoo 10 (help/v10), shared with 10.0
 
-18.0.1.0.7 (2026-10-29)
-~~~~~~~~~~~~~~~~~~~~~~~
+12.0.0
+~~~~~~
 
 * [IMP] The Help Editor menus are in the Help app, no longer an app of their own: the Help app still opens the help window and, for the help editors, shows the Help Editor menu in the top bar
 
-18.0.1.0.6 (2026-10-22)
-~~~~~~~~~~~~~~~~~~~~~~~
+12.0.0
+~~~~~~
 
 * [IMP] help-page :when: condition on many2one fields too, the record named by xmlid or id, e.g. type_id = sale_order_type.normal_sale_type
 * [IMP] Help rules (Settings ‣ Technical ‣ Context Help ‣ Help Rules, or the Rules tab of a page): the administrator chooses which page is shown by a selection, boolean or many2one field of the record, no RST source needed; several rules of a page are alternatives; in the rule form field, operator and value are shown together
@@ -375,22 +407,22 @@ ChangeLog History | Cronologia modifiche
 * [FIX] Odoo 18 form views: the help sees the fields of the open record (the form view did not share its record with the control panel), so the :when: conditions and the rules work on the record; the help window follows the record when it is saved or the pager moves to another one
 * [FIX] Help pages: Duplicate no longer fails on the duplicate key: the copy key ends with " (copy)" (" (copy 2)" and so on for further copies); the copy has no source file, so it is a page of the administrator kept by the rebuild
 
-18.0.1.0.5 (2026-10-14)
-~~~~~~~~~~~~~~~~~~~~~~~
+12.0.0
+~~~~~~
 
 * [IMP] Help pages: Help video button in the floating toolbar of the editor (and /Help video command): inserts a video of the directory set by the system parameter web_help_video_path (default ~/Video), played on click; Backspace or Delete next to a video removes it
 * [UPD] Help pages: HTML code view (</>) shown only in developer mode, as in standard Odoo; the custom field widget is removed
 * [FIX] Help pages: the Sections of a page edited by the administrator (editor or HTML code view) are rebuilt from its content, so the added headings and text are listed and found by the search; a reset to source rebuilds them too
 
-18.0.1.0.4 (2026-10-14)
-~~~~~~~~~~~~~~~~~~~~~~~
+12.0.0
+~~~~~~
 
 * [IMP] Help menu at the top of the menu tree: opens the help home page, editable by the administrator; HTML code view (</>) on the content of the help pages, also without developer mode and as wide as the page
 * [IMP] Help window: Summary button, page listing the help pages of every installed help module, each title followed by its view type (list) or (form); Home and Edit buttons
 * [FIX] Help window: a malformed lang in the URL (e.g. ?lang=it_IT?debug=1) no longer falls back to the English page
 
-18.0.1.0.3 (2026-10-02)
-~~~~~~~~~~~~~~~~~~~~~~~
+12.0.0
+~~~~~~
 
 * [IMP] Help window: find in page box, like the browser Ctrl+F, with previous / next buttons; several words found when near each other, phrase in quotes
 * [IMP] Help window: FAQ and fields help on their own pages, opened by the FAQ and Fields buttons
@@ -398,22 +430,22 @@ ChangeLog History | Cronologia modifiche
 * [IMP] help-page :when: condition on the open record or the menu context, e.g. move_type != entry
 * [FIX] RST: a :field: role wrapped on two lines was printed as text; a :version: role with a stray ";" now fails on every version instead of cutting the text
 
-18.0.1.0.2 (2026-10-01)
-~~~~~~~~~~~~~~~~~~~~~~~
+12.0.0
+~~~~~~
 
 * [IMP] Version specific help: help-version directive and :version: role, pages built for the running Odoo version
 
-18.0.1.0.1 (2026-09-27)
-~~~~~~~~~~~~~~~~~~~~~~~
+12.0.0
+~~~~~~
 
 * [IMP] Field labels highlighted too, dialogs keep the help of the main view
 
-18.0.1.0.0 (2026-09-27)
-~~~~~~~~~~~~~~~~~~~~~~~
+12.0.0
+~~~~~~
 
 * [IMP] Migrated from 16.0: list views, invisible expressions, Odoo 18 control panel adapter
 
-18.0.0
+12.0.0
 ~~~~~~
 
 * [NEW] Context help button, help pages built from the RST sources of each module
@@ -467,7 +499,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-31
+Last Update / Ultimo aggiornamento: 2026-11-01
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status
@@ -478,8 +510,8 @@ Last Update / Ultimo aggiornamento: 2026-10-31
 .. |license opl| image:: https://img.shields.io/badge/licence-OPL-7379c3.svg
     :target: https://www.odoo.com/documentation/user/14.0/legal/licenses/licenses.html
     :alt: License: OPL
-.. |Try Me| image:: https://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-18.svg
-    :target: https://erp18.zeroincombenze.it
+.. |Try Me| image:: https://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-12.svg
+    :target: https://erp12.zeroincombenze.it
     :alt: Try Me
 .. |Zeroincombenze| image:: https://avatars0.githubusercontent.com/u/6972555?s=460&v=4
    :target: https://www.zeroincombenze.it/

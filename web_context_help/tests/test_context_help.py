@@ -12,7 +12,9 @@ import tempfile
 
 from odoo.exceptions import AccessError, ValidationError
 from odoo.modules.module import get_module_path
-from odoo.tests import common, tagged
+from odoo.tests import common
+from odoo.tools import config
+from odoo.tools.misc import mute_logger
 
 BASE = """.. help-page:: partner
    :model: res.partner
@@ -76,6 +78,18 @@ Footer
 Page created.
 """
 
+IF_SALE = """.. help-inherit:: wch_test_a.partner
+   :section: usage
+   :position: after
+
+   .. help-if:: module = wch_test_sale
+
+      Sale
+      ----
+
+      Invoice the sale orders.
+"""
+
 INHERIT = """.. help-inherit:: wch_test_a.partner
    :section: usage
    :position: after
@@ -87,7 +101,8 @@ INHERIT = """.. help-inherit:: wch_test_a.partner
 """
 
 
-@tagged("post_install", "-at_install")
+@common.at_install(False)
+@common.post_install(True)
 class TestContextHelp(common.TransactionCase):
     def setUp(self):
         super(TestContextHelp, self).setUp()
@@ -195,6 +210,40 @@ class TestContextHelp(common.TransactionCase):
         self.assertNotIn("Ordinary invoice", page.section_ids.mapped("title"))
         self.assertIn("extra", page.section_ids.mapped("label"))
 
+    def test_help_if(self):
+        """A help-if chapter appears when its module is installed later"""
+        self.modules.append(
+            ("wch_test_d", self._help_dir("d", {"common/sale.rst": IF_SALE}))
+        )
+        installed = {"module": set(), "model": set()}
+        Page = self.Page
+        group = Page._wch_group()
+        before = Page._wch_installed_checksum(self.modules, group, installed)
+        Page._wch_rebuild(self.modules, group, installed=installed)
+        page = Page.search(
+            [("key", "=", "wch_test_a.partner"), ("lang", "=", "en_US")]
+        )
+        self.assertNotIn("sale orders", page.html)
+        installed["module"].add("wch_test_sale")
+        after = Page._wch_installed_checksum(self.modules, group, installed)
+        self.assertNotEqual(before, after)
+        # a module not named by any condition does not change the checksum
+        installed["module"].add("other")
+        self.assertEqual(
+            after, Page._wch_installed_checksum(self.modules, group, installed)
+        )
+        Page._wch_rebuild(self.modules, group, installed=installed)
+        self.assertIn("sale orders", page.html)
+        self.assertIn("sale", page.section_ids.mapped("label"))
+        # the real installed modules and models
+        real = Page._wch_installed()
+        self.assertIn("web_context_help", real["module"])
+        self.assertIn("res.partner", real["model"])
+        Page.sync_sources(force=True)
+        Source = Page.env["context.help.source"]
+        self.assertTrue(Source.search([("module", "=", "__installed__")]))
+        self.assertFalse(Page.sync_sources())
+
     def test_removed_source(self):
         self._rebuild()
         page = self.Page.search([("key", "=", "wch_test_a.partner")])
@@ -296,7 +345,9 @@ class TestContextHelp(common.TransactionCase):
         self.assertEqual(lookup({"country_id": False}).key, "wch_test_a.partner")
 
     def _field(self, name):
-        return self.env["ir.model.fields"]._get("res.partner", name)
+        return self.env["ir.model.fields"].search(
+            [("model", "=", "res.partner"), ("name", "=", name)]
+        )
 
     def test_rules(self):
         self._rebuild()
@@ -309,12 +360,15 @@ class TestContextHelp(common.TransactionCase):
             {"page_id": company.id, "field_id": self._field("country_id").id}
         )
         self.assertEqual(rule.condition, "country_id = False")
-        self.assertEqual(rule.relation_model_id.model, "res.country")
+        self.assertEqual(rule.relation, "res.country")
         # the record is picked by the reference field, like the server actions
         rule.record_ref = "res.country,%d" % italy
         self.assertEqual(rule.res_id, italy)
         self.assertEqual(rule.condition, "country_id = %d" % italy)
         self.assertEqual(rule.record_ref, self.env.ref("base.it"))
+        # the record must be of the comodel of the field
+        with self.assertRaises(ValidationError), self.cr.savepoint():
+            rule.record_ref = "res.partner,%d" % self.env.ref("base.main_partner").id
 
         def lookup(values):
             return self.Page.lookup(
@@ -333,19 +387,22 @@ class TestContextHelp(common.TransactionCase):
             {
                 "page_id": company.id,
                 "field_id": self._field("type").id,
-                "selection_ids": [
-                    (
-                        6,
-                        0,
-                        self._field("type")
-                        .selection_ids.filtered(
-                            lambda s: s.value in ("invoice", "delivery")
-                        )
-                        .ids,
-                    )
-                ],
+                "selection_values": "invoice, delivery",
             }
         )
+        self.assertEqual(
+            Rule.search([], limit=1, order="id desc").condition,
+            "type = invoice, delivery",
+        )
+        # a value not of the selection is refused
+        with self.assertRaises(ValidationError), self.cr.savepoint():
+            Rule.create(
+                {
+                    "page_id": company.id,
+                    "field_id": self._field("type").id,
+                    "selection_values": "invoice, nowhere",
+                }
+            )
         self.assertEqual(
             lookup({"is_company": True, "country_id": fr, "type": "delivery"}).key,
             "wch_test_c.company",
@@ -363,12 +420,12 @@ class TestContextHelp(common.TransactionCase):
             }
         )
         self.assertEqual(rule.condition, "active != True")
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(ValidationError), self.cr.savepoint():
             Rule.create(
                 {
                     "page_id": company.id,
                     "field_id": self.env["ir.model.fields"]
-                    ._get("res.country", "code")
+                    .search([("model", "=", "res.country"), ("name", "=", "code")])
                     .id,
                 }
             )
@@ -505,12 +562,24 @@ class TestContextHelp(common.TransactionCase):
         self.assertEqual(log.mapped("found"), [False, True])
 
 
-@tagged("post_install", "-at_install")
+@common.at_install(False)
+@common.post_install(True)
 class TestContextHelpHttp(common.HttpCase):
-    def _json(self, url, params):
+    def url_open(self, url, data=None, timeout=10, headers=None):
+        """Odoo 12 url_open sends no headers, the JSON routes need them, and
+        its port is read when the module is imported, before the config"""
+        if url.startswith("/"):
+            url = "http://%s:%s%s" % (common.HOST, config["http_port"], url)
+        if data is not None:
+            return self.opener.post(url, data=data, timeout=timeout, headers=headers)
+        return self.opener.get(url, timeout=timeout, headers=headers)
+
+    def _json(self, url, params=None):
         res = self.url_open(
             url,
-            data=json.dumps({"jsonrpc": "2.0", "method": "call", "params": params}),
+            data=json.dumps(
+                {"jsonrpc": "2.0", "method": "call", "params": params or {}}
+            ),
             headers={"Content-Type": "application/json"},
         )
         return res.json()["result"]
@@ -601,7 +670,9 @@ class TestContextHelpHttp(common.HttpCase):
             },
         )
         self.assertEqual(res["key"], standard.key)
-        res = self.url_open("/web_context_help/loose/%s?lang=en_US" % own.key)
+        res = self.url_open(
+            "/web_context_help/loose/%s?lang=en_US" % own.key.replace(" ", "%20")
+        )
         self.assertIn("/web_context_help/page/%s" % standard.key, res.url)
         self.assertEqual(
             self.url_open("/web_context_help/loose/no.page").status_code, 404
@@ -679,27 +750,29 @@ class TestContextHelpHttp(common.HttpCase):
         self.assertFalse(editor.has_group("base.group_system"))
         page = Page.search([("key", "=", "web_context_help.context_help_page")])[0]
         with self.assertRaises(AccessError):
-            page.with_user(reader).write({"html": "<p>no</p>"})
-        own = page.with_user(editor).copy()
+            page.sudo(reader).write({"html": "<p>no</p>"})
+        own = page.sudo(editor).copy()
         own.write({"html": "<h2>Mine</h2><p>text</p>", "clear_cut": True})
         self.assertTrue(own.edited)
         rule = (
             self.env["context.help.rule"]
-            .with_user(editor)
+            .sudo(editor)
             .create(
                 {
                     "page_id": own.id,
                     "field_id": self.env["ir.model.fields"]
-                    ._get("context.help.page", "edited")
+                    .search(
+                        [("model", "=", "context.help.page"), ("name", "=", "edited")]
+                    )
                     .id,
                     "value_boolean": True,
                 }
             )
         )
         self.assertEqual(rule.condition, "edited = True")
-        self.env["context.help.question"].with_user(editor).search([])
+        self.env["context.help.question"].sudo(editor).search([])
         with self.assertRaises(AccessError):
-            self.env["context.help.rule"].with_user(reader).search([])
+            self.env["context.help.rule"].sudo(reader).search([])
 
     def test_videos(self):
         tmp = tempfile.mkdtemp()
@@ -735,8 +808,19 @@ class TestContextHelpHttp(common.HttpCase):
         self.assertEqual(res.content, b"webm")
         res = self.url_open("/web_context_help/video/..%2Fsecret.mp4")
         self.assertEqual(res.status_code, 404)
-        res = self.make_jsonrpc_request("/web_context_help/videos")
+        res = self._json("/web_context_help/videos")
         self.assertEqual(len(res["videos"]), 2)
+        # the editor inserts a video in a page, after a paragraph
+        Page.sync_sources(force=True)
+        page = Page.search([("key", "=", "web_context_help.home")], limit=1)
+        page.html = "<p>First</p><ul><li>item two</li></ul><p>Last</p>"
+        wizard = self.env["context.help.video.wizard"].create(
+            {"page_id": page.id, "video": "sale/order.webm", "after_text": "Item  two"}
+        )
+        wizard.action_insert()
+        self.assertIn('src="/web_context_help/video/sale/order.webm"', page.html)
+        self.assertLess(page.html.index("</ul>"), page.html.index("<video"))
+        self.assertLess(page.html.index("<video"), page.html.index("Last"))
         # only the administrator lists the videos
         self.env["res.users"].create(
             {
@@ -749,5 +833,6 @@ class TestContextHelpHttp(common.HttpCase):
         self.authenticate("wch_video", "wch_video_pwd")
         res = self.url_open("/web_context_help/video/intro.mp4")
         self.assertEqual(res.status_code, 200)
-        with self.assertRaises(Exception):
-            self.make_jsonrpc_request("/web_context_help/videos")
+        # the refusal is expected: Odoo 12 logs it as an ERROR
+        with self.assertRaises(Exception), mute_logger("odoo.http"):
+            self._json("/web_context_help/videos")

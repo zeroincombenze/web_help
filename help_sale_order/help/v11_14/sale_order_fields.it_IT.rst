@@ -18,7 +18,7 @@ Campi principali
 * :field:`Listino prezzi <pricelist_id>`: prezzi e sconti automatici per il
   cliente (impostazione dei listini).
 * :field:`Termini di pagamento <payment_term_id>`: scadenze delle fatture.
-* **Sconto %** sulle righe dell'ordine (impostazione *Sconti*).
+* :version:`<13|**Sconto (%)**;*|**Sconto %**` sulle righe dell'ordine (impostazione *Sconti*).
 * :field:`Addetto vendite <user_id>` e :field:`team di vendita <team_id>`: chi
   segue l'ordine, usati nei rendiconti.
 * :field:`Riferimento cliente <client_order_ref>`: il numero d'ordine del

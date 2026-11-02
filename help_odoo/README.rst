@@ -1,10 +1,10 @@
 ==========================================
-|icon| Help for Odoo/Aiuto Odoo 18.0.1.0.1
+|icon| Help for Odoo/Aiuto Odoo 12.0.1.0.2
 ==========================================
 
 **Installs all the context help modules**
 
-.. |icon| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/18.0/help_odoo/static/description/icon.png
+.. |icon| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/12.0/help_odoo/static/description/icon.png
 
 
 .. contents::
@@ -42,7 +42,7 @@ dipendono i moduli di aiuto (Fatturazione, Vendite, Acquisti, Contatti).
 
 |thumbnail|
 
-.. |thumbnail| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/18.0/help_odoo/static/description/
+.. |thumbnail| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/12.0/help_odoo/static/description/
 
 
 Getting started | Primi passi
@@ -53,6 +53,9 @@ Getting started | Primi passi
 
 Prerequisites | Prerequisiti
 ----------------------------
+
+* python 3.7
+* postgresql 9.6+ (best 10.0+)
 
 ::
 
@@ -82,15 +85,15 @@ Installation | Installazione
 +---------------------------------+------------------------------------------+
 | Suggested deployment is:        | Posizione suggerita per l'installazione: |
 +---------------------------------+------------------------------------------+
-| $HOME/18.0 |
+| $HOME/12.0 |
 +----------------------------------------------------------------------------+
 
 ::
 
     # Odoo repository installation; OCB repository must be installed
-    deploy_odoo clone -r web_help -b 18.0 -G zero -p $HOME/18.0
+    deploy_odoo clone -r web_help -b 12.0 -G zero -p $HOME/12.0
     # Upgrade virtual environment
-    vem amend $HOME/18.0/venv_odoo
+    vem amend $HOME/12.0/venv_odoo
 
 
 
@@ -99,8 +102,8 @@ Upgrade | Aggiornamento
 
 ::
 
-    deploy_odoo update -r web_help -b 18.0 -G zero -p $HOME/18.0
-    vem amend $HOME/18.0/venv_odoo
+    deploy_odoo update -r web_help -b 12.0 -G zero -p $HOME/12.0
+    vem amend $HOME/12.0/venv_odoo
     # Adjust following statements as per your system
     sudo systemctl restart odoo
 
@@ -137,14 +140,19 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
-18.0.1.0.1 (2026-10-30)
+12.0.1.0.2 (2026-11-01)
 ~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Migrated from 18.0 to 12.0 (requires web_context_help 12.0.1.0.10)
+
+12.0.0
+~~~~~~
 
 * [FIX] web_context_help in the dependencies
 * [FIX] Website of the repository
 
-18.0.1.0.0 (2026-10-29)
-~~~~~~~~~~~~~~~~~~~~~~~
+12.0.0
+~~~~~~
 
 * [NEW] Module installing all the help modules
 
@@ -197,7 +205,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-30
+Last Update / Ultimo aggiornamento: 2026-11-01
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status
@@ -208,8 +216,8 @@ Last Update / Ultimo aggiornamento: 2026-10-30
 .. |license opl| image:: https://img.shields.io/badge/licence-OPL-7379c3.svg
     :target: https://www.odoo.com/documentation/user/14.0/legal/licenses/licenses.html
     :alt: License: OPL
-.. |Try Me| image:: https://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-18.svg
-    :target: https://erp18.zeroincombenze.it
+.. |Try Me| image:: https://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-12.svg
+    :target: https://erp12.zeroincombenze.it
     :alt: Try Me
 .. |Zeroincombenze| image:: https://avatars0.githubusercontent.com/u/6972555?s=460&v=4
    :target: https://www.zeroincombenze.it/

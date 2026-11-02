@@ -15,7 +15,7 @@ Come modificare un record
 #. Cambiare il tipo da *Persona* ad *Azienda* permette al contatto di avere
    contatti e indirizzi propri. Quando una persona riporta il nome di
    un'azienda (ad es. da una registrazione sul sito), :version:`11|**Crea
-   compagnia**;*|**Crea azienda**` la trasforma in una nuova azienda.
+   compagnia**;12|**Create company**;*|**Crea azienda**` la trasforma in una nuova azienda.
 #. I documenti già creati conservano l'indirizzo con cui sono stati fatti:
    cambiarlo sul documento stesso.
 #. :version:`<=12|**Attivo** in alto a destra archivia il contatto;*|**Azione

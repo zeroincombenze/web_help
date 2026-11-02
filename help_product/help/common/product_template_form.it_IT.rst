@@ -24,7 +24,8 @@ oppure come prodotti con varianti.
 .. help-version:: <16
 
    In Odoo il :field:`tipo di prodotto <type>` distingue le merci
-   **Consumabile** e **Prodotto Stoccabile** da un **Servizio**; :field:`Può
+   **Consumabile** e :version:`<=11|**Prodotto Stoccabile**;12-13|**Prodotto
+   immagazzinabile**;*|**Prodotto stoccabile**` da un **Servizio**; :field:`Può
    essere venduto <sale_ok>` e :field:`Può essere acquistato <purchase_ok>`
    decidono dove il prodotto viene proposto. Il :field:`riferimento interno
    <default_code>` è il codice, il :field:`costo <standard_price>` e il

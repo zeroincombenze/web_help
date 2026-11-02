@@ -1,3 +1,10 @@
+12.0.1.0.10 (2026-11-01)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Migrated from 18.0 to 12.0: control panel button and form tracking for the Odoo 12 web client, Insert video wizard, rule values of selection fields written as keys
+* [QUA] Test coverage 91% (1318: 122+1196) [0 TestPoints] - quality rating 51 (target 100)
+* [IMP] Help sources: new ``help-if`` directive: content shown only when a module is installed or a model exists (``module = sale``, ``model != sale.order``); the pages are rebuilt when a module or model named by a condition is installed or removed
+
 18.0.1.0.9 (2026-10-31)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

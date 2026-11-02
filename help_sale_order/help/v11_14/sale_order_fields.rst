@@ -17,7 +17,7 @@ Main fields
 * :field:`Pricelist <pricelist_id>`: prices and automatic discounts for the
   customer (pricelist setting).
 * :field:`Payment terms <payment_term_id>`: due dates of the invoices.
-* **Disc.%** on the order lines (*Discounts* setting).
+* :version:`<13|**Discount (%)**;*|**Disc.%**` on the order lines (*Discounts* setting).
 * :field:`Salesperson <user_id>` and :field:`sales team <team_id>`: who follows
   the order, used in the reports.
 * :field:`Customer reference <client_order_ref>`: the customer's own order

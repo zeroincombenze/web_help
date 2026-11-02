@@ -8,7 +8,7 @@ Esempi
 .. help-version:: <13
 
    Se il cliente non ha ancora pagato e il registro consente l'annullamento
-   delle registrazioni, premere **Annullare fattura**,
+   delle registrazioni, premere :version:`10|**Annullare fattura**;11|**Cancel Invoice**;*|**Annulla**`,
    :version:`10|**Riportare in bozza**;*|**Reimposta a bozza**`, correggere il
    prezzo e premere :version:`10|**Validare**;*|**Valida**`: la fattura
    mantiene il suo numero. Altrimenti premere :version:`10|**Nota di

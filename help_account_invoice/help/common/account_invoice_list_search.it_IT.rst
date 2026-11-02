@@ -27,11 +27,13 @@ Suggerimenti per la ricerca
   pagate con la scadenza passata; *Data fattura* e *Data di scadenza*
   selezionano un periodo.
   :version:`>=14|*Da controllare* mostra le fatture da verificare.`
-  *Aggiungi filtro personalizzato* costruisce qualsiasi condizione.
+  :version:`10|*Crea filtro personalizzato*;11|*Aggiungi filtro*;*|*Aggiungi
+  filtro personalizzato*` costruisce qualsiasi condizione.
 * **Raggruppa per**: :version:`<13|*Partner*, *Addetto vendite*,
   *Stato*;13-14|*Addetto vendite*, *Stato*;*|*Addetto vendite*, *Partner*,
   *Stato*, *Registro*`, *Data fattura* o *Data di scadenza* (anno,
   trimestre, mese, settimana, giorno), con i subtotali.
-* **Preferiti ‣ Salva ricerca attuale** conserva filtri e raggruppamenti per
+* :version:`<=12|**Preferiti ‣ Salva la ricerca corrente**;*|**Preferiti ‣ Salva
+  ricerca attuale**` conserva filtri e raggruppamenti per
   dopo.
 * Le viste kanban, pivot e grafico sono in alto a destra, quando disponibili.

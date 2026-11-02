@@ -21,7 +21,7 @@ How to set up
      dates, e.g. *30 days end of month* or 30% now and 70% in 60 days.
    * **Invoicing ‣ Configuration ‣ Accounting ‣ Journals**: the sales and
      purchase journals and their number sequence. *Allow Cancelling Entries*
-     (module *Cancel Journal Entries*) enables **Cancel Invoice**.
+     (module *Cancel Journal Entries*) enables :version:`<12|**Cancel Invoice**;*|**Cancel**`.
    * **Invoicing ‣ Configuration ‣ Accounting ‣ Taxes** and **Fiscal
      Positions**.
    * On the partner, **Invoicing** tab (*Accounting* tab for an accountant):

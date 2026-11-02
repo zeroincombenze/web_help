@@ -60,7 +60,7 @@ Domande frequenti
       Quantità, prezzi e nuove righe si modificano direttamente, vedere *Modifica
       record*. Se l'ordine è *Bloccato*, un responsabile acquisti deve prima
       premere **Sblocca**. Per modifiche importanti, annullarlo, premere
-      **Imposta come Bozza**, modificarlo e confermarlo di nuovo.
+      :version:`12|**Imposta a bozza**;*|**Imposta come Bozza**`, modificarlo e confermarlo di nuovo.
 
    .. help-question:: Perché non riesco ad annullare l'ordine?
 

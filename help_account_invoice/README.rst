@@ -1,10 +1,10 @@
 =================================================
-|icon| Help for invoices/Aiuto fatture 18.0.1.0.2
+|icon| Help for invoices/Aiuto fatture 12.0.1.0.3
 =================================================
 
 **Context help pages for customer invoices and vendor bills**
 
-.. |icon| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/18.0/help_account_invoice/static/description/icon.png
+.. |icon| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/12.0/help_account_invoice/static/description/icon.png
 
 
 .. contents::
@@ -27,6 +27,9 @@ Every page follows the standard layout of web_context_help:
 * **Description**: what invoices are, their statuses and the main fields
 * **How to insert a new record** (form): step-by-step guide to create, validate
   and send an invoice or a vendor bill
+* **Invoicing from sale order** (form, only when the Sales app is installed):
+  invoicing policy, invoice status, regular invoices and down payments,
+  several orders at once
 * **Suggestions for search** (list): menus, search, filters and groupings
 * **How to update a record** (form): changing an invoice, registering payments,
   credit notes, cancelling and deleting
@@ -55,6 +58,9 @@ Ogni pagina segue la struttura standard di web_context_help:
 * **Descrizione**: cosa sono le fatture, i loro stati e i campi principali
 * **Come inserire un nuovo record** (maschera): guida passo passo per creare,
   validare e inviare una fattura o una fattura fornitore
+* **Fatturazione da ordine di vendita** (maschera, solo con l'app Vendite
+  installata): politica di fatturazione, stato fattura, fatture normali e
+  anticipi, più ordini insieme
 * **Suggerimenti per la ricerca** (lista): menu, ricerca, filtri e
   raggruppamenti
 * **Come modificare un record** (maschera): modificare una fattura, registrare
@@ -73,7 +79,7 @@ della versione di Odoo in uso.
 
 |thumbnail|
 
-.. |thumbnail| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/18.0/help_account_invoice/static/description/
+.. |thumbnail| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/12.0/help_account_invoice/static/description/
 
 
 Getting started | Primi passi
@@ -84,6 +90,9 @@ Getting started | Primi passi
 
 Prerequisites | Prerequisiti
 ----------------------------
+
+* python 3.7
+* postgresql 9.6+ (best 10.0+)
 
 ::
 
@@ -113,15 +122,15 @@ Installation | Installazione
 +---------------------------------+------------------------------------------+
 | Suggested deployment is:        | Posizione suggerita per l'installazione: |
 +---------------------------------+------------------------------------------+
-| $HOME/18.0 |
+| $HOME/12.0 |
 +----------------------------------------------------------------------------+
 
 ::
 
     # Odoo repository installation; OCB repository must be installed
-    deploy_odoo clone -r web_help -b 18.0 -G zero -p $HOME/18.0
+    deploy_odoo clone -r web_help -b 12.0 -G zero -p $HOME/12.0
     # Upgrade virtual environment
-    vem amend $HOME/18.0/venv_odoo
+    vem amend $HOME/12.0/venv_odoo
 
 
 
@@ -130,8 +139,8 @@ Upgrade | Aggiornamento
 
 ::
 
-    deploy_odoo update -r web_help -b 18.0 -G zero -p $HOME/18.0
-    vem amend $HOME/18.0/venv_odoo
+    deploy_odoo update -r web_help -b 12.0 -G zero -p $HOME/12.0
+    vem amend $HOME/12.0/venv_odoo
     # Adjust following statements as per your system
     sudo systemctl restart odoo
 
@@ -168,18 +177,24 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
-18.0.1.0.2 (2026-10-31)
+12.0.1.0.3 (2026-11-01)
 ~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Migrated from 18.0 to 12.0 (requires web_context_help 12.0.1.0.10)
+* [IMP] Invoice form: new section Invoicing from sale order (Fatturazione da ordine di vendita), shown only when the sale module is installed
+
+12.0.0
+~~~~~~
 
 * [IMP] Help pages in the standard layout: sections renamed How to insert a new record, How to update a record, Suggestions for search, How to set up, Report and export file (Italian titles too); the Report section explains how to export the records to a file
 
-18.0.1.0.1 (2026-10-25)
-~~~~~~~~~~~~~~~~~~~~~~~
+12.0.0
+~~~~~~
 
 * [IMP] Help pages declared with :priority: 96, the priority of the module pages: the last fallback after the pages of the administrator (requires web_context_help 18.0.1.0.6)
 
-18.0.1.0.0 (2026-10-02)
-~~~~~~~~~~~~~~~~~~~~~~~
+12.0.0
+~~~~~~
 
 * [NEW] Help pages for invoice list and form, English and Italian, Odoo 10 to 18 (account.invoice before 13.0, account.move since 13.0, journal entries excluded)
 
@@ -232,7 +247,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-31
+Last Update / Ultimo aggiornamento: 2026-11-01
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status
@@ -243,8 +258,8 @@ Last Update / Ultimo aggiornamento: 2026-10-31
 .. |license opl| image:: https://img.shields.io/badge/licence-OPL-7379c3.svg
     :target: https://www.odoo.com/documentation/user/14.0/legal/licenses/licenses.html
     :alt: License: OPL
-.. |Try Me| image:: https://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-18.svg
-    :target: https://erp18.zeroincombenze.it
+.. |Try Me| image:: https://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-12.svg
+    :target: https://erp12.zeroincombenze.it
     :alt: Try Me
 .. |Zeroincombenze| image:: https://avatars0.githubusercontent.com/u/6972555?s=460&v=4
    :target: https://www.zeroincombenze.it/

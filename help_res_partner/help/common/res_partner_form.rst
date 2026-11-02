@@ -52,9 +52,10 @@ FAQ
 
    .. help-question:: Why can't I change the address of a contact?
 
-      A contact of type *Contact* uses the address of its company: press
-      **(edit)** next to the address to change it on the company, or change the
-      address type to *Invoice address*, *Shipping address* or *Other address* to
+      A contact of type *Contact* uses the address of its company:
+      :version:`<12|press **(edit)** next to the address to change it on the
+      company;*|it is read-only, under *Company Address*: change it on the
+      company`, or change the address type to *Invoice address*, *Shipping address* or *Other address* to
       give the contact its own address.
 
    .. help-question:: Why is the Accounting tab empty for a person of a company?

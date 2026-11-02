@@ -28,7 +28,7 @@ Come configurare
      acquisti e la loro sequenza dei numeri.
      :version:`10|*Consenti cancellazione registrazioni*;*|*Consentire
      annullamento registrazioni*` (modulo *Annullamento registrazioni
-     contabili*) abilita **Annullare fattura**.
+     contabili*) abilita :version:`10|**Annullare fattura**;11|**Cancel Invoice**;*|**Annulla**`.
    * **Fatturazione ‣ Configurazione ‣ Contabilità ‣**
      :version:`10|**IVA**;*|**Imposte**` e **Posizioni fiscali**.
    * Sul partner, scheda **Fatturazione** (scheda *Contabilità* per un

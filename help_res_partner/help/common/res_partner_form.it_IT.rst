@@ -19,7 +19,8 @@ Descrizione
    di azienda <company_type>` distingue un'**Azienda** da una **Persona**; una
    persona può appartenere a un'azienda tramite il campo :field:`azienda
    <parent_id>`. Un'azienda raggruppa le sue persone e i suoi indirizzi
-   (fatturazione, spedizione, altro) nella scheda **Contatti & Indirizzi**; i dati
+   (fatturazione, spedizione, altro) nella scheda :version:`12|**Contatti e indirizzi**;*|**Contatti &
+   Indirizzi**`; i dati
    commerciali (partita IVA, termini di pagamento, listino, conti) si gestiscono
    sull'azienda e sono condivisi con tutti loro.
 
@@ -54,8 +55,10 @@ Domande frequenti
 
    .. help-question:: Perché non riesco a cambiare l'indirizzo di un contatto?
 
-      Un contatto di tipo *Contatto* usa l'indirizzo della sua azienda: premere
-      **(edit)** accanto all'indirizzo per cambiarlo sull'azienda, oppure
+      Un contatto di tipo *Contatto* usa l'indirizzo della sua azienda:
+      :version:`<12|premere **(edit)** accanto all'indirizzo per cambiarlo
+      sull'azienda;*|è in sola lettura, sotto *Company Address*: cambiarlo
+      sull'azienda`, oppure
       cambiare il tipo indirizzo in *Indirizzo fattura*, *Indirizzo di
       Spedizione* o *Altro Indirizzo* per dare al contatto un indirizzo proprio.
 

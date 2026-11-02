@@ -8,8 +8,8 @@ Suggerimenti per la ricerca
    * Nell'app **Acquisti**, :version:`11|**Acquisto**;*|**Acquisti**` **‣
      Richieste di preventivo** elenca le RdP, **‣ Ordini di acquisto** gli
      ordini da approvare e quelli confermati, **Controllo ‣ Fatture
-     fornitore** le fatture e **Controllo ‣ Prodotti in arrivo** la merce
-     ancora da ricevere.
+     fornitore** le fatture\ :version:`11| e **Controllo ‣ Prodotti in
+     arrivo** la merce ancora da ricevere`.
 
 .. help-version:: >=13
 

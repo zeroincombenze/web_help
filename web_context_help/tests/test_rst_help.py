@@ -8,7 +8,9 @@ import os
 import shutil
 import tempfile
 
-from odoo.tests import common, tagged
+import unittest
+
+from odoo.tests import common
 
 from ..lib import html_page, rst_help
 
@@ -43,8 +45,13 @@ Bye.
 """
 
 
-@tagged("post_install", "-at_install")
-class TestRstHelp(common.BaseCase):
+@common.tagged("standard", "post_install", "-at_install")
+class TestRstHelp(unittest.TestCase):
+    # no database: BaseCase.assertRaises needs an environment. Odoo 12 runs
+    # only the tests having tags and a module, set here as BaseCase would
+    test_module = "web_context_help"
+    test_class = "TestRstHelp"
+
     def setUp(self):
         super(TestRstHelp, self).setUp()
         self.help_dir = tempfile.mkdtemp()
@@ -220,9 +227,7 @@ Press :version:`16|**View Invoice**;17|*Draft Invoice*;*|Create Draft` now.
 """
         html = {}
         for version in (16, 17, 18):
-            doc = rst_help.parse(
-                text, "<t>", self.help_dir, "v16_20", version=version
-            )
+            doc = rst_help.parse(text, "<t>", self.help_dir, "v16_20", version=version)
             html[version] = rst_help.to_html(doc)
         self.assertNotIn("Create Draft</strong>", html[16])
         self.assertIn('data-field="x"', html[16])
@@ -274,6 +279,59 @@ Press :version:`16|**View Invoice**;17|*Draft Invoice*;*|Create Draft` now.
             ".. help-page:: p\n   :when: bad\n", "<t>", self.help_dir, "v16_20"
         )
         self.assertIsNone(doc.wch_page)
+
+    def test_help_if(self):
+        match = rst_help.installed_match
+        installed = {"module": {"account", "sale"}, "model": {"sale.order"}}
+        self.assertTrue(match("module = sale", installed))
+        self.assertTrue(match("module = purchase, sale", installed))
+        self.assertFalse(match("module = purchase", installed))
+        self.assertTrue(match("module != purchase", installed))
+        self.assertFalse(match("module != purchase, sale", installed))
+        self.assertTrue(match("model = sale.order and module = account", installed))
+        self.assertFalse(match("model = sale.order and module != account", installed))
+        # unknown: nothing installed
+        self.assertFalse(match("module = sale", None))
+        self.assertTrue(match("module != sale", None))
+        self.assertRaises(ValueError, match, "move_type = entry", installed)
+        self.assertRaises(ValueError, match, "", installed)
+        text = """Invoice
+=======
+
+.. help-if:: module = sale
+
+   From sale order
+   ---------------
+
+   Press **Create Invoice**.
+
+.. help-if:: model != sale.order
+
+   No sale.
+
+.. help-if:: state = draft
+
+   Wrong.
+"""
+        doc = rst_help.parse(
+            text, "<t>", self.help_dir, "v16_20", installed=installed
+        )
+        html = rst_help.to_html(doc)
+        self.assertIn("<h2>From sale order</h2>", html)
+        self.assertNotIn("No sale", html)
+        # an invalid condition keeps nothing
+        self.assertNotIn("Wrong.", html)
+        html = rst_help.to_html(
+            rst_help.parse(text, "<t>", self.help_dir, "v16_20", installed={})
+        )
+        self.assertNotIn("From sale order", html)
+        self.assertIn("No sale", html)
+        # names of the conditions, also inside included files and inherits
+        self._write("common/inc.rst", "   .. help-if:: model = a.b, c.d\n\n      x\n")
+        self.assertEqual(
+            rst_help.installed_names(self.help_dir, "v16_20"),
+            {("model", "a.b"), ("model", "c.d")},
+        )
 
     def test_version_role_semicolon(self):
         text = "Press :version:`<17|**Edit**; then **Save**;*|nothing`."
@@ -431,7 +489,7 @@ Press :version:`16|**View Invoice**;17|*Draft Invoice*;*|Create Draft` now.
         self.assertEqual(body.count("<button"), 2)
         self.assertIn('title="Occorrenza successiva"', body)
         self.assertEqual(html_page.ASK_ENABLED, "wch_ask" in body)
-        self.assertRegex(body, r"help_window\.css\?v=[0-9]+")
+        self.assertRegexpMatches(body, r"help_window\.css\?v=[0-9]+")
         body = html_page.render_auto(
             "P", [("name", "Name", "a<b")], model="res.partner"
         )

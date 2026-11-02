@@ -1,10 +1,10 @@
 ==================================================================
-|icon| Help for purchase order/Aiuto ordini di acquisto 18.0.1.0.2
+|icon| Help for purchase order/Aiuto ordini di acquisto 12.0.1.0.3
 ==================================================================
 
 **Context help pages for purchase orders**
 
-.. |icon| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/18.0/help_purchase_order/static/description/icon.png
+.. |icon| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/12.0/help_purchase_order/static/description/icon.png
 
 
 .. contents::
@@ -52,7 +52,7 @@ versione di Odoo in uso.
 
 |thumbnail|
 
-.. |thumbnail| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/18.0/help_purchase_order/static/description/
+.. |thumbnail| image:: https://raw.githubusercontent.com/zeroincombenze/web_help/12.0/help_purchase_order/static/description/
 
 
 Getting started | Primi passi
@@ -63,6 +63,9 @@ Getting started | Primi passi
 
 Prerequisites | Prerequisiti
 ----------------------------
+
+* python 3.7
+* postgresql 9.6+ (best 10.0+)
 
 ::
 
@@ -92,15 +95,15 @@ Installation | Installazione
 +---------------------------------+------------------------------------------+
 | Suggested deployment is:        | Posizione suggerita per l'installazione: |
 +---------------------------------+------------------------------------------+
-| $HOME/18.0 |
+| $HOME/12.0 |
 +----------------------------------------------------------------------------+
 
 ::
 
     # Odoo repository installation; OCB repository must be installed
-    deploy_odoo clone -r web_help -b 18.0 -G zero -p $HOME/18.0
+    deploy_odoo clone -r web_help -b 12.0 -G zero -p $HOME/12.0
     # Upgrade virtual environment
-    vem amend $HOME/18.0/venv_odoo
+    vem amend $HOME/12.0/venv_odoo
 
 
 
@@ -109,8 +112,8 @@ Upgrade | Aggiornamento
 
 ::
 
-    deploy_odoo update -r web_help -b 18.0 -G zero -p $HOME/18.0
-    vem amend $HOME/18.0/venv_odoo
+    deploy_odoo update -r web_help -b 12.0 -G zero -p $HOME/12.0
+    vem amend $HOME/12.0/venv_odoo
     # Adjust following statements as per your system
     sudo systemctl restart odoo
 
@@ -147,20 +150,25 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
-18.0.1.0.2 (2026-10-31)
+12.0.1.0.3 (2026-11-01)
 ~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Migrated from 18.0 to 12.0 (requires web_context_help 12.0.1.0.10)
+
+12.0.0
+~~~~~~
 
 * [IMP] Help pages for Odoo 11-14 (help/v11_14) and 15 (help/v15): menus, buttons, fields and settings of each version, from 11.0 to 15.0, in English and Italian
 * [IMP] Help pages in the standard layout: sections renamed How to insert a new record, How to update a record, Suggestions for search, How to set up, Report and export file (Italian titles too); the Report section explains how to export the records to a file
 
-18.0.1.0.1 (2026-10-30)
-~~~~~~~~~~~~~~~~~~~~~~~
+12.0.0
+~~~~~~
 
 * [IMP] Help pages shared with 10.0: the common pages hold the text of every Odoo version in help-version blocks, the help directory carries both v10 and v16_20
 * [FIX] Website of the repository
 
-18.0.1.0.0 (2026-10-29)
-~~~~~~~~~~~~~~~~~~~~~~~
+12.0.0
+~~~~~~
 
 * [NEW] Help pages for purchase order list and form, English and Italian
 
@@ -213,7 +221,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-31
+Last Update / Ultimo aggiornamento: 2026-11-01
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status
@@ -224,8 +232,8 @@ Last Update / Ultimo aggiornamento: 2026-10-31
 .. |license opl| image:: https://img.shields.io/badge/licence-OPL-7379c3.svg
     :target: https://www.odoo.com/documentation/user/14.0/legal/licenses/licenses.html
     :alt: License: OPL
-.. |Try Me| image:: https://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-18.svg
-    :target: https://erp18.zeroincombenze.it
+.. |Try Me| image:: https://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-12.svg
+    :target: https://erp12.zeroincombenze.it
     :alt: Try Me
 .. |Zeroincombenze| image:: https://avatars0.githubusercontent.com/u/6972555?s=460&v=4
    :target: https://www.zeroincombenze.it/

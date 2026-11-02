@@ -129,10 +129,12 @@ Filtri, raggruppamenti e preferiti
   sull'intestazione di un gruppo per aprirlo o chiuderlo: mostra il numero di
   record e i totali delle colonne numeriche. **Aggiungi gruppo
   personalizzato** raggruppa per qualsiasi campo.
-* **Preferiti**: **Salva ricerca corrente** conserva ricerca, filtri e
-  raggruppamenti con un nome; :version:`<=10|*Usa come predefinito*;*|*Filtro
-  predefinito*` la applica ogni volta che il menu viene aperto e
-  :version:`<=10|*Condividi con tutti gli utenti*;*|*Condiviso*` la rende
+* **Preferiti**: :version:`<=12|**Salva la ricerca corrente**;*|**Salva ricerca
+  corrente**` conserva ricerca, filtri e raggruppamenti con un nome;
+  :version:`10|*Utilizza per default*;11|*Utilizza come predefinita*;12-13|*Utilizzare
+  come predefinita*;*|*Filtro predefinito*` la applica ogni volta che il menu
+  viene aperto e :version:`<=11|*Condividi con tutti gli utenti*;12-13|*Condividere
+  con tutti gli utenti*;*|*Condiviso*` la rende
   visibile a tutti.
 
 .. _navigation:
@@ -183,7 +185,8 @@ Esportare
 #. Scegliere i campi: cercarli in *Campi disponibili* e aggiungerli a *Campi da
    esportare*, poi trascinarli per cambiarne l'ordine. Un elenco di campi usato
    spesso si può salvare e riprendere:
-   :version:`<=12|**Salva l'elenco dei campi**;*|**Modello ‣ Nuovo modello**`.
+   :version:`<=11|**Salva l'elenco dei campi**;12|**Salva elenco
+   campi**;*|**Modello ‣ Nuovo modello**`.
 #. Spuntare :version:`<=10|*Esportazione compatibile alla successiva
    importazione*;<=12|*Esportazione compatibile con l'importazione*;*|*È un
    aggiornamento dati (compatibile con l'importazione)*` quando il file sarà
@@ -201,7 +204,7 @@ Importare
    :version:`<=12|il pulsante **Importa** accanto a **Crea**;13-16|**Preferiti ‣
    Importa record**;*|**⚙ ‣ Importa record** (l'ingranaggio accanto al titolo
    della vista)`.
-#. Premere :version:`<=10|**Carica File**;*|**Carica file dati**` e scegliere
+#. Premere :version:`10-11|**Carica File**;<=14|**Carica file**;*|**Carica file dati**` e scegliere
    il file, :version:`<=10|CSV o Excel;*|XLSX, XLS, ODS o CSV`. Per un file CSV
    controllare la codifica, il separatore e il delimitatore di testo
    (:version:`<=10|opzioni;*|**Formattazione**`): Odoo si aspetta virgole e

@@ -18,10 +18,12 @@ Come modificare un record
    fatturazione <invoice_status>` è ricalcolato. Il prodotto di una riga non si
    può cambiare una volta fatturato o inviato al magazzino. Le righe non si
    possono eliminare: mettere la quantità a 0.
-#. **Crea fattura** fattura quanto dovuto: :version:`<=12|scegliere *Righe
+#. **Crea fattura** fattura quanto dovuto: :version:`11|scegliere *Righe
    fatturabili*, *Righe fatturabili (con anticipo dedotto)* o un anticipo
    (percentuale o valore fisso), poi **Crea fatture** o **Crea e visualizza
-   fatture**;*|scegliere *Fattura normale* (con la deduzione degli anticipi
+   fatture**;12|scegliere *Righe fatturabili*, *Righe fatturabili (con anticipo
+   dedotto)* o un anticipo (percentuale o valore fisso), poi **Crea fatture** o
+   **Crea e mostra fattura**;*|scegliere *Fattura normale* (con la deduzione degli anticipi
    quando ce ne sono) o un anticipo (percentuale o importo fisso), poi **Crea
    fattura** o **Crea e visualizza fattura**`.
 #. **Blocca** (o l'impostazione :version:`11|*Blocca Ordini confermati*;12|*Blocca

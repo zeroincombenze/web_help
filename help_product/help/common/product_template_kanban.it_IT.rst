@@ -52,7 +52,7 @@ Domande frequenti
 
    .. help-question:: Perché lo stesso prodotto compare più volte?
 
-      Nel menu **Varianti Prodotto** ogni variante è una riga, ad es. una per
+      Nel menu :version:`12|**Varianti prodotto**;*|**Varianti Prodotto**` ogni variante è una riga, ad es. una per
       taglia e colore; il menu **Prodotti** mostra il prodotto una sola volta.
 
 .. help-version:: >=16
