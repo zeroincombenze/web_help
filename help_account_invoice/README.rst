@@ -1,5 +1,5 @@
 =================================================
-|icon| Help for invoices/Aiuto fatture 10.0.1.0.3
+|icon| Help for invoices/Aiuto fatture 10.0.1.0.4
 =================================================
 
 **Context help pages for customer invoices and vendor bills**
@@ -27,6 +27,9 @@ Every page follows the standard layout of web_context_help:
 * **Description**: what invoices are, their statuses and the main fields
 * **How to insert a new record** (form): step-by-step guide to create, validate
   and send an invoice or a vendor bill
+* **Invoicing from sale order** (form, only when the Sales app is installed):
+  invoicing policy, invoice status, regular invoices and down payments,
+  several orders at once
 * **Suggestions for search** (list): menus, search, filters and groupings
 * **How to update a record** (form): changing an invoice, registering payments,
   credit notes, cancelling and deleting
@@ -36,6 +39,9 @@ Every page follows the standard layout of web_context_help:
 * **Example** button: common cases, e.g. partial payments or correcting a
   posted invoice
 * **FAQ** button and **Footer**
+
+A page for the Accounting Dashboard (journal kanban) explains the cards of
+the journals, their buttons and figures, and the **More** menu.
 
 Pages are in English and Italian, with the menus, buttons and statuses of the
 running Odoo version.
@@ -55,6 +61,9 @@ Ogni pagina segue la struttura standard di web_context_help:
 * **Descrizione**: cosa sono le fatture, i loro stati e i campi principali
 * **Come inserire un nuovo record** (maschera): guida passo passo per creare,
   validare e inviare una fattura o una fattura fornitore
+* **Fatturazione da ordine di vendita** (maschera, solo con l'app Vendite
+  installata): politica di fatturazione, stato fattura, fatture normali e
+  anticipi, più ordini insieme
 * **Suggerimenti per la ricerca** (lista): menu, ricerca, filtri e
   raggruppamenti
 * **Come modificare un record** (maschera): modificare una fattura, registrare
@@ -66,6 +75,9 @@ Ogni pagina segue la struttura standard di web_context_help:
 * Pulsante **Esempio**: casi comuni, ad es. pagamenti parziali o correzione di
   una fattura registrata
 * Pulsante **FAQ** e **Piè di pagina**
+
+Una pagina per la Bacheca della contabilità (kanban dei registri) spiega le
+schede dei registri, i loro pulsanti e importi, e il menu **Altro**.
 
 Le pagine sono in inglese e in italiano, con i menu, i pulsanti e gli stati
 della versione di Odoo in uso.
@@ -171,6 +183,12 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+10.0.1.0.4 (2026-11-01)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Invoice form: new section Invoicing from sale order (Fatturazione da ordine di vendita), shown only when the sale module is installed
+* [NEW] Accounting Dashboard (journal kanban) help page: cards of sale, purchase, bank, cash and miscellaneous journals, the More menu, search, set up and FAQ
+
 10.0.1.0.3 (2026-10-31)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -240,7 +258,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-31
+Last Update / Ultimo aggiornamento: 2026-11-01
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

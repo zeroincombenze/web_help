@@ -4,6 +4,7 @@
 #
 # License LGPL-3.0-or-later (https://www.gnu.org/licenses/lgpl).
 #
+import hashlib
 import logging
 import os
 import re
@@ -23,6 +24,8 @@ RE_WORD = re.compile(r"\w{3,}", re.UNICODE)
 VIEW_TYPE_ALIASES = {"list": ("list", "tree"), "tree": ("list", "tree")}
 # Page opened by the Help menu; the summary lists all the other pages
 HOME_KEY = "web_context_help.home"
+# Checksum record of the help-if conditions, beside the module checksums
+INSTALLED_KEY = "__installed__"
 # Label of a section shown on its own page -> view of that page
 OWN_VIEW = dict((label, view) for view, label in html_page.OWN_PAGE.items())
 # 1 is the highest priority: the pages built from the sources of the modules
@@ -642,20 +645,49 @@ class ContextHelpPage(models.Model):
         return result
 
     @api.model
+    def _wch_installed(self):
+        """Installed modules and existing models, for the help-if conditions"""
+        mods = self.env["ir.module.module"].search(
+            [("state", "in", ("installed", "to upgrade"))]
+        )
+        return {
+            "module": set(mods.mapped("name")),
+            "model": set(self.env.registry.models),
+        }
+
+    @api.model
+    def _wch_installed_checksum(self, modules, group, installed):
+        """Which help-if conditions are met: it changes, and the pages are
+        rebuilt, when a module or model named by a condition comes or goes"""
+        names = set()
+        for dummy, path in modules:
+            names |= rst_help.installed_names(path, group)
+        state = sorted(
+            "%s:%s:%s" % (kind, name, name in installed.get(kind, ()))
+            for kind, name in names
+        )
+        return hashlib.sha1("\n".join(state).encode("utf-8")).hexdigest()
+
+    @api.model
     def sync_sources(self, force=False):
-        """Rebuild the pages when any help source checksum changed"""
+        """Rebuild the pages when any help source checksum changed, or when
+        a module or model named by a help-if condition is installed / removed"""
         group = self._wch_group()
         version = self._wch_version()
         modules = self._wch_modules()
+        installed = self._wch_installed()
         checksums = {
             name: rst_help.checksum(path, group, version) for name, path in modules
         }
+        checksums[INSTALLED_KEY] = self._wch_installed_checksum(
+            modules, group, installed
+        )
         Source = self.env["context.help.source"]
         stored = {s.module: s for s in Source.search([])}
         if not force and checksums == {m: s.checksum for m, s in stored.items()}:
             return False
         _logger.info("web_context_help: rebuilding help pages")
-        self._wch_rebuild(modules, group, version)
+        self._wch_rebuild(modules, group, version, installed)
         for name, value in checksums.items():
             if name in stored:
                 if stored[name].checksum != value:
@@ -668,7 +700,9 @@ class ContextHelpPage(models.Model):
         return True
 
     @api.model
-    def _wch_parse_module(self, module, help_dir, group, version=None):
+    def _wch_parse_module(
+        self, module, help_dir, group, version=None, installed=None
+    ):
         """Return (pages, inherits) parsed from the sources of one module"""
         pages, inherits = [], []
         for filename, path in sorted(rst_help.list_sources(help_dir, group).items()):
@@ -681,6 +715,7 @@ class ContextHelpPage(models.Model):
                     lang,
                     fields_help=self._wch_with_lang(lang).fields_help,
                     version=version,
+                    installed=installed,
                 )
             except Exception as e:
                 _logger.warning("web_context_help: %s not parsed: %s", path, e)
@@ -717,12 +752,16 @@ class ContextHelpPage(models.Model):
         return result
 
     @api.model
-    def _wch_rebuild(self, modules, group, version=None):
+    def _wch_rebuild(self, modules, group, version=None, installed=None):
         version = version or self._wch_version()
+        if installed is None:
+            installed = self._wch_installed()
         order = {name: seq for seq, (name, dummy) in enumerate(modules)}
         pages, inherits = [], []
         for module, help_dir in modules:
-            p, i = self._wch_parse_module(module, help_dir, group, version)
+            p, i = self._wch_parse_module(
+                module, help_dir, group, version, installed
+            )
             pages.extend(p)
             inherits.extend(i)
         inherits.sort(key=lambda i: order.get(i["module"], 0))
@@ -739,6 +778,7 @@ class ContextHelpPage(models.Model):
                     item["lang"],
                     self._wch_with_lang(item["lang"]).fields_help,
                     version,
+                    installed,
                 )
                 if not ok:
                     _logger.warning(

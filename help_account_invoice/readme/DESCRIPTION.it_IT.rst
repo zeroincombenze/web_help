@@ -12,6 +12,9 @@ Ogni pagina segue la struttura standard di web_context_help:
 * **Descrizione**: cosa sono le fatture, i loro stati e i campi principali
 * **Come inserire un nuovo record** (maschera): guida passo passo per creare,
   validare e inviare una fattura o una fattura fornitore
+* **Fatturazione da ordine di vendita** (maschera, solo con l'app Vendite
+  installata): politica di fatturazione, stato fattura, fatture normali e
+  anticipi, più ordini insieme
 * **Suggerimenti per la ricerca** (lista): menu, ricerca, filtri e
   raggruppamenti
 * **Come modificare un record** (maschera): modificare una fattura, registrare
@@ -23,6 +26,9 @@ Ogni pagina segue la struttura standard di web_context_help:
 * Pulsante **Esempio**: casi comuni, ad es. pagamenti parziali o correzione di
   una fattura registrata
 * Pulsante **FAQ** e **Piè di pagina**
+
+Una pagina per la Bacheca della contabilità (kanban dei registri) spiega le
+schede dei registri, i loro pulsanti e importi, e il menu **Altro**.
 
 Le pagine sono in inglese e in italiano, con i menu, i pulsanti e gli stati
 della versione di Odoo in uso.

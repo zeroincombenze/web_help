@@ -27,7 +27,7 @@ Suggerimenti per la ricerca
   pagate con la scadenza passata; *Data fattura* e *Data di scadenza*
   selezionano un periodo.
   :version:`>=14|*Da controllare* mostra le fatture da verificare.`
-  *Aggiungi filtro personalizzato* costruisce qualsiasi condizione.
+  *Crea filtro personalizzato* costruisce qualsiasi condizione.
 * **Raggruppa per**: :version:`<13|*Partner*, *Addetto vendite*,
   *Stato*;13-14|*Addetto vendite*, *Stato*;*|*Addetto vendite*, *Partner*,
   *Stato*, *Registro*`, *Data fattura* o *Data di scadenza* (anno,

@@ -159,4 +159,26 @@ senza altri ruoli; scrivere ``\ `` prima del ruolo quando è attaccato alla
 parola precedente.
 I ruoli ``:field:`` e ``:tour:`` evidenziano un campo o avviano un tour nella scheda di Odoo.
 
+Il testo che ha senso solo con un altro modulo va in ``help-if``: è mostrato
+solo quando il modulo è installato, o il modello esiste. Le pagine sono
+ricostruite quando un modulo o un modello citato da una condizione è
+installato o rimosso, in qualunque ordine siano installati i moduli.
+
+::
+
+    .. help-if:: module = sale
+
+       Fatturazione da ordine di vendita
+       ---------------------------------
+
+       RST mostrato solo quando sale è installato (sezioni ammesse)
+
+    .. help-if:: model = sale.order and module != purchase
+
+       RST mostrato quando sale.order esiste e purchase non è installato
+
+Condizioni: ``module`` o ``model``, ``=`` (almeno uno dei nomi separati da
+virgola è installato / esiste) o ``!=`` (nessuno di essi), più condizioni
+unite da ``and``.
+
 .. |sos| unicode:: U+1F6DF

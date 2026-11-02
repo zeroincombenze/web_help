@@ -1,3 +1,9 @@
+10.0.1.0.4 (2026-11-01)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Invoice form: new section Invoicing from sale order (Fatturazione da ordine di vendita), shown only when the sale module is installed
+* [NEW] Accounting Dashboard (journal kanban) help page: cards of sale, purchase, bank, cash and miscellaneous journals, the More menu, search, set up and FAQ
+
 10.0.1.0.3 (2026-10-31)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
