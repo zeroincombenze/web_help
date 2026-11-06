@@ -14,18 +14,7 @@ Come modificare un record
       mantiene il suo numero. L'annullamento richiede l'opzione
       :version:`10|*Consenti cancellazione registrazioni*;*|*Consentire
       annullamento registrazioni*` del registro, vedere *Come configurare*.
-   #. Per registrare un pagamento premere
-      :version:`10|**Registrare pagamento**;*|**Registra pagamento**`:
-      controllare il registro di pagamento (banca o cassa), l'importo, la data
-      e la causale, poi premere :version:`10|**Validare**;*|**Valida**`. Un
-      importo minore lascia aperto il resto
-      (:version:`10|*Lasciare aperto*;11|*Tenere aperto*;*|*Lasciare aperta*`)
-      o lo storna (:version:`10|*Marca la fattura come pagata
-      interamente*;11|*Indicazione fattura saldata*;*|*Segnare fattura come
-      pagata*`).
-   #. Un pagamento già ricevuto, ad es. dall'estratto conto bancario, è
-      mostrato sotto i totali come *credito in sospeso*: premere **Aggiungi**
-      accanto ad esso.
+   #. Per registrare un pagamento, vedere *Altre azioni*.
    #. Per rimborsare il cliente premere :version:`10|**Nota di
       credito**;*|**Aggiungi nota di credito**`, scrivere il motivo e la data,
       scegliere il metodo e premere :version:`10|**Crea nota di
@@ -56,15 +45,7 @@ Come modificare un record
       nuovo **Conferma**; mantiene il suo numero. Il pulsante manca in un
       periodo chiuso e sui registri protetti: emettere invece una nota di
       credito.
-   #. Per registrare un pagamento premere **Registra pagamento**: controllare
-      il registro, il metodo di pagamento, l'importo, la data e la causale,
-      poi premere **Crea pagamento**. Un importo minore lascia da pagare il
-      resto (:version:`13|*Lasciare aperta*;*|*Tieni aperta*`) o lo storna
-      (:version:`13|*Impostare fattura come pagata*;*|*Segna come totalmente
-      pagata*`).
-   #. Un pagamento già ricevuto, ad es. dall'estratto conto bancario, è
-      mostrato sotto i totali come *credito in sospeso*: premere **Aggiungi**
-      accanto ad esso.
+   #. Per registrare un pagamento, vedere *Altre azioni*.
    #. Per rimborsare il cliente premere :version:`<18|**Aggiungi nota di
       credito**;*|**Nota di credito**`, scrivere il motivo e controllare la
       data di storno e il registro.

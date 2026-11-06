@@ -1,3 +1,10 @@
+18.0.1.0.4 (2026-11-06)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Report and export file: export of several invoices in a ZIP file (Export ZIP in 17.0, Print ‣ XML FatturaPA with l10n_it_edi in 18.0) and import of a ZIP of e-invoices made outside Odoo (only with l10n_it_edi_extension)
+* [IMP] Invoice list: new chapter Other actions (Altre azioni), before How to set up: confirm invoices, register a payment, create a debit note (with account_debit_note; TD05 with l10n_it_edi_ndd_account_dn)
+* [IMP] Invoice form: new chapter Other actions (Altre azioni), before How to set up: confirm the invoice, register a payment (moved here from How to update a record), create a debit note
+
 18.0.1.0.3 (2026-11-01)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

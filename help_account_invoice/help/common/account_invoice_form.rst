@@ -100,6 +100,8 @@ Description
 
 .. help-include:: account_invoice_update.rst
 
+.. help-include:: account_invoice_form_actions.rst
+
 .. help-include:: account_invoice_configure.rst
 
 .. help-include:: account_invoice_report.rst

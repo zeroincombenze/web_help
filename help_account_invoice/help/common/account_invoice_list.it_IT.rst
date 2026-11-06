@@ -55,6 +55,8 @@ Descrizione
 
 .. help-include:: account_invoice_list_search.rst
 
+.. help-include:: account_invoice_list_actions.rst
+
 .. help-include:: account_invoice_configure.rst
 
 .. help-include:: account_invoice_report.rst

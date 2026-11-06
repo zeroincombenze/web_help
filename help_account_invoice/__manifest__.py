@@ -6,7 +6,7 @@
 #
 {
     "name": "Help for invoices",
-    "version": "18.0.1.0.3",
+    "version": "18.0.1.0.4",
     "category": "Hidden/Tools",
     "summary": "Context help pages for customer invoices and vendor bills",
     "author": "Zeroincombenze srls",

@@ -1,5 +1,5 @@
 =================================================
-|icon| Help for invoices/Aiuto fatture 18.0.1.0.3
+|icon| Help for invoices/Aiuto fatture 18.0.1.0.4
 =================================================
 
 **Context help pages for customer invoices and vendor bills**
@@ -180,6 +180,13 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+18.0.1.0.4 (2026-11-06)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Report and export file: export of several invoices in a ZIP file (Export ZIP in 17.0, Print ‣ XML FatturaPA with l10n_it_edi in 18.0) and import of a ZIP of e-invoices made outside Odoo (only with l10n_it_edi_extension)
+* [IMP] Invoice list: new chapter Other actions (Altre azioni), before How to set up: confirm invoices, register a payment, create a debit note (with account_debit_note; TD05 with l10n_it_edi_ndd_account_dn)
+* [IMP] Invoice form: new chapter Other actions (Altre azioni), before How to set up: confirm the invoice, register a payment (moved here from How to update a record), create a debit note
+
 18.0.1.0.3 (2026-11-01)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -250,7 +257,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-11-01
+Last Update / Ultimo aggiornamento: 2026-11-06
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status
