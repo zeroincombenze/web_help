@@ -1,5 +1,5 @@
 =================================================
-|icon| Context help/Aiuto contestuale 18.0.1.0.10
+|icon| Context help/Aiuto contestuale 18.0.1.0.11
 =================================================
 
 **Context help button, pages written in RST by each module**
@@ -356,6 +356,12 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+18.0.1.0.11 (2026-11-07)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [QUA] Test coverage 95% (1194: 60+1134) [0 TestPoints] - quality rating 54 (target 100)
+* [IMP] Help window: admonitions (``.. important::``, ``.. warning::``, ``.. admonition::``) shown as a highlighted box
+
 18.0.1.0.10 (2026-11-01)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -440,11 +446,6 @@ ChangeLog History | Cronologia modifiche
 
 * [IMP] Migrated from 16.0: list views, invisible expressions, Odoo 18 control panel adapter
 
-18.0.0
-~~~~~~
-
-* [NEW] Context help button, help pages built from the RST sources of each module
-
 
 
 Credits | Ringraziamenti
@@ -494,7 +495,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-11-01
+Last Update / Ultimo aggiornamento: 2026-11-07
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

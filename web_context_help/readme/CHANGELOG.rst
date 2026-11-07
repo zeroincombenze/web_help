@@ -1,3 +1,9 @@
+18.0.1.0.11 (2026-11-07)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [QUA] Test coverage 95% (1194: 60+1134) [0 TestPoints] - quality rating 54 (target 100)
+* [IMP] Help window: admonitions (``.. important::``, ``.. warning::``, ``.. admonition::``) shown as a highlighted box
+
 18.0.1.0.10 (2026-11-01)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 

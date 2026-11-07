@@ -63,6 +63,10 @@ mark.wch-match.wch-current { background: #ff9632; }
 .wch-content a, .wch-answers a { color: var(--wch-accent); }
 a.wch-field, a.wch-tour { text-decoration: none; border-bottom: 1px dashed var(--wch-accent); }
 a.wch-tour::before { content: "▶ "; }
+.wch-content .admonition { margin: 12px 0; padding: 8px 12px; background: var(--wch-warn);
+    border-left: 4px solid #e0a800; border-radius: 4px; }
+.wch-content .admonition-title { margin: 0 0 4px; font-weight: 600; }
+.wch-content .admonition > :last-child { margin-bottom: 0; }
 .wch-question { margin: 8px 0; padding: 8px 12px; background: var(--wch-panel); border-radius: 4px; }
 .wch-question .wch-q { margin: 0; font-weight: 600; }
 .wch-question .wch-a > :last-child { margin-bottom: 0; }
