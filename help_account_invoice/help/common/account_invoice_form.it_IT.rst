@@ -101,6 +101,8 @@ Descrizione
 
 .. help-include:: account_invoice_update.rst
 
+.. help-include:: account_invoice_form_actions.rst
+
 .. help-include:: account_invoice_configure.rst
 
 .. help-include:: account_invoice_report.rst
@@ -170,6 +172,10 @@ Domande frequenti
       *In pagamento* significa che il pagamento è registrato ma non ancora
       abbinato all'estratto conto bancario: la fattura diventa *Pagata* dopo la
       riconciliazione.
+
+.. help-version:: 10
+
+   .. help-include:: account_invoice_faq_einvoice.rst
 
 .. help-question::
    :auto:

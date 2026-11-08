@@ -55,6 +55,8 @@ Descrizione
 
 .. help-include:: account_invoice_list_search.rst
 
+.. help-include:: account_invoice_list_actions.rst
+
 .. help-include:: account_invoice_configure.rst
 
 .. help-include:: account_invoice_report.rst
@@ -106,6 +108,10 @@ Domande frequenti
       fatture mostrano solo i tipi fattura, mentre la lista delle registrazioni
       contabili dei contabili mostra ogni registrazione, fatture comprese, e
       non ha l'aiuto delle fatture.
+
+.. help-version:: 10
+
+   .. help-include:: account_invoice_faq_einvoice.rst
 
 .. _footer:
 

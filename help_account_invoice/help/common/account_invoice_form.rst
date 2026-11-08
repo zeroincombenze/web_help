@@ -100,6 +100,8 @@ Description
 
 .. help-include:: account_invoice_update.rst
 
+.. help-include:: account_invoice_form_actions.rst
+
 .. help-include:: account_invoice_configure.rst
 
 .. help-include:: account_invoice_report.rst
@@ -162,6 +164,10 @@ FAQ
 
       *In Payment* means the payment is registered but not yet matched with
       the bank statement: the invoice becomes *Paid* after the reconciliation.
+
+.. help-version:: 10
+
+   .. help-include:: account_invoice_faq_einvoice.rst
 
 .. help-question::
    :auto:

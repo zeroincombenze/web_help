@@ -45,3 +45,35 @@ Stampe ed esportazione
   :version:`<=16|**Azione ‣ Esporta**;*|**Azioni ‣ Esporta**`: scegliere i
   campi e il formato (xlsx o csv). Vedere *Importare ed esportare dati* nella
   pagina **Pronto** dell'aiuto.
+
+.. help-version:: 17
+
+   * Per ottenere i documenti di più fatture in un unico file, selezionare le
+     fatture clienti confermate nella vista elenco, poi **Azioni ‣ Esporta
+     ZIP**: un file ZIP contiene il PDF e gli altri documenti legali di ogni
+     fattura.
+
+.. help-version:: >=18
+
+   .. help-if:: module = l10n_it_edi
+
+      * Per ottenere le fatture elettroniche in un unico file, selezionare le
+        fatture nella vista elenco, poi **Stampa ‣ XML FatturaPA**: una
+        fattura dà il suo file XML, più fatture danno un file ZIP
+        (*invoices.zip*) con l'XML di ciascuna. Le fatture senza fattura
+        elettronica sono ignorate. **Stampa ‣ PDF** fa lo stesso con i PDF.
+
+   .. help-if:: module = l10n_it_edi_extension
+
+      * Per caricare fatture elettroniche prodotte fuori da Odoo (ad es. da un
+        altro software, o scaricate dal portale Fatture e Corrispettivi
+        dell'Agenzia delle Entrate), mettere i file XML o P7M in un file ZIP,
+        poi **Fatturazione ‣ Fornitori ‣ File importazione e-fattura**:
+        caricare lo ZIP e premere **Importa file**. Ogni fattura elettronica
+        diventa una fattura cliente o una fattura fornitore, secondo che
+        l'azienda sia il venditore o l'acquirente, con la fattura elettronica
+        allegata; un file con più fatture dà una fattura per ciascuna. Alla
+        fine è mostrata la lista delle fatture importate. I file che non sono
+        XML o P7M sono ignorati ed elencati in un'attività *Da fare*
+        dell'utente. Se un file con lo stesso nome è già stato importato, non
+        è importato nulla e un errore indica il file.

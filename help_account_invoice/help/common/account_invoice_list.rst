@@ -54,6 +54,8 @@ Description
 
 .. help-include:: account_invoice_list_search.rst
 
+.. help-include:: account_invoice_list_actions.rst
+
 .. help-include:: account_invoice_configure.rst
 
 .. help-include:: account_invoice_report.rst
@@ -101,6 +103,10 @@ FAQ
       show only the invoice types, while the journal entries list of the
       accountants shows every entry, invoices included, and has no invoice
       help.
+
+.. help-version:: 10
+
+   .. help-include:: account_invoice_faq_einvoice.rst
 
 .. _footer:
 

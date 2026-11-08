@@ -1,3 +1,11 @@
+10.0.1.0.5 (2026-11-07)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Invoice form and invoice list: 33 e-invoice FAQ (FAQ fattura elettronica, sending and receiving) from the helpdesk tickets, 10.0 only, shown when the l10n_it_einvoice modules are installed
+* [IMP] Invoice list: new chapter Other actions (Altre azioni), before How to set up: confirm invoices, register one payment for several invoices of the same partner, type and currency; no debit note function in 10.0
+* [IMP] Invoice form: new chapter Other actions (Altre azioni), before How to set up: confirm the invoice, register a payment (moved here from How to update a record), outstanding credits, debit note
+* [IMP] Report and export file: aligned with 18.0 (the new paragraphs apply to 17.0 and later only)
+
 10.0.1.0.4 (2026-11-01)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
