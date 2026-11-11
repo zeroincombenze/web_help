@@ -12,6 +12,9 @@ Product variants
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 .. help-version:: <13
 
    The list of product variants. Each row shows the :field:`internal reference
@@ -52,6 +55,8 @@ Description
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-version:: <16
 

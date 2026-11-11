@@ -35,6 +35,9 @@ Invoice
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 .. help-version:: <13
 
    An invoice asks the :field:`customer <partner_id>` to pay for goods or
@@ -100,6 +103,8 @@ Description
 
 .. help-include:: account_invoice_update.rst
 
+.. help-include:: account_invoice_form_actions.rst
+
 .. help-include:: account_invoice_configure.rst
 
 .. help-include:: account_invoice_report.rst
@@ -110,6 +115,8 @@ Description
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-question:: Why can't I change the invoice?
 
@@ -162,6 +169,52 @@ FAQ
 
       *In Payment* means the payment is registered but not yet matched with
       the bank statement: the invoice becomes *Paid* after the reconciliation.
+
+.. help-question:: Can I write a negative quantity on an invoice line?
+
+   Yes: a line with a negative quantity lowers the total of the invoice, e.g.
+   for a returned item, a down payment already invoiced or an extra discount.
+   Write the minus sign in the quantity and keep the unit price positive: the
+   taxes of the line are lowered too. The total of the invoice must stay zero
+   or positive, see the next question.
+
+.. help-question:: What if the negative lines make the total negative?
+
+   An invoice with a negative total is a credit note in disguise: the money
+   goes to the customer, not from the customer.
+
+   .. help-version:: 10
+
+      Odoo 10.0 does not stop you, but do not validate it: the invoice would
+      show the amount as due from the customer and **Register Payment** would
+      propose to collect it, while the journal entry records the opposite.
+      Correct the lines, or delete the draft and press **Refund Invoice** on
+      the original invoice.
+
+   .. help-version:: 11-12
+
+      Odoo refuses to validate it: *You cannot validate an invoice with a
+      negative total amount. You should create a credit note instead.*
+      Correct the lines, or delete the draft and press **Add Credit Note** on
+      the original invoice; a credit note with no original invoice is created
+      in **Invoicing ‣ Customers ‣ Credit Notes**.
+
+   .. help-version:: >=13
+
+      Odoo refuses to confirm it: *You cannot validate an invoice with a
+      negative total amount. You should create a credit note instead. Use the
+      action menu to transform it into a credit note or refund.* Correct the
+      lines, or turn the draft into a credit note with
+      :version:`<=14|**Action ‣ Switch into refund/credit note**;<=16|**Action
+      ‣ Switch into invoice/credit note**;*|**Switch into invoice/credit
+      note** in the menu under the gear icon`: Odoo changes the sign of the
+      quantities, so the credit note has a positive total. A credit note of a
+      posted invoice is created with
+      :version:`<18|**Add Credit Note**;*|**Credit Note**` on the invoice.
+
+.. help-version:: 12
+
+   .. help-include:: account_invoice_faq_einvoice.rst
 
 .. help-question::
    :auto:

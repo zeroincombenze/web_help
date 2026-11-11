@@ -12,6 +12,9 @@ Contact
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 .. help-version:: <16
 
    A contact (partner) is anyone the company deals with: customers, vendors,
@@ -47,6 +50,8 @@ Description
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-version:: <16
 

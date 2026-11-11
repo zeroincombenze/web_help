@@ -12,6 +12,9 @@ Sale orders
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 The list of quotations and sales orders. Each row shows the
 :field:`number <name>`, the :field:`customer <partner_id>`, the
 :field:`salesperson <user_id>`, the :field:`total <amount_total>` and the
@@ -29,6 +32,8 @@ progress of the document. Click a row to open the order.
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-question:: Why don't I see the orders of my colleagues?
 

@@ -28,9 +28,10 @@ How to insert a new record
       :version:`10|**PRO-FORMA** (*Allow pro-forma invoices* setting) marks the
       draft as a pro-forma to send to the customer.`
    #. Press **Validate**: Odoo assigns the :field:`number <number>`, writes the
-      journal entry and the status becomes *Open*. Odoo refuses to validate an
-      invoice with a total below zero: create a
-      :version:`10|refund;*|credit note` instead.
+      journal entry and the status becomes *Open*. :version:`10|Odoo 10.0 does
+      not stop an invoice with a total below zero, but do not validate it:
+      create a refund instead.;*|Odoo refuses to validate an invoice with a
+      total below zero: create a credit note instead.`
    #. Press :version:`<12|**Send by Email**;*|**Send & Print**` to send the
       invoice with its PDF to the customer.
 

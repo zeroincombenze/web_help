@@ -12,6 +12,9 @@ Sale order
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 A sale order starts as a **quotation**: a proposal sent to the
 :field:`customer <partner_id>` listing products, quantities and prices.
 When the customer accepts it, the quotation is confirmed and becomes a
@@ -34,6 +37,8 @@ The :field:`status <state>` bar at the top shows where the document stands.
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-question:: Why can't I create the invoice?
 

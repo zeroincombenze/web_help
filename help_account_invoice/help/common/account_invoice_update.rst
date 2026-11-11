@@ -11,12 +11,7 @@ How to update a record
       :version:`<12|**Cancel Invoice**;*|**Cancel**`, then **Reset to Draft**, change it and press
       **Validate** again: it keeps its number. Cancelling needs the
       *Allow Cancelling Entries* option of the journal, see *How to set up*.
-   #. To register a payment press **Register Payment**: check the payment
-      journal (bank or cash), the amount, the date and the memo, then press
-      **Validate**. A lower amount leaves the rest open (*Keep open*) or writes
-      it off (*Mark invoice as fully paid*).
-   #. A payment already received, e.g. from the bank statement, is shown under
-      the totals as an *outstanding credit*: press **Add** next to it.
+   #. To register a payment, see *Other actions*.
    #. To refund the customer, press :version:`10|**Refund Invoice**;*|**Add
       Credit Note**`, write the reason and the date, choose the method and
       press :version:`10|**Create Refund**;*|**Add Credit Note**`:
@@ -42,13 +37,7 @@ How to update a record
       it and press :version:`13|**Post**;*|**Confirm**` again; it keeps its
       number. The button is missing in a locked period and on secured
       journals: issue a credit note instead.
-   #. To register a payment press :version:`<18|**Register Payment**;*|**Pay**`:
-      check the journal, the payment method, the amount, the date and the memo,
-      then press **Create Payment**. A lower amount leaves the rest to pay
-      (*Keep open*) or writes it off (:version:`13|*Mark invoice as fully
-      paid*;*|*Mark as fully paid*`).
-   #. A payment already received, e.g. from the bank statement, is shown under
-      the totals as an *outstanding credit*: press **Add** next to it.
+   #. To register a payment, see *Other actions*.
    #. To refund the customer, press :version:`<18|**Add Credit Note**;*|**Credit
       Note**`, write the reason and check the reversal date and the journal.
 

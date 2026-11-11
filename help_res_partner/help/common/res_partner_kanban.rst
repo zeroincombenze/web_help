@@ -12,6 +12,9 @@ Contacts (kanban)
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 .. help-version:: <16
 
    The contacts as cards, the default view of the contacts menus. Each card
@@ -40,6 +43,8 @@ Description
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-version:: <16
 

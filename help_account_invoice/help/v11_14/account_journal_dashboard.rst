@@ -15,6 +15,9 @@ Accounting Overview
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 The dashboard opened by **Invoicing ‣ Overview**. The menu is shown only to
 the users with *Show Full Accounting Features* (see *FAQ*). It shows a card
 for each journal of your current company. Each card shows the
@@ -53,6 +56,8 @@ Report and export file
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-question:: Why don't I see the Overview menu?
 

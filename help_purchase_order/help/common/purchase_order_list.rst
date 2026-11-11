@@ -12,6 +12,9 @@ Purchase orders
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 .. help-version:: <16
 
    The list of requests for quotation and purchase orders. Each row shows the
@@ -39,6 +42,8 @@ Description
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-version:: <16
 

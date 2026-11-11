@@ -9,7 +9,7 @@
 #
 {
     "name": "Context help",
-    "version": "12.0.1.0.10",
+    "version": "12.0.1.0.11",
     "category": "Hidden/Tools",
     "summary": "Context help button, pages written in RST by each module",
     "author": "Zeroincombenze srls",
@@ -27,5 +27,6 @@
     ],
     "qweb": ["static/src/v12/control_panel.xml"],
     "maintainer": "Antonio M. Vigliotti <antoniomaria.vigliotti@gmail.com>",
+    "post_init_hook": "post_init_hook",
     "installable": True,
 }

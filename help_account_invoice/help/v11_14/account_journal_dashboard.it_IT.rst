@@ -15,6 +15,9 @@ Panoramica contabilità
 Descrizione
 -----------
 
+Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
+clic sul pulsante **FAQ** per le domande più comuni già risolte.
+
 La bacheca aperta da **Fatturazione ‣ Panoramica**. Il menu è visibile solo
 agli utenti con *Mostrare funzionalità contabili complete* (vedere *Domande
 frequenti*). Mostra una scheda per ogni registro dell'azienda corrente. Ogni
@@ -53,6 +56,8 @@ Stampe ed esportazione
 
 Domande frequenti
 -----------------
+
+Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché non vedo il menu Panoramica?
 

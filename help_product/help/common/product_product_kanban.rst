@@ -12,6 +12,9 @@ Product variants (kanban)
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 .. help-version:: <13
 
    The product variants as cards. Each card shows the picture, the :field:`name
@@ -52,6 +55,8 @@ Description
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-version:: <16
 

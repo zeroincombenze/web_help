@@ -35,6 +35,9 @@ Fatture
 Descrizione
 -----------
 
+Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
+clic sul pulsante **FAQ** per le domande più comuni già risolte.
+
 .. help-version:: <13
 
    La lista delle fatture clienti, o delle fatture fornitore, secondo il menu.
@@ -55,6 +58,8 @@ Descrizione
 
 .. help-include:: account_invoice_list_search.rst
 
+.. help-include:: account_invoice_list_actions.rst
+
 .. help-include:: account_invoice_configure.rst
 
 .. help-include:: account_invoice_report.rst
@@ -65,6 +70,8 @@ Descrizione
 
 Domande frequenti
 -----------------
+
+Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché non vedo le note di credito?
 
@@ -106,6 +113,10 @@ Domande frequenti
       fatture mostrano solo i tipi fattura, mentre la lista delle registrazioni
       contabili dei contabili mostra ogni registrazione, fatture comprese, e
       non ha l'aiuto delle fatture.
+
+.. help-version:: 12
+
+   .. help-include:: account_invoice_faq_einvoice.rst
 
 .. _footer:
 

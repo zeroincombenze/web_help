@@ -12,6 +12,9 @@ Ordine di vendita
 Descrizione
 -----------
 
+Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
+clic sul pulsante **FAQ** per le domande più comuni già risolte.
+
 Un ordine di vendita nasce come **preventivo**: una proposta inviata al
 :field:`cliente <partner_id>` con prodotti, quantità e prezzi.
 Quando il cliente lo accetta, il preventivo viene confermato e diventa un
@@ -35,6 +38,8 @@ documento.
 
 Domande frequenti
 -----------------
+
+Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché non riesco a creare la fattura?
 

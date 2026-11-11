@@ -12,6 +12,9 @@ Product
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 Products are the items or services purchased and sold by a company. They
 may be assigned specific codes or left uncoded, managed as inventory stock,
 tracked via serial numbers or batch numbers—or handled without any specific
@@ -69,6 +72,8 @@ with variants.
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-version:: <16
 

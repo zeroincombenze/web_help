@@ -35,8 +35,22 @@ odoo.define("web_context_help.context_help", function (require) {
         }
     }
 
+    // The Odoo client never is the help window: a help window whose
+    // session expired goes to the login page and then loads Odoo in the
+    // same tab, which keeps the window name. Without this reset the help
+    // pages would be loaded over the Odoo views of this very tab
+    if (window.name === WINDOW_NAME) {
+        window.name = "";
+    }
+
+    // The window found by name, never this very tab
+    function openWindow(url) {
+        var win = window.open(url, WINDOW_NAME);
+        return win === window ? null : win;
+    }
+
     function isOpen() {
-        return Boolean(helpWindow && !helpWindow.closed);
+        return Boolean(helpWindow && !helpWindow.closed && helpWindow !== window);
     }
 
     // {widget, action} of the main view, or null (client action, no action)
@@ -148,7 +162,7 @@ odoo.define("web_context_help.context_help", function (require) {
     function open(ctx) {
         lastContext = ctx;
         // Open synchronously in the click handler, or popup blockers bite
-        helpWindow = window.open("", WINDOW_NAME);
+        helpWindow = openWindow("");
         lookup(ctx).then(function (result) {
             topicUrl = result.url;
             if (helpWindow) {
@@ -160,7 +174,7 @@ odoo.define("web_context_help.context_help", function (require) {
 
     // Help menu: the home page, in the same window as the context help
     function openHome() {
-        helpWindow = window.open("/web_context_help/home", WINDOW_NAME);
+        helpWindow = openWindow("/web_context_help/home");
         if (helpWindow) {
             helpWindow.focus();
         }
@@ -241,7 +255,12 @@ odoo.define("web_context_help.context_help", function (require) {
         if (isOpen() && ev.source !== helpWindow) {
             return;
         }
-        if (!isOpen() && ev.source && ev.source.name === WINDOW_NAME) {
+        if (
+            !isOpen() &&
+            ev.source &&
+            ev.source !== window &&
+            ev.source.name === WINDOW_NAME
+        ) {
             // Odoo tab reloaded: take the help window back
             helpWindow = ev.source;
         }

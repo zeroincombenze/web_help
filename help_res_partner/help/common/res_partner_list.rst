@@ -12,6 +12,9 @@ Contacts
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 .. help-version:: <16
 
    The list of contacts. Each row shows the :field:`name <display_name>` (with
@@ -38,6 +41,8 @@ Description
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-version:: <16
 
