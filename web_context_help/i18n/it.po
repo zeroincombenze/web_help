@@ -516,6 +516,7 @@ msgstr "Senza risposta"
 
 #. module: web_context_help
 #: model:ir.model.fields,field_description:web_context_help.field_context_help_question__user_id
+#: model:res.groups,name:web_context_help.group_help_user
 msgid "User"
 msgstr "Utente"
 
@@ -596,12 +597,64 @@ msgstr ""
 "una pagina clear cut è soddisfatta"
 
 #. module: web_context_help
-#: model:res.groups,name:web_context_help.group_help_editor
 #: model:ir.ui.menu,name:web_context_help.menu_help_editor_root
 msgid "Help Editor"
 msgstr "Editor dell'aiuto"
 
 #. module: web_context_help
+#: model:res.groups,name:web_context_help.group_help_editor
+msgid "System"
+msgstr "Sistema"
+
+#. module: web_context_help
+#: model:res.groups,comment:web_context_help.group_help_user
+msgid ""
+"Edits the help pages of priority lower than 64, their rules and reads the "
+"questions asked. Editing any other page creates a copy of it with the "
+"default priority."
+msgstr ""
+"Modifica le pagine di aiuto con priorità minore di 64 e le loro regole e "
+"legge le domande poste. Modificando qualsiasi altra pagina se ne crea una "
+"copia con la priorità predefinita."
+
+#. module: web_context_help
 #: model:res.groups,comment:web_context_help.group_help_editor
-msgid "Edits the help pages, their rules and reads the questions asked."
-msgstr "Modifica le pagine di aiuto e le loro regole e legge le domande poste."
+msgid "Edits all the help pages, their rules and reads the questions asked."
+msgstr ""
+"Modifica tutte le pagine di aiuto e le loro regole e legge le domande poste."
+
+#. module: web_context_help
+#: model_terms:ir.ui.view,arch_db:web_context_help.context_help_page_form
+msgid "Edit a copy"
+msgstr "Modifica una copia"
+
+#. module: web_context_help
+#: model_terms:ir.ui.view,arch_db:web_context_help.context_help_page_form
+msgid ""
+"This page has priority 64 or more: only the System help\n"
+"                        editors change it. Edit a copy: the copy gets the default\n"
+"                        priority and is shown in place of this page."
+msgstr ""
+"Questa pagina ha priorità 64 o più: solo gli editor dell'aiuto di livello "
+"Sistema la modificano. Modifica una copia: la copia ha la priorità "
+"predefinita ed è mostrata al posto di questa pagina."
+
+#. module: web_context_help
+#: model:ir.model.fields,field_description:web_context_help.field_context_help_page__wch_can_edit
+msgid "Can edit"
+msgstr "Modificabile"
+
+#. module: web_context_help
+#: model:ir.model.fields,help:web_context_help.field_context_help_page__wch_can_edit
+msgid ""
+"The current user edits this page; otherwise editing it creates a copy with "
+"the default priority"
+msgstr ""
+"L'utente corrente modifica questa pagina; altrimenti modificandola se ne "
+"crea una copia con la priorità predefinita"
+
+#. module: web_context_help
+#. odoo-python
+#: code:addons/web_context_help/models/context_help_page.py:0
+msgid "Only the System help editors set a priority of %d or more"
+msgstr "Solo gli editor dell'aiuto di livello Sistema impostano una priorità di %d o più"

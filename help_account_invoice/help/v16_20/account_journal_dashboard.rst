@@ -13,6 +13,9 @@ Accounting Dashboard
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 .. help-if:: module != accountant
 
    The dashboard opened by **Invoicing ‣ Dashboard**.
@@ -59,6 +62,8 @@ Report and export file
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-question:: Why don't I see the Dashboard menu?
 

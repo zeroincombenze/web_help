@@ -35,6 +35,9 @@ Invoices
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 .. help-version:: <13
 
    The list of customer invoices, or of vendor bills, depending on the menu.
@@ -66,6 +69,8 @@ Description
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-question:: Why don't I see the credit notes?
 
@@ -103,6 +108,10 @@ FAQ
       show only the invoice types, while the journal entries list of the
       accountants shows every entry, invoices included, and has no invoice
       help.
+
+.. help-version:: 18
+
+   .. help-include:: account_invoice_faq_einvoice.rst
 
 .. _footer:
 

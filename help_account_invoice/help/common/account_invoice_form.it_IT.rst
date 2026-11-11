@@ -35,6 +35,9 @@ Fattura
 Descrizione
 -----------
 
+Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
+clic sul pulsante **FAQ** per le domande più comuni già risolte.
+
 .. help-version:: <13
 
    Una fattura chiede al :field:`cliente <partner_id>` il pagamento di beni o
@@ -114,6 +117,8 @@ Descrizione
 Domande frequenti
 -----------------
 
+Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+
 .. help-question:: Perché non riesco a modificare la fattura?
 
    .. help-version:: <13
@@ -172,6 +177,53 @@ Domande frequenti
       *In pagamento* significa che il pagamento è registrato ma non ancora
       abbinato all'estratto conto bancario: la fattura diventa *Pagata* dopo la
       riconciliazione.
+
+.. help-question:: Posso scrivere una quantità negativa in una riga della fattura?
+
+   Sì: una riga con quantità negativa riduce il totale della fattura, ad es.
+   per un articolo reso, un acconto già fatturato o uno sconto aggiuntivo.
+   Scrivere il segno meno nella quantità e lasciare positivo il prezzo
+   unitario: anche le imposte della riga sono ridotte. Il totale della fattura
+   deve restare zero o positivo, vedere la domanda successiva.
+
+.. help-question:: Cosa succede se le righe negative rendono negativo il totale?
+
+   Una fattura con totale negativo è una nota di credito mascherata: il denaro
+   va al cliente, non dal cliente.
+
+   .. help-version:: 10
+
+      Odoo 10.0 non lo impedisce, ma non bisogna validarla: la fattura
+      mostrerebbe l'importo come dovuto dal cliente e **Registra pagamento**
+      proporrebbe di incassarlo, mentre la registrazione contabile riporta il
+      contrario. Correggere le righe, oppure eliminare la bozza e premere
+      **Nota di credito** sulla fattura originale.
+
+   .. help-version:: 11-12
+
+      Odoo rifiuta di validarla: *Impossibile validare una fattura con un
+      importo totale negativo. Creare invece una nota di credito.* Correggere
+      le righe, oppure eliminare la bozza e premere **Aggiungi nota di
+      credito** sulla fattura originale; una nota di credito senza fattura
+      originale si crea in **Fatturazione ‣ Clienti ‣ Note di credito**.
+
+   .. help-version:: >=13
+
+      Odoo rifiuta di confermarla: *Impossibile validare una fattura con un
+      importo totale negativo. Creare invece una nota di credito. Usare il menu
+      azioni per trasformarla in una nota di credito o un rimborso.* Correggere
+      le righe, oppure trasformare la bozza in nota di credito con
+      :version:`<=14|**Azione ‣ Cambia in rimborso/nota di credito**;<=16|**Azione
+      ‣ Trasforma in fattura/nota di credito**;*|**Trasforma in fattura/nota di
+      credito** nel menu sotto l'icona dell'ingranaggio`: Odoo cambia il segno
+      delle quantità, così la nota di credito ha un totale positivo. Una nota
+      di credito di una fattura confermata si crea con
+      :version:`<18|**Aggiungi nota di credito**;*|**Nota di credito**` sulla
+      fattura.
+
+.. help-version:: 18
+
+   .. help-include:: account_invoice_faq_einvoice.rst
 
 .. help-question::
    :auto:

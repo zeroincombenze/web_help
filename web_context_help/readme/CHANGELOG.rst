@@ -1,3 +1,11 @@
+18.0.1.0.12 (2026-11-08)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [FIX] Odoo tab loaded in the help window (expired session, login): the help pages no more replace the Odoo views, e.g. the Invoicing dashboard
+* [IMP] Help pages: the Help pages page starts with the hint to the Ready and FAQ buttons; every FAQ page starts with the hint to the Topic button; the rules are in USAGE
+* [IMP] Help on help: how to move inside the help, the header buttons, the FAQ, the find box; FAQ of the main page
+* [IMP] Help edit authorization in 3 levels, field Context Help of the user form, now in the Other section: empty (no edit), User (new: edits the pages of priority lower than 64; editing a page of priority 64 or more edits a copy of it with the default priority) and System (edits all the pages, the former Help Editor group); the administrators are no more System by default: the field sets their level too, the existing ones keep System
+
 18.0.1.0.11 (2026-11-07)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 

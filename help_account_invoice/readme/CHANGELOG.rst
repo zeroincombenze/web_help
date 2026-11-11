@@ -1,3 +1,11 @@
+18.0.1.0.5 (2026-11-08)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Invoice form and invoice list: 25 e-invoice FAQ (FAQ fattura elettronica) adapted from the 10.0 helpdesk FAQ to l10n_it_edi; the cases handled automatically by Odoo 18.0 are left out
+* [IMP] Every help page starts with the hint to the Ready and FAQ buttons; every FAQ page starts with the hint to the Topic button
+* [IMP] Invoice FAQ: negative quantity on an invoice line and negative invoice total (Odoo 10.0 does not stop it, 11.0+ refuses it, 13.0+ can switch the draft into a credit note)
+* [FIX] New invoice: Odoo 10.0 does not refuse an invoice with a negative total
+
 18.0.1.0.4 (2026-11-06)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

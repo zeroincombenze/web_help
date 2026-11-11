@@ -12,6 +12,9 @@ Products (kanban)
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 .. help-version:: <16
 
    The products as cards, the default view of the product menus. Each card shows
@@ -38,6 +41,8 @@ Description
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-version:: <16
 

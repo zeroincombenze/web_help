@@ -258,25 +258,120 @@ l'aiuto dei suoi campi.
 
 .. |sos| unicode:: U+1F6DF
 
+.. _navigate:
+
+Muoversi nell'aiuto
+-------------------
+
+Una pagina lunga inizia con il suo **Indice**: fare clic su un titolo per
+saltare a quella sezione. Nel testo:
+
+* un collegamento a un'altra pagina o sezione la apre nella finestra di aiuto;
+  il pulsante Indietro del browser torna alla pagina precedente;
+* il nome di un campo mostrato come collegamento (ad es. nella pagina
+  **Campi**) evidenzia quel campo nella scheda di Odoo, per vedere dove si
+  trova nella maschera.
+
+.. _buttons:
+
+I pulsanti dell'intestazione
+----------------------------
+
+L'intestazione mostra solo i pulsanti utili per la pagina che si sta
+leggendo:
+
+* **Segui Odoo**: se attivo, la finestra di aiuto cambia pagina ogni volta che
+  si apre un'altra vista in Odoo; se non attivo, resta sulla pagina che si sta
+  leggendo, ad es. per tenerla aperta mentre si lavora altrove.
+* **Argomento**: in una pagina, compare quando la vista di Odoo ha una pagina
+  diversa da quella che si sta leggendo (ad es. dopo aver aperto il
+  **Sommario**, o con *Segui Odoo* non attivo): riporta all'aiuto della vista
+  corrente. Nelle pagine **FAQ**, **Esempio** e **Campi** riporta alla pagina a
+  cui appartengono.
+* **Pronto**: apre questa pagina, l'aiuto generale, da qualsiasi pagina.
+* **Aiuto generale**: mostrato nelle pagine scritte per un caso particolare, ad
+  es. un tipo di ordine: apre l'aiuto generale dello stesso record.
+* **Esempio**: apre un esempio svolto della pagina, in una pagina a sé.
+* **FAQ**: apre le domande frequenti della pagina, vedere sotto.
+* **Campi**: elenca tutti i campi della maschera con la loro spiegazione; fare
+  clic sul nome di un campo per evidenziarlo in Odoo.
+* **Sommario**: elenca tutte le pagine di aiuto, raggruppate per modulo; fare
+  clic su un titolo per aprirla.
+* **Modifica**: solo per gli editor dell'aiuto, vedere *Modificare questa pagina*.
+
+.. _faq_button:
+
+Domande frequenti (FAQ)
+-----------------------
+
+Le domande su una pagina sono tenute a parte, così la pagina resta breve: il
+pulsante **FAQ** compare solo quando la pagina ha delle domande. Premerlo per
+aprirle in una pagina a sé: ogni domanda è un riquadro con la domanda in
+grassetto e la risposta sotto. Scorrere l'elenco, oppure scrivere una parola
+del proprio dubbio nella casella di ricerca (ad es. *ricostruisci*) per andare
+subito alla domanda che risponde. Premere **Argomento** per tornare alla
+pagina.
+
+Anche questa pagina ha le sue FAQ: provare il pulsante **FAQ**.
+
 .. _search:
 
 Cercare un testo nell'aiuto
 ---------------------------
 
 La casella nell'intestazione cerca un testo nella pagina, come Ctrl+F del
-browser. Maiuscole e accenti sono ignorati; il testo tra virgolette è cercato
-come frase esatta.
+browser (che porta a questa casella). Maiuscole e accenti sono ignorati; il
+testo tra virgolette è cercato come frase esatta. Con più parole sono mostrati
+prima i punti in cui sono vicine tra loro; se non ce ne sono, il contatore
+mostra *qualsiasi parola* e ogni parola è cercata da sola.
+
+Il contatore mostra l'occorrenza corrente e il totale, ad es. *2/5*. Premere
+Invio o ▼ per l'occorrenza successiva, Maiusc+Invio o ▲ per la precedente, Esc
+per cancellare la ricerca. La ricerca guarda solo la pagina che si sta
+leggendo: per cercare tra le domande, aprire prima le **FAQ**.
 
 .. _configure:
 
 Modificare questa pagina
 ------------------------
 
-Gli amministratori vedono il pulsante **Modifica** nell'intestazione: apre la
-pagina in *Impostazioni > Tecnico > Aiuto contestuale > Pagine di aiuto*, dove
-il contenuto può essere adattato all'azienda, compresa questa pagina. Una
-pagina modificata mantiene la versione dell'utente all'aggiornamento del
-modulo.
+Gli editor dell'aiuto vedono il pulsante **Modifica** nell'intestazione: apre
+la pagina in *Aiuto > Editor dell'aiuto > Pagine di aiuto*, dove il contenuto
+può essere adattato all'azienda, compresa questa pagina. Una pagina
+modificata mantiene la versione dell'utente all'aggiornamento del modulo. Un
+editor dell'aiuto di livello **Utente** modifica una copia delle pagine con
+priorità 64 o più, ad es. questa pagina: **Modifica** crea la copia, con la
+priorità predefinita, e la apre.
+
+.. _faq:
+
+Domande
+-------
+
+Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+
+.. help-question:: Premendo il pulsante di aiuto non si apre nessuna finestra. Perché?
+
+   Il browser ha bloccato la finestra pop-up: consentire i pop-up per il sito
+   di Odoo (l'icona a destra della barra degli indirizzi) e premere di nuovo il
+   pulsante.
+
+.. help-question:: La finestra di aiuto mostra una pagina che non riguarda la mia vista. Perché?
+
+   *Segui Odoo* non è attivo, oppure si è aperta un'altra pagina dall'aiuto.
+   Premere **Argomento** per tornare all'aiuto della vista corrente, oppure
+   attivare *Segui Odoo*.
+
+.. help-question:: Perché non vedo il pulsante FAQ?
+
+   La pagina che si sta leggendo non ha domande. I pulsanti **FAQ**,
+   **Esempio**, **Campi** e **Aiuto generale** compaiono solo nelle pagine che
+   li prevedono.
+
+.. help-question:: La pagina elenca solo i campi della maschera. Perché?
+
+   Nessuno ha ancora scritto una pagina per questa vista: l'aiuto mostra una
+   pagina automatica con la spiegazione dei suoi campi.
 
 .. _footer:
 

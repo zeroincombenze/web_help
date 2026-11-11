@@ -12,6 +12,9 @@ Azienda
 Descrizione
 -----------
 
+Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
+clic sul pulsante **FAQ** per le domande più comuni già risolte.
+
 L'azienda è il soggetto giuridico che emette i documenti di Odoo: nome, logo,
 indirizzo, :field:`partita IVA <vat>` e :field:`valuta <currency_id>` sono
 stampati su preventivi, fatture e ogni altra stampa, e la contabilità di ogni
@@ -71,6 +74,8 @@ Esempio
 
 Domande frequenti
 -----------------
+
+Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché non vedo il campo Regime fiscale?
 

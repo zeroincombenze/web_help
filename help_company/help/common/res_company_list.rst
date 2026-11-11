@@ -13,6 +13,9 @@ Companies
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 The list of the companies managed in the database. Each row shows the
 :field:`company name <name>`, its :field:`partner <partner_id>` (the contact
 holding address and Tax ID of the company) and its :field:`branches
@@ -51,6 +54,8 @@ the other with the company switcher in the top bar.
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-question:: Why don't I see the Companies menu?
 

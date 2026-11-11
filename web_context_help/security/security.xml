@@ -3,22 +3,85 @@
      License LGPL-3.0-or-later (https://www.gnu.org/licenses/lgpl). -->
 <odoo>
 
+    <!-- No parent: the user form shows its selection in the Other section -->
     <record id="module_category_context_help" model="ir.module.category">
         <field name="name">Context Help</field>
+        <field name="parent_id" eval="False"/>
         <field name="sequence">90</field>
     </record>
 
-    <!-- Writes the help pages and their rules without being an administrator -->
-    <record id="group_help_editor" model="res.groups">
-        <field name="name">Help Editor</field>
+    <!-- Help edit authorization, a selection in the user form:
+         empty (no edit), User, System -->
+
+    <!-- Edits the pages of priority lower than 64; editing a page of the
+         modules or of priority 64 or more edits a copy of it -->
+    <record id="group_help_user" model="res.groups">
+        <field name="name">User</field>
         <field name="category_id" ref="module_category_context_help"/>
         <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-        <field name="comment">Edits the help pages, their rules and reads the questions asked.</field>
+        <field name="comment">Edits the help pages of priority lower than 64, their rules and reads the questions asked. Editing any other page creates a copy of it with the default priority.</field>
     </record>
 
-    <!-- The administrators keep editing the help -->
+    <!-- Edits all the help pages, as the administrators -->
+    <record id="group_help_editor" model="res.groups">
+        <field name="name">System</field>
+        <field name="category_id" ref="module_category_context_help"/>
+        <field name="implied_ids" eval="[(4, ref('group_help_user'))]"/>
+        <field name="comment">Edits all the help pages, their rules and reads the questions asked.</field>
+    </record>
+
+    <!-- The Context Help field of the user form alone sets the level, also of
+         the administrators: an administrator is no more System by default.
+         The administrators of an existing database keep System; on a new
+         install the post init hook gives it to them -->
     <record id="base.group_system" model="res.groups">
-        <field name="implied_ids" eval="[(4, ref('group_help_editor'))]"/>
+        <field name="implied_ids" eval="[(3, ref('group_help_editor'))]"/>
+    </record>
+
+    <!-- User level: pages of priority lower than 64 only -->
+    <record id="rule_help_page_user" model="ir.rule">
+        <field name="name">Help page: priority lower than 64</field>
+        <field name="model_id" ref="model_context_help_page"/>
+        <field name="domain_force">[('priority', '&lt;', 64)]</field>
+        <field name="groups" eval="[(4, ref('group_help_user'))]"/>
+        <field name="perm_read" eval="False"/>
+    </record>
+    <record id="rule_help_section_user" model="ir.rule">
+        <field name="name">Help section: page priority lower than 64</field>
+        <field name="model_id" ref="model_context_help_section"/>
+        <field name="domain_force">[('page_id.priority', '&lt;', 64)]</field>
+        <field name="groups" eval="[(4, ref('group_help_user'))]"/>
+        <field name="perm_read" eval="False"/>
+    </record>
+    <record id="rule_help_rule_user" model="ir.rule">
+        <field name="name">Help rule: page priority lower than 64</field>
+        <field name="model_id" ref="model_context_help_rule"/>
+        <field name="domain_force">[('page_id.priority', '&lt;', 64)]</field>
+        <field name="groups" eval="[(4, ref('group_help_user'))]"/>
+        <field name="perm_read" eval="False"/>
+    </record>
+
+    <!-- System level: every page -->
+    <record id="rule_help_page_system" model="ir.rule">
+        <field name="name">Help page: all</field>
+        <field name="model_id" ref="model_context_help_page"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_help_editor'))]"/>
+        <field name="perm_read" eval="False"/>
+    </record>
+    <record id="rule_help_section_system" model="ir.rule">
+        <field name="name">Help section: all</field>
+        <field name="model_id" ref="model_context_help_section"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_help_editor'))]"/>
+        <field name="perm_read" eval="False"/>
+    </record>
+    <record id="rule_help_rule_system" model="ir.rule">
+        <field name="name">Help rule: all</field>
+        <field name="model_id" ref="model_context_help_rule"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_help_editor'))]"/>
+        <field name="perm_read" eval="False"/>
     </record>
 
 </odoo>

@@ -12,6 +12,9 @@ Product variant
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 .. help-version:: <13
 
    A product variant is one version of a product, defined by its
@@ -78,6 +81,8 @@ Description
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-version:: <16
 

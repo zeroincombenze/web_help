@@ -19,6 +19,20 @@ export const contextHelpService = {
         // Page of the current Odoo view: the Topic button of the help window
         let topicUrl = false;
 
+        // The Odoo client never is the help window: a help window whose
+        // session expired goes to the login page and then loads Odoo in the
+        // same tab, which keeps the window name. Without this reset the help
+        // pages would be loaded over the Odoo views of this very tab
+        if (window.name === WINDOW_NAME) {
+            window.name = "";
+        }
+
+        // The window found by name, never this very tab
+        function openWindow(url) {
+            const win = browser.open(url, WINDOW_NAME);
+            return win === window ? null : win;
+        }
+
         function isFollowing() {
             try {
                 return browser.localStorage.getItem(FOLLOW_KEY) !== "0";
@@ -28,7 +42,9 @@ export const contextHelpService = {
         }
 
         function isOpen() {
-            return Boolean(helpWindow && !helpWindow.closed);
+            return Boolean(
+                helpWindow && !helpWindow.closed && helpWindow !== window
+            );
         }
 
         async function lookup(ctx, looseFrom) {
@@ -70,7 +86,7 @@ export const contextHelpService = {
         async function open(ctx) {
             lastContext = ctx;
             // Open synchronously in the click handler, or popup blockers bite
-            helpWindow = browser.open("", WINDOW_NAME);
+            helpWindow = openWindow("");
             const result = await lookup(ctx);
             topicUrl = result.url;
             if (result.url && helpWindow) {
@@ -81,7 +97,7 @@ export const contextHelpService = {
 
         // Help menu: the home page, in the same window as the context help
         function openHome() {
-            helpWindow = browser.open("/web_context_help/home", WINDOW_NAME);
+            helpWindow = openWindow("/web_context_help/home");
             if (helpWindow) {
                 helpWindow.focus();
             }
@@ -174,7 +190,12 @@ export const contextHelpService = {
             if (isOpen() && ev.source !== helpWindow) {
                 return;
             }
-            if (!isOpen() && ev.source && ev.source.name === WINDOW_NAME) {
+            if (
+                !isOpen() &&
+                ev.source &&
+                ev.source !== window &&
+                ev.source.name === WINDOW_NAME
+            ) {
                 // Odoo tab reloaded: take the help window back
                 helpWindow = ev.source;
             }

@@ -13,6 +13,9 @@ Termini di pagamento
 Descrizione
 -----------
 
+Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
+clic sul pulsante **FAQ** per le domande più comuni già risolte.
+
 La lista dei termini di pagamento: ognuno calcola le scadenze delle fatture
 che lo usano. Ogni riga mostra il :field:`nome <name>` e, in un database
 multi-azienda, l':field:`azienda <company_id>`. I termini sono elencati
@@ -31,6 +34,8 @@ riga per aprire il termine e vederne le righe.
 
 Domande frequenti
 -----------------
+
+Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché non vedo alcuni termini di pagamento?
 

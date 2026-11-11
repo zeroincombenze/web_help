@@ -707,13 +707,49 @@ class TestContextHelpHttp(common.HttpCase):
         self.authenticate("wch_editor", "wch_editor_pwd")
         res = self.url_open("/web_context_help/home")
         self.assertIn('id="wch_edit"', res.text)
+        # the User level edits a copy of the pages of priority 64 or more
+        self.env["res.users"].create(
+            {
+                "name": "Help user",
+                "login": "wch_huser",
+                "password": "wch_huser_pwd",
+                "groups_id": [
+                    (6, 0, [self.env.ref("web_context_help.group_help_user").id])
+                ],
+            }
+        )
+        self.authenticate("wch_huser", "wch_huser_pwd")
+        res = self.url_open(
+            "/web_context_help/page/web_context_help.context_help_page?lang=en_US"
+        )
+        self.assertIn('id="wch_edit"', res.text)
+        self.assertIn("/web_context_help/edit/", res.text)
+        Page = self.env["context.help.page"]
+        page = Page.search(
+            [("key", "=", "web_context_help.context_help_page"), ("lang", "=", "en_US")]
+        )
+        res = self.url_open(
+            "/web_context_help/edit/%d" % page.id, allow_redirects=False
+        )
+        self.assertIn(res.status_code, (302, 303))
+        copy = Page.search(
+            [("key", "=", "web_context_help.context_help_page (copy)")], limit=1
+        )
+        self.assertEqual(copy.priority, 32)
+        self.assertTrue(res.headers["Location"].endswith("/%d" % copy.id))
 
     def test_help_editor(self):
         Page = self.env["context.help.page"]
         Page.sync_sources(force=True)
         editor_group = self.env.ref("web_context_help.group_help_editor")
-        # the administrators are help editors
-        self.assertIn(editor_group, self.env.ref("base.group_system").implied_ids)
+        # the administrators are no more System by default: the Context Help
+        # field of the user form sets the level
+        self.assertNotIn(editor_group, self.env.ref("base.group_system").implied_ids)
+        self.assertTrue(
+            self.env.ref("base.user_admin").has_group(
+                "web_context_help.group_help_editor"
+            )
+        )
 
         def user(login, groups):
             return self.env["res.users"].create(
@@ -746,6 +782,95 @@ class TestContextHelpHttp(common.HttpCase):
         self.env["context.help.question"].with_user(editor).search([])
         with self.assertRaises(AccessError):
             self.env["context.help.rule"].with_user(reader).search([])
+        # the System level edits the pages of the modules as they are
+        page_e = page.with_user(editor)
+        self.assertTrue(page_e.wch_can_edit)
+        self.assertEqual(page_e.wch_page_to_edit(), page_e)
+        page_e.write({"html": "<h2>System</h2><p>text</p>"})
+        self.assertTrue(page.edited)
+
+    def test_help_user(self):
+        Page = self.env["context.help.page"]
+        Page.sync_sources(force=True)
+        user_group = self.env.ref("web_context_help.group_help_user")
+        system_group = self.env.ref("web_context_help.group_help_editor")
+        # three levels: no edit, User, System
+        self.assertIn(user_group, system_group.implied_ids)
+        self.assertEqual(user_group.category_id, system_group.category_id)
+        self.assertFalse(user_group.category_id.parent_id)
+        # the authorization is in the Other section of the user form
+        _app, kind, groups, section = [
+            t
+            for t in self.env["res.groups"].get_groups_by_application()
+            if t[0] == user_group.category_id
+        ][0]
+        self.assertEqual(kind, "selection")
+        self.assertEqual(groups, user_group | system_group)
+        self.assertEqual(section, (100, "Other"))
+        help_user = self.env["res.users"].create(
+            {
+                "name": "wch_u",
+                "login": "wch_u",
+                "groups_id": [(6, 0, user_group.ids)],
+            }
+        )
+        self.assertFalse(help_user.has_group("web_context_help.group_help_editor"))
+        standard = Page.search([("key", "=", "web_context_help.context_help_page")])[
+            0
+        ].with_user(help_user)
+        self.assertGreaterEqual(standard.priority, 64)
+        self.assertFalse(standard.wch_can_edit)
+        with self.assertRaises(AccessError):
+            standard.write({"html": "<p>no</p>"})
+        self.assertTrue(
+            standard.action_edit_copy()["res_id"] != standard.id
+            and standard.edit_url(standard).startswith("/web_context_help/edit/")
+        )
+        # editing a page of priority 64 or more edits a copy, default priority
+        copy = standard.wch_page_to_edit()
+        self.assertNotEqual(copy, standard)
+        self.assertEqual(copy.priority, 32)
+        self.assertFalse(copy.source_file)
+        self.assertTrue(copy.wch_can_edit)
+        copy.write({"html": "<h2>Mine</h2><p>text</p>", "priority": 10})
+        self.assertTrue(copy.edited)
+        self.assertEqual(copy.wch_page_to_edit(), copy)
+        self.assertEqual(copy.edit_url(copy), Page.edit_url(copy.sudo()))
+        # the User level keeps its pages below priority 64
+        with self.assertRaises(AccessError):
+            copy.write({"priority": 64})
+        with self.assertRaises(AccessError):
+            Page.with_user(help_user).create(
+                {"key": "wch_test.u", "name": "U", "priority": 96}
+            )
+        self.env["context.help.rule"].with_user(help_user).create(
+            {
+                "page_id": copy.id,
+                "field_id": self.env["ir.model.fields"]
+                ._get("context.help.page", "edited")
+                .id,
+                "value_boolean": True,
+            }
+        )
+        copy.unlink()
+        with self.assertRaises(AccessError):
+            standard.unlink()
+        # an administrator at the User level edits a copy too
+        admin = self.env["res.users"].create(
+            {
+                "name": "wch_adm",
+                "login": "wch_adm",
+                "groups_id": [
+                    (6, 0, (self.env.ref("base.group_system") | user_group).ids)
+                ],
+            }
+        )
+        self.assertFalse(admin.has_group("web_context_help.group_help_editor"))
+        standard = standard.with_user(admin)
+        self.assertFalse(standard.wch_can_edit)
+        with self.assertRaises(AccessError):
+            standard.write({"html": "<p>no</p>"})
+        self.assertEqual(standard.wch_page_to_edit().priority, 32)
 
     def test_videos(self):
         tmp = tempfile.mkdtemp()

@@ -6,6 +6,9 @@
 Pagine di aiuto
 ===============
 
+Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
+clic sul pulsante **FAQ** per le domande più comuni già risolte.
+
 Ogni modulo può spiegare le proprie maschere con file RST nella cartella
 ``help/``. Sono letti a ogni avvio del server e trasformati nelle pagine qui
 elencate. Il pulsante |sos| del pannello di controllo apre l'aiuto della vista
@@ -64,6 +67,8 @@ fondo alla pagina, oppure dopo il paragrafo che contiene il testo scritto in
 
 Domande
 -------
+
+Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché la modifica al file RST non compare?
 

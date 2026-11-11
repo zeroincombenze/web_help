@@ -10,7 +10,8 @@ import os
 import re
 from urllib.parse import quote
 
-from odoo import api, fields, models, release
+from odoo import _, api, fields, models, release
+from odoo.exceptions import AccessError
 from odoo.modules.module import get_module_path
 
 from ..lib import html_page, rst_help
@@ -37,6 +38,10 @@ PRIORITY_LOOSE = 64
 VIDEO_PATH_PARAM = "web_help_video_path"
 VIDEO_PATH_DEFAULT = "~/Video"
 VIDEO_EXTS = (".mp4", ".m4v", ".webm", ".ogv", ".ogg", ".mov")
+# Help edit authorization: the User level edits the pages of priority lower
+# than PRIORITY_LOOSE, the System level edits all the pages
+GROUP_HELP_USER = "web_context_help.group_help_user"
+GROUP_HELP_SYSTEM = "web_context_help.group_help_editor"
 
 
 class ContextHelpSource(models.Model):
@@ -120,6 +125,12 @@ class ContextHelpPage(models.Model):
         "ignored and it is shown when no rule of a clear cut page is met",
     )
     active = fields.Boolean(default=True)
+    wch_can_edit = fields.Boolean(
+        "Can edit",
+        compute="_compute_wch_can_edit",
+        help="The current user edits this page; otherwise editing it creates a "
+        "copy with the default priority",
+    )
 
     _sql_constraints = [
         ("key_lang_uniq", "unique(key, lang)", "Page key must be unique per language"),
@@ -128,8 +139,31 @@ class ContextHelpPage(models.Model):
     # ------------------------------------------------------------------
     # Admin editing
     # ------------------------------------------------------------------
+    @api.depends("priority")
+    @api.depends_context("uid")
+    def _compute_wch_can_edit(self):
+        system = self.env.user.has_group(GROUP_HELP_SYSTEM)
+        user = system or self.env.user.has_group(GROUP_HELP_USER)
+        for page in self:
+            page.wch_can_edit = system or (user and page.priority < PRIORITY_LOOSE)
+
+    def _wch_check_priority(self, vals):
+        """The User level keeps its pages below priority PRIORITY_LOOSE"""
+        if (
+            not self.env.su
+            and (vals.get("priority") or 0) >= PRIORITY_LOOSE
+            and not self.env.context.get("wch_sync")
+            and not self.env.user.has_group(GROUP_HELP_SYSTEM)
+        ):
+            raise AccessError(
+                _("Only the System help editors set a priority of %d or more")
+                % PRIORITY_LOOSE
+            )
+
     @api.model_create_multi
     def create(self, vals_list):
+        for vals in vals_list:
+            self._wch_check_priority(vals)
         pages = super(ContextHelpPage, self).create(vals_list)
         # a page created by the administrator has no source: its sections
         # come from its content
@@ -139,6 +173,7 @@ class ContextHelpPage(models.Model):
         return pages
 
     def write(self, vals):
+        self._wch_check_priority(vals)
         if "html" in vals and not self.env.context.get("wch_sync"):
             vals = dict(vals, edited=True)
         res = super(ContextHelpPage, self).write(vals)
@@ -186,6 +221,26 @@ class ContextHelpPage(models.Model):
             page._wch_set_sections(html_page.extract_sections(page.html))
         return True
 
+    def wch_page_to_edit(self):
+        """Page the current user edits: this page, or a new copy of it with the
+        default priority when the user is not allowed to edit it"""
+        self.ensure_one()
+        if self.wch_can_edit or not self.env.user.has_group(GROUP_HELP_USER):
+            return self
+        return self.copy({"priority": PRIORITY_DEFAULT, "active": True})
+
+    def action_edit_copy(self):
+        """Edit button of a page the user is not allowed to edit: opens a copy
+        of it, with the default priority"""
+        page = self.wch_page_to_edit()
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": self._name,
+            "res_id": page.id,
+            "view_mode": "form",
+            "target": "current",
+        }
+
     def action_source_seen(self):
         return self.write({"source_changed": False})
 
@@ -213,7 +268,10 @@ class ContextHelpPage(models.Model):
 
     @api.model
     def edit_url(self, page):
-        """URL of the backend form of a page"""
+        """URL of the backend form of a page; a page the user is not allowed to
+        edit is copied first, by the edit route"""
+        if not page.wch_can_edit:
+            return "/web_context_help/edit/%s" % page.id
         return "/odoo/action-web_context_help.action_context_help_page/%s" % page.id
 
     @api.model

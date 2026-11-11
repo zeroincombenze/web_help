@@ -30,13 +30,25 @@
                 <header>
                     <button name="action_open" type="object" string="Open" class="oe_highlight"/>
                     <button name="action_reset_to_source" type="object" string="Reset to source"
-                        invisible="not edited or not source_file"
+                        invisible="not edited or not source_file or not wch_can_edit"
                         confirm="Discard the changes made to this page?"/>
                     <button name="action_source_seen" type="object" string="Keep my version"
-                        invisible="not source_changed"/>
-                    <button name="action_rebuild" type="object" string="Rebuild all pages"/>
+                        invisible="not source_changed or not wch_can_edit"/>
+                    <button name="action_edit_copy" type="object" string="Edit a copy"
+                        class="oe_highlight" invisible="wch_can_edit"
+                        groups="web_context_help.group_help_user"/>
+                    <button name="action_rebuild" type="object" string="Rebuild all pages"
+                        groups="web_context_help.group_help_editor"/>
                 </header>
                 <sheet>
+                    <field name="wch_can_edit" invisible="1"/>
+                    <div class="alert alert-info" role="alert"
+                        invisible="wch_can_edit"
+                        groups="web_context_help.group_help_user">
+                        This page has priority 64 or more: only the System help
+                        editors change it. Edit a copy: the copy gets the default
+                        priority and is shown in place of this page.
+                    </div>
                     <div class="alert alert-warning" role="alert"
                         invisible="not source_changed">
                         The source of this page changed after it was edited:
@@ -44,28 +56,29 @@
                     </div>
                     <group>
                         <group>
-                            <field name="key"/>
-                            <field name="name"/>
-                            <field name="lang"/>
-                            <field name="module"/>
+                            <field name="key" readonly="not wch_can_edit"/>
+                            <field name="name" readonly="not wch_can_edit"/>
+                            <field name="lang" readonly="not wch_can_edit"/>
+                            <field name="module" readonly="not wch_can_edit"/>
                             <field name="source_file"/>
                         </group>
                         <group>
-                            <field name="model"/>
-                            <field name="view_xmlid"/>
-                            <field name="view_type"/>
+                            <field name="model" readonly="not wch_can_edit"/>
+                            <field name="view_xmlid" readonly="not wch_can_edit"/>
+                            <field name="view_type" readonly="not wch_can_edit"/>
                             <field name="when" readonly="1" invisible="not when"/>
                             <!-- the rebuild sets the pages of the modules back to 96 -->
-                            <field name="priority" readonly="source_file"/>
-                            <field name="clear_cut"/>
+                            <field name="priority" readonly="source_file or not wch_can_edit"/>
+                            <field name="clear_cut" readonly="not wch_can_edit"/>
                             <field name="edited"/>
                             <field name="source_changed"/>
-                            <field name="active"/>
+                            <field name="active" readonly="not wch_can_edit"/>
                         </group>
                     </group>
                     <notebook>
                         <page name="content" string="Content">
-                            <field name="html" widget="wch_html" options="{'codeview': true}" class="o_wch_html"/>
+                            <field name="html" widget="wch_html" options="{'codeview': true}" class="o_wch_html"
+                                readonly="not wch_can_edit"/>
                         </page>
                         <page name="source" string="Source">
                             <field name="source_html" widget="html" options="{'codeview': true}" class="o_wch_html"/>
@@ -78,7 +91,8 @@
                                 rule met, the general page with the highest priority
                                 is shown, the pages of the modules being the last.
                             </p>
-                            <field name="rule_ids" context="{'default_page_id': id}">
+                            <field name="rule_ids" context="{'default_page_id': id}"
+                                readonly="not wch_can_edit">
                                 <list editable="bottom">
                                     <field name="sequence" widget="handle"/>
                                     <field name="model" column_invisible="1"/>
@@ -260,7 +274,7 @@
          for the administrators in debug mode. The Help app opens the help
          window; for the editors it also shows these menus in the top bar -->
     <menuitem id="menu_help_editor_root" name="Help Editor" parent="menu_help_root"
-        groups="group_help_editor" sequence="10"/>
+        groups="group_help_user" sequence="10"/>
     <menuitem id="menu_help_editor_page" name="Help Pages" action="action_context_help_page"
         parent="menu_help_editor_root" sequence="10"/>
     <menuitem id="menu_help_editor_rule" name="Help Rules" action="action_context_help_rule"

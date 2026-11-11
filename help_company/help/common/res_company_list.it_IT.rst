@@ -13,6 +13,9 @@ Aziende
 Descrizione
 -----------
 
+Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
+clic sul pulsante **FAQ** per le domande più comuni già risolte.
+
 L'elenco delle aziende gestite nel database. Ogni riga mostra il
 :field:`nome dell'azienda <name>`, il suo :field:`partner <partner_id>` (il
 contatto che contiene indirizzo e partita IVA dell'azienda) e le sue
@@ -52,6 +55,8 @@ barra in alto.
 
 Domande frequenti
 -----------------
+
+Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché non vedo il menu Aziende?
 

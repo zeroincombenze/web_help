@@ -44,7 +44,12 @@ kanban view follows the list rules):
 * *Contents*: table of contents, built by the help window, not written in RST;
   it lists the sections left on the page, footer excepted; the sections of a
   page with several parts (titles of first level) are grouped by part
-* ``description`` *Description*: summary of the view / model
+* ``description`` *Description*: summary of the view / model; its first
+  paragraph is always "Click on button **Ready** for help about how to use
+  this help; click on button **FAQ** for the most common solved questions."
+  (Italian: "Fare clic sul pulsante **Pronto** per sapere come usare questo
+  aiuto; fare clic sul pulsante **FAQ** per le domande più comuni già
+  risolte.")
 * ``new_record`` *How to insert a new record*: form only, steps to insert a
   record
 * ``search`` *Suggestions for search*: list / kanban only, how to find, filter
@@ -56,7 +61,10 @@ kanban view follows the list rules):
 * ``example`` *Example*: useful examples, on their own page opened by the
   **Example** button
 * ``faq`` *FAQ*: ``help-question`` blocks, on their own page opened by the
-  **FAQ** button
+  **FAQ** button; the first paragraph, before the first question, is always
+  "Click on button **Topic** to return to the specific help page." (Italian:
+  "Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto
+  specifica.")
 * ``footer`` *Footer*: date and time of page creation and copyright notice,
   not in the table of contents
 

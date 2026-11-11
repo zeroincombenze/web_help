@@ -9,7 +9,7 @@
 #
 {
     "name": "Context help",
-    "version": "18.0.1.0.11",
+    "version": "18.0.1.0.12",
     "category": "Hidden/Tools",
     "summary": "Context help button, pages written in RST by each module",
     "author": "Zeroincombenze srls",
@@ -37,5 +37,6 @@
         ],
     },
     "maintainer": "Antonio M. Vigliotti <antoniomaria.vigliotti@gmail.com>",
+    "post_init_hook": "post_init_hook",
     "installable": True,
 }

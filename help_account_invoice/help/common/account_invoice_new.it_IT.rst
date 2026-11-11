@@ -33,8 +33,10 @@ Come inserire un nuovo record
       segna la bozza come pro-forma da inviare al cliente.`
    #. Premere :version:`10|**Validare**;*|**Valida**`: Odoo assegna il
       :field:`numero <number>`, scrive la registrazione contabile e lo stato
-      diventa *Aperta*. Odoo rifiuta di validare una fattura con totale
-      negativo: creare invece una nota di credito.
+      diventa *Aperta*. :version:`10|Odoo 10.0 non blocca una fattura con
+      totale negativo, ma non bisogna validarla: creare invece una nota di
+      credito.;*|Odoo rifiuta di validare una fattura con totale negativo:
+      creare invece una nota di credito.`
    #. Premere :version:`10|**Invia per Email**;11|**Inviare per e-mail**;*|**Invia
       e stampa**` per inviare al cliente la fattura con il suo PDF.
 
