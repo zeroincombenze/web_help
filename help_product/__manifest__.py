@@ -6,7 +6,7 @@
 #
 {
     "name": "Help for product",
-    "version": "10.0.1.0.3",
+    "version": "10.0.1.0.4",
     "category": "Hidden/Tools",
     "summary": "Context help pages for products and product variants",
     "author": "Zeroincombenze srls",

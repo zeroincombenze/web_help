@@ -1,3 +1,8 @@
+10.0.1.0.4 (2026-11-08)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Every help page starts with the hint to the Ready and FAQ buttons; every FAQ page starts with the hint to the Topic button
+
 10.0.1.0.3 (2026-10-31)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -12,6 +12,9 @@ Ordine di acquisto
 Descrizione
 -----------
 
+Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
+clic sul pulsante **FAQ** per le domande più comuni già risolte.
+
 .. help-version:: <16
 
    Un ordine di acquisto nasce come **richiesta di preventivo** (RdP): una
@@ -46,6 +49,8 @@ Descrizione
 
 Domande frequenti
 -----------------
+
+Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
 .. help-version:: <16
 

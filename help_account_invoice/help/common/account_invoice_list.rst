@@ -35,6 +35,9 @@ Invoices
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 .. help-version:: <13
 
    The list of customer invoices, or of vendor bills, depending on the menu.
@@ -66,6 +69,8 @@ Description
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-question:: Why don't I see the credit notes?
 

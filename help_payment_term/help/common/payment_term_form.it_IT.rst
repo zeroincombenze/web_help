@@ -13,6 +13,9 @@ Termini di pagamento
 Descrizione
 -----------
 
+Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
+clic sul pulsante **FAQ** per le domande più comuni già risolte.
+
 I termini di pagamento dicono quando un cliente deve pagare una fattura, o
 quando si deve pagare una fattura fornitore: Odoo calcola
 :version:`<13|la data di scadenza;*|le scadenze` della fattura dalla data
@@ -43,6 +46,8 @@ giorno fisso del mese.
 
 Domande frequenti
 -----------------
+
+Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché non riesco a salvare il termine di pagamento?
 

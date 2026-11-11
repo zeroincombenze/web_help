@@ -119,6 +119,21 @@ class TestRstHelp(unittest.TestCase):
         self.assertIn("The name", html)
         self.assertIn("wch-auto-q", html)
 
+    def test_auto_question_bytes(self):
+        # Python 2: field strings and helps of the modules may be utf-8 bytes
+        doc = rst_help.parse_file(
+            os.path.join(self.help_dir, "common/page.rst"),
+            self.help_dir,
+            "v16_20",
+            "en_US",
+            fields_help=lambda model: [
+                ("name", b"Citt\xc3\xa0", b"\xe2\x80\xa3 Codice \xc3\xa8 lungo")
+            ],
+        )
+        html = rst_help.to_html(doc)
+        self.assertIn(b"Citt\xc3\xa0".decode("utf-8"), html)
+        self.assertIn(b"\xe2\x80\xa3 Codice \xc3\xa8 lungo".decode("utf-8"), html)
+
     def test_include_group_and_lang(self):
         self.assertIn("Intro for 10", rst_help.to_html(self._parse(group="v10")))
         html = rst_help.to_html(self._parse(lang="it_IT"))

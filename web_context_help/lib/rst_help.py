@@ -408,7 +408,7 @@ class HelpQuestion(Directive):
                 return []
             # Marked: the FAQ page leaves them to the Fields page
             return [
-                self._question(label, [help_text], classes=["wch-auto-q"])
+                self._question(_text(label), [_text(help_text)], classes=["wch-auto-q"])
                 for (dummy, label, help_text) in fields_help(model)
             ]
         if not self.arguments:
@@ -427,6 +427,14 @@ class HelpQuestion(Directive):
                 body += nodes.paragraph(text, text)
         box += body
         return box
+
+
+def _text(value):
+    """Field strings and helps may be bytes on Python 2 (plain str literals of
+    the modules): docutils would decode them as ascii"""
+    if isinstance(value, bytes):
+        return value.decode("utf-8", "replace")
+    return value
 
 
 class HelpVersion(Directive):

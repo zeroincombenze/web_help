@@ -13,6 +13,9 @@ Payment Terms
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 The list of the payment terms: each one computes the due dates of the
 invoices that use it. Each row shows the :field:`name <name>` and, in a
 multi-company database, the :field:`company <company_id>`. The terms are
@@ -31,6 +34,8 @@ row to open the terms and see their lines.
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-question:: Why don't I see some payment terms?
 

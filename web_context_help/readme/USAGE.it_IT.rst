@@ -47,7 +47,11 @@ l'elenco (una vista kanban segue le regole dell'elenco):
 * *Indice*: costruito dalla finestra di aiuto, non si scrive in RST; elenca le
   sezioni rimaste nella pagina, tranne il piè di pagina; le sezioni di una
   pagina con più parti (titoli di primo livello) sono raggruppate per parte
-* ``description`` *Descrizione*: sintesi della vista / modello
+* ``description`` *Descrizione*: sintesi della vista / modello; il primo
+  paragrafo è sempre "Fare clic sul pulsante **Pronto** per sapere come usare
+  questo aiuto; fare clic sul pulsante **FAQ** per le domande più comuni già
+  risolte." (inglese: "Click on button **Ready** for help about how to use
+  this help; click on button **FAQ** for the most common solved questions.")
 * ``new_record`` *Come inserire un nuovo record*: solo maschera, passi per
   inserire un record
 * ``search`` *Suggerimenti per la ricerca*: solo elenco / kanban, come trovare,
@@ -59,7 +63,10 @@ l'elenco (una vista kanban segue le regole dell'elenco):
 * ``example`` *Esempi*: esempi utili, in una pagina a parte aperta dal pulsante
   **Esempio**
 * ``faq`` *Domande frequenti*: blocchi ``help-question``, in una pagina a parte
-  aperta dal pulsante **FAQ**
+  aperta dal pulsante **FAQ**; il primo paragrafo, prima della prima domanda, è
+  sempre "Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto
+  specifica." (inglese: "Click on button **Topic** to return to the specific
+  help page.")
 * ``footer`` *Piè di pagina*: data e ora di creazione della pagina e nota di
   copyright, non nell'indice
 

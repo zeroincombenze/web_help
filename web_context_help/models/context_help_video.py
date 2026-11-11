@@ -61,7 +61,7 @@ class ContextHelpVideoWizard(models.TransientModel):
 
     @api.model
     def _selection_video(self):
-        if not self.env.user.has_group("web_context_help.group_help_editor"):
+        if not self.env.user.has_group("web_context_help.group_help_user"):
             return []
         listed = self.env["context.help.page"].video_list()
         return [(v["name"], v["name"]) for v in listed["videos"]]

@@ -12,6 +12,9 @@ Prodotto
 Descrizione
 -----------
 
+Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
+clic sul pulsante **FAQ** per le domande più comuni già risolte.
+
 I prodotti sono i beni o i servizi acquistati e venduti da un'azienda.
 Possono avere un codice specifico o esserne privi, essere gestiti a magazzino,
 tracciati con numeri di serie o numeri di lotto, oppure gestiti senza alcuna
@@ -70,6 +73,8 @@ oppure come prodotti con varianti.
 
 Domande frequenti
 -----------------
+
+Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
 .. help-version:: <16
 

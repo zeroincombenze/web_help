@@ -18,7 +18,11 @@ from odoo import http
 from odoo.http import request
 
 from ..lib import html_page
-from ..models.context_help_page import HOME_KEY, STRING_TYPES
+from ..models.context_help_page import (
+    GROUP_HELP_USER,
+    HOME_KEY,
+    STRING_TYPES,
+)
 
 RE_LANG = re.compile(r"^[a-z]{2,3}(_[A-Za-z0-9]+)?(@\w+)?$")
 RE_RANGE = re.compile(r"^bytes=(\d*)-(\d*)$")
@@ -175,7 +179,8 @@ class ContextHelp(http.Controller):
                 lang,
             )
         nav.update(self._nav(lang, "home" if page.key == HOME_KEY else None))
-        if page.can_write():
+        # User level: a page it may not edit is copied by the edit route
+        if request.env.user.has_group(GROUP_HELP_USER):
             nav["edit"] = Page.edit_url(page)
         body = html_page.render(
             title,
@@ -217,10 +222,27 @@ class ContextHelp(http.Controller):
         context.setdefault("lang", self._lang())
         return request.env["context.help.page"].ask(question, context)
 
+    @http.route("/web_context_help/edit/<int:page_id>", type="http", auth="user")
+    def edit(self, page_id, **kw):
+        """Edit a page: a page of priority 64 or more, edited by the User level,
+        is copied with the default priority and the copy is opened"""
+        if not request.env.user.has_group(GROUP_HELP_USER):
+            raise Forbidden()
+        Page = request.env["context.help.page"]
+        page = Page.browse(page_id).exists()
+        if not page:
+            raise NotFound()
+        page = page.wch_page_to_edit()
+        action = request.env.ref("web_context_help.action_context_help_page")
+        return redirect(
+            "/web#id=%d&model=%s&view_type=form&action=%d"
+            % (page.id, Page._name, action.id)
+        )
+
     @http.route("/web_context_help/videos", type="json", auth="user")
     def videos(self, **kw):
         """Videos that a help editor can insert in a help page"""
-        if not request.env.user.has_group("web_context_help.group_help_editor"):
+        if not request.env.user.has_group(GROUP_HELP_USER):
             raise Forbidden()
         return request.env["context.help.page"].video_list()
 

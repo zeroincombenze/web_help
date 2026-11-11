@@ -6,6 +6,9 @@
 Help pages
 ==========
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 Every module can explain its forms with RST files in its ``help/`` directory.
 They are read at every server start and turned into the pages listed here.
 Press the |sos| button in the control panel to open the help of the current view
@@ -55,6 +58,8 @@ gets the key of the page followed by " (copy)".
 
 Questions
 ---------
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-question:: Why doesn't my change to the RST file appear?
 

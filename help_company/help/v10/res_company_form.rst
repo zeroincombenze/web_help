@@ -12,6 +12,9 @@ Company
 Description
 -----------
 
+Click on button **Ready** for help about how to use this help; click on
+button **FAQ** for the most common solved questions.
+
 A company is the legal entity that issues the documents of Odoo: its name,
 logo, :field:`Company Tagline <rml_header1>`, address and :field:`Tax ID
 <vat>` are printed on quotations, invoices and every other report, and the
@@ -73,6 +76,8 @@ Example
 
 FAQ
 ---
+
+Click on button **Topic** to return to the specific help page.
 
 .. help-question:: Where is the Regime fiscale of the company?
 

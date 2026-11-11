@@ -13,6 +13,9 @@ Bacheca della contabilità
 Descrizione
 -----------
 
+Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
+clic sul pulsante **FAQ** per le domande più comuni già risolte.
+
 .. help-if:: module != account_accountant
 
    La bacheca aperta da **Fatturazione ‣ Bacheca**.
@@ -53,6 +56,8 @@ Stampe ed esportazione
 
 Domande frequenti
 -----------------
+
+Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché non vedo il menu Bacheca?
 

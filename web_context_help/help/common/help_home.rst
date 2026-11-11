@@ -251,23 +251,116 @@ When a view has no page, an automatic page lists the help of its fields.
 
 .. |sos| unicode:: U+1F6DF
 
+.. _navigate:
+
+Moving inside the help
+----------------------
+
+A long page starts with its **Contents**: click a title to jump to that
+section. Inside the text:
+
+* a link to another page or section opens it in the help window; the Back
+  button of the browser returns to the previous page;
+* a field name shown as a link (e.g. on the **Fields** page) highlights that
+  field in the Odoo tab, so you can see where it is in the form.
+
+.. _buttons:
+
+The buttons in the header
+-------------------------
+
+The header shows only the buttons that make sense for the page you are
+reading:
+
+* **Follow Odoo**: checked, the help window changes page every time you open
+  another view in Odoo; unchecked, it stays on the page you are reading, e.g.
+  to keep it open while you work elsewhere.
+* **Topic**: on a page, it appears when the Odoo view has a page other than
+  the one you are reading (e.g. after opening the **Summary**, or with *Follow
+  Odoo* unchecked): it brings you back to the help of the current view. On the
+  **FAQ**, **Example** and **Fields** pages it brings you back to the page they
+  belong to.
+* **Ready**: opens this page, the general help, from any page.
+* **Loose help**: shown on the pages written for a special case, e.g. one type
+  of order: it opens the general help of the same record.
+* **Example**: opens a worked example of the page, on a page of its own.
+* **FAQ**: opens the frequently asked questions of the page, see below.
+* **Fields**: lists every field of the form with its explanation; click a
+  field name to highlight it in Odoo.
+* **Summary**: lists all the help pages, grouped by module; click a title to
+  open it.
+* **Edit**: help editors only, see *Changing this page*.
+
+.. _faq_button:
+
+Frequently asked questions (FAQ)
+--------------------------------
+
+The questions about a page are kept apart, so the page stays short: the
+**FAQ** button appears only when the page has questions. Press it to open
+them on a page of their own: every question is a box with the question in bold
+and its answer underneath. Scroll the list, or type a word of your doubt in the
+find box (e.g. *rebuild*) to go straight to the question that answers it. Press
+**Topic** to go back to the page.
+
+This page has its FAQ too: try the **FAQ** button.
+
 .. _search:
 
 Finding text inside help
 ------------------------
 
-The box in the header finds text in the page, like the browser Ctrl+F.
-Case and accents are ignored; text in quotes is searched as an exact phrase.
+The box in the header finds text in the page, like the browser Ctrl+F (which
+moves to this box). Case and accents are ignored; text in quotes is searched
+as an exact phrase. With more words, the places where they are near each other
+are shown first; when there is none, the counter shows *any word* and every
+word is found on its own.
+
+The counter shows the current match and the total, e.g. *2/5*. Press Enter or
+▼ for the next match, Shift+Enter or ▲ for the previous one, Esc to clear the
+search. The search looks only in the page you are reading: to search the
+questions, open the **FAQ** first.
 
 .. _configure:
 
 Changing this page
 ------------------
 
-Administrators see the **Edit** button in the header: it opens the page in
-*Settings > Technical > Context Help > Help Pages*, where its content can be
-adapted to your company, this page included. An edited page keeps your
-version when the module is upgraded.
+The help editors see the **Edit** button in the header: it opens the page in
+*Help > Help Editor > Help Pages*, where its content can be adapted to your
+company, this page included. An edited page keeps your version when the
+module is upgraded. A help editor of level **User** edits a copy of the pages
+of priority 64 or more, e.g. this page: **Edit** creates the copy, with the
+default priority, and opens it.
+
+.. _faq:
+
+Questions
+---------
+
+Click on button **Topic** to return to the specific help page.
+
+.. help-question:: Pressing the help button, no window opens. Why?
+
+   The browser has blocked the pop-up window: allow pop-ups for the Odoo
+   site (the icon at the right of the address bar) and press the button again.
+
+.. help-question:: The help window shows a page that is not about my view. Why?
+
+   *Follow Odoo* is unchecked, or you have opened another page from the help.
+   Press **Topic** to go back to the help of the current view, or check
+   *Follow Odoo*.
+
+.. help-question:: Why don't I see the FAQ button?
+
+   The page you are reading has no questions. The **FAQ**, **Example**,
+   **Fields** and **Loose help** buttons appear only on the pages that have
+   them.
+
+.. help-question:: The page lists only the fields of the form. Why?
+
+   Nobody has written a page for this view yet: the help shows an automatic
+   page with the explanation of its fields.
 
 .. _footer:
 
