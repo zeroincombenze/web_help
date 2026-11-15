@@ -22,3 +22,16 @@
         line-height: 1.4;
     }
 }
+// [`Save`] of the help sources: the button frame, also in the page editor
+.o_wch_html .wch-button {
+    display: inline-block;
+    padding: 0 0.45rem;
+    border: 2px solid $gray-600;
+    border-radius: 0.25rem;
+    background: #f0f0f0;
+    color: #212529;
+    font-size: 0.9em;
+    font-weight: normal;
+    line-height: 1.4;
+    white-space: nowrap;
+}

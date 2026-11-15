@@ -3,7 +3,7 @@
 Stampe ed esportazione
 ----------------------
 
-* **Stampare etichette** (nell'intestazione della maschera, oppure dall'elenco
+* [`Stampare etichette`] (nell'intestazione della maschera, oppure dall'elenco
   dopo aver selezionato i prodotti): scegliere la quantità e il formato per
   stampare etichette con prezzo e codice a barre.
 * Con l'impostazione *Listini prezzi*, selezionare i prodotti e usare

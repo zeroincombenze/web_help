@@ -132,7 +132,7 @@
       from the notifications of the SdI: *SdI Processing*, then e.g. *SdI
       Accepted, Forwarded to Partner* or *SdI Rejected*. The invoices to a PA
       notify only the delivery and the outcome; sometimes the notification is
-      late. Press **Check Sending** on the invoice to ask for the state now;
+      late. Press [`Check Sending`] on the invoice to ask for the state now;
       if it is still wrong, open a ticket with the support.
 
    .. help-question:: Why does Odoo stop receiving the e-invoices and the notifications?
@@ -166,7 +166,7 @@
 
    .. help-question:: How do I import an e-invoice received by PEC or in a ZIP?
 
-      In **Invoicing ‣ Vendors ‣ Bills** press **Upload** and choose the file
+      In **Invoicing ‣ Vendors ‣ Bills** press [`Upload`] and choose the file
       *IT...xml* (or *.xml.p7m*) of the bill, not the metadata file *_MT_*.
 
       .. help-if:: module = l10n_it_edi_extension
@@ -189,5 +189,5 @@
 
       The document was entered with the wrong type: a negative invoice
       instead of a credit note, or the other way round. Open it and press
-      **Rectify** at the top: it becomes the right type, with positive
+      [`Rectify`] at the top: it becomes the right type, with positive
       amounts.

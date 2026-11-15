@@ -17,7 +17,5 @@ Come modificare un record
    magazzino** con giacenza è rifiutato`; svuotare prima la giacenza.
 #. **Attributi e varianti**: aggiungere un valore crea le nuove varianti;
    toglierne uno archivia le varianti che lo usano.
-#. **Azioni ‣ Archivia** nasconde un prodotto non più usato senza perderne la
-   storia; **Azioni ‣ Duplica** lo copia per crearne uno simile.
-#. Per eliminare un prodotto selezionarlo nell'elenco e usare **Azioni ‣
-   Elimina**: un prodotto usato in documenti non si può eliminare, archiviarlo.
+#. :version:`<17|**Azione ‣ Duplica**;*|L'icona dell'ingranaggio ‣
+   **Duplica**` copia il prodotto per crearne uno simile.

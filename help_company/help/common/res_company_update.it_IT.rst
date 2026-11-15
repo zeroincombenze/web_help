@@ -13,8 +13,5 @@ Come modificare un record
 #. La :field:`valuta <currency_id>` non si può cambiare quando l'azienda ha
    già movimenti contabili.
 #. Per aggiungere una filiale, aprire la scheda **Filiali** e premere
-   **Aggiungi riga**; il pulsante **Filiali** in alto mostra le filiali
+   [`Aggiungi riga`]; il pulsante [`Filiali`] in alto mostra le filiali
    dell'azienda.
-#. Un'azienda non più usata si archivia con l'icona dell'ingranaggio ‣
-   **Archivia**; un'azienda che è ancora l'azienda predefinita di un utente
-   attivo non si può archiviare.

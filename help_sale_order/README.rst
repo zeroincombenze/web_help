@@ -1,5 +1,5 @@
 =============================================================
-|icon| Help for sale order/Aiuto ordini di vendita 18.0.1.0.4
+|icon| Help for sale order/Aiuto ordini di vendita 18.0.1.0.6
 =============================================================
 
 **Context help pages for sale orders**
@@ -21,7 +21,9 @@ Every page follows the help rule of web_context_help:
 * **Description**: what quotations and sales orders are, with the main fields
 * **New record** (form): step-by-step guide to create a quotation and confirm it
 * **Update record** (form): what can be changed in each status, invoicing,
-  locking, cancelling and deleting
+  locking
+* **How to cancel or delete record** (form and list): cancelling an order,
+  setting it back to quotation, which orders can be deleted
 * **How to search** (list): menus, search, filters and groupings
 * **Configure**: the Sales settings that affect sale orders
 * **Report**: the quotation / order PDF, the pro-forma and the sales analysis
@@ -39,7 +41,9 @@ Ogni pagina segue la regola di aiuto di web_context_help:
 * **Descrizione**: cosa sono preventivi e ordini di vendita, con i campi principali
 * **Nuovo record** (maschera): guida passo passo per creare un preventivo e confermarlo
 * **Modifica record** (maschera): cosa si può cambiare in ogni stato,
-  fatturazione, blocco, annullamento ed eliminazione
+  fatturazione, blocco
+* **Come annullare o eliminare un record** (maschera e lista): annullare un
+  ordine, riportarlo a preventivo, quali ordini si possono eliminare
 * **Come cercare** (lista): menu, ricerca, filtri e raggruppamenti
 * **Configurazione**: le impostazioni di Vendite che influenzano gli ordini
 * **Stampe**: il PDF di preventivo / ordine, la pro-forma e l'analisi vendite
@@ -147,6 +151,18 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+18.0.1.0.6 (2026-11-13)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Sale order form and list: new section How to cancel or delete record (cancel wizard / confirmation by version, Set to Quotation, which orders can be deleted)
+* [IMP] Sale order list: new sections How to insert a new record (button Create / New) and How to update a record (click on a line)
+* [IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)
+
+18.0.1.0.5 (2026-11-08)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Every help page starts with the hint to the Ready and FAQ buttons; every FAQ page starts with the hint to the Topic button
+
 18.0.1.0.4 (2026-10-31)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -228,7 +244,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-31
+Last Update / Ultimo aggiornamento: 2026-11-15
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

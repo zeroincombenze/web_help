@@ -20,5 +20,5 @@ Main fields
   several variants.
 * :field:`Cost <standard_price>`, :field:`weight <weight>` and
   :field:`volume <volume>`: each variant has its own.
-* Stock: the **On Hand** and **Forecasted** buttons count the quantity of this
+* Stock: the [`On Hand`] and [`Forecasted`] buttons count the quantity of this
   variant only.

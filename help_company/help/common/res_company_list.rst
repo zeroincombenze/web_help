@@ -13,8 +13,8 @@ Companies
 Description
 -----------
 
-Click on button **Ready** for help about how to use this help; click on
-button **FAQ** for the most common solved questions.
+Click on button [`Ready`] for help about how to use this help; click on
+button [`FAQ`] for the most common solved questions.
 
 The list of the companies managed in the database. Each row shows the
 :field:`company name <name>`, its :field:`partner <partner_id>` (the contact
@@ -22,6 +22,14 @@ holding address and Tax ID of the company) and its :field:`branches
 <child_ids>`. The order of the rows, changed by dragging the handle at the
 left, is the order in which the companies are proposed. Click a row to open
 the company.
+
+.. _new_record:
+
+How to insert a new record
+--------------------------
+
+Press :version:`<16|[\`Create\`];*|[\`New\`]` at the top left: an empty form
+opens, see its help for the fields to fill in.
 
 .. _search:
 
@@ -35,6 +43,16 @@ Suggestions for search
 * **Group By ‣ Add Custom Group** groups the companies, e.g. by parent
   company, to see the branches under their main company.
 
+.. _update_record:
+
+How to update a record
+----------------------
+
+Click on a line of the list to open its form, then follow the help of the
+form to change it.
+
+.. help-include:: res_company_cancel.rst
+
 .. help-include:: res_company_configure.rst
 
 .. help-include:: res_company_report.rst
@@ -44,7 +62,7 @@ Suggestions for search
 Example
 -------
 
-**A second company in the same database.** Press **New**, type the name,
+**A second company in the same database.** Press [`New`], type the name,
 the address and the Tax ID and leave the form. Then open **Settings ‣ Users
 & Companies ‣ Users**, open every user who must work for the new company
 and add it to the *Allowed Companies*. The users switch from one company to
@@ -55,7 +73,7 @@ the other with the company switcher in the top bar.
 FAQ
 ---
 
-Click on button **Topic** to return to the specific help page.
+Click on button [`Topic`] to return to the specific help page.
 
 .. help-question:: Why don't I see the Companies menu?
 

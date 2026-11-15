@@ -35,8 +35,8 @@ Invoice
 Description
 -----------
 
-Click on button **Ready** for help about how to use this help; click on
-button **FAQ** for the most common solved questions.
+Click on button [`Ready`] for help about how to use this help; click on
+button [`FAQ`] for the most common solved questions.
 
 .. help-version:: <13
 
@@ -103,6 +103,8 @@ button **FAQ** for the most common solved questions.
 
 .. help-include:: account_invoice_update.rst
 
+.. help-include:: account_invoice_cancel.rst
+
 .. help-include:: account_invoice_form_actions.rst
 
 .. help-include:: account_invoice_configure.rst
@@ -116,19 +118,19 @@ button **FAQ** for the most common solved questions.
 FAQ
 ---
 
-Click on button **Topic** to return to the specific help page.
+Click on button [`Topic`] to return to the specific help page.
 
 .. help-question:: Why can't I change the invoice?
 
    .. help-version:: <13
 
-      A validated invoice is locked. Cancel it with **Cancel Invoice** and
-      press **Reset to Draft**: the journal must allow cancelling entries, see
+      A validated invoice is locked. Cancel it with [`Cancel Invoice`] and
+      press [`Reset to Draft`]: the journal must allow cancelling entries, see
       *How to set up*. If it is paid, remove the payment first.
 
    .. help-version:: >=13
 
-      A posted invoice is locked: press **Reset to Draft**, change it and
+      A posted invoice is locked: press [`Reset to Draft`], change it and
       confirm it again. If the button is missing, the invoice is in a locked
       period or its journal secures the entries; issue a credit note instead.
 
@@ -148,7 +150,7 @@ Click on button **Topic** to return to the specific help page.
 
 .. help-question:: How do I register a partial payment?
 
-   Press :version:`<18|**Register Payment**;*|**Pay**`
+   Press :version:`<18|[\`Register Payment\`];*|[\`Pay\`]`
    and lower the amount. Choose *Keep open* to wait for the rest, or
    :version:`<14|*Mark invoice as fully paid*;*|*Mark as fully paid*` to write
    the difference off to an account, e.g. for bank fees.
@@ -156,14 +158,14 @@ Click on button **Topic** to return to the specific help page.
 .. help-question:: How do I cancel a paid invoice?
 
    Remove the payment first: in the payments under the totals, click the
-   ⓘ icon of the payment and press **Unreconcile**. Then cancel the invoice,
+   ⓘ icon of the payment and press [`Unreconcile`]. Then cancel the invoice,
    or issue a credit note.
 
 .. help-question:: Why is the invoice still waiting for a payment I already registered?
 
    The payment was registered without the invoice, e.g. from the bank
    statement: the invoice shows it under the totals as an *outstanding
-   credit*. Press **Add** next to the payment to use it.
+   credit*. Press [`Add`] next to the payment to use it.
 
    .. help-version:: >=12
 
@@ -186,16 +188,16 @@ Click on button **Topic** to return to the specific help page.
    .. help-version:: 10
 
       Odoo 10.0 does not stop you, but do not validate it: the invoice would
-      show the amount as due from the customer and **Register Payment** would
+      show the amount as due from the customer and [`Register Payment`] would
       propose to collect it, while the journal entry records the opposite.
-      Correct the lines, or delete the draft and press **Refund Invoice** on
+      Correct the lines, or delete the draft and press [`Refund Invoice`] on
       the original invoice.
 
    .. help-version:: 11-12
 
       Odoo refuses to validate it: *You cannot validate an invoice with a
       negative total amount. You should create a credit note instead.*
-      Correct the lines, or delete the draft and press **Add Credit Note** on
+      Correct the lines, or delete the draft and press [`Add Credit Note`] on
       the original invoice; a credit note with no original invoice is created
       in **Invoicing ‣ Customers ‣ Credit Notes**.
 
@@ -210,7 +212,7 @@ Click on button **Topic** to return to the specific help page.
       note** in the menu under the gear icon`: Odoo changes the sign of the
       quantities, so the credit note has a positive total. A credit note of a
       posted invoice is created with
-      :version:`<18|**Add Credit Note**;*|**Credit Note**` on the invoice.
+      :version:`<18|[\`Add Credit Note\`];*|**Credit Note**` on the invoice.
 
 .. help-version:: 18
 

@@ -12,8 +12,8 @@ Products
 Description
 -----------
 
-Click on button **Ready** for help about how to use this help; click on
-button **FAQ** for the most common solved questions.
+Click on button [`Ready`] for help about how to use this help; click on
+button [`FAQ`] for the most common solved questions.
 
 .. help-version:: <16
 
@@ -30,7 +30,25 @@ button **FAQ** for the most common solved questions.
    and the other main data. Click it to open the product. The buttons at the top
    right switch between kanban, list and the other views.
 
+.. _new_record:
+
+How to insert a new record
+--------------------------
+
+Press :version:`<16|[\`Create\`];*|[\`New\`]` at the top left: an empty form
+opens, see its help for the fields to fill in.
+
 .. help-include:: product_list_search.rst
+
+.. _update_record:
+
+How to update a record
+----------------------
+
+Click on a line of the list to open its form, then follow the help of the
+form to change it.
+
+.. help-include:: product_cancel.rst
 
 .. help-include:: product_configure.rst
 
@@ -43,7 +61,7 @@ button **FAQ** for the most common solved questions.
 FAQ
 ---
 
-Click on button **Topic** to return to the specific help page.
+Click on button [`Topic`] to return to the specific help page.
 
 .. help-version:: <16
 

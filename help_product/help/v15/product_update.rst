@@ -3,8 +3,8 @@
 How to update a record
 ----------------------
 
-#. Open the product, press **Edit**, change the fields and press **Save**
-   (**Discard** drops the changes).
+#. Open the product, press [`Edit`], change the fields and press [`Save`]
+   ([`Discard`] drops the changes).
 #. A new :field:`sale price <list_price>` or :field:`cost <standard_price>` is
    used by the next documents only; orders and invoices already made keep
    their prices.
@@ -14,18 +14,11 @@ How to update a record
 #. Adding a value in the :version:`<=14|**Variants**;*|**Attributes &
    Variants**` tab creates the new variants; removing a value deletes the
    variants that use it, or archives them when they are already used by
-   documents. :version:`11|**Variant Prices**;12-14|**Configure
-   Variants**;*|**Configure** on an attribute line` sets the extra price of
+   documents. :version:`11|**Variant Prices**;12-14|[\`Configure
+   Variants\`];*|[\`Configure\`] on an attribute line` sets the extra price of
    each attribute value: the sale price of a variant is the sale price of the
    product plus the extra prices of its values.
-#. The **Variants** button opens the variants, to set their own reference,
+#. The [`Variants`] button opens the variants, to set their own reference,
    barcode, cost and weight.
-#. :version:`<=12|**Update Qty On Hand**;*|**Update Quantity**` (storable
+#. :version:`<=12|[\`Update Qty On Hand\`];*|[\`Update Quantity\`]` (storable
    products) sets the quantity in stock after a count.
-#. :version:`<=12|**Active** at the top right archives;*|**Action ‣ Archive**
-   archives` the product and all its variants: it is no longer proposed on new
-   documents but stays on the old ones. :version:`<=12|Press **Archived** to
-   restore it.;*|**Action ‣ Unarchive** restores it.`
-#. To delete a product select it in the list and use **Action ‣ Delete**: a
-   product used by orders, invoices or stock moves cannot be deleted, archive
-   it instead.

@@ -35,8 +35,8 @@ Fattura
 Descrizione
 -----------
 
-Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
-clic sul pulsante **FAQ** per le domande più comuni già risolte.
+Fare clic sul pulsante [`Pronto`] per sapere come usare questo aiuto; fare
+clic sul pulsante [`FAQ`] per le domande più comuni già risolte.
 
 .. help-version:: <13
 
@@ -104,6 +104,8 @@ clic sul pulsante **FAQ** per le domande più comuni già risolte.
 
 .. help-include:: account_invoice_update.rst
 
+.. help-include:: account_invoice_cancel.rst
+
 .. help-include:: account_invoice_form_actions.rst
 
 .. help-include:: account_invoice_configure.rst
@@ -117,20 +119,20 @@ clic sul pulsante **FAQ** per le domande più comuni già risolte.
 Domande frequenti
 -----------------
 
-Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+Fare clic sul pulsante [`Argomento`] per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché non riesco a modificare la fattura?
 
    .. help-version:: <13
 
-      Una fattura validata è bloccata. Annullarla con **Annullare fattura** e
-      premere :version:`10|**Riportare in bozza**;*|**Reimposta a bozza**`: il
+      Una fattura validata è bloccata. Annullarla con [`Annullare fattura`] e
+      premere :version:`10|[\`Riportare in bozza\`];*|[\`Reimposta a bozza\`]`: il
       registro deve consentire l'annullamento delle registrazioni, vedere
       *Come configurare*. Se è pagata, togliere prima il pagamento.
 
    .. help-version:: >=13
 
-      Una fattura confermata è bloccata: premere **Reimposta a bozza**,
+      Una fattura confermata è bloccata: premere [`Reimposta a bozza`],
       modificarla e confermarla di nuovo. Se il pulsante manca, la fattura è
       in un periodo chiuso o il suo registro protegge le registrazioni;
       emettere invece una nota di credito.
@@ -151,7 +153,7 @@ Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Come registro un pagamento parziale?
 
-   Premere :version:`10|**Registrare pagamento**;*|**Registra pagamento**` e
+   Premere :version:`10|[\`Registrare pagamento\`];*|[\`Registra pagamento\`]` e
    ridurre l'importo. Scegliere
    :version:`10|*Lasciare aperto*;11|*Tenere aperto*;12-13|*Lasciare
    aperta*;*|*Tieni aperta*` per attendere il resto, o
@@ -163,14 +165,14 @@ Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 .. help-question:: Come annullo una fattura pagata?
 
    Togliere prima il pagamento: nei pagamenti sotto i totali fare clic
-   sull'icona ⓘ del pagamento e premere **Annulla riconciliazione**. Poi
+   sull'icona ⓘ del pagamento e premere [`Annulla riconciliazione`]. Poi
    annullare la fattura, o emettere una nota di credito.
 
 .. help-question:: Perché la fattura attende ancora un pagamento già registrato?
 
    Il pagamento è stato registrato senza la fattura, ad es. dall'estratto conto
    bancario: la fattura lo mostra sotto i totali come *credito in sospeso*.
-   Premere **Aggiungi** accanto al pagamento per usarlo.
+   Premere [`Aggiungi`] accanto al pagamento per usarlo.
 
    .. help-version:: >=12
 
@@ -194,17 +196,17 @@ Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
    .. help-version:: 10
 
       Odoo 10.0 non lo impedisce, ma non bisogna validarla: la fattura
-      mostrerebbe l'importo come dovuto dal cliente e **Registra pagamento**
+      mostrerebbe l'importo come dovuto dal cliente e [`Registra pagamento`]
       proporrebbe di incassarlo, mentre la registrazione contabile riporta il
       contrario. Correggere le righe, oppure eliminare la bozza e premere
-      **Nota di credito** sulla fattura originale.
+      [`Nota di credito`] sulla fattura originale.
 
    .. help-version:: 11-12
 
       Odoo rifiuta di validarla: *Impossibile validare una fattura con un
       importo totale negativo. Creare invece una nota di credito.* Correggere
-      le righe, oppure eliminare la bozza e premere **Aggiungi nota di
-      credito** sulla fattura originale; una nota di credito senza fattura
+      le righe, oppure eliminare la bozza e premere [`Aggiungi nota di
+      credito`] sulla fattura originale; una nota di credito senza fattura
       originale si crea in **Fatturazione ‣ Clienti ‣ Note di credito**.
 
    .. help-version:: >=13
@@ -218,7 +220,7 @@ Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
       credito** nel menu sotto l'icona dell'ingranaggio`: Odoo cambia il segno
       delle quantità, così la nota di credito ha un totale positivo. Una nota
       di credito di una fattura confermata si crea con
-      :version:`<18|**Aggiungi nota di credito**;*|**Nota di credito**` sulla
+      :version:`<18|[\`Aggiungi nota di credito\`];*|**Nota di credito**` sulla
       fattura.
 
 .. help-version:: 18

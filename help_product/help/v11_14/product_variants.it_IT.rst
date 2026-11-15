@@ -36,8 +36,8 @@ Campi condivisi:
 * Elenco fornitori
 * Codice HS / codice Intrastat (con i moduli Intrastat)
 * Prezzo di vendita (le differenze di prezzo si gestiscono tramite gli
-  attributi, con :version:`11|**Prezzi Variante**;12-14|**Configura
-  varianti**;*|**Configura** sulla riga dell'attributo`)
+  attributi, con :version:`11|**Prezzi Variante**;12-14|[\`Configura
+  varianti\`];*|[\`Configura\`] sulla riga dell'attributo`)
 * Flag *Può essere venduto* e *Può essere acquistato*
 * Tempi di consegna
 * Tipo di prodotto

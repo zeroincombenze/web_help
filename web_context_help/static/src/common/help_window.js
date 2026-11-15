@@ -56,11 +56,68 @@
             return;
         }
         ev.preventDefault();
+        var box = el.closest(".wch-help-tour");
         if (el.classList.contains("wch-field")) {
             post({type: "wch_highlight", field: el.getAttribute("data-field")});
+        } else if (box) {
+            if (el.classList.contains("wch-tour-running")) {
+                // tour playing: the button only brings the Odoo tab back
+                if (hasOpener()) {
+                    window.opener.focus();
+                }
+                return;
+            }
+            // help-tour: the steps written in the page travel with the
+            // request, the Odoo tab plays them (web_context_help_tour)
+            if (hasOpener()) {
+                setTourRunning(el, true);
+            }
+            post({
+                type: "wch_help_tour",
+                tour: el.getAttribute("data-tour"),
+                steps: tourSteps(box),
+            });
         } else {
             post({type: "wch_tour", tour: el.getAttribute("data-tour")});
         }
+    }
+
+    // Tour button while its tour plays in the Odoo tab: "Return to record
+    // view"; the Odoo tab sends wch_tour_end when the tour stops
+    function setTourRunning(el, running) {
+        if (running) {
+            if (!el.hasAttribute("data-label")) {
+                el.setAttribute("data-label", el.textContent);
+            }
+            el.textContent = labels.tour_back || "Return to record view";
+            el.classList.add("wch-tour-running");
+        } else if (el.classList.contains("wch-tour-running")) {
+            el.textContent = el.getAttribute("data-label");
+            el.classList.remove("wch-tour-running");
+        }
+    }
+
+    function endTour(tour) {
+        var buttons = document.querySelectorAll("a.wch-tour.wch-tour-running");
+        for (var i = 0; i < buttons.length; i++) {
+            if (!tour || buttons[i].getAttribute("data-tour") === tour) {
+                setTourRunning(buttons[i], false);
+            }
+        }
+    }
+
+    function tourSteps(box) {
+        var steps = [];
+        var nodes = box.querySelectorAll(".wch-tour-steps > .wch-tour-step");
+        for (var i = 0; i < nodes.length; i++) {
+            steps.push({
+                target: nodes[i].getAttribute("data-target"),
+                click: nodes[i].getAttribute("data-click") === "1",
+                position: nodes[i].getAttribute("data-position") || "auto",
+                html: nodes[i].innerHTML,
+            });
+        }
+        return steps;
     }
 
     // Path and query of a URL, without the FAQ / Fields view of a page: they
@@ -75,8 +132,14 @@
     // Topic button: back to the page of the Odoo view, hidden when on it
     function onMessage(ev) {
         if (ev.origin !== window.location.origin || !ev.data ||
-            ev.data.type !== "wch_topic" || !hasOpener() ||
-            ev.source !== window.opener) {
+            !hasOpener() || ev.source !== window.opener) {
+            return;
+        }
+        if (ev.data.type === "wch_tour_end") {
+            endTour(typeof ev.data.tour === "string" ? ev.data.tour : "");
+            return;
+        }
+        if (ev.data.type !== "wch_topic") {
             return;
         }
         var button = document.getElementById("wch_topic");
@@ -187,7 +250,8 @@
         var last = null;
         var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
             acceptNode: function (node) {
-                return node.parentNode.closest("script, style")
+                // the steps of a tour are hidden: not found by the find box
+                return node.parentNode.closest("script, style, .wch-tour-steps")
                     ? NodeFilter.FILTER_REJECT
                     : NodeFilter.FILTER_ACCEPT;
             },

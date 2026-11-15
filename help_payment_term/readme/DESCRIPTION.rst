@@ -17,8 +17,9 @@ Every page follows the standard layout of web_context_help:
 * **How to insert a new record** (form): step-by-step guide to load the
   *30 days* terms
 * **Suggestions for search** (list): menu, search, filters and groupings
-* **How to update a record** (form): changing, archiving and deleting payment
-  terms
+* **How to update a record** (form): changing payment terms
+* **How to archive or delete record** (form and list): archiving, restoring
+  and deleting payment terms
 * **How to set up**: where payment terms are used and the OCA module
 * **Report and export file**: the due dates printed on the invoice and the
   export of the payment terms to a file

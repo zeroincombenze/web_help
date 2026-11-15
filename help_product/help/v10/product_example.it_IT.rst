@@ -8,9 +8,9 @@ Esempi
 #. Abilitare *Varianti Prodotto* in **Vendite ‣ Configurazione ‣
    Configurazione**.
 #. Creare il prodotto *Maglietta*, nella scheda **Varianti** aggiungere
-   *Taglia* con *S, M, L* e *Colore* con *Bianco, Rosso*, poi **Salva**: Odoo
+   *Taglia* con *S, M, L* e *Colore* con *Bianco, Rosso*, poi [`Salva`]: Odoo
    crea 6 varianti.
-#. Premere **Prezzi Variante** e impostare un prezzo extra di 2,00 su
+#. Premere [`Prezzi Variante`] e impostare un prezzo extra di 2,00 su
    *Rosso*: le magliette rosse costano 2,00 in più.
 
 **Un servizio di installazione fatturato a lavoro fatto**

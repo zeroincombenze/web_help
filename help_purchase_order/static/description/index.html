@@ -35,7 +35,9 @@ Every page follows the help rule of web_context_help:
 <li><b>Description</b>: what requests for quotation and purchase orders are, with the main fields</li>
 <li><b>New record</b> (form): step-by-step guide to create a request for quotation and confirm it</li>
 <li><b>Update record</b> (form): what can be changed in each status, approval,
-  receipt, billing, locking, cancelling and deleting</li>
+  receipt, billing, locking</li>
+<li><b>How to cancel or delete record</b> (form and list): when an order can be
+  cancelled, setting it back to draft, deleting cancelled orders</li>
 <li><b>How to search</b> (list): menus, search, filters and groupings</li>
 <li><b>Configure</b>: the Purchase settings that affect purchase orders</li>
 <li><b>Report</b>: the request for quotation / purchase order PDF and the purchase analysis</li>
@@ -59,7 +61,9 @@ Ogni pagina segue la regola di aiuto di web_context_help:
 <li><b>Descrizione</b>: cosa sono richieste di preventivo e ordini di acquisto, con i campi principali</li>
 <li><b>Nuovo record</b> (maschera): guida passo passo per creare una richiesta di preventivo e confermarla</li>
 <li><b>Modifica record</b> (maschera): cosa si pu&#242; cambiare in ogni stato,
-  approvazione, ricezione, fatturazione, blocco, annullamento ed eliminazione</li>
+  approvazione, ricezione, fatturazione, blocco</li>
+<li><b>Come annullare o eliminare un record</b> (maschera e lista): quando un
+  ordine si pu&#242; annullare, riportarlo in bozza, eliminare gli ordini annullati</li>
 <li><b>Come cercare</b> (lista): menu, ricerca, filtri e raggruppamenti</li>
 <li><b>Configurazione</b>: le impostazioni di Acquisti che influenzano gli ordini</li>
 <li><b>Stampe</b>: il PDF di richiesta di preventivo / ordine di acquisto e l'analisi acquisti</li>
@@ -78,8 +82,22 @@ versione di Odoo in uso.
     <div class="oe_row oe_spaced">
         <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">ChangeLog History | Cronologia modifiche</h3>
         <div class="oe_span12">
-<h4>18.0.1.0.2 (2026-10-31)</h4>
+<h4>18.0.1.0.4 (2026-11-13)</h4>
 <p align="justify">
+<ul>
+<li>[IMP] Purchase order form and list: new section How to cancel or delete record (when cancelling is refused, Set to Draft, only cancelled orders can be deleted)</li>
+<li>[IMP] Purchase order list: new sections How to insert a new record (button Create / New) and How to update a record (click on a line)</li>
+<li>[IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.3 (2026-11-08)</h4>
+</p><p align="justify">
+<ul>
+<li>[IMP] Every help page starts with the hint to the Ready and FAQ buttons; every FAQ page starts with the hint to the Topic button</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.2 (2026-10-31)</h4>
+</p><p align="justify">
 <ul>
 <li>[IMP] Help pages for Odoo 11-14 (help/v11_14) and 15 (help/v15): menus, buttons, fields and settings of each version, from 11.0 to 15.0, in English and Italian</li>
 <li>[IMP] Help pages in the standard layout: sections renamed How to insert a new record, How to update a record, Suggestions for search, How to set up, Report and export file (Italian titles too); the Report section explains how to export the records to a file</li>
@@ -125,6 +143,6 @@ versione di Odoo in uso.
     </div>
     <div class="oe_row oe_spaced">
         <p>This module is part of <a href="https://github.com/zeroincombenze/web_help">web_help</a> project.</p>
-        <p>Published information on | Informazioni pubblicate: 2026-10-31</p>
+        <p>Published information on | Informazioni pubblicate: 2026-11-15</p>
     </div>
 </section>

@@ -13,8 +13,8 @@ Accounting Dashboard
 Description
 -----------
 
-Click on button **Ready** for help about how to use this help; click on
-button **FAQ** for the most common solved questions.
+Click on button [`Ready`] for help about how to use this help; click on
+button [`FAQ`] for the most common solved questions.
 
 .. help-if:: module != accountant
 
@@ -40,7 +40,25 @@ miscellaneous card.
 
 .. help-include:: account_journal_dashboard_cards.rst
 
+.. _new_record:
+
+How to insert a new record
+--------------------------
+
+Cards cannot be added here: a new journal is created in the configuration,
+see *How to set up*.
+
 .. help-include:: account_journal_dashboard_search.rst
+
+.. _update_record:
+
+How to update a record
+----------------------
+
+A card opens the documents of its journal; to change the journal itself
+use **⋮ ‣ Configuration** on the card, see *How to set up*.
+
+.. help-include:: account_journal_dashboard_cancel.rst
 
 .. help-include:: account_journal_dashboard_configure.rst
 
@@ -63,7 +81,7 @@ Report and export file
 FAQ
 ---
 
-Click on button **Topic** to return to the specific help page.
+Click on button [`Topic`] to return to the specific help page.
 
 .. help-question:: Why don't I see the Dashboard menu?
 

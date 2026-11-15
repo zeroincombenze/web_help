@@ -1,5 +1,5 @@
 ================================================
-|icon| Help for company/Aiuto aziende 18.0.1.0.0
+|icon| Help for company/Aiuto aziende 18.0.1.0.2
 ================================================
 
 **Context help pages for companies, with Italian e-invoicing setup**
@@ -18,7 +18,7 @@ Overview | Panoramica
 web_context_help.
 
 Every page follows the standard layout of web_context_help: description, new
-record, update record or search, set up, report, example, FAQ and footer.
+record, update record or search, archive or delete record, set up, report, example, FAQ and footer.
 
 The *How to set up* section of the form explains how to activate the Italian
 electronic invoicing (FatturaPA through the SdI): which modules to install,
@@ -37,7 +37,8 @@ Pages are in English and Italian.
 (``res.company``), mostrate da web_context_help.
 
 Ogni pagina segue la struttura standard di web_context_help: descrizione,
-nuovo record, modifica record o ricerca, configurazione, stampe, esempio,
+nuovo record, modifica record o ricerca, archiviare o eliminare un record,
+configurazione, stampe, esempio,
 domande frequenti e piè di pagina.
 
 La sezione *Come configurare* della maschera spiega come attivare la fattura
@@ -150,6 +151,18 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+18.0.1.0.2 (2026-11-13)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Company form and list: new section How to archive or delete record
+* [IMP] Company list: new sections How to insert a new record (button Create / New) and How to update a record (click on a line)
+* [IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)
+
+18.0.1.0.1 (2026-11-08)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Every help page starts with the hint to the Ready and FAQ buttons; every FAQ page starts with the hint to the Topic button
+
 18.0.1.0.0 (2026-11-07)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -204,7 +217,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-11-07
+Last Update / Ultimo aggiornamento: 2026-11-15
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

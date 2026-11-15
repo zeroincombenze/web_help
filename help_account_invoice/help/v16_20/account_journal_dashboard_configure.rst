@@ -20,7 +20,7 @@ How to set up
 * A bank journal has, in the same tab, the *Account Number*, the bank and the
   :field:`Bank Feeds <bank_statements_source>`, how the transactions arrive.
   While the account number is empty and the bank feed is not chosen yet, the
-  card shows **Bank Setup**.
+  card shows [`Bank Setup`].
 * The *Incoming Payments* and *Outgoing Payments* tabs of a bank or cash
   journal list the payment methods, used by **Customer Payment** and
   **Vendor Payment**.

@@ -3,7 +3,7 @@
 How to insert a new record
 --------------------------
 
-#. Open **Settings ‣ Users & Companies ‣ Companies** and press **New**
+#. Open **Settings ‣ Users & Companies ‣ Companies** and press [`New`]
    (administrators only). A branch is created instead from the **Branches**
    tab of its main company.
 #. Type the :field:`company name <name>` (required) and click the image to

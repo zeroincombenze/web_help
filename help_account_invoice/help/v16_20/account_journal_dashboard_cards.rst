@@ -1,8 +1,8 @@
 **Sales and purchase journals**
 
-* **New** creates a new customer invoice (sales) or vendor bill (purchase) in
-  this journal. On a purchase card **Upload** loads the PDF of a bill and
-  creates a draft bill from it; **New** is next to it.
+* [`New`] creates a new customer invoice (sales) or vendor bill (purchase) in
+  this journal. On a purchase card [`Upload`] loads the PDF of a bill and
+  creates a draft bill from it; [`New`] is next to it.
 * *N To Validate*: the documents still in draft, and their total.
 * *N Unpaid* (sales) or *N To Pay* (purchase): the posted documents not fully
   paid yet, and the amount still due. Credit notes are subtracted.
@@ -16,7 +16,7 @@
 **Bank, cash and credit card journals**
 
 * **Transactions** opens the transactions of the account. On a bank journal
-  not set up yet (no account number, no bank feed chosen) **Bank Setup** sets
+  not set up yet (no account number, no bank feed chosen) [`Bank Setup`] sets
   up the bank account.
 
   .. help-if:: module = account_accountant
@@ -45,7 +45,7 @@
 
 **Miscellaneous journals**
 
-* **New** creates a journal entry in this journal.
+* [`New`] creates a journal entry in this journal.
 * The next activities of the journal, e.g. the tax returns to file, and *N To
   Check*: the posted entries not yet marked as checked.
 
@@ -68,7 +68,7 @@ columns.
        still to be matched.
 
   * *New*: **Invoice** or **Bill**, **Credit Note** or **Refund**; on a
-    sales card also **Upload Invoices**, which creates invoices from files.
+    sales card also [`Upload Invoices`], which creates invoices from files.
   * *Reporting*: **Invoices Analysis** or **Bills Analysis**.
 
 * Bank, cash and credit card journals:
@@ -84,7 +84,7 @@ columns.
 
     .. help-if:: module = account_bank_statement_import
 
-       On a bank journal also **Import File**, which loads the statement
+       On a bank journal also [`Import File`], which loads the statement
        file downloaded from the bank.
 
 * Miscellaneous journals:

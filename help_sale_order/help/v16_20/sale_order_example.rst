@@ -5,10 +5,10 @@ Example
 
 **30% down payment before production**
 
-#. Create the quotation and press **Confirm** when the customer accepts.
-#. Press **Create Invoice**, choose *Down payment (percentage)*, type 30 and
+#. Create the quotation and press [`Confirm`] when the customer accepts.
+#. Press [`Create Invoice`], choose *Down payment (percentage)*, type 30 and
    create the invoice: post it and send it to the customer.
-#. When the goods are delivered press **Create Invoice** again with *Regular
+#. When the goods are delivered press [`Create Invoice`] again with *Regular
    invoice*: the down payment is deducted from the final invoice.
 
 **The customer wants 2 more units after the confirmation**
@@ -25,5 +25,5 @@ Example
 
 **The customer refuses the quotation**
 
-Press **Cancel**: the wizard proposes an email to the customer; press
-**Send and cancel** or **Cancel** to cancel without email.
+Press [`Cancel`]: the wizard proposes an email to the customer; press
+[`Send and cancel`] or [`Cancel`] to cancel without email.

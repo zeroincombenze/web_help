@@ -45,25 +45,31 @@ kanban view follows the list rules):
   it lists the sections left on the page, footer excepted; the sections of a
   page with several parts (titles of first level) are grouped by part
 * ``description`` *Description*: summary of the view / model; its first
-  paragraph is always "Click on button **Ready** for help about how to use
-  this help; click on button **FAQ** for the most common solved questions."
-  (Italian: "Fare clic sul pulsante **Pronto** per sapere come usare questo
-  aiuto; fare clic sul pulsante **FAQ** per le domande più comuni già
+  paragraph is always "Click on button ``[`Ready`]`` for help about how to use
+  this help; click on button ``[`FAQ`]`` for the most common solved questions."
+  (Italian: "Fare clic sul pulsante ``[`Pronto`]`` per sapere come usare questo
+  aiuto; fare clic sul pulsante ``[`FAQ`]`` per le domande più comuni già
   risolte.")
-* ``new_record`` *How to insert a new record*: form only, steps to insert a
-  record
+* ``new_record`` *How to insert a new record*: in the form, steps to insert a
+  record; in list / kanban, a brief text about the **New** button (**Create**
+  up to Odoo 15)
 * ``search`` *Suggestions for search*: list / kanban only, how to find, filter
   and group
-* ``update_record`` *How to update a record*: form only, steps to update a
-  record
+* ``update_record`` *How to update a record*: in the form, steps to update a
+  record; in list / kanban, a brief text: click on a line (list) or on a card
+  (kanban) to open its form
+* ``cancel`` *How to cancel or delete record* when the model has a
+  ``state`` field, else *How to archive or delete record*: form and list,
+  steps to cancel (or archive) a record, restore it and delete it, with the
+  conditions that forbid each step
 * ``configure`` *How to set up*: settings and configuration
 * ``report`` *Report and export file*: prints, pdf attachment, export
 * ``example`` *Example*: useful examples, on their own page opened by the
   **Example** button
 * ``faq`` *FAQ*: ``help-question`` blocks, on their own page opened by the
   **FAQ** button; the first paragraph, before the first question, is always
-  "Click on button **Topic** to return to the specific help page." (Italian:
-  "Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto
+  "Click on button ``[`Topic`]`` to return to the specific help page." (Italian:
+  "Fare clic sul pulsante ``[`Argomento`]`` per tornare alla pagina di aiuto
   specifica.")
 * ``footer`` *Footer*: date and time of page creation and copyright notice,
   not in the table of contents
@@ -111,8 +117,7 @@ Rules
 
 Without writing RST, a help editor chooses which page is shown from
 *Help ‣ Help Editor ‣ Help Rules* or from the **Rules** tab of
-a page: field of the page model (selection, boolean or many2one), *is* or *is
-not*, and the values (selection), the checkbox (boolean) or the record
+a page: field of the page model (selection, boolean or many2one), *is* or *is not*, and the values (selection), the checkbox (boolean) or the record
 (many2one). A page with rules is shown when one of them is met, and the
 ``:when:`` of its source too.
 
@@ -153,11 +158,20 @@ role; the version directories remain for whole files that differ.
 
     Press :version:`16|**Create and View Invoice**;17|**Create Draft Invoice**;>=18|**Create Draft**`.
 
-Conditions: ``16``, ``16-18``, ``>=17``, ``>17``, ``<=16``, ``<17``, ``*``
-(any version), several joined by comma (``10,16``). The role shows the text of
+Conditions: ``16``, ``16-18``, ``>=17``, ``>17``, ``<=16``, ``<17``, or a star
+(the star: any version), several joined by comma (``10,16``). The role shows the text of
 the first matching condition, inline markup allowed, roles not allowed; write
 ``\ `` before the role when it is glued to the previous word.
 Roles ``:field:`` and ``:tour:`` highlight a field or run a tour in the Odoo tab.
+
+A button label written between ``[`` and ``]`` with backquotes,
+``[`Save`]``, is shown as a button, the label inside a frame. Inside
+``:version:`` the backquotes are escaped:
+``:version:`<16|[\`Create\`];>=16|[\`New\`]```. It cannot be nested in
+Italic and bold are written with one or two stars around the words
+(*italic*, **bold**); in a code block the stars stay as written.
+The help pages write every button this way; menu paths (``**Sales ‣
+Orders**``), tabs, menu items after ‣ and titles stay in bold.
 
 Text that makes sense only with another module goes in ``help-if``: it is
 shown only when the module is installed, or the model exists. The pages are
@@ -179,5 +193,44 @@ in whatever order the modules are installed.
 
 Conditions: ``module`` or ``model``, ``=`` (any of the names joined by comma
 is installed / exists) or ``!=`` (none of them), several joined by ``and``.
+
+Guided tours
+~~~~~~~~~~~~
+
+``help-tour`` writes a guided tour in the page, where it is needed, e.g. in
+*How to insert a new record*. With the *Context help tours* module
+(``web_context_help_tour``) installed, the help window shows a button: pressed,
+it plays the steps in the Odoo tab, one at a time, dimming the screen around
+the element of the step, with the **Previous**, **Next** and **Stop**
+buttons. Without that module the tour is not shown. The steps are written in
+the page, so the Italian twin has its own text and ``help-version`` /
+``help-if`` work inside the tour too.
+
+::
+
+    .. help-tour:: res_partner_new
+       :label: Show me how to create a contact
+
+       .. help-step:: new
+          :click:
+
+          Press **New** to open an empty contact form.
+
+       .. help-step:: field:name
+          :position: right
+
+          Type the name: it is the only required field.
+
+``:label:`` is the text of the button, *Show me how* when missing.
+Targets of ``help-step``: ``field:<field name>`` (the field and its label;
+the column in a list), ``button:<button name>``, ``tab:<notebook page
+name>``, ``menu:<menu xmlid>``, ``css:<selector>``, or ``new``, ``save``,
+``discard``, ``search``, ``filters``, ``actions`` (gear menu),
+``breadcrumb``, ``statusbar``. ``:click:``: **Next** presses the target for
+the user, e.g. **New**; ``:position:`` places the popover (``auto``,
+``top``, ``bottom``, ``left``, ``right``). A step whose target is not on
+screen waits for it: the user opens the screen, or does what the previous
+step asks. The targets are those of the Odoo version: put the tour in a
+``help-version`` block of the versions it was checked on.
 
 .. |sos| unicode:: U+1F6DF

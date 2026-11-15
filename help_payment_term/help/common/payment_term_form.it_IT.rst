@@ -13,8 +13,8 @@ Termini di pagamento
 Descrizione
 -----------
 
-Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
-clic sul pulsante **FAQ** per le domande più comuni già risolte.
+Fare clic sul pulsante [`Pronto`] per sapere come usare questo aiuto; fare
+clic sul pulsante [`FAQ`] per le domande più comuni già risolte.
 
 I termini di pagamento dicono quando un cliente deve pagare una fattura, o
 quando si deve pagare una fattura fornitore: Odoo calcola
@@ -36,6 +36,8 @@ giorno fisso del mese.
 
 .. help-include:: payment_term_update.rst
 
+.. help-include:: payment_term_cancel.rst
+
 .. help-include:: payment_term_configure.rst
 
 .. help-include:: payment_term_report.rst
@@ -47,7 +49,7 @@ giorno fisso del mese.
 Domande frequenti
 -----------------
 
-Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+Fare clic sul pulsante [`Argomento`] per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché non riesco a salvare il termine di pagamento?
 

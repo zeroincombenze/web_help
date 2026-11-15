@@ -116,7 +116,7 @@ poi impostare la riga come segue.
       mese.
 
    Odoo aggiunge 30 giorni alla data fattura, poi va all'ultimo giorno di
-   quel mese. Verificarlo nell'**Anteprima** con 15 gennaio e 31 gennaio. Non
+   quel mese. Verificarlo nell'[`Anteprima`] con 15 gennaio e 31 gennaio. Non
    usare 30 *Giorni dopo la fine del mese*: significa fine mese della
    fattura + 30 giorni, quindi la fattura del 15 gennaio scade il 2 marzo.
 
@@ -125,7 +125,7 @@ poi impostare la riga come segue.
    :field:`Giorno/i di pagamento <payment_days>` ``31``, dà la stessa
    scadenza: i termini caricati così, ad es. in un database migrato,
    continuano a funzionare. Per i nuovi termini usare il nativo *Giorni fine
-   mese il*, che non richiede moduli ed è mostrato nell'**Anteprima**. Usare
+   mese il*, che non richiede moduli ed è mostrato nell'[`Anteprima`]. Usare
    uno dei due, non entrambi.
 
 **30 giorni fine mese + 5 giorni**

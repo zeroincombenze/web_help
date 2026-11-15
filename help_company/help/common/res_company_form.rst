@@ -12,8 +12,8 @@ Company
 Description
 -----------
 
-Click on button **Ready** for help about how to use this help; click on
-button **FAQ** for the most common solved questions.
+Click on button [`Ready`] for help about how to use this help; click on
+button [`FAQ`] for the most common solved questions.
 
 A company is the legal entity that issues the documents of Odoo: its name,
 logo, address, :field:`Tax ID <vat>` and :field:`currency <currency_id>` are
@@ -38,6 +38,8 @@ stored on its :field:`partner <partner_id>`, a contact like any other.
 .. help-include:: res_company_new.rst
 
 .. help-include:: res_company_update.rst
+
+.. help-include:: res_company_cancel.rst
 
 .. help-include:: res_company_configure.rst
 
@@ -74,7 +76,7 @@ tab:
 FAQ
 ---
 
-Click on button **Topic** to return to the specific help page.
+Click on button [`Topic`] to return to the specific help page.
 
 .. help-question:: Why don't I see the Regime fiscale field?
 

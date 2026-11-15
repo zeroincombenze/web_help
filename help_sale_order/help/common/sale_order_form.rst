@@ -12,8 +12,8 @@ Sale order
 Description
 -----------
 
-Click on button **Ready** for help about how to use this help; click on
-button **FAQ** for the most common solved questions.
+Click on button [`Ready`] for help about how to use this help; click on
+button [`FAQ`] for the most common solved questions.
 
 A sale order starts as a **quotation**: a proposal sent to the
 :field:`customer <partner_id>` listing products, quantities and prices.
@@ -27,6 +27,8 @@ The :field:`status <state>` bar at the top shows where the document stands.
 
 .. help-include:: sale_order_update.rst
 
+.. help-include:: sale_order_cancel.rst
+
 .. help-include:: sale_order_configure.rst
 
 .. help-include:: sale_order_report.rst
@@ -38,20 +40,20 @@ The :field:`status <state>` bar at the top shows where the document stands.
 FAQ
 ---
 
-Click on button **Topic** to return to the specific help page.
+Click on button [`Topic`] to return to the specific help page.
 
 .. help-question:: Why can't I create the invoice?
 
    The order must be confirmed first. With the *delivered quantities* invoicing
    policy, the goods must also be delivered: validate the delivery, then press
-   **Create Invoice** again.
+   [`Create Invoice`] again.
 
 .. help-question:: How do I change a confirmed order?
 
    Quantities and new lines can be changed directly, see *How to update a
    record*.
    If the order is locked, unlock it first. To change it a lot, cancel it,
-   press **Set to Quotation**, change it and confirm it again.
+   press [`Set to Quotation`], change it and confirm it again.
 
 .. help-question:: Why can't I delete an order line?
 

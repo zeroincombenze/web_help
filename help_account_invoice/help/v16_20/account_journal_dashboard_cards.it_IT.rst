@@ -1,8 +1,8 @@
 **Registri vendite e acquisti**
 
-* **Nuovo** crea una nuova fattura cliente (vendite) o fattura fornitore
-  (acquisti) in questo registro. Su una scheda acquisti **Carica** carica il
-  PDF di una fattura e ne crea una fattura in bozza; **Nuovo** è accanto.
+* [`Nuovo`] crea una nuova fattura cliente (vendite) o fattura fornitore
+  (acquisti) in questo registro. Su una scheda acquisti [`Carica`] carica il
+  PDF di una fattura e ne crea una fattura in bozza; [`Nuovo`] è accanto.
 * *N Da convalidare*: i documenti ancora in bozza, e il loro totale.
 * *N Non pagato* (vendite) o *N Da pagare* (acquisti): i documenti confermati
   non ancora pagati del tutto, e l'importo ancora dovuto. Le note di credito
@@ -20,7 +20,7 @@
 
 * **Transazioni** apre le transazioni del conto. Su un registro banca non
   ancora impostato (senza numero di conto e senza flusso bancario scelto)
-  **Configurazione banca** imposta il conto bancario.
+  [`Configurazione banca`] imposta il conto bancario.
 
   .. help-if:: module = account_accountant
 
@@ -48,7 +48,7 @@
 
 **Registri varie**
 
-* **Nuovo** crea una registrazione contabile in questo registro.
+* [`Nuovo`] crea una registrazione contabile in questo registro.
 * Le prossime attività del registro, ad es. le dichiarazioni IVA da
   presentare, e *N Da controllare*: le registrazioni confermate non ancora
   segnate come controllate.
@@ -73,7 +73,7 @@ menu, in colonne.
        ancora da abbinare.
 
   * *Nuovo*: **Fattura**, **Nota di credito** (vendite) o **Rimborso**
-    (acquisti); su una scheda vendite anche **Carica fatture**, che crea le
+    (acquisti); su una scheda vendite anche [`Carica fatture`], che crea le
     fatture da file.
   * *Rendicontazione*: **Analisi fatture**.
 
@@ -90,7 +90,7 @@ menu, in colonne.
 
     .. help-if:: module = account_bank_statement_import
 
-       Su un registro banca anche **Importa file**, che carica il file
+       Su un registro banca anche [`Importa file`], che carica il file
        dell'estratto conto scaricato dalla banca.
 
 * Registri varie:

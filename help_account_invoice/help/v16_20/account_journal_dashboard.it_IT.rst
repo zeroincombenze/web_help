@@ -13,8 +13,8 @@ Bacheca della contabilità
 Descrizione
 -----------
 
-Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
-clic sul pulsante **FAQ** per le domande più comuni già risolte.
+Fare clic sul pulsante [`Pronto`] per sapere come usare questo aiuto; fare
+clic sul pulsante [`FAQ`] per le domande più comuni già risolte.
 
 .. help-if:: module != accountant
 
@@ -40,7 +40,25 @@ conto su una scheda banca, allegati su una scheda varie.
 
 .. help-include:: account_journal_dashboard_cards.rst
 
+.. _new_record:
+
+Come inserire un nuovo record
+-----------------------------
+
+Qui non si aggiungono schede: un nuovo registro si crea nella
+configurazione, vedere *Come configurare*.
+
 .. help-include:: account_journal_dashboard_search.rst
+
+.. _update_record:
+
+Come modificare un record
+-------------------------
+
+Una scheda apre i documenti del suo registro; per modificare il registro
+usare **⋮ ‣ Configurazione** sulla scheda, vedere *Come configurare*.
+
+.. help-include:: account_journal_dashboard_cancel.rst
 
 .. help-include:: account_journal_dashboard_configure.rst
 
@@ -63,7 +81,7 @@ Stampe ed esportazione
 Domande frequenti
 -----------------
 
-Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+Fare clic sul pulsante [`Argomento`] per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché non vedo il menu Bacheca?
 

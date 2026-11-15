@@ -6,8 +6,8 @@
 Help pages
 ==========
 
-Click on button **Ready** for help about how to use this help; click on
-button **FAQ** for the most common solved questions.
+Click on button [`Ready`] for help about how to use this help; click on
+button [`FAQ`] for the most common solved questions.
 
 Every module can explain its forms with RST files in its ``help/`` directory.
 They are read at every server start and turned into the pages listed here.
@@ -43,13 +43,13 @@ wins is set by its **Priority** (1 is the highest):
   is shown: your own pages (default 32) come before the pages of the modules
   (96), which are the last fallback.
 
-A clear cut page, or a page of priority 64 or less, shows the **Loose help**
+A clear cut page, or a page of priority 64 or less, shows the [`Loose help`]
 button: it opens the general help of the same record, i.e. the general page
 of priority 64 or more with the highest priority, usually the page of the
 module.
 
-All the rules are also listed in *Help Rules*. A page created with **New** or
-**Duplicate** has no source and is kept by **Rebuild all pages**; a duplicate
+All the rules are also listed in *Help Rules*. A page created with [`New`] or
+[`Duplicate`] has no source and is kept by **Rebuild all pages**; a duplicate
 gets the key of the page followed by " (copy)".
 
 .. help-include:: editing.rst
@@ -59,12 +59,12 @@ gets the key of the page followed by " (copy)".
 Questions
 ---------
 
-Click on button **Topic** to return to the specific help page.
+Click on button [`Topic`] to return to the specific help page.
 
 .. help-question:: Why doesn't my change to the RST file appear?
 
    Pages are rebuilt at server start when a source checksum changes.
-   Restart the server or press **Rebuild all pages**.
+   Restart the server or press [`Rebuild all pages`].
 
 .. help-question::
    :auto:

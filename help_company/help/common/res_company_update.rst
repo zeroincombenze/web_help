@@ -11,8 +11,5 @@ How to update a record
    already printed keep the old data.
 #. The :field:`currency <currency_id>` cannot be changed once the company
    has journal items.
-#. To add a branch, open the **Branches** tab and press **Add a line**; the
-   **Branches** button at the top shows the branches of the company.
-#. A company no longer used is archived with the gear icon ‣ **Archive**;
-   a company that is still the default company of an active user cannot be
-   archived.
+#. To add a branch, open the **Branches** tab and press [`Add a line`]; the
+   [`Branches`] button at the top shows the branches of the company.

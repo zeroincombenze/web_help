@@ -12,8 +12,8 @@ Contatto
 Descrizione
 -----------
 
-Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
-clic sul pulsante **FAQ** per le domande più comuni già risolte.
+Fare clic sul pulsante [`Pronto`] per sapere come usare questo aiuto; fare
+clic sul pulsante [`FAQ`] per le domande più comuni già risolte.
 
 .. help-version:: <16
 
@@ -42,6 +42,8 @@ clic sul pulsante **FAQ** per le domande più comuni già risolte.
 
 .. help-include:: res_partner_update.rst
 
+.. help-include:: res_partner_cancel.rst
+
 .. help-include:: res_partner_configure.rst
 
 .. help-include:: res_partner_report.rst
@@ -53,14 +55,14 @@ clic sul pulsante **FAQ** per le domande più comuni già risolte.
 Domande frequenti
 -----------------
 
-Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+Fare clic sul pulsante [`Argomento`] per tornare alla pagina di aiuto specifica.
 
 .. help-version:: <16
 
    .. help-question:: Perché non riesco a cambiare l'indirizzo di un contatto?
 
       Un contatto di tipo *Contatto* usa l'indirizzo della sua azienda: premere
-      **(edit)** accanto all'indirizzo per cambiarlo sull'azienda, oppure
+      [`(edit)`] accanto all'indirizzo per cambiarlo sull'azienda, oppure
       cambiare il tipo indirizzo in *Indirizzo fattura*, *Indirizzo di
       Spedizione* o *Altro Indirizzo* per dare al contatto un indirizzo proprio.
 
@@ -72,12 +74,12 @@ Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
    .. help-question:: Perché non riesco a eliminare il contatto?
 
       Un contatto usato da ordini, fatture o registrazioni contabili non si può
-      eliminare: archiviarlo invece con il pulsante **Attivo** in alto a destra.
+      eliminare: archiviarlo invece con il pulsante [`Attivo`] in alto a destra.
 
    .. help-question:: Dov'è un contatto che ho archiviato?
 
       I contatti archiviati sono nascosti: nella lista usare il filtro
-      *Archiviato*, aprire il contatto e premere il pulsante **Archiviato** per
+      *Archiviato*, aprire il contatto e premere il pulsante [`Archiviato`] per
       ripristinarlo.
 
    .. help-question:: Perché l'email è obbligatoria?

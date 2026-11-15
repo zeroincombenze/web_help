@@ -5,7 +5,9 @@ Every page follows the help rule of web_context_help:
 
 * **Description**: products, product types and variants, with the main fields
 * **New record** (form): step-by-step guide to create a product and its variants
-* **Update record** (form): changing prices, units and types, archiving and deleting
+* **Update record** (form): changing prices, units and types
+* **How to archive or delete record** (form, list and kanban): archiving,
+  restoring and deleting products and variants
 * **How to search** (list and kanban): menus, search, filters and groupings
 * **Configure**: the settings and the configuration menus that affect products
 * **Report**: labels and the pricelist report

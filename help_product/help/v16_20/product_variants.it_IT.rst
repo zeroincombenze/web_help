@@ -40,7 +40,7 @@ Campi condivisi:
 * Elenco fornitori (un prezzo fornitore può valere per una sola variante)
 * Codice HS / codice Intrastat (con i moduli Intrastat)
 * Prezzo di vendita (le differenze di prezzo si impostano come *Prezzo extra*
-  dei valori attributo, con **Configura** nella scheda **Attributi e
+  dei valori attributo, con [`Configura`] nella scheda **Attributi e
   varianti**)
 * Flag :version:`<=17|*Può essere venduto* e *Può essere acquistato*;*|*Vendita*
   e *Acquisto*`

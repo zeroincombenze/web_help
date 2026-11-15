@@ -1,0 +1,190 @@
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <p align="center">
+                <img src="l10n_uk.png" alt="English" style="width:28px;height:16px;"/>
+                <img src="l10n_us.png" alt="English" style="width:28px;height:16px;"/>
+            </p>
+            <h2 class="oe_slogan" style="color:#162832;">Guided tours of the context help pages, played in the Odoo tab</h2>
+        </div>
+        <div class="oe_span6">
+            <p align="center">
+                <img src="l10n_it.png" alt="Italiano" style="width:28px;height:16px;"/>
+            </p>
+            <h2 class="oe_slogan" style="color:#162832;">Tour guidati delle pagine di aiuto contestuale, eseguiti nella scheda di Odoo</h2>
+        </div>
+        <div class="oe_demo oe_screenshot">
+            Unknown description_img
+        </div>
+    </div>
+</section>
+
+<section>
+    <div>
+        <div class="oe_span6">
+            <p align="center">
+                <img src="l10n_uk.png" alt="English" style="width:28px;height:16px;"/>
+                <img src="l10n_us.png" alt="English" style="width:28px;height:16px;"/>
+            </p>
+            <p class="oe_mt16" align="justify">Guided tours for the context help pages of web_context_help.
+<p align="justify">
+A help page writes its mini tours where they are needed, e.g. a tour to
+create a record in <i>How to insert a new record</i> and a tour to change it in
+<i>How to update a record</i>. The help window shows each tour as a button;
+pressed, the tour plays in the Odoo tab:
+</p><p align="justify">
+<ul>
+<li>the screen is dimmed around the element of the step (field and its label,
+  button, tab, menu) and a pulsing ring shows it;</li>
+<li>a popover explains the step, with <b>Previous</b>, <b>Next</b> (<b>Finish</b> on the
+  last step) and <b>Stop</b>; <b>Esc</b> stops the tour too;</li>
+<li>the dimmed screen still takes the clicks: the user does the work, the tour
+  shows where; a step can also press its button for the user, e.g. <b>New</b>;</li>
+<li>a step whose element is not on screen waits for it, e.g. until the form
+  opens.</li>
+</ul>
+</p><p align="justify">
+The steps are written in RST in the help pages (<code>help-tour</code> and
+<code>help-step</code> directives), so every tour has its English and Italian text and
+follows the Odoo version, like the rest of the help. Without this module the
+tours are not shown.
+</p></p>
+        </div>
+        <div class="oe_span6">
+            <p align="center">
+                <img src="l10n_it.png" alt="Italiano" style="width:28px;height:16px;"/>
+            </p>
+            <p class="oe_mt16" align="justify">Tour guidati per le pagine di aiuto contestuale di web_context_help.
+<p align="justify">
+Una pagina di aiuto scrive i suoi mini tour dove servono, ad es. un tour per
+creare un record in <i>Come inserire un nuovo record</i> e un tour per modificarlo
+in <i>Come modificare un record</i>. La finestra di aiuto mostra ogni tour come un
+pulsante; premuto, il tour si svolge nella scheda di Odoo:
+</p><p align="justify">
+<ul>
+<li>lo schermo &#232; oscurato intorno all'elemento del passo (campo e sua
+  etichetta, pulsante, scheda, menu) e un anello pulsante lo indica;</li>
+<li>un fumetto spiega il passo, con <b>Indietro</b>, <b>Avanti</b> (<b>Fine</b>
+  all'ultimo passo) e <b>Interrompi</b>; anche <b>Esc</b> interrompe il tour;</li>
+<li>lo schermo oscurato riceve comunque i clic: l'utente fa il lavoro, il tour
+  mostra dove; un passo pu&#242; anche premere il suo pulsante per l'utente, ad es.
+  <b>Nuovo</b>;</li>
+<li>un passo il cui elemento non &#232; sullo schermo lo attende, ad es. finch&#233; la
+  maschera si apre.</li>
+</ul>
+</p><p align="justify">
+I passi sono scritti in RST nelle pagine di aiuto (direttive <code>help-tour</code> e
+<code>help-step</code>), quindi ogni tour ha il suo testo inglese e italiano e segue la
+versione di Odoo, come il resto dell'aiuto. Senza questo modulo i tour non
+sono mostrati.
+</p></p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="oe_row oe_spaced">
+        <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">Usage | Utilizzo</h3>
+        <div class="oe_span6">
+            <p align="center">
+                <img src="l10n_uk.png" alt="English" style="width:28px;height:16px;"/>
+                <img src="l10n_us.png" alt="English" style="width:28px;height:16px;"/>
+            </p>
+            <p class="oe_mt16" align="justify">Open the help window with the |sos| button and press the tour button of a
+chapter, e.g. <b>Show me how to create a contact</b> in the contact help. The
+Odoo tab comes to the front and the tour starts:
+<p align="justify">
+<ul>
+<li>read the step and do it, or press <b>Next</b> to go on;</li>
+<li><b>Previous</b> goes back one step;</li>
+<li><b>Stop</b>, the <i>*&#215;*</i> of the popover or <b>Esc</b> end the tour.</li>
+</ul>
+</p><p align="justify">
+While the tour plays, its button in the help window reads <b>Return to record
+view</b>: it brings the Odoo tab back. When the tour ends, the button shows its
+label again.
+</p><p align="justify">
+A step whose element is not on screen shows <i>Waiting for this step</i>: open the
+screen it refers to, or do what the previous step asks; the tour goes on by
+itself. <b>Next</b> skips the step.
+</p><p align="justify">
+To write a tour see <i>Guided tours</i> in the usage of web_context_help: the
+<code>help-tour</code> directive, its <code>help-step</code> steps and their targets.
+</p><p align="justify">
+</p>
+.. |sos| unicode:: U+1F6DF</p>
+        </div>
+        <div class="oe_span6">
+            <p align="center">
+                <img src="l10n_it.png" alt="Italiano" style="width:28px;height:16px;"/>
+            </p>
+            <p class="oe_mt16" align="justify">Aprire la finestra di aiuto con il pulsante |sos| e premere il pulsante del
+tour di un capitolo, ad es. <b>Mostrami come creare un contatto</b> nell'aiuto
+dei contatti. La scheda di Odoo passa in primo piano e il tour inizia:
+<p align="justify">
+<ul>
+<li>leggere il passo ed eseguirlo, o premere <b>Avanti</b> per proseguire;</li>
+<li><b>Indietro</b> torna al passo precedente;</li>
+<li><b>Interrompi</b>, la <i>*&#215;*</i> del fumetto o <b>Esc</b> terminano il tour.</li>
+</ul>
+</p><p align="justify">
+Mentre il tour &#232; in corso, il suo pulsante nella finestra di aiuto mostra
+<b>Torna alla vista del record</b>: riporta in primo piano la scheda di Odoo.
+Al termine del tour il pulsante torna a mostrare la sua etichetta.
+</p><p align="justify">
+Un passo il cui elemento non &#232; sullo schermo mostra <i>In attesa di questo
+passo</i>: aprire la schermata a cui si riferisce, o fare quanto chiede il passo
+precedente; il tour prosegue da solo. <b>Avanti</b> salta il passo.
+</p><p align="justify">
+Per scrivere un tour vedere <i>Tour guidati</i> nell'uso di web_context_help: la
+direttiva <code>help-tour</code>, i suoi passi <code>help-step</code> e i loro obiettivi.
+</p><p align="justify">
+</p>
+.. |sos| unicode:: U+1F6DF</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="oe_row oe_spaced">
+        <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">ChangeLog History | Cronologia modifiche</h3>
+        <div class="oe_span12">
+<h4>18.0.1.0.0 (2026-11-13)</h4>
+<p align="justify">
+<ul>
+<li>[NEW] Tour player of the help-tour tours: dimmed screen around the target, ring, popover with Previous / Next / Stop, waiting for a missing target</li>
+<li>[NEW] The help window is told when the tour ends (Finish, Stop, Esc), so the tour button gets back its label</li>
+<li>[IMP] A press on the tour popover (mouse or Enter on Next) does not close an Odoo dropdown opened by the tour, e.g. the Filters menu; new test of the contact search tour</li>
+</ul>
+</p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">Credits | Ringraziamenti</h3>
+        <div class="oe_span6" align="left">
+            <p class="oe_mt16"><b>Authors | Autori:</b></p>
+            <p class="oe_mt16"><ul>
+<li><a href="https://www.zeroincombenze.it">Zeroincombenze srls</a></li>
+</ul></p>
+        </div>
+        <div class="oe_span6" align="left">
+            <p class="oe_mt16"><b>Contributors | Partecipanti:</b></p>
+            <p class="oe_mt16"><ul>
+<li><a href="mailto:antoniomaria.vigliotti@gmail.com">Antonio Maria Vigliotti</a></li>
+</ul></p>
+        </div>
+    </div>
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <p>This module is maintained by the <b><a href="https://www.shs-av.com">SHS_AV s.r.l.</a></b>.</p>
+        </div>
+    </div>
+    <div class="oe_row oe_spaced">
+        <p>This module is part of <a href="https://github.com/zeroincombenze/web_help">web_help</a> project.</p>
+        <p>Published information on | Informazioni pubblicate: 2026-11-15</p>
+    </div>
+</section>

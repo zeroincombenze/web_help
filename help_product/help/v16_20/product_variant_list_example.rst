@@ -10,4 +10,4 @@ for: …*, or **Group By ‣ Product Template**.
 
 **Variants without barcode**
 
-**Add Custom Filter**: *Barcode* is not set.
+[`Add Custom Filter`]: *Barcode* is not set.

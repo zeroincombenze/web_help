@@ -136,7 +136,7 @@
       dipende dalle notifiche dello SdI: *Elaborazione SdI*, poi ad es.
       *Accettato dall'SdI, Consegnato al Partner* o *Rifiutato SdI*. Le
       fatture alla PA notificano solo consegna ed esito; a volte la notifica
-      arriva in ritardo. Premere **Controlla Invio** sulla fattura per
+      arriva in ritardo. Premere [`Controlla Invio`] sulla fattura per
       chiedere subito lo stato; se resta errato, aprire un ticket con
       l'assistenza.
 
@@ -171,7 +171,7 @@
 
    .. help-question:: Come importo una fattura elettronica ricevuta via PEC o in uno ZIP?
 
-      In **Fatturazione ‣ Fornitori ‣ Fatture** premere **Carica** e
+      In **Fatturazione ‣ Fornitori ‣ Fatture** premere [`Carica`] e
       scegliere il file *IT...xml* (o *.xml.p7m*) della fattura, non il file
       dei metadati *_MT_*.
 
@@ -197,5 +197,5 @@
 
       Il documento è stato registrato con il tipo sbagliato: una fattura
       negativa invece di una nota di credito, o viceversa. Aprirlo e premere
-      **Rettificare** in alto: diventa del tipo corretto, con importi
+      [`Rettificare`] in alto: diventa del tipo corretto, con importi
       positivi.

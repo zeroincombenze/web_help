@@ -4,8 +4,8 @@ How to set up
 -------------
 
 **Settings ‣ General Settings ‣ Companies** shows the current company:
-**Update Info** opens it, **Manage Companies** lists all of them, and
-**Configure Document Layout** sets the look of the reports. Each user works
+[`Update Info`] opens it, [`Manage Companies`] lists all of them, and
+[`Configure Document Layout`] sets the look of the reports. Each user works
 for the companies in the *Allowed Companies* of the user, chosen in **Settings
 ‣ Users & Companies ‣ Users**; the default company is the one used at login.
 

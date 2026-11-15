@@ -1,3 +1,14 @@
+18.0.1.0.13 (2026-11-14)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [NEW] Guided tours: help-tour / help-step directives write the steps in the page, shown as a button by web_context_help_tour; the help window sends the steps to the Odoo tab and its find box skips them
+* [IMP] Tour button: while its tour plays it reads *Return to record view* and brings the Odoo tab back; the original label returns when the tour ends
+* [IMP] Standard layout: new section cancel, *How to cancel or delete record* (model with state) or *How to archive or delete record*, after How to update a record
+* [IMP] Standard layout: list and kanban pages have the sections How to insert a new record (brief: button New / Create) and How to update a record (brief: click on a line or a card)
+* [NEW] Button frames: [`Save`] in the RST shows the label as a button, inside a frame, in the help window and in the page editor
+* [QUA] Test coverage 95% (1316: 64+1252) [0 TestPoints] - quality rating 54 (target 100)
+* [IMP] Help home and help editor pages: buttons written [`Label`], shown inside a frame; the mandatory Ready / FAQ / Topic sentences use it too
+
 18.0.1.0.12 (2026-11-08)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 

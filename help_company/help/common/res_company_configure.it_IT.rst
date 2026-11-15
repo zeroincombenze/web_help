@@ -4,8 +4,8 @@ Come configurare
 ----------------
 
 **Impostazioni ‣ Impostazioni generali ‣ Aziende** mostra l'azienda corrente:
-**Aggiorna informazioni** la apre, **Gestisci aziende** le elenca tutte, e
-**Configura struttura documento** imposta l'aspetto delle stampe. Ogni utente
+[`Aggiorna informazioni`] la apre, [`Gestisci aziende`] le elenca tutte, e
+[`Configura struttura documento`] imposta l'aspetto delle stampe. Ogni utente
 lavora per le aziende indicate nelle *Aziende consentite* dell'utente, scelte
 in **Impostazioni ‣ Utenti e aziende ‣ Utenti**; l'azienda predefinita è
 quella usata all'accesso.

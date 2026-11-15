@@ -12,8 +12,8 @@ Variante prodotto
 Descrizione
 -----------
 
-Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
-clic sul pulsante **FAQ** per le domande più comuni già risolte.
+Fare clic sul pulsante [`Pronto`] per sapere come usare questo aiuto; fare
+clic sul pulsante [`FAQ`] per le domande più comuni già risolte.
 
 .. help-version:: <13
 
@@ -57,7 +57,7 @@ clic sul pulsante **FAQ** per le domande più comuni già risolte.
 
    Le varianti nascono dal loro prodotto: aggiungere gli attributi e i loro
    valori nella scheda **Varianti** della maschera del prodotto, e Odoo crea
-   una variante per ogni combinazione. **Crea** qui crea un nuovo prodotto con
+   una variante per ogni combinazione. [`Crea`] qui crea un nuovo prodotto con
    la sua unica variante.
 
 .. help-version:: >=16
@@ -65,6 +65,8 @@ clic sul pulsante **FAQ** per le domande più comuni già risolte.
    .. help-include:: product_variant_new.rst
 
 .. help-include:: product_variant_update.rst
+
+.. help-include:: product_variant_cancel.rst
 
 .. help-include:: product_configure.rst
 
@@ -83,7 +85,7 @@ clic sul pulsante **FAQ** per le domande più comuni già risolte.
 Domande frequenti
 -----------------
 
-Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+Fare clic sul pulsante [`Argomento`] per tornare alla pagina di aiuto specifica.
 
 .. help-version:: <16
 
@@ -91,14 +93,14 @@ Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
       Nome, categoria, tipo e prezzi appartengono al prodotto: cambiarli su una
       variante cambia il prodotto e tutte le sue varianti. Nella maschera della
-      variante aperta dal pulsante **Varianti** non sono nemmeno mostrati,
+      variante aperta dal pulsante [`Varianti`] non sono nemmeno mostrati,
       premere *Modello prodotto* per aprire il prodotto.
 
    .. help-question:: Perché il prezzo di vendita della variante non è modificabile?
 
       Con più varianti è calcolato: prezzo di vendita del prodotto più il prezzo
       extra dei valori attributo, impostato con :version:`<=11|**Prezzi
-      Variante**;12-14|**Configura varianti**;*|**Configura** sulla riga
+      Variante**;12-14|[\`Configura varianti\`];*|[\`Configura\`] sulla riga
       dell'attributo` sul prodotto.
 
    .. help-question:: Perché non riesco a eliminare una variante?

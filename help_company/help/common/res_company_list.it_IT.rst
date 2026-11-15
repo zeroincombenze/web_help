@@ -13,8 +13,8 @@ Aziende
 Descrizione
 -----------
 
-Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
-clic sul pulsante **FAQ** per le domande più comuni già risolte.
+Fare clic sul pulsante [`Pronto`] per sapere come usare questo aiuto; fare
+clic sul pulsante [`FAQ`] per le domande più comuni già risolte.
 
 L'elenco delle aziende gestite nel database. Ogni riga mostra il
 :field:`nome dell'azienda <name>`, il suo :field:`partner <partner_id>` (il
@@ -22,6 +22,14 @@ contatto che contiene indirizzo e partita IVA dell'azienda) e le sue
 :field:`filiali <child_ids>`. L'ordine delle righe, cambiato trascinando la
 maniglia a sinistra, è l'ordine con cui le aziende sono proposte. Fare clic
 su una riga per aprire l'azienda.
+
+.. _new_record:
+
+Come inserire un nuovo record
+-----------------------------
+
+Premere :version:`<16|[\`Crea\`];*|[\`Nuovo\`]` in alto a sinistra: si apre una
+maschera vuota, vedere il suo aiuto per i campi da compilare.
 
 .. _search:
 
@@ -35,6 +43,16 @@ Suggerimenti per la ricerca
 * **Raggruppa per ‣ Aggiungi gruppo personalizzato** raggruppa le aziende,
   ad es. per azienda principale, per vedere le filiali sotto la loro azienda.
 
+.. _update_record:
+
+Come modificare un record
+-------------------------
+
+Fare clic su una riga dell'elenco per aprire la sua maschera, poi seguire
+l'aiuto della maschera per modificarla.
+
+.. help-include:: res_company_cancel.rst
+
 .. help-include:: res_company_configure.rst
 
 .. help-include:: res_company_report.rst
@@ -44,7 +62,7 @@ Suggerimenti per la ricerca
 Esempio
 -------
 
-**Una seconda azienda nello stesso database.** Premere **Nuovo**, scrivere
+**Una seconda azienda nello stesso database.** Premere [`Nuovo`], scrivere
 nome, indirizzo e partita IVA e uscire dalla maschera. Poi aprire
 **Impostazioni ‣ Utenti e aziende ‣ Utenti**, aprire ogni utente che deve
 lavorare per la nuova azienda e aggiungerla alle *Aziende consentite*. Gli
@@ -56,7 +74,7 @@ barra in alto.
 Domande frequenti
 -----------------
 
-Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+Fare clic sul pulsante [`Argomento`] per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché non vedo il menu Aziende?
 

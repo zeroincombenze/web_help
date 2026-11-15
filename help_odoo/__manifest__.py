@@ -16,6 +16,7 @@
     "depends": [
         "web_context_help",
         "help_account_invoice",
+        "help_company",
         "help_payment_term",
         "help_product",
         "help_purchase_order",

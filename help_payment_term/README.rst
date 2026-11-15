@@ -1,5 +1,5 @@
 ===================================================================
-|icon| Help for payment terms/Aiuto termini di pagamento 18.0.1.0.2
+|icon| Help for payment terms/Aiuto termini di pagamento 18.0.1.0.4
 ===================================================================
 
 **Context help pages for payment terms**
@@ -33,8 +33,9 @@ Every page follows the standard layout of web_context_help:
 * **How to insert a new record** (form): step-by-step guide to load the
   *30 days* terms
 * **Suggestions for search** (list): menu, search, filters and groupings
-* **How to update a record** (form): changing, archiving and deleting payment
-  terms
+* **How to update a record** (form): changing payment terms
+* **How to archive or delete record** (form and list): archiving, restoring
+  and deleting payment terms
 * **How to set up**: where payment terms are used and the OCA module
 * **Report and export file**: the due dates printed on the invoice and the
   export of the payment terms to a file
@@ -66,8 +67,10 @@ Ogni pagina segue la struttura standard di web_context_help:
   il termine *30 giorni*
 * **Suggerimenti per la ricerca** (lista): menu, ricerca, filtri e
   raggruppamenti
-* **Come modificare un record** (maschera): modificare, archiviare ed
-  eliminare i termini di pagamento
+* **Come modificare un record** (maschera): modificare i termini di
+  pagamento
+* **Come archiviare o eliminare un record** (maschera e lista): archiviare,
+  ripristinare ed eliminare i termini di pagamento
 * **Come configurare**: dove si usano i termini di pagamento e il modulo OCA
 * **Stampe ed esportazione**: le scadenze stampate sulla fattura e
   l'esportazione dei termini di pagamento in un file
@@ -176,6 +179,18 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+18.0.1.0.4 (2026-11-13)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Payment term form and list: new section How to archive or delete record
+* [IMP] Payment term list: new sections How to insert a new record (button Create / New) and How to update a record (click on a line)
+* [IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)
+
+18.0.1.0.3 (2026-11-08)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Every help page starts with the hint to the Ready and FAQ buttons; every FAQ page starts with the hint to the Topic button
+
 18.0.1.0.2 (2026-10-31)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -240,7 +255,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-31
+Last Update / Ultimo aggiornamento: 2026-11-15
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

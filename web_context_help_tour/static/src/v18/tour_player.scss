@@ -1,0 +1,136 @@
+// Copyright 2026 Zeroincombenze srls <https://www.zeroincombenze.it>
+// License LGPL-3.0-or-later (https://www.gnu.org/licenses/lgpl).
+//
+// Tour player of the help pages: dimmed screen with a hole on the target,
+// ring around it, popover with Previous / Next / Stop.
+
+$o-wcht-accent: $primary;
+$o-wcht-arrow: 9px;
+
+.o_wcht {
+    position: fixed;
+    inset: 0;
+    z-index: 1075;
+    // the dimmed screen still takes the clicks: the user does the work
+    pointer-events: none;
+}
+
+.o_wcht_mask {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.o_wcht_ring {
+    position: fixed;
+    border: 3px solid $o-wcht-accent;
+    border-radius: 6px;
+    box-shadow: 0 0 0 4px rgba($o-wcht-accent, 0.25), 0 0 18px rgba($o-wcht-accent, 0.6);
+    transition: top 0.2s, left 0.2s, width 0.2s, height 0.2s;
+    animation: o_wcht_pulse 1.6s ease-in-out infinite;
+}
+
+.o_wcht_waiting .o_wcht_ring,
+.o_wcht_waiting .o_wcht_arrow {
+    display: none;
+}
+
+@keyframes o_wcht_pulse {
+    50% {
+        box-shadow: 0 0 0 8px rgba($o-wcht-accent, 0.1), 0 0 24px rgba($o-wcht-accent, 0.8);
+    }
+}
+
+.o_wcht_pop {
+    position: fixed;
+    width: max-content;
+    max-width: unquote("min(360px, calc(100vw - 16px))");
+    padding: 10px 14px 10px;
+    pointer-events: auto;
+    background: var(--bs-body-bg, #fff);
+    color: var(--bs-body-color, #212529);
+    border: 1px solid $o-wcht-accent;
+    border-radius: 8px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+    transition: top 0.2s, left 0.2s;
+}
+
+.o_wcht_arrow {
+    position: absolute;
+    width: $o-wcht-arrow * 2;
+    height: $o-wcht-arrow * 2;
+    margin: (-$o-wcht-arrow) 0 0 (-$o-wcht-arrow);
+    background: inherit;
+    border: inherit;
+    transform: rotate(45deg);
+}
+
+.o_wcht_pop[data-side="bottom"] .o_wcht_arrow {
+    top: 0;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.o_wcht_pop[data-side="top"] .o_wcht_arrow {
+    top: 100%;
+    border-left: 0;
+    border-top: 0;
+}
+
+.o_wcht_pop[data-side="right"] .o_wcht_arrow {
+    left: 0;
+    border-top: 0;
+    border-right: 0;
+}
+
+.o_wcht_pop[data-side="left"] .o_wcht_arrow {
+    left: 100%;
+    border-bottom: 0;
+    border-left: 0;
+}
+
+.o_wcht_header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.o_wcht_count {
+    font-size: 0.85em;
+    font-weight: 600;
+    color: $o-wcht-accent;
+}
+
+.o_wcht_body {
+    position: relative;
+    > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+.o_wcht_note {
+    display: none;
+    margin: 8px 0 0;
+    font-size: 0.9em;
+    font-style: italic;
+    color: var(--bs-secondary-color, #6c757d);
+}
+
+.o_wcht_waiting .o_wcht_note {
+    display: block;
+}
+
+.o_wcht_footer {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-top: 10px;
+
+    .o_wcht_stop {
+        margin-right: auto;
+        padding-left: 0;
+    }
+}

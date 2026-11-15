@@ -6,7 +6,7 @@ Righe
 .. help-version:: <16
 
    Le righe sono nella tabella **Condizioni**; cliccare una riga, o
-   :version:`<12|**Aggiungi un elemento**;*|**Aggiungi riga**`, per aprirne la
+   :version:`<12|[\`Aggiungi un elemento\`];*|[\`Aggiungi riga\`]`, per aprirne la
    maschera:
 
    * :field:`Tipo <value>`: *Saldo* (il resto dell'importo), *Percentuale*
@@ -68,7 +68,7 @@ Righe
       :field:`giorno del mese successivo <days_next_month>` scritto nella
       casella dopo; 0 significa la fine del mese.
 
-   L'**Anteprima** mostra le scadenze di un importo a una data: cambiare la
+   L'[`Anteprima`] mostra le scadenze di un importo a una data: cambiare la
    data per verificare il termine. :field:`Mostra date versamento
    <display_on_invoice>` stampa scadenze e importi sulla fattura; *Sconto
    anticipato* concede uno sconto per pagamento anticipato.

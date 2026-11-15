@@ -20,7 +20,7 @@ Come configurare
 * Un registro banca ha, nella stessa scheda, il *Numero conto*, la banca e i
   :field:`Flussi bancari <bank_statements_source>`, come arrivano le
   transazioni. Finché il numero di conto è vuoto e il flusso bancario non è
-  ancora scelto, la scheda mostra **Configurazione banca**.
+  ancora scelto, la scheda mostra [`Configurazione banca`].
 * Le schede *Pagamenti in entrata* e *Pagamenti in uscita* di un registro
   banca o cassa elencano i metodi di pagamento, usati da **Pagamento
   cliente** e **Pagamento fornitore**.

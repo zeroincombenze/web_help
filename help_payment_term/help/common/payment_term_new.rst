@@ -8,7 +8,7 @@ invoice date (invoice of 15 January, due on 14 February).
 
 #. Open **Invoicing ‣ Configuration ‣**
    :version:`<13|**Management**;*|**Invoicing**` **‣ Payment Terms** and
-   press :version:`<17|**Create**;*|**New**`.
+   press :version:`<17|[\`Create\`];*|[\`New\`]`.
 #. Write the :field:`name <name>`, e.g. *30 Days*: it is the text shown when
    the terms are chosen on a partner or an invoice.
 #. Write the :field:`description on the invoice <note>`, e.g. *Payment terms:
@@ -27,7 +27,7 @@ invoice date (invoice of 15 January, due on 14 February).
 
          Leave :field:`On the … of the month <day_of_the_month>` on 0.
 
-   #. Press **Save & Close** to close the line, then **Save** the payment
+   #. Press [`Save & Close`] to close the line, then [`Save`] the payment
       terms.
 
 .. help-version:: 16
@@ -37,14 +37,14 @@ invoice date (invoice of 15 January, due on 14 February).
       on 0 and :field:`End of month <end_month>` off.
    #. Check the *Example* under the table: with an invoice date of 15
       January, the due date is 14 February.
-   #. Press **Save**.
+   #. Press [`Save`].
 
 .. help-version:: >=17
 
    4. The table **Due Terms** already holds one line *100 % Percent After 0
       Days after invoice date*: click :field:`After <nb_days>` and write 30;
       leave *Days after invoice date*.
-   #. Check the **Preview**: with an invoice date of 15 January, the amount is
+   #. Check the [`Preview`]: with an invoice date of 15 January, the amount is
       due on 14 February.
    #. The record is saved automatically when you leave it, or at once with
       the cloud icon next to the breadcrumb.

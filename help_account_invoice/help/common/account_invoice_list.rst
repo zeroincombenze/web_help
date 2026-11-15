@@ -35,8 +35,8 @@ Invoices
 Description
 -----------
 
-Click on button **Ready** for help about how to use this help; click on
-button **FAQ** for the most common solved questions.
+Click on button [`Ready`] for help about how to use this help; click on
+button [`FAQ`] for the most common solved questions.
 
 .. help-version:: <13
 
@@ -55,7 +55,25 @@ button **FAQ** for the most common solved questions.
    and the :field:`status <state>`\ :version:`>=14|, with the payment status`.
    Click a row to open the invoice.
 
+.. _new_record:
+
+How to insert a new record
+--------------------------
+
+Press :version:`<16|[\`Create\`];*|[\`New\`]` at the top left: an empty form
+opens, see its help for the fields to fill in.
+
 .. help-include:: account_invoice_list_search.rst
+
+.. _update_record:
+
+How to update a record
+----------------------
+
+Click on a line of the list to open its form, then follow the help of the
+form to change it.
+
+.. help-include:: account_invoice_cancel.rst
 
 .. help-include:: account_invoice_list_actions.rst
 
@@ -70,7 +88,7 @@ button **FAQ** for the most common solved questions.
 FAQ
 ---
 
-Click on button **Topic** to return to the specific help page.
+Click on button [`Topic`] to return to the specific help page.
 
 .. help-question:: Why don't I see the credit notes?
 

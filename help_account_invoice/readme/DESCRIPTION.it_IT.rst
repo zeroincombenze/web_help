@@ -18,7 +18,10 @@ Ogni pagina segue la struttura standard di web_context_help:
 * **Suggerimenti per la ricerca** (lista): menu, ricerca, filtri e
   raggruppamenti
 * **Come modificare un record** (maschera): modificare una fattura, registrare
-  i pagamenti, note di credito, annullamento ed eliminazione
+  i pagamenti, note di credito
+* **Come annullare o eliminare un record** (maschera e lista): annullare una
+  fattura in bozza o confermata, riportarla in bozza, quali fatture si
+  possono eliminare
 * **Come configurare**: le impostazioni di Fatturazione, registri, termini di
   pagamento e imposte
 * **Stampe ed esportazione**: il PDF della fattura, l'invio, l'analisi fatture
@@ -28,7 +31,8 @@ Ogni pagina segue la struttura standard di web_context_help:
 * Pulsante **FAQ** e **Piè di pagina**
 
 Una pagina per la Bacheca della contabilità (kanban dei registri) spiega le
-schede dei registri, i loro pulsanti e importi, e il menu **⋮**.
+schede dei registri, i loro pulsanti e importi, il menu **⋮**, e come si
+archiviano o eliminano i registri.
 
 Le pagine sono in inglese e in italiano, con i menu, i pulsanti e gli stati
 della versione di Odoo in uso.

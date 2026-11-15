@@ -12,8 +12,8 @@ Azienda
 Descrizione
 -----------
 
-Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
-clic sul pulsante **FAQ** per le domande più comuni già risolte.
+Fare clic sul pulsante [`Pronto`] per sapere come usare questo aiuto; fare
+clic sul pulsante [`FAQ`] per le domande più comuni già risolte.
 
 L'azienda è il soggetto giuridico che emette i documenti di Odoo: nome, logo,
 indirizzo, :field:`partita IVA <vat>` e :field:`valuta <currency_id>` sono
@@ -39,6 +39,8 @@ memorizzati sul suo :field:`partner <partner_id>`, un contatto come gli altri.
 .. help-include:: res_company_new.rst
 
 .. help-include:: res_company_update.rst
+
+.. help-include:: res_company_cancel.rst
 
 .. help-include:: res_company_configure.rst
 
@@ -75,7 +77,7 @@ Esempio
 Domande frequenti
 -----------------
 
-Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+Fare clic sul pulsante [`Argomento`] per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché non vedo il campo Regime fiscale?
 

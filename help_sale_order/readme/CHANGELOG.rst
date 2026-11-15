@@ -1,3 +1,10 @@
+18.0.1.0.6 (2026-11-13)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Sale order form and list: new section How to cancel or delete record (cancel wizard / confirmation by version, Set to Quotation, which orders can be deleted)
+* [IMP] Sale order list: new sections How to insert a new record (button Create / New) and How to update a record (click on a line)
+* [IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)
+
 18.0.1.0.5 (2026-11-08)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

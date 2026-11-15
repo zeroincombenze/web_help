@@ -7,9 +7,9 @@ Example
 
 #. Enable *Product Variants* in **Sales ‣ Configuration ‣ Settings**.
 #. Create the product *T-shirt*, in the **Variants** tab add *Size* with *S,
-   M, L* and *Colour* with *White, Red*, then **Save**: Odoo creates 6
+   M, L* and *Colour* with *White, Red*, then [`Save`]: Odoo creates 6
    variants.
-#. Press **Variant Prices** and set an extra price of 2.00 on *Red*: red
+#. Press [`Variant Prices`] and set an extra price of 2.00 on *Red*: red
    T-shirts cost 2.00 more.
 
 **An installation service invoiced when done**

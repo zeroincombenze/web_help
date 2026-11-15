@@ -13,8 +13,8 @@ Payment Terms
 Description
 -----------
 
-Click on button **Ready** for help about how to use this help; click on
-button **FAQ** for the most common solved questions.
+Click on button [`Ready`] for help about how to use this help; click on
+button [`FAQ`] for the most common solved questions.
 
 Payment terms tell when a customer must pay an invoice, or when you must pay a
 vendor bill: Odoo computes the :version:`<13|due date;*|due dates` of the
@@ -35,6 +35,8 @@ or to a fixed day of the month.
 
 .. help-include:: payment_term_update.rst
 
+.. help-include:: payment_term_cancel.rst
+
 .. help-include:: payment_term_configure.rst
 
 .. help-include:: payment_term_report.rst
@@ -46,7 +48,7 @@ or to a fixed day of the month.
 FAQ
 ---
 
-Click on button **Topic** to return to the specific help page.
+Click on button [`Topic`] to return to the specific help page.
 
 .. help-question:: Why can't I save the payment terms?
 

@@ -1,0 +1,59 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* web_context_help_tour
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-13 18:00+0000\n"
+"PO-Revision-Date: 2026-11-13 18:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+"Language: it\n"
+
+#. module: web_context_help_tour
+#. odoo-javascript
+#: code:addons/web_context_help_tour/static/src/v18/tour_player.js:0
+msgid "Finish"
+msgstr "Fine"
+
+#. module: web_context_help_tour
+#. odoo-javascript
+#: code:addons/web_context_help_tour/static/src/v18/tour_player.js:0
+msgid "Next"
+msgstr "Avanti"
+
+#. module: web_context_help_tour
+#. odoo-javascript
+#: code:addons/web_context_help_tour/static/src/v18/tour_player.js:0
+msgid "Previous"
+msgstr "Indietro"
+
+#. module: web_context_help_tour
+#. odoo-javascript
+#: code:addons/web_context_help_tour/static/src/v18/tour_player.js:0
+msgid "Step %(current)s of %(total)s"
+msgstr "Passo %(current)s di %(total)s"
+
+#. module: web_context_help_tour
+#. odoo-javascript
+#: code:addons/web_context_help_tour/static/src/v18/tour_player.js:0
+msgid "Stop"
+msgstr "Interrompi"
+
+#. module: web_context_help_tour
+#. odoo-javascript
+#: code:addons/web_context_help_tour/static/src/v18/tour_player.js:0
+msgid "Stop the tour"
+msgstr "Interrompi il tour"
+
+#. module: web_context_help_tour
+#. odoo-javascript
+#: code:addons/web_context_help_tour/static/src/v18/tour_player.js:0
+msgid "Waiting for this step: open the screen it refers to, or do what the previous step asks."
+msgstr "In attesa di questo passo: aprire la schermata a cui si riferisce, o fare quanto chiede il passo precedente."

@@ -3,12 +3,12 @@
 Report and export file
 ----------------------
 
-* **Request for Quotation**: the PDF of the RFQ. Press **Print RFQ** in the
+* **Request for Quotation**: the PDF of the RFQ. Press [`Print RFQ`] in the
   header, or use the **Print** menu above the form.
 * **Purchase Order**: the PDF of the confirmed order, from the **Print** menu
-  above the form, or selecting the orders in the list and using **Print**.
-* :version:`11|**Send RFQ by Email**;*|**Send by Email**` and **Send PO by
-  Email** attach the PDF to the email; the sent message and its attachment stay
+  above the form, or selecting the orders in the list and using [`Print`].
+* :version:`11|[\`Send RFQ by Email\`];*|[\`Send by Email\`]` and [`Send PO by
+  Email`] attach the PDF to the email; the sent message and its attachment stay
   in the chatter of the order.
 * Purchase analysis: :version:`11|**Purchases ‣ Reporting**;12|**Purchase ‣
   Reporting**;*|**Purchase ‣ Reporting ‣ Purchase**` (purchase managers) shows

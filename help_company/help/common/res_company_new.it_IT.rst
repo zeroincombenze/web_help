@@ -3,7 +3,7 @@
 Come inserire un nuovo record
 -----------------------------
 
-#. Aprire **Impostazioni ‣ Utenti e aziende ‣ Aziende** e premere **Nuovo**
+#. Aprire **Impostazioni ‣ Utenti e aziende ‣ Aziende** e premere [`Nuovo`]
    (solo amministratori). Una filiale si crea invece dalla scheda **Filiali**
    della sua azienda principale.
 #. Scrivere il :field:`nome dell'azienda <name>` (obbligatorio) e fare clic
