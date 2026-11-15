@@ -9,9 +9,9 @@ Example
    Options*;*|*Variants*` in **Sales ‣ Configuration ‣ Settings**.
 #. Create the product *T-shirt*, in the :version:`<=14|**Variants**;*|**Attributes
    & Variants**` tab add *Size* with *S, M, L* and *Colour* with *White, Red*,
-   then **Save**: Odoo creates 6 variants.
+   then [`Save`]: Odoo creates 6 variants.
 #. Set an extra price of 2.00 on *Red* with :version:`11|**Variant
-   Prices**;12-14|**Configure Variants**;*|**Configure** on the *Colour* line`:
+   Prices**;12-14|[\`Configure Variants\`];*|[\`Configure\`] on the *Colour* line`:
    red T-shirts cost 2.00 more.
 
 **An installation service invoiced when done**

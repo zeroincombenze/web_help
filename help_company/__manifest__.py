@@ -6,7 +6,7 @@
 #
 {
     "name": "Help for company",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "category": "Hidden/Tools",
     "summary": "Context help pages for companies, with Italian e-invoicing setup",
     "author": "Zeroincombenze srls",

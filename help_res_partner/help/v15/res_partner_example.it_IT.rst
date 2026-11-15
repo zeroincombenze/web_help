@@ -5,15 +5,15 @@ Esempi
 
 **Il cliente vuole le fatture inviate alla sede centrale**
 
-Aprire l'azienda, in **Contatti e indirizzi** premere **Crea**, scegliere
+Aprire l'azienda, in **Contatti e indirizzi** premere [`Crea`], scegliere
 :version:`11|*Indirizzo fatturazione*;*|*Indirizzo fattura*`, scrivere
-l'indirizzo della sede e **Salva e chiudi**: i nuovi ordini lo propongono come
+l'indirizzo della sede e [`Salva e chiudi`]: i nuovi ordini lo propongono come
 indirizzo di fatturazione.
 
 **Una persona passa a un'altra azienda**
 
-Aprire la persona, premere **Modifica**, cambiare l':field:`azienda
-<parent_id>` e **Salva**: l'indirizzo e i dati commerciali vengono ora dalla
+Aprire la persona, premere [`Modifica`], cambiare l':field:`azienda
+<parent_id>` e [`Salva`]: l'indirizzo e i dati commerciali vengono ora dalla
 nuova azienda; i documenti vecchi conservano quelli vecchi.
 
 **Un cliente è stato creato due volte**

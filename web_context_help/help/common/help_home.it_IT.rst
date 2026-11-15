@@ -42,7 +42,7 @@ elenca i record corrispondenti, per sceglierne esattamente uno. La ricerca
 semplice usa l'operatore *contiene*, quindi maiuscole e minuscole non contano.
 
 Ogni ricerca diventa un riquadro (un *facet*) dentro la barra di ricerca: si
-toglie con la sua **×** o con il tasto Backspace. Le ricerche sullo stesso
+toglie con la sua [`×`] o con il tasto Backspace. Le ricerche sullo stesso
 campo sono unite da *o*, quelle su campi diversi da *e*.
 
 .. _several_words:
@@ -79,15 +79,15 @@ più dati da inserire:
 
    in **Filtri ‣ Aggiungi filtro personalizzato** scrivere una regola *Nome
    contiene Rossi* e una seconda regola *Nome contiene Mario*, scegliere che
-   corrispondano *tutte* le regole e premere **Aggiungi**.
+   corrispondano *tutte* le regole e premere [`Aggiungi`].
 
 .. help-version:: <17
 
    le condizioni di un singolo filtro personalizzato sono unite da *oppure*,
    quindi applicare due filtri personalizzati: **Filtri ‣ Aggiungi filtro
-   personalizzato**, condizione *Nome contiene Rossi*, **Applica**; poi di nuovo
-   **Aggiungi filtro personalizzato**, condizione *Nome contiene Mario*,
-   **Applica**. Due filtri personalizzati sono uniti da *e anche*.
+   personalizzato**, condizione *Nome contiene Rossi*, [`Applica`]; poi di nuovo
+   [`Aggiungi filtro personalizzato`], condizione *Nome contiene Mario*,
+   [`Applica`]. Due filtri personalizzati sono uniti da *e anche*.
 
 Il risultato sono i nominativi 1 e 2.
 
@@ -110,31 +110,29 @@ Filtri, raggruppamenti e preferiti
 
 .. help-version:: >=17
 
-   Il pulsante **▾** a destra della casella di ricerca apre tre colonne:
+   Il pulsante [`▾`] a destra della casella di ricerca apre tre colonne:
    **Filtri**, **Raggruppa per** e **Preferiti**.
 
 .. help-version:: <17
 
-   I pulsanti **Filtri**, **Raggruppa per** e **Preferiti** sotto la casella di
+   I pulsanti [`Filtri`], [`Raggruppa per`] e [`Preferiti`] sotto la casella di
    ricerca aprono i loro menu.
 
 * **Filtri**: selezioni dei record già pronte. I filtri dello stesso gruppo
   (tra due linee di separazione) sono uniti da *o*, quelli di gruppi diversi da
-  *e*. **Aggiungi filtro personalizzato** costruisce una condizione con un
+  *e*. [`Aggiungi filtro personalizzato`] costruisce una condizione con un
   campo, un operatore e un valore\ :version:`>=17|, unite da *una qualsiasi* o
   da *tutte* le regole, e può includere i record archiviati`. I record
   archiviati sono nascosti: il filtro *Archiviato*, quando presente, li mostra.
 * **Raggruppa per**: raggruppa le righe per un campo, ad es. per cliente;
   scegliendo un secondo raggruppamento ogni gruppo è diviso di nuovo. Fare clic
   sull'intestazione di un gruppo per aprirlo o chiuderlo: mostra il numero di
-  record e i totali delle colonne numeriche. **Aggiungi gruppo
-  personalizzato** raggruppa per qualsiasi campo.
-* **Preferiti**: :version:`<=12|**Salva la ricerca corrente**;*|**Salva ricerca
-  corrente**` conserva ricerca, filtri e raggruppamenti con un nome;
-  :version:`10|*Utilizza per default*;11|*Utilizza come predefinita*;12-13|*Utilizzare
-  come predefinita*;*|*Filtro predefinito*` la applica ogni volta che il menu
-  viene aperto e :version:`<=11|*Condividi con tutti gli utenti*;12-13|*Condividere
-  con tutti gli utenti*;*|*Condiviso*` la rende
+  record e i totali delle colonne numeriche. [`Aggiungi gruppo
+  personalizzato`] raggruppa per qualsiasi campo.
+* **Preferiti**: **Salva ricerca corrente** conserva ricerca, filtri e
+  raggruppamenti con un nome; :version:`<=10|*Usa come predefinito*;*|*Filtro
+  predefinito*` la applica ogni volta che il menu viene aperto e
+  :version:`<=10|*Condividi con tutti gli utenti*;*|*Condiviso*` la rende
   visibile a tutti.
 
 .. _navigation:
@@ -176,7 +174,7 @@ Esportare
 
 #. Aprire l'elenco, cercare e filtrare i record che servono e spuntarli. La
    casella nell'intestazione spunta tutti i record della pagina\ :version:`<=12|,
-   e con essa sono esportati tutti i record trovati;*|, poi **Seleziona tutto**
+   e con essa sono esportati tutti i record trovati;*|, poi [\`Seleziona tutto\`]
    spunta tutti i record trovati`.
 #. Premere :version:`<=10|**Azione ‣ Esportazione**;<=16|**Azione ‣
    Esporta**;*|**⚙ Azioni ‣ Esporta**`.
@@ -193,7 +191,7 @@ Esportare
    reimportato: sono proposti solo i campi importabili ed è esportato anche
    l'identificativo del record (*ID esterno*).
 #. Scegliere il formato, :version:`<=10|*CSV* o *Excel*;*|*XLSX* o *CSV*`, e
-   premere **Esporta**: il browser scarica il file.
+   premere [`Esporta`]: il browser scarica il file.
 
 .. _import:
 
@@ -201,10 +199,10 @@ Importare
 ~~~~~~~~~
 
 #. Aprire l'elenco in cui vanno i record e premere
-   :version:`<=12|il pulsante **Importa** accanto a **Crea**;13-16|**Preferiti ‣
+   :version:`<=12|il pulsante [\`Importa\`] accanto a [\`Crea\`];13-16|**Preferiti ‣
    Importa record**;*|**⚙ ‣ Importa record** (l'ingranaggio accanto al titolo
    della vista)`.
-#. Premere :version:`10-11|**Carica File**;<=14|**Carica file**;*|**Carica file dati**` e scegliere
+#. Premere :version:`<=10|[\`Carica File\`];*|[\`Carica file dati\`]` e scegliere
    il file, :version:`<=10|CSV o Excel;*|XLSX, XLS, ODS o CSV`. Per un file CSV
    controllare la codifica, il separatore e il delimitatore di testo
    (:version:`<=10|opzioni;*|**Formattazione**`): Odoo si aspetta virgole e
@@ -213,10 +211,10 @@ Importare
    gli abbinamenti e scegliere il campo delle colonne non riconosciute; una
    colonna senza campo non viene importata. I campi dei record collegati sono
    mostrati da *Visualizzare i campi di relazione (avanzato)*.
-#. Premere :version:`<=10|**Valida**;*|**Prova**`: Odoo controlla tutto il file
+#. Premere :version:`<=10|[\`Valida\`];*|[\`Prova\`]`: Odoo controlla tutto il file
    senza salvare nulla ed elenca gli errori con le loro righe. Correggere il
    file e caricarlo di nuovo.
-#. Premere **Importa**.
+#. Premere [`Importa`].
 
 ⚠ **Attenzione!** Un'importazione non si può annullare. Per trovare i record
 appena importati, raggruppare o filtrare l'elenco per *Creato il*.
@@ -244,7 +242,7 @@ Aiuto sull'aiuto
 Benvenuto
 ---------
 
-Questo è l'aiuto del tuo Odoo. Premere **Sommario** nell'intestazione per
+Questo è l'aiuto del tuo Odoo. Premere [`Sommario`] nell'intestazione per
 vedere tutte le pagine di aiuto disponibili: l'elenco cresce con ogni modulo
 di aiuto installato (ad es. fatture, ordini di vendita, termini di pagamento).
 
@@ -286,21 +284,21 @@ leggendo:
 * **Segui Odoo**: se attivo, la finestra di aiuto cambia pagina ogni volta che
   si apre un'altra vista in Odoo; se non attivo, resta sulla pagina che si sta
   leggendo, ad es. per tenerla aperta mentre si lavora altrove.
-* **Argomento**: in una pagina, compare quando la vista di Odoo ha una pagina
+* [`Argomento`]: in una pagina, compare quando la vista di Odoo ha una pagina
   diversa da quella che si sta leggendo (ad es. dopo aver aperto il
   **Sommario**, o con *Segui Odoo* non attivo): riporta all'aiuto della vista
-  corrente. Nelle pagine **FAQ**, **Esempio** e **Campi** riporta alla pagina a
+  corrente. Nelle pagine [`FAQ`], [`Esempio`] e [`Campi`] riporta alla pagina a
   cui appartengono.
-* **Pronto**: apre questa pagina, l'aiuto generale, da qualsiasi pagina.
+* [`Pronto`]: apre questa pagina, l'aiuto generale, da qualsiasi pagina.
 * **Aiuto generale**: mostrato nelle pagine scritte per un caso particolare, ad
   es. un tipo di ordine: apre l'aiuto generale dello stesso record.
 * **Esempio**: apre un esempio svolto della pagina, in una pagina a sé.
-* **FAQ**: apre le domande frequenti della pagina, vedere sotto.
+* [`FAQ`]: apre le domande frequenti della pagina, vedere sotto.
 * **Campi**: elenca tutti i campi della maschera con la loro spiegazione; fare
   clic sul nome di un campo per evidenziarlo in Odoo.
 * **Sommario**: elenca tutte le pagine di aiuto, raggruppate per modulo; fare
   clic su un titolo per aprirla.
-* **Modifica**: solo per gli editor dell'aiuto, vedere *Modificare questa pagina*.
+* [`Modifica`]: solo per gli editor dell'aiuto, vedere *Modificare questa pagina*.
 
 .. _faq_button:
 
@@ -308,14 +306,14 @@ Domande frequenti (FAQ)
 -----------------------
 
 Le domande su una pagina sono tenute a parte, così la pagina resta breve: il
-pulsante **FAQ** compare solo quando la pagina ha delle domande. Premerlo per
+pulsante [`FAQ`] compare solo quando la pagina ha delle domande. Premerlo per
 aprirle in una pagina a sé: ogni domanda è un riquadro con la domanda in
 grassetto e la risposta sotto. Scorrere l'elenco, oppure scrivere una parola
 del proprio dubbio nella casella di ricerca (ad es. *ricostruisci*) per andare
-subito alla domanda che risponde. Premere **Argomento** per tornare alla
+subito alla domanda che risponde. Premere [`Argomento`] per tornare alla
 pagina.
 
-Anche questa pagina ha le sue FAQ: provare il pulsante **FAQ**.
+Anche questa pagina ha le sue FAQ: provare il pulsante [`FAQ`].
 
 .. _search:
 
@@ -331,19 +329,19 @@ mostra *qualsiasi parola* e ogni parola è cercata da sola.
 Il contatore mostra l'occorrenza corrente e il totale, ad es. *2/5*. Premere
 Invio o ▼ per l'occorrenza successiva, Maiusc+Invio o ▲ per la precedente, Esc
 per cancellare la ricerca. La ricerca guarda solo la pagina che si sta
-leggendo: per cercare tra le domande, aprire prima le **FAQ**.
+leggendo: per cercare tra le domande, aprire prima le [`FAQ`].
 
 .. _configure:
 
 Modificare questa pagina
 ------------------------
 
-Gli editor dell'aiuto vedono il pulsante **Modifica** nell'intestazione: apre
+Gli editor dell'aiuto vedono il pulsante [`Modifica`] nell'intestazione: apre
 la pagina in *Aiuto > Editor dell'aiuto > Pagine di aiuto*, dove il contenuto
 può essere adattato all'azienda, compresa questa pagina. Una pagina
 modificata mantiene la versione dell'utente all'aggiornamento del modulo. Un
 editor dell'aiuto di livello **Utente** modifica una copia delle pagine con
-priorità 64 o più, ad es. questa pagina: **Modifica** crea la copia, con la
+priorità 64 o più, ad es. questa pagina: [`Modifica`] crea la copia, con la
 priorità predefinita, e la apre.
 
 .. _faq:
@@ -351,7 +349,7 @@ priorità predefinita, e la apre.
 Domande
 -------
 
-Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+Fare clic sul pulsante [`Argomento`] per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Premendo il pulsante di aiuto non si apre nessuna finestra. Perché?
 
@@ -362,13 +360,13 @@ Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 .. help-question:: La finestra di aiuto mostra una pagina che non riguarda la mia vista. Perché?
 
    *Segui Odoo* non è attivo, oppure si è aperta un'altra pagina dall'aiuto.
-   Premere **Argomento** per tornare all'aiuto della vista corrente, oppure
+   Premere [`Argomento`] per tornare all'aiuto della vista corrente, oppure
    attivare *Segui Odoo*.
 
 .. help-question:: Perché non vedo il pulsante FAQ?
 
-   La pagina che si sta leggendo non ha domande. I pulsanti **FAQ**,
-   **Esempio**, **Campi** e **Aiuto generale** compaiono solo nelle pagine che
+   La pagina che si sta leggendo non ha domande. I pulsanti [`FAQ`],
+   [`Esempio`], [`Campi`] e [`Aiuto generale`] compaiono solo nelle pagine che
    li prevedono.
 
 .. help-question:: La pagina elenca solo i campi della maschera. Perché?

@@ -12,8 +12,8 @@ Prodotto
 Descrizione
 -----------
 
-Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
-clic sul pulsante **FAQ** per le domande più comuni già risolte.
+Fare clic sul pulsante [`Pronto`] per sapere come usare questo aiuto; fare
+clic sul pulsante [`FAQ`] per le domande più comuni già risolte.
 
 I prodotti sono i beni o i servizi acquistati e venduti da un'azienda.
 Possono avere un codice specifico o esserne privi, essere gestiti a magazzino,
@@ -64,6 +64,8 @@ oppure come prodotti con varianti.
 
 .. help-include:: product_update.rst
 
+.. help-include:: product_cancel.rst
+
 .. help-include:: product_configure.rst
 
 .. help-include:: product_report.rst
@@ -75,7 +77,7 @@ oppure come prodotti con varianti.
 Domande frequenti
 -----------------
 
-Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+Fare clic sul pulsante [`Argomento`] per tornare alla pagina di aiuto specifica.
 
 .. help-version:: <16
 
@@ -96,7 +98,7 @@ Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
    .. help-question:: Perché non riesco a eliminare il prodotto?
 
       Un prodotto usato da ordini, fatture o movimenti di magazzino non si può
-      eliminare: archiviarlo invece :version:`<=12|con il pulsante **Attivo** in
+      eliminare: archiviarlo invece :version:`<=12|con il pulsante [\`Attivo\`] in
       alto a destra;*|con **Azione ‣ Archivia**`.
 
    .. help-question:: Perché il prezzo di vendita non è modificabile?

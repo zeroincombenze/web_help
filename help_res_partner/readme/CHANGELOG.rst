@@ -1,3 +1,11 @@
+12.0.1.0.5 (2026-11-13)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [NEW] Guided tours (Odoo 18, with web_context_help_tour): create a contact, update a contact, search contacts (Filters menu, Companies, Add Custom Filter, search by Related Company)
+* [IMP] Contact form, list and kanban: new section How to archive or delete record (archive, restore, delete, contacts linked to users)
+* [IMP] Contact list and kanban: new sections How to insert a new record (button Create / New) and How to update a record (click on a line or a card)
+* [IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)
+
 12.0.1.0.4 (2026-11-08)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

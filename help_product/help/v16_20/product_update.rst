@@ -17,7 +17,5 @@ How to update a record
    hand is refused`; empty the stock first.
 #. **Attributes & Variants**: adding a value creates the new variants;
    removing one archives the variants using it.
-#. **Actions ‣ Archive** hides a product no longer used without losing its
-   history; **Actions ‣ Duplicate** copies it to create a similar one.
-#. To delete a product select it in the list and use **Actions ‣ Delete**: a
-   product used in documents cannot be deleted, archive it instead.
+#. :version:`<17|**Action ‣ Duplicate**;*|The gear icon ‣ **Duplicate**`
+   copies the product to create a similar one.

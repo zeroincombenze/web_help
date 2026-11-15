@@ -4,7 +4,7 @@ Suggestions for search
 ----------------------
 
 * **Sales ‣ Products ‣ Product Variants** (*Variants* setting) lists all the
-  variants; the **Variants** smart button of a product lists its own.
+  variants; the [`Variants`] smart button of a product lists its own.
 * Type in the search bar and choose what to search: *Product* (name, internal
   reference or barcode), *Product Template*, *Product Category*,
   *Attributes*, …. Several criteria are combined; remove one with its ✕.

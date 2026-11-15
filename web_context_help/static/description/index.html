@@ -93,17 +93,30 @@ utilizzabile.
 source changes; a help editor can force it with <b>Rebuild all pages</b> in
 <i>Help &gt; Help Editor &gt; Help Pages</i>.
 <p align="justify">
-Every internal user reads the help. The help pages and their rules are written
-by the users of the group <b>Help Editor</b> (<i>Settings &gt; Users</i>, section
-<i>Context Help</i>), with no administrator rights: opening the <b>Help</b> app, they
-get its <i>Help Editor</i> menu in the top bar (pages, rules, questions asked) and
-the <b>Edit</b> button of the help window.
-The administrators are help editors too.
+Every internal user reads the help. Who edits it is set in the user form
+(<i>Settings &gt; Users</i>, field <b>Context Help</b> in the <i>Application Accesses</i> section):
+</p><p align="justify">
+<ul>
+<li>empty: no edit, the help is only read;</li>
+<li><b>User</b>: edits the help pages of priority lower than 64 and their rules.
+  Editing a page of priority 64 or more, e.g. a page of a module (96),
+  creates a copy of it with the default priority (32), and the copy is
+  edited: being of higher priority, it is shown in place of the original;</li>
+<li><b>System</b>: edits all the help pages, as before.</li>
+</ul>
+</p><p align="justify">
+The field sets the level of the administrators too: they start as <b>System</b>
+(when the module is installed, or already had it before this version), and
+can be lowered to <b>User</b> or to no edit. A user made administrator later
+gets no help level by default.
+</p><p align="justify">
+Both levels need no administrator rights: opening the <b>Help</b> app, they get
+its <i>Help Editor</i> menu in the top bar (pages, rules, questions asked) and the
+<b>Edit</b> button of the help window.
 </p><p align="justify">
 The videos inserted in the help pages are read from the directory of the system
 parameter <code>web_help_video_path</code> (default <code>~/Video</code>, the home of the user
-running Odoo), subdirectories included; change it in <i>Settings &gt; Technical &gt;
-System Parameters</i>.
+running Odoo), subdirectories included; change it in <i>Settings &gt; Technical &gt; System Parameters</i>.
 </p></p>
         </div>
         <div class="oe_span6">
@@ -114,11 +127,29 @@ System Parameters</i>.
 quando cambia una sorgente di aiuto; un editor dell'aiuto pu&#242; forzarlo con
 <b>Ricostruisci tutte le pagine</b> in <i>Aiuto &gt; Editor dell'aiuto &gt; Pagine di aiuto</i>.
 <p align="justify">
-Ogni utente interno legge l'aiuto. Le pagine di aiuto e le loro regole sono
-scritte dagli utenti del gruppo <b>Editor dell'aiuto</b> (<i>Impostazioni &gt; Utenti</i>,
-sezione <i>Aiuto contestuale</i>), senza diritti di amministratore: aprendo l'app
+Ogni utente interno legge l'aiuto. Chi lo modifica si imposta nella scheda
+utente (<i>Impostazioni &gt; Utenti</i>, campo <b>Aiuto contestuale</b> nella sezione
+<i>Accessi applicazione</i>):
+</p><p align="justify">
+<ul>
+<li>vuoto: nessuna modifica, l'aiuto &#232; solo letto;</li>
+<li><b>Utente</b>: modifica le pagine di aiuto con priorit&#224; minore di 64 e le loro
+  regole. Modificando una pagina con priorit&#224; 64 o pi&#249;, ad es. una pagina di
+  un modulo (96), se ne crea una copia con la priorit&#224; predefinita (32) e si
+  modifica la copia: avendo priorit&#224; pi&#249; alta, &#232; mostrata al posto
+  dell'originale;</li>
+<li><b>Sistema</b>: modifica tutte le pagine di aiuto, come prima.</li>
+</ul>
+</p><p align="justify">
+Il campo imposta anche il livello degli amministratori: partono come
+<b>Sistema</b> (all'installazione del modulo, o se lo avevano gi&#224; prima di
+questa versione) e possono essere abbassati a <b>Utente</b> o a nessuna
+modifica. Un utente reso amministratore in seguito non ha un livello di aiuto
+predefinito.
+</p><p align="justify">
+Nessuno dei due livelli richiede diritti di amministratore: aprendo l'app
 <b>Aiuto</b>, hanno il suo menu <i>Editor dell'aiuto</i> nella barra in alto (pagine,
-regole, domande poste) e il pulsante <b>Modifica</b> della finestra di aiuto. Anche gli amministratori sono editor dell'aiuto.
+regole, domande poste) e il pulsante <b>Modifica</b> della finestra di aiuto.
 </p><p align="justify">
 I video inseriti nelle pagine di aiuto sono letti dalla cartella del parametro
 di sistema <code>web_help_video_path</code> (predefinito <code>~/Video</code>, la home
@@ -184,19 +215,33 @@ kanban view follows the list rules):
 <li><i>Contents</i>: table of contents, built by the help window, not written in RST;
   it lists the sections left on the page, footer excepted; the sections of a
   page with several parts (titles of first level) are grouped by part</li>
-<li><code>description</code> <i>Description</i>: summary of the view / model</li>
-<li><code>new_record</code> <i>How to insert a new record</i>: form only, steps to insert a
-  record</li>
+<li><code>description</code> <i>Description</i>: summary of the view / model; its first
+  paragraph is always "Click on button ``<span style="border-style:solid;border-width:1px 1px 0px 1px">&#160;Ready&#160;</span>`` for help about how to use
+  this help; click on button ``<span style="border-style:solid;border-width:1px 1px 0px 1px">&#160;FAQ&#160;</span>`` for the most common solved questions."
+  (Italian: "Fare clic sul pulsante ``<span style="border-style:solid;border-width:1px 1px 0px 1px">&#160;Pronto&#160;</span>`` per sapere come usare questo
+  aiuto; fare clic sul pulsante ``<span style="border-style:solid;border-width:1px 1px 0px 1px">&#160;FAQ&#160;</span>`` per le domande pi&#249; comuni gi&#224;
+  risolte.")</li>
+<li><code>new_record</code> <i>How to insert a new record</i>: in the form, steps to insert a
+  record; in list / kanban, a brief text about the <b>New</b> button (<b>Create</b>
+  up to Odoo 15)</li>
 <li><code>search</code> <i>Suggestions for search</i>: list / kanban only, how to find, filter
   and group</li>
-<li><code>update_record</code> <i>How to update a record</i>: form only, steps to update a
-  record</li>
+<li><code>update_record</code> <i>How to update a record</i>: in the form, steps to update a
+  record; in list / kanban, a brief text: click on a line (list) or on a card
+  (kanban) to open its form</li>
+<li><code>cancel</code> <i>How to cancel or delete record</i> when the model has a
+  <code>state</code> field, else <i>How to archive or delete record</i>: form and list,
+  steps to cancel (or archive) a record, restore it and delete it, with the
+  conditions that forbid each step</li>
 <li><code>configure</code> <i>How to set up</i>: settings and configuration</li>
 <li><code>report</code> <i>Report and export file</i>: prints, pdf attachment, export</li>
 <li><code>example</code> <i>Example</i>: useful examples, on their own page opened by the
   <b>Example</b> button</li>
 <li><code>faq</code> <i>FAQ</i>: <code>help-question</code> blocks, on their own page opened by the
-  <b>FAQ</b> button</li>
+  <b>FAQ</b> button; the first paragraph, before the first question, is always
+  "Click on button ``<span style="border-style:solid;border-width:1px 1px 0px 1px">&#160;Topic&#160;</span>`` to return to the specific help page." (Italian:
+  "Fare clic sul pulsante ``<span style="border-style:solid;border-width:1px 1px 0px 1px">&#160;Argomento&#160;</span>`` per tornare alla pagina di aiuto
+  specifica.")</li>
 <li><code>footer</code> <i>Footer</i>: date and time of page creation and copyright notice,
   not in the table of contents</li>
 </ul>
@@ -244,8 +289,7 @@ without it.
 </p><p align="justify">
 Without writing RST, a help editor chooses which page is shown from
 <i>Help &#8227; Help Editor &#8227; Help Rules</i> or from the <b>Rules</b> tab of
-a page: field of the page model (selection, boolean or many2one), *is* or <i>is
-not</i>, and the values (selection: their keys comma separated, e.g.
+a page: field of the page model (selection, boolean or many2one), *is* or <i>is not</i>, and the values (selection: their keys comma separated, e.g.
 <code>draft, sent</code>, listed in <i>Allowed values</i>), the checkbox (boolean) or the
 record (many2one). A page with rules is shown when one of them is met, and the
 <code>:when:</code> of its source too.
@@ -288,11 +332,20 @@ role; the version directories remain for whole files that differ.
 </p><p align="justify">
     Press :version:`16|<b>Create and View Invoice</b>;17|<b>Create Draft Invoice</b>;&gt;=18|<b>Create Draft</b>`.
 </p><p align="justify">
-Conditions: <code>16</code>, <code>16-18</code>, <code>&gt;=17</code>, <code>&gt;17</code>, <code>&lt;=16</code>, <code>&lt;17</code>, <code>*</code>
-(any version), several joined by comma (<code>10,16</code>). The role shows the text of
+Conditions: <code>16</code>, <code>16-18</code>, <code>&gt;=17</code>, <code>&gt;17</code>, <code>&lt;=16</code>, <code>&lt;17</code>, or a star
+(the star: any version), several joined by comma (<code>10,16</code>). The role shows the text of
 the first matching condition, inline markup allowed, roles not allowed; write
 <code>\ </code> before the role when it is glued to the previous word.
 Roles <code>:field:</code> and <code>:tour:</code> highlight a field or run a tour in the Odoo tab.
+</p><p align="justify">
+A button label written between <code>[</code> and <code>]</code> with backquotes,
+``<span style="border-style:solid;border-width:1px 1px 0px 1px">&#160;Save&#160;</span>``, is shown as a button, the label inside a frame. Inside
+<code>:version:</code> the backquotes are escaped:
+``:version:`&lt;16|[\`Create\`];&gt;=16|[\`New\`]```. It cannot be nested in
+Italic and bold are written with one or two stars around the words
+(<i>italic</i>, <b>bold</b>); in a code block the stars stay as written.
+The help pages write every button this way; menu paths (``<b>Sales &#8227;
+Orders</b>``), tabs, menu items after &#8227; and titles stay in bold.
 </p><p align="justify">
 Text that makes sense only with another module goes in <code>help-if</code>: it is
 shown only when the module is installed, or the model exists. The pages are
@@ -315,6 +368,45 @@ in whatever order the modules are installed.
 </p><p align="justify">
 Conditions: <code>module</code> or <code>model</code>, <code>=</code> (any of the names joined by comma
 is installed / exists) or <code>!=</code> (none of them), several joined by <code>and</code>.
+</p><p align="justify">
+<h4>Guided tours</h4>
+</p><p align="justify">
+<code>help-tour</code> writes a guided tour in the page, where it is needed, e.g. in
+<i>How to insert a new record</i>. With the <i>Context help tours</i> module
+(<code>web_context_help_tour</code>) installed, the help window shows a button: pressed,
+it plays the steps in the Odoo tab, one at a time, dimming the screen around
+the element of the step, with the <b>Previous</b>, <b>Next</b> and <b>Stop</b>
+buttons. Without that module the tour is not shown. The steps are written in
+the page, so the Italian twin has its own text and <code>help-version</code> /
+<code>help-if</code> work inside the tour too.
+</p><p align="justify">
+
+<code>
+    .. help-tour:: res_partner_new
+       :label: Show me how to create a contact
+</code>
+</p><p align="justify">
+       .. help-step:: new
+          :click:
+</p><p align="justify">
+          Press <b>New</b> to open an empty contact form.
+</p><p align="justify">
+       .. help-step:: field:name
+          :position: right
+</p><p align="justify">
+          Type the name: it is the only required field.
+</p><p align="justify">
+<code>:label:</code> is the text of the button, <i>Show me how</i> when missing.
+Targets of <code>help-step</code>: <code>field:&lt;field name&gt;</code> (the field and its label;
+the column in a list), <code>button:&lt;button name&gt;</code>, ``tab:&lt;notebook page
+name&gt;<code>, </code>menu:&lt;menu xmlid&gt;<code>, </code>css:&lt;selector&gt;<code>, or </code>new<code>, </code>save``,
+<code>discard</code>, <code>search</code>, <code>filters</code>, <code>actions</code> (gear menu),
+<code>breadcrumb</code>, <code>statusbar</code>. <code>:click:</code>: <b>Next</b> presses the target for
+the user, e.g. <b>New</b>; <code>:position:</code> places the popover (<code>auto</code>,
+<code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code>). A step whose target is not on
+screen waits for it: the user opens the screen, or does what the previous
+step asks. The targets are those of the Odoo version: put the tour in a
+<code>help-version</code> block of the versions it was checked on.
 </p><p align="justify">
 </p>
 .. |sos| unicode:: U+1F6DF</p>
@@ -373,19 +465,33 @@ l'elenco (una vista kanban segue le regole dell'elenco):
 <li><i>Indice</i>: costruito dalla finestra di aiuto, non si scrive in RST; elenca le
   sezioni rimaste nella pagina, tranne il pi&#232; di pagina; le sezioni di una
   pagina con pi&#249; parti (titoli di primo livello) sono raggruppate per parte</li>
-<li><code>description</code> <i>Descrizione</i>: sintesi della vista / modello</li>
-<li><code>new_record</code> <i>Come inserire un nuovo record</i>: solo maschera, passi per
-  inserire un record</li>
+<li><code>description</code> <i>Descrizione</i>: sintesi della vista / modello; il primo
+  paragrafo &#232; sempre "Fare clic sul pulsante ``<span style="border-style:solid;border-width:1px 1px 0px 1px">&#160;Pronto&#160;</span>`` per sapere come
+  usare questo aiuto; fare clic sul pulsante ``<span style="border-style:solid;border-width:1px 1px 0px 1px">&#160;FAQ&#160;</span>`` per le domande pi&#249;
+  comuni gi&#224; risolte." (inglese: "Click on button ``<span style="border-style:solid;border-width:1px 1px 0px 1px">&#160;Ready&#160;</span>`` for help about
+  how to use this help; click on button ``<span style="border-style:solid;border-width:1px 1px 0px 1px">&#160;FAQ&#160;</span>`` for the most common solved
+  questions.")</li>
+<li><code>new_record</code> <i>Come inserire un nuovo record</i>: nella maschera, passi per
+  inserire un record; in elenco / kanban, un breve testo sul pulsante
+  <b>Nuovo</b> (<b>Crea</b> fino a Odoo 15)</li>
 <li><code>search</code> <i>Suggerimenti per la ricerca</i>: solo elenco / kanban, come trovare,
   filtrare e raggruppare</li>
-<li><code>update_record</code> <i>Come modificare un record</i>: solo maschera, passi per
-  modificare un record</li>
+<li><code>update_record</code> <i>Come modificare un record</i>: nella maschera, passi per
+  modificare un record; in elenco / kanban, un breve testo: fare clic su una
+  riga (elenco) o su una scheda (kanban) per aprire la sua maschera</li>
+<li><code>cancel</code> <i>Come annullare o eliminare un record</i> quando il modello ha il
+  campo <code>state</code>, altrimenti <i>Come archiviare o eliminare un record</i>:
+  maschera ed elenco, passi per annullare (o archiviare) un record,
+  ripristinarlo ed eliminarlo, con le condizioni che impediscono ogni passo</li>
 <li><code>configure</code> <i>Come configurare</i>: impostazioni e configurazione</li>
 <li><code>report</code> <i>Stampe ed esportazione</i>: stampe, allegato pdf, esportazione</li>
 <li><code>example</code> <i>Esempi</i>: esempi utili, in una pagina a parte aperta dal pulsante
   <b>Esempio</b></li>
 <li><code>faq</code> <i>Domande frequenti</i>: blocchi <code>help-question</code>, in una pagina a parte
-  aperta dal pulsante <b>FAQ</b></li>
+  aperta dal pulsante <b>FAQ</b>; il primo paragrafo, prima della prima domanda, &#232;
+  sempre "Fare clic sul pulsante ``<span style="border-style:solid;border-width:1px 1px 0px 1px">&#160;Argomento&#160;</span>`` per tornare alla pagina di
+  aiuto specifica." (inglese: "Click on button ``<span style="border-style:solid;border-width:1px 1px 0px 1px">&#160;Topic&#160;</span>`` to return to the specific
+  help page.")</li>
 <li><code>footer</code> <i>Pi&#232; di pagina</i>: data e ora di creazione della pagina e nota di
   copyright, non nell'indice</li>
 </ul>
@@ -480,12 +586,22 @@ che cambiano.
 </p><p align="justify">
     Premere :version:`16|<b>Crea e visualizza fattura</b>;17|<b>Crea bozza fattura</b>;&gt;=18|<b>Crea bozza</b>`.
 </p><p align="justify">
-Condizioni: <code>16</code>, <code>16-18</code>, <code>&gt;=17</code>, <code>&gt;17</code>, <code>&lt;=16</code>, <code>&lt;17</code>, <code>*</code>
-(qualsiasi versione), pi&#249; condizioni separate da virgola (<code>10,16</code>). Il ruolo
+Condizioni: <code>16</code>, <code>16-18</code>, <code>&gt;=17</code>, <code>&gt;17</code>, <code>&lt;=16</code>, <code>&lt;17</code>, or un asterisco
+(l'asterisco: qualsiasi versione), pi&#249; condizioni separate da virgola (<code>10,16</code>). Il ruolo
 mostra il testo della prima condizione soddisfatta, con il markup in linea ma
 senza altri ruoli; scrivere <code>\ </code> prima del ruolo quando &#232; attaccato alla
 parola precedente.
 I ruoli <code>:field:</code> e <code>:tour:</code> evidenziano un campo o avviano un tour nella scheda di Odoo.
+</p><p align="justify">
+L'etichetta di un pulsante scritta tra <code>[</code> e <code>]</code> con gli apici
+inversi, ``<span style="border-style:solid;border-width:1px 1px 0px 1px">&#160;Salva&#160;</span>``, &#232; mostrata come un pulsante, l'etichetta dentro una
+cornice. Dentro <code>:version:</code> gli apici inversi sono preceduti da <code>\</code>:
+``:version:`&lt;16|[\`Crea\`];&gt;=16|[\`Nuovo\`]```. Non si pu&#242; annidare in
+Corsivo e grassetto si scrivono con uno o due asterischi attorno alle
+parole (<i>corsivo</i>, <b>grassetto</b>); in un blocco di codice restano come sono
+scritta. Le pagine di aiuto scrivono cos&#236; tutti i pulsanti; i percorsi di menu
+(<code><b>Vendite &#8227; Ordini</b></code>), le schede, le voci di menu dopo &#8227; e i titoli
+restano in grassetto.
 </p><p align="justify">
 Il testo che ha senso solo con un altro modulo va in <code>help-if</code>: &#232; mostrato
 solo quando il modulo &#232; installato, o il modello esiste. Le pagine sono
@@ -510,6 +626,46 @@ Condizioni: <code>module</code> o <code>model</code>, <code>=</code> (almeno uno
 virgola &#232; installato / esiste) o <code>!=</code> (nessuno di essi), pi&#249; condizioni
 unite da <code>and</code>.
 </p><p align="justify">
+<h4>Tour guidati</h4>
+</p><p align="justify">
+<code>help-tour</code> scrive un tour guidato nella pagina, dove serve, ad es. in
+<i>Come inserire un nuovo record</i>. Con il modulo <i>Tour dell'aiuto contestuale</i>
+(<code>web_context_help_tour</code>) installato, la finestra di aiuto mostra un
+pulsante: premuto, esegue i passi nella scheda di Odoo, uno alla volta,
+oscurando lo schermo intorno all'elemento del passo, con i pulsanti
+<b>Indietro</b>, <b>Avanti</b> e <b>Interrompi</b>. Senza quel modulo il tour non &#232;
+mostrato. I passi sono scritti nella pagina, quindi il gemello italiano ha il
+suo testo e <code>help-version</code> / <code>help-if</code> funzionano anche dentro il tour.
+</p><p align="justify">
+
+<code>
+    .. help-tour:: res_partner_new
+       :label: Mostrami come creare un contatto
+</code>
+</p><p align="justify">
+       .. help-step:: new
+          :click:
+</p><p align="justify">
+          Premere <b>Nuovo</b> per aprire la maschera di un contatto vuoto.
+</p><p align="justify">
+       .. help-step:: field:name
+          :position: right
+</p><p align="justify">
+          Digitare il nome: &#232; l'unico campo obbligatorio.
+</p><p align="justify">
+<code>:label:</code> &#232; il testo del pulsante, <i>Mostrami come</i> se manca.
+Obiettivi di <code>help-step</code>: <code>field:&lt;nome campo&gt;</code> (il campo e la sua
+etichetta; la colonna in un elenco), <code>button:&lt;nome pulsante&gt;</code>,
+<code>tab:&lt;nome pagina del notebook&gt;</code>, <code>menu:&lt;xmlid del menu&gt;</code>,
+<code>css:&lt;selettore&gt;</code>, oppure <code>new</code>, <code>save</code>, <code>discard</code>, <code>search</code>,
+<code>filters</code>, <code>actions</code> (menu dell'ingranaggio), <code>breadcrumb</code>,
+<code>statusbar</code>. <code>:click:</code>: <b>Avanti</b> preme l'obiettivo per l'utente, ad es.
+<b>Nuovo</b>; <code>:position:</code> colloca il fumetto (<code>auto</code>, <code>top</code>, <code>bottom</code>,
+<code>left</code>, <code>right</code>). Un passo il cui obiettivo non &#232; sullo schermo lo
+attende: l'utente apre la schermata, o fa quanto chiede il passo precedente.
+Gli obiettivi sono quelli della versione di Odoo: mettere il tour in un
+blocco <code>help-version</code> delle versioni su cui &#232; stato verificato.
+</p><p align="justify">
 </p>
 .. |sos| unicode:: U+1F6DF</p>
         </div>
@@ -520,8 +676,29 @@ unite da <code>and</code>.
     <div class="oe_row oe_spaced">
         <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">ChangeLog History | Cronologia modifiche</h3>
         <div class="oe_span12">
-<h4>12.0.1.0.10 (2026-11-01)</h4>
+<h4>12.0.1.0.12 (2026-11-15)</h4>
 <p align="justify">
+<ul>
+<li>[NEW] Guided tours: help-tour / help-step directives write the steps in the page, shown as a button by web_context_help_tour; the help window sends the steps to the Odoo tab and its find box skips them</li>
+<li>[IMP] Tour button: while its tour plays it reads <i>Return to record view</i> and brings the Odoo tab back; the original label returns when the tour ends</li>
+<li>[IMP] Standard layout: new section cancel, <i>How to cancel or delete record</i> (model with state) or <i>How to archive or delete record</i>, after How to update a record</li>
+<li>[IMP] Standard layout: list and kanban pages have the sections How to insert a new record (brief: button New / Create) and How to update a record (brief: click on a line or a card)</li>
+<li>[NEW] Button frames: [`Save`] in the RST shows the label as a button, inside a frame, in the help window and in the page editor</li>
+<li>[QUA] Test coverage 90% (1442: 137+1305) [0 TestPoints] - quality rating 51 (target 100)</li>
+<li>[IMP] Help home and help editor pages: buttons written [`Label`], shown inside a frame; the mandatory Ready / FAQ / Topic sentences use it too</li>
+</ul>
+</p><p align="justify">
+<h4>12.0.1.0.11 (2026-11-08)</h4>
+</p><p align="justify">
+<ul>
+<li>[FIX] Odoo tab loaded in the help window (expired session, login): the help pages no more replace the Odoo views, e.g. the Invoicing dashboard</li>
+<li>[IMP] Help pages: the Help pages page starts with the hint to the Ready and FAQ buttons; every FAQ page starts with the hint to the Topic button; the rules are in USAGE</li>
+<li>[IMP] Help on help: how to move inside the help, the header buttons, the FAQ, the find box; FAQ of the main page</li>
+<li>[IMP] Help edit authorization in 3 levels, field Context Help of the user form: empty (no edit), User (new: edits the pages of priority lower than 64; editing a page of priority 64 or more edits a copy of it with the default priority) and System (edits all the pages, the former Help Editor group); the administrators are no more System by default: the field sets their level too, the existing ones keep System</li>
+</ul>
+</p><p align="justify">
+<h4>12.0.1.0.10 (2026-11-01)</h4>
+</p><p align="justify">
 <ul>
 <li>[IMP] Migrated from 18.0 to 12.0: control panel button and form tracking for the Odoo 12 web client, Insert video wizard, rule values of selection fields written as keys</li>
 <li>[QUA] Test coverage 91% (1318: 122+1196) [0 TestPoints] - quality rating 51 (target 100)</li>
@@ -609,18 +786,6 @@ unite da <code>and</code>.
 <ul>
 <li>[IMP] Field labels highlighted too, dialogs keep the help of the main view</li>
 </ul>
-</p><p align="justify">
-<h4>12.0.0</h4>
-</p><p align="justify">
-<ul>
-<li>[IMP] Migrated from 16.0: list views, invisible expressions, Odoo 18 control panel adapter</li>
-</ul>
-</p><p align="justify">
-<h4>12.0.0</h4>
-</p><p align="justify">
-<ul>
-<li>[NEW] Context help button, help pages built from the RST sources of each module</li>
-</ul>
 </p>
         </div>
     </div>
@@ -649,6 +814,6 @@ unite da <code>and</code>.
     </div>
     <div class="oe_row oe_spaced">
         <p>This module is part of <a href="https://github.com/zeroincombenze/web_help">web_help</a> project.</p>
-        <p>Published information on | Informazioni pubblicate: 2026-11-01</p>
+        <p>Published information on | Informazioni pubblicate: 2026-11-15</p>
     </div>
 </section>

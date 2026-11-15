@@ -5,7 +5,9 @@ Ogni pagina segue la regola di aiuto di web_context_help:
 * **Descrizione**: cosa sono preventivi e ordini di vendita, con i campi principali
 * **Nuovo record** (maschera): guida passo passo per creare un preventivo e confermarlo
 * **Modifica record** (maschera): cosa si può cambiare in ogni stato,
-  fatturazione, blocco, annullamento ed eliminazione
+  fatturazione, blocco
+* **Come annullare o eliminare un record** (maschera e lista): annullare un
+  ordine, riportarlo a preventivo, quali ordini si possono eliminare
 * **Come cercare** (lista): menu, ricerca, filtri e raggruppamenti
 * **Configurazione**: le impostazioni di Vendite che influenzano gli ordini
 * **Stampe**: il PDF di preventivo / ordine, la pro-forma e l'analisi vendite

@@ -18,8 +18,10 @@ Ogni pagina segue la struttura standard di web_context_help:
   il termine *30 giorni*
 * **Suggerimenti per la ricerca** (lista): menu, ricerca, filtri e
   raggruppamenti
-* **Come modificare un record** (maschera): modificare, archiviare ed
-  eliminare i termini di pagamento
+* **Come modificare un record** (maschera): modificare i termini di
+  pagamento
+* **Come archiviare o eliminare un record** (maschera e lista): archiviare,
+  ripristinare ed eliminare i termini di pagamento
 * **Come configurare**: dove si usano i termini di pagamento e il modulo OCA
 * **Stampe ed esportazione**: le scadenze stampate sulla fattura e
   l'esportazione dei termini di pagamento in un file

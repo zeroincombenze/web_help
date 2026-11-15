@@ -1,5 +1,5 @@
 =================================================
-|icon| Context help/Aiuto contestuale 12.0.1.0.10
+|icon| Context help/Aiuto contestuale 12.0.1.0.12
 =================================================
 
 **Context help button, pages written in RST by each module**
@@ -69,17 +69,28 @@ No configuration is needed. Pages are rebuilt at server start when a help
 source changes; a help editor can force it with **Rebuild all pages** in
 *Help > Help Editor > Help Pages*.
 
-Every internal user reads the help. The help pages and their rules are written
-by the users of the group **Help Editor** (*Settings > Users*, section
-*Context Help*), with no administrator rights: opening the **Help** app, they
-get its *Help Editor* menu in the top bar (pages, rules, questions asked) and
-the **Edit** button of the help window.
-The administrators are help editors too.
+Every internal user reads the help. Who edits it is set in the user form
+(*Settings > Users*, field **Context Help** in the *Application Accesses* section):
+
+* empty: no edit, the help is only read;
+* **User**: edits the help pages of priority lower than 64 and their rules.
+  Editing a page of priority 64 or more, e.g. a page of a module (96),
+  creates a copy of it with the default priority (32), and the copy is
+  edited: being of higher priority, it is shown in place of the original;
+* **System**: edits all the help pages, as before.
+
+The field sets the level of the administrators too: they start as **System**
+(when the module is installed, or already had it before this version), and
+can be lowered to **User** or to no edit. A user made administrator later
+gets no help level by default.
+
+Both levels need no administrator rights: opening the **Help** app, they get
+its *Help Editor* menu in the top bar (pages, rules, questions asked) and the
+**Edit** button of the help window.
 
 The videos inserted in the help pages are read from the directory of the system
 parameter ``web_help_video_path`` (default ``~/Video``, the home of the user
-running Odoo), subdirectories included; change it in *Settings > Technical >
-System Parameters*.
+running Odoo), subdirectories included; change it in *Settings > Technical > System Parameters*.
 
 
 
@@ -132,19 +143,33 @@ kanban view follows the list rules):
 * *Contents*: table of contents, built by the help window, not written in RST;
   it lists the sections left on the page, footer excepted; the sections of a
   page with several parts (titles of first level) are grouped by part
-* ``description`` *Description*: summary of the view / model
-* ``new_record`` *How to insert a new record*: form only, steps to insert a
-  record
+* ``description`` *Description*: summary of the view / model; its first
+  paragraph is always "Click on button ``[`Ready`]`` for help about how to use
+  this help; click on button ``[`FAQ`]`` for the most common solved questions."
+  (Italian: "Fare clic sul pulsante ``[`Pronto`]`` per sapere come usare questo
+  aiuto; fare clic sul pulsante ``[`FAQ`]`` per le domande più comuni già
+  risolte.")
+* ``new_record`` *How to insert a new record*: in the form, steps to insert a
+  record; in list / kanban, a brief text about the **New** button (**Create**
+  up to Odoo 15)
 * ``search`` *Suggestions for search*: list / kanban only, how to find, filter
   and group
-* ``update_record`` *How to update a record*: form only, steps to update a
-  record
+* ``update_record`` *How to update a record*: in the form, steps to update a
+  record; in list / kanban, a brief text: click on a line (list) or on a card
+  (kanban) to open its form
+* ``cancel`` *How to cancel or delete record* when the model has a
+  ``state`` field, else *How to archive or delete record*: form and list,
+  steps to cancel (or archive) a record, restore it and delete it, with the
+  conditions that forbid each step
 * ``configure`` *How to set up*: settings and configuration
 * ``report`` *Report and export file*: prints, pdf attachment, export
 * ``example`` *Example*: useful examples, on their own page opened by the
   **Example** button
 * ``faq`` *FAQ*: ``help-question`` blocks, on their own page opened by the
-  **FAQ** button
+  **FAQ** button; the first paragraph, before the first question, is always
+  "Click on button ``[`Topic`]`` to return to the specific help page." (Italian:
+  "Fare clic sul pulsante ``[`Argomento`]`` per tornare alla pagina di aiuto
+  specifica.")
 * ``footer`` *Footer*: date and time of page creation and copyright notice,
   not in the table of contents
 
@@ -191,8 +216,7 @@ Rules
 
 Without writing RST, a help editor chooses which page is shown from
 *Help ‣ Help Editor ‣ Help Rules* or from the **Rules** tab of
-a page: field of the page model (selection, boolean or many2one), *is* or *is
-not*, and the values (selection: their keys comma separated, e.g.
+a page: field of the page model (selection, boolean or many2one), *is* or *is not*, and the values (selection: their keys comma separated, e.g.
 ``draft, sent``, listed in *Allowed values*), the checkbox (boolean) or the
 record (many2one). A page with rules is shown when one of them is met, and the
 ``:when:`` of its source too.
@@ -234,11 +258,20 @@ role; the version directories remain for whole files that differ.
 
     Press :version:`16|**Create and View Invoice**;17|**Create Draft Invoice**;>=18|**Create Draft**`.
 
-Conditions: ``16``, ``16-18``, ``>=17``, ``>17``, ``<=16``, ``<17``, ``*``
-(any version), several joined by comma (``10,16``). The role shows the text of
+Conditions: ``16``, ``16-18``, ``>=17``, ``>17``, ``<=16``, ``<17``, or a star
+(the star: any version), several joined by comma (``10,16``). The role shows the text of
 the first matching condition, inline markup allowed, roles not allowed; write
 ``\ `` before the role when it is glued to the previous word.
 Roles ``:field:`` and ``:tour:`` highlight a field or run a tour in the Odoo tab.
+
+A button label written between ``[`` and ``]`` with backquotes,
+``[`Save`]``, is shown as a button, the label inside a frame. Inside
+``:version:`` the backquotes are escaped:
+``:version:`<16|[\`Create\`];>=16|[\`New\`]```. It cannot be nested in
+Italic and bold are written with one or two stars around the words
+(*italic*, **bold**); in a code block the stars stay as written.
+The help pages write every button this way; menu paths (``**Sales ‣
+Orders**``), tabs, menu items after ‣ and titles stay in bold.
 
 Text that makes sense only with another module goes in ``help-if``: it is
 shown only when the module is installed, or the model exists. The pages are
@@ -260,6 +293,45 @@ in whatever order the modules are installed.
 
 Conditions: ``module`` or ``model``, ``=`` (any of the names joined by comma
 is installed / exists) or ``!=`` (none of them), several joined by ``and``.
+
+Guided tours
+~~~~~~~~~~~~
+
+``help-tour`` writes a guided tour in the page, where it is needed, e.g. in
+*How to insert a new record*. With the *Context help tours* module
+(``web_context_help_tour``) installed, the help window shows a button: pressed,
+it plays the steps in the Odoo tab, one at a time, dimming the screen around
+the element of the step, with the **Previous**, **Next** and **Stop**
+buttons. Without that module the tour is not shown. The steps are written in
+the page, so the Italian twin has its own text and ``help-version`` /
+``help-if`` work inside the tour too.
+
+::
+
+    .. help-tour:: res_partner_new
+       :label: Show me how to create a contact
+
+       .. help-step:: new
+          :click:
+
+          Press **New** to open an empty contact form.
+
+       .. help-step:: field:name
+          :position: right
+
+          Type the name: it is the only required field.
+
+``:label:`` is the text of the button, *Show me how* when missing.
+Targets of ``help-step``: ``field:<field name>`` (the field and its label;
+the column in a list), ``button:<button name>``, ``tab:<notebook page
+name>``, ``menu:<menu xmlid>``, ``css:<selector>``, or ``new``, ``save``,
+``discard``, ``search``, ``filters``, ``actions`` (gear menu),
+``breadcrumb``, ``statusbar``. ``:click:``: **Next** presses the target for
+the user, e.g. **New**; ``:position:`` places the popover (``auto``,
+``top``, ``bottom``, ``left``, ``right``). A step whose target is not on
+screen waits for it: the user opens the screen, or does what the previous
+step asks. The targets are those of the Odoo version: put the tour in a
+``help-version`` block of the versions it was checked on.
 
 .. |sos| unicode:: U+1F6DF
 
@@ -360,6 +432,25 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+12.0.1.0.12 (2026-11-15)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [NEW] Guided tours: help-tour / help-step directives write the steps in the page, shown as a button by web_context_help_tour; the help window sends the steps to the Odoo tab and its find box skips them
+* [IMP] Tour button: while its tour plays it reads *Return to record view* and brings the Odoo tab back; the original label returns when the tour ends
+* [IMP] Standard layout: new section cancel, *How to cancel or delete record* (model with state) or *How to archive or delete record*, after How to update a record
+* [IMP] Standard layout: list and kanban pages have the sections How to insert a new record (brief: button New / Create) and How to update a record (brief: click on a line or a card)
+* [NEW] Button frames: [`Save`] in the RST shows the label as a button, inside a frame, in the help window and in the page editor
+* [QUA] Test coverage 90% (1442: 137+1305) [0 TestPoints] - quality rating 51 (target 100)
+* [IMP] Help home and help editor pages: buttons written [`Label`], shown inside a frame; the mandatory Ready / FAQ / Topic sentences use it too
+
+12.0.1.0.11 (2026-11-08)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [FIX] Odoo tab loaded in the help window (expired session, login): the help pages no more replace the Odoo views, e.g. the Invoicing dashboard
+* [IMP] Help pages: the Help pages page starts with the hint to the Ready and FAQ buttons; every FAQ page starts with the hint to the Topic button; the rules are in USAGE
+* [IMP] Help on help: how to move inside the help, the header buttons, the FAQ, the find box; FAQ of the main page
+* [IMP] Help edit authorization in 3 levels, field Context Help of the user form: empty (no edit), User (new: edits the pages of priority lower than 64; editing a page of priority 64 or more edits a copy of it with the default priority) and System (edits all the pages, the former Help Editor group); the administrators are no more System by default: the field sets their level too, the existing ones keep System
+
 12.0.1.0.10 (2026-11-01)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -440,16 +531,6 @@ ChangeLog History | Cronologia modifiche
 
 * [IMP] Field labels highlighted too, dialogs keep the help of the main view
 
-12.0.0
-~~~~~~
-
-* [IMP] Migrated from 16.0: list views, invisible expressions, Odoo 18 control panel adapter
-
-12.0.0
-~~~~~~
-
-* [NEW] Context help button, help pages built from the RST sources of each module
-
 
 
 Credits | Ringraziamenti
@@ -499,7 +580,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-11-01
+Last Update / Ultimo aggiornamento: 2026-11-15
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

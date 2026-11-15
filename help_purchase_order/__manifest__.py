@@ -6,7 +6,7 @@
 #
 {
     "name": "Help for purchase order",
-    "version": "12.0.1.0.4",
+    "version": "12.0.1.0.5",
     "category": "Hidden/Tools",
     "summary": "Context help pages for purchase orders",
     "author": "Zeroincombenze srls",

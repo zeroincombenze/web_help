@@ -1,0 +1,12 @@
+#!/bin/bash
+# Copyright 2026 Zeroincombenze srls <https://www.zeroincombenze.it>
+# License LGPL-3.0-or-later (https://www.gnu.org/licenses/lgpl).
+#
+# Chrome for the browser tests. Odoo's test harness attaches to the first
+# target of Chrome, which is an extension background page unless the
+# built-in component extensions with background pages are disabled.
+CHROME=/usr/bin/google-chrome
+if [ ! -x "$CHROME" ]; then
+    CHROME=$(command -v chromium || command -v chromium-browser)
+fi
+exec "$CHROME" --disable-component-extensions-with-background-pages "$@"

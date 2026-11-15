@@ -114,7 +114,7 @@ set the line as follows.
       month.
 
    Odoo adds 30 days to the invoice date, then goes to the last day of that
-   month. Check it in the **Preview** with 15 January and 31 January. Do not
+   month. Check it in the [`Preview`] with 15 January and 31 January. Do not
    use 30 *Days after end of month*: it means end of the invoice month + 30
    days, so the invoice of 15 January is due on 2 March.
 
@@ -123,7 +123,7 @@ set the line as follows.
    <payment_days>` ``31``, give the same due date: terms loaded that way, e.g.
    in a migrated database, keep working. For new terms use the native *Days
    end of month on the*, which needs no module and is shown in the
-   **Preview**. Use one of the two, not both.
+   [`Preview`]. Use one of the two, not both.
 
 **30 days end of month + 5 days**
 

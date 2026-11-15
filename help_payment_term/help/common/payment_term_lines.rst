@@ -6,7 +6,7 @@ Lines
 .. help-version:: <16
 
    The lines are listed in the **Terms** table; click a line, or
-   :version:`<12|**Add an item**;*|**Add a line**`, to open its form:
+   :version:`<12|[\`Add an item\`];*|[\`Add a line\`]`, to open its form:
 
    * :field:`Type <value>`: *Balance* (the rest of the amount), *Percent* (a
      percentage of the total) or *Fixed Amount*. One line, the last one, must
@@ -65,7 +65,7 @@ Lines
       to the :field:`day of the next month <days_next_month>` written in the
       small box after it; 0 means the end of the month.
 
-   The **Preview** shows the due dates of an amount on a date: change the date
+   The [`Preview`] shows the due dates of an amount on a date: change the date
    to check the terms. :field:`Show installment dates <display_on_invoice>`
    prints the due dates and amounts on the invoice; *Early Discount* grants a
    discount for early payment.

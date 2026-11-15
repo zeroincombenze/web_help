@@ -2,7 +2,8 @@ Pagine di aiuto contestuale per l'elenco e la maschera delle aziende
 (``res.company``), mostrate da web_context_help.
 
 Ogni pagina segue la struttura standard di web_context_help: descrizione,
-nuovo record, modifica record o ricerca, configurazione, stampe, esempio,
+nuovo record, modifica record o ricerca, archiviare o eliminare un record,
+configurazione, stampe, esempio,
 domande frequenti e piè di pagina.
 
 La sezione *Come configurare* della maschera spiega come attivare la fattura

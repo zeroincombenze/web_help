@@ -1,5 +1,5 @@
 =================================================
-|icon| Help for partner/Aiuto contatti 12.0.1.0.3
+|icon| Help for partner/Aiuto contatti 12.0.1.0.5
 =================================================
 
 **Context help pages for partners (contacts)**
@@ -20,7 +20,11 @@ Every page follows the help rule of web_context_help:
 
 * **Description**: what companies, individuals and addresses are, with the main fields
 * **New record** (form): step-by-step guide to create a company with its contacts and addresses
-* **Update record** (form): changing, archiving, merging and deleting contacts
+* **Update record** (form): changing and merging contacts
+* **How to archive or delete record** (form, list and kanban): archiving,
+  restoring and deleting contacts
+* **Guided tours** (Odoo 18, with web_context_help_tour): create, update and
+  search contacts, step by step in the Odoo tab
 * **How to search** (list and kanban): menus, search, filters and groupings
 * **Configure**: tags, titles, industries, countries and banks, and the
   sales, purchase and invoicing data of a partner
@@ -38,7 +42,11 @@ Ogni pagina segue la regola di aiuto di web_context_help:
 
 * **Descrizione**: cosa sono aziende, persone e indirizzi, con i campi principali
 * **Nuovo record** (maschera): guida passo passo per creare un'azienda con i suoi contatti e indirizzi
-* **Modifica record** (maschera): modifica, archiviazione, unione ed eliminazione dei contatti
+* **Modifica record** (maschera): modifica e unione dei contatti
+* **Come archiviare o eliminare un record** (maschera, lista e kanban):
+  archiviazione, ripristino ed eliminazione dei contatti
+* **Tour guidati** (Odoo 18, con web_context_help_tour): creare, modificare
+  e cercare i contatti, passo per passo nella scheda di Odoo
 * **Come cercare** (lista e kanban): menu, ricerca, filtri e raggruppamenti
 * **Configurazione**: etichette, qualifiche, settori, nazioni e banche, e i
   dati di vendita, acquisto e fatturazione di un partner
@@ -150,6 +158,19 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+12.0.1.0.5 (2026-11-13)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [NEW] Guided tours (Odoo 18, with web_context_help_tour): create a contact, update a contact, search contacts (Filters menu, Companies, Add Custom Filter, search by Related Company)
+* [IMP] Contact form, list and kanban: new section How to archive or delete record (archive, restore, delete, contacts linked to users)
+* [IMP] Contact list and kanban: new sections How to insert a new record (button Create / New) and How to update a record (click on a line or a card)
+* [IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)
+
+12.0.1.0.4 (2026-11-08)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Every help page starts with the hint to the Ready and FAQ buttons; every FAQ page starts with the hint to the Topic button
+
 12.0.1.0.3 (2026-11-01)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -222,7 +243,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-11-01
+Last Update / Ultimo aggiornamento: 2026-11-15
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

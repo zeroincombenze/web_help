@@ -12,8 +12,8 @@ Product
 Description
 -----------
 
-Click on button **Ready** for help about how to use this help; click on
-button **FAQ** for the most common solved questions.
+Click on button [`Ready`] for help about how to use this help; click on
+button [`FAQ`] for the most common solved questions.
 
 Products are the items or services purchased and sold by a company. They
 may be assigned specific codes or left uncoded, managed as inventory stock,
@@ -62,6 +62,8 @@ with variants.
 
 .. help-include:: product_update.rst
 
+.. help-include:: product_cancel.rst
+
 .. help-include:: product_configure.rst
 
 .. help-include:: product_report.rst
@@ -73,7 +75,7 @@ with variants.
 FAQ
 ---
 
-Click on button **Topic** to return to the specific help page.
+Click on button [`Topic`] to return to the specific help page.
 
 .. help-version:: <16
 
@@ -91,7 +93,7 @@ Click on button **Topic** to return to the specific help page.
    .. help-question:: Why can't I delete the product?
 
       A product used by orders, invoices or stock moves cannot be deleted:
-      archive it instead :version:`<=12|with the **Active** button at the top
+      archive it instead :version:`<=12|with the [\`Active\`] button at the top
       right;*|with **Action ‣ Archive**`.
 
    .. help-question:: Why is the sale price read-only?

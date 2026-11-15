@@ -5,7 +5,9 @@ Ogni pagina segue la regola di aiuto di web_context_help:
 * **Descrizione**: cosa sono richieste di preventivo e ordini di acquisto, con i campi principali
 * **Nuovo record** (maschera): guida passo passo per creare una richiesta di preventivo e confermarla
 * **Modifica record** (maschera): cosa si può cambiare in ogni stato,
-  approvazione, ricezione, fatturazione, blocco, annullamento ed eliminazione
+  approvazione, ricezione, fatturazione, blocco
+* **Come annullare o eliminare un record** (maschera e lista): quando un
+  ordine si può annullare, riportarlo in bozza, eliminare gli ordini annullati
 * **Come cercare** (lista): menu, ricerca, filtri e raggruppamenti
 * **Configurazione**: le impostazioni di Acquisti che influenzano gli ordini
 * **Stampe**: il PDF di richiesta di preventivo / ordine di acquisto e l'analisi acquisti

@@ -12,8 +12,8 @@ Ordini di acquisto
 Descrizione
 -----------
 
-Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
-clic sul pulsante **FAQ** per le domande più comuni già risolte.
+Fare clic sul pulsante [`Pronto`] per sapere come usare questo aiuto; fare
+clic sul pulsante [`FAQ`] per le domande più comuni già risolte.
 
 .. help-version:: <16
 
@@ -30,7 +30,25 @@ clic sul pulsante **FAQ** per le domande più comuni già risolte.
    l':field:`acquirente <user_id>`, il :field:`totale <amount_total>` e
    l'avanzamento del documento. Fare clic su una riga per aprire l'ordine.
 
+.. _new_record:
+
+Come inserire un nuovo record
+-----------------------------
+
+Premere :version:`<16|[\`Crea\`];*|[\`Nuovo\`]` in alto a sinistra: si apre una
+maschera vuota, vedere il suo aiuto per i campi da compilare.
+
 .. help-include:: purchase_order_list_search.rst
+
+.. _update_record:
+
+Come modificare un record
+-------------------------
+
+Fare clic su una riga dell'elenco per aprire la sua maschera, poi seguire
+l'aiuto della maschera per modificarla.
+
+.. help-include:: purchase_order_cancel.rst
 
 .. help-include:: purchase_order_configure.rst
 
@@ -43,7 +61,7 @@ clic sul pulsante **FAQ** per le domande più comuni già risolte.
 Domande frequenti
 -----------------
 
-Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+Fare clic sul pulsante [`Argomento`] per tornare alla pagina di aiuto specifica.
 
 .. help-version:: <16
 

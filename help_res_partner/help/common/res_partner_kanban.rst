@@ -12,8 +12,8 @@ Contacts (kanban)
 Description
 -----------
 
-Click on button **Ready** for help about how to use this help; click on
-button **FAQ** for the most common solved questions.
+Click on button [`Ready`] for help about how to use this help; click on
+button [`FAQ`] for the most common solved questions.
 
 .. help-version:: <16
 
@@ -31,7 +31,25 @@ button **FAQ** for the most common solved questions.
    The buttons at the top right switch between kanban, list and the other
    views.
 
+.. _new_record:
+
+How to insert a new record
+--------------------------
+
+Press :version:`<16|[\`Create\`];*|[\`New\`]` at the top left: an empty form
+opens, see its help for the fields to fill in.
+
 .. help-include:: res_partner_list_search.rst
+
+.. _update_record:
+
+How to update a record
+----------------------
+
+Click on a card of the kanban view to open its form, then follow the help
+of the form to change it.
+
+.. help-include:: res_partner_cancel.rst
 
 .. help-include:: res_partner_configure.rst
 
@@ -44,7 +62,7 @@ button **FAQ** for the most common solved questions.
 FAQ
 ---
 
-Click on button **Topic** to return to the specific help page.
+Click on button [`Topic`] to return to the specific help page.
 
 .. help-version:: <16
 

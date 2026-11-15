@@ -16,7 +16,9 @@ Every page follows the standard layout of web_context_help:
   several orders at once
 * **Suggestions for search** (list): menus, search, filters and groupings
 * **How to update a record** (form): changing an invoice, registering payments,
-  credit notes, cancelling and deleting
+  credit notes
+* **How to cancel or delete record** (form and list): cancelling a draft or
+  posted invoice, resetting it to draft, which invoices can be deleted
 * **How to set up**: the Invoicing settings, journals, payment terms and taxes
 * **Report and export file**: the invoice PDF, sending, the invoice analysis
   and the export of the invoices to a file
@@ -24,8 +26,9 @@ Every page follows the standard layout of web_context_help:
   posted invoice
 * **FAQ** button and **Footer**
 
-A page for the Accounting Overview (journal kanban) explains the cards of
-the journals, their buttons and figures, and the **⋮** menu.
+A page for the Accounting Dashboard (journal kanban) explains the cards of
+the journals, their buttons and figures, the **⋮** menu, and how journals
+are archived or deleted.
 
 Pages are in English and Italian, with the menus, buttons and statuses of the
 running Odoo version.

@@ -6,14 +6,14 @@ Report and export file
 .. help-version:: <13
 
    * **Invoices**: the PDF of the invoice. Print it with
-     :version:`10|**Print**;11|**Print Invoice**;*|**Send & Print**` or from
+     :version:`10|[\`Print\`];11|[\`Print Invoice\`];*|[\`Send & Print\`]` or from
      the **Print** menu, also from the list after selecting the invoices.
      Once the invoice is validated, the PDF is saved as an attachment and
      printed again unchanged.\ :version:`>=11| **Invoices without Payment**
      prints the same PDF without the payments received.`
-   * :version:`<12|**Send by Email**;*|**Send & Print**` attaches the PDF to
+   * :version:`<12|[\`Send by Email\`];*|[\`Send & Print\`]` attaches the PDF to
      the email; the message stays in the chatter of the invoice.
-     :version:`12|**Preview** shows the invoice as the customer sees it in the
+     :version:`12|[\`Preview\`] shows the invoice as the customer sees it in the
      portal.`
    * Invoice analysis: :version:`10|**Invoicing ‣ Reports ‣ Business
      Intelligence ‣ Invoices**;*|**Invoicing ‣ Reporting ‣ Management ‣
@@ -24,14 +24,14 @@ Report and export file
 
    * :version:`<18|**Invoices**;*|**Invoice PDF**`: the PDF of the invoice.
      Print it from the **Print** menu\ :version:`>=17| (under the gear icon
-     next to the record name)`, :version:`<18|with **Send &
-     Print**;*|with **Print**`, or from the list after selecting the
+     next to the record name)`, :version:`<18|with [\`Send &
+     Print\`];*|with [\`Print\`]`, or from the list after selecting the
      invoices. Once the invoice is posted, the PDF is saved as an attachment
      and printed again unchanged.
    * :version:`<18|**Invoices without Payment**;*|**PDF without Payment**`: the
      same PDF without the payments received, from the **Print** menu.
-   * :version:`<18|**Send & Print**;*|**Send**` attaches the PDF to the email;
-     the message stays in the chatter of the invoice. **Preview** shows the
+   * :version:`<18|[\`Send & Print\`];*|[\`Send\`]` attaches the PDF to the email;
+     the message stays in the chatter of the invoice. [`Preview`] shows the
      invoice as the customer sees it in the portal.
    * Invoice analysis: :version:`13|**Invoicing ‣ Reporting ‣ Management ‣
      Invoices**;*|**Invoicing ‣ Reporting ‣ Management ‣ Invoice Analysis**`
@@ -64,7 +64,7 @@ Report and export file
       * To load e-invoices made outside Odoo (e.g. by another software, or
         downloaded from the SdI portal of the Revenue Agency), put the XML or
         P7M files in a ZIP file, then **Invoicing ‣ Vendors ‣ E-invoice Import
-        Files**: upload the ZIP and press **Import Files**. Each e-invoice
+        Files**: upload the ZIP and press [`Import Files`]. Each e-invoice
         becomes a customer invoice or a vendor bill, according to the company
         being the seller or the buyer, with the e-invoice attached; a file
         with several invoices gives one invoice for each. At the end the list

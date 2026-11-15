@@ -12,10 +12,10 @@ Come configurare
    * *Multi-valute*: fatture in valute estere.
    * *Avvisi*: un messaggio mostrato quando si sceglie un partner o un
      prodotto.
-   * :version:`10|*Consentire fatture pro-forma*: il pulsante **PRO
-     FORMA**.;11|*Arrotondamento di cassa*: l'arrotondamento del totale, ad
+   * :version:`10|*Consentire fatture pro-forma*: il pulsante [\`PRO
+     FORMA\`].;11|*Arrotondamento di cassa*: l'arrotondamento del totale, ad
      es. a 0,05.;12|*Arrotondamento di cassa*, e le *Opzioni di invio
-     predefinite* (stampa, email) di **Invia e stampa**.`
+     predefinite* (stampa, email) di [\`Invia e stampa\`].`
 
    Altri menu:
 
@@ -28,7 +28,7 @@ Come configurare
      acquisti e la loro sequenza dei numeri.
      :version:`10|*Consenti cancellazione registrazioni*;*|*Consentire
      annullamento registrazioni*` (modulo *Annullamento registrazioni
-     contabili*) abilita :version:`10|**Annullare fattura**;11|**Cancel Invoice**;*|**Annulla**`.
+     contabili*) abilita [`Annullare fattura`].
    * **Fatturazione ‣ Configurazione ‣ Contabilità ‣**
      :version:`10|**IVA**;*|**Imposte**` e **Posizioni fiscali**.
    * Sul partner, scheda **Fatturazione** (scheda *Contabilità* per un
@@ -45,7 +45,7 @@ Come configurare
    * *Fatture cliente*: *Avvisi* su partner e prodotti, *Arrotondamento di
      cassa*\ :version:`>=14|, *Termine di resa predefinito* e *Termini e
      condizioni predefiniti* stampati sulle fatture`\ :version:`14-17|, *Opzioni
-     di invio predefinite* (stampa, email) di **Invia e stampa**`\
+     di invio predefinite* (stampa, email) di [\`Invia e stampa\`]`\
      :version:`>=16|, *Indirizzi cliente* (indirizzo di consegna sulla
      fattura)`.
    * *Pagamenti cliente*: :version:`13|*Codice QR SEPA*;*|*Codici QR*` sulle

@@ -12,8 +12,8 @@ Contact
 Description
 -----------
 
-Click on button **Ready** for help about how to use this help; click on
-button **FAQ** for the most common solved questions.
+Click on button [`Ready`] for help about how to use this help; click on
+button [`FAQ`] for the most common solved questions.
 
 .. help-version:: <16
 
@@ -40,6 +40,8 @@ button **FAQ** for the most common solved questions.
 
 .. help-include:: res_partner_update.rst
 
+.. help-include:: res_partner_cancel.rst
+
 .. help-include:: res_partner_configure.rst
 
 .. help-include:: res_partner_report.rst
@@ -51,16 +53,15 @@ button **FAQ** for the most common solved questions.
 FAQ
 ---
 
-Click on button **Topic** to return to the specific help page.
+Click on button [`Topic`] to return to the specific help page.
 
 .. help-version:: <16
 
    .. help-question:: Why can't I change the address of a contact?
 
-      A contact of type *Contact* uses the address of its company:
-      :version:`<12|press **(edit)** next to the address to change it on the
-      company;*|it is read-only, under *Company Address*: change it on the
-      company`, or change the address type to *Invoice address*, *Shipping address* or *Other address* to
+      A contact of type *Contact* uses the address of its company: press
+      [`(edit)`] next to the address to change it on the company, or change the
+      address type to *Invoice address*, *Shipping address* or *Other address* to
       give the contact its own address.
 
    .. help-question:: Why is the Accounting tab empty for a person of a company?
@@ -71,12 +72,12 @@ Click on button **Topic** to return to the specific help page.
    .. help-question:: Why can't I delete the contact?
 
       A contact used by orders, invoices or journal entries cannot be deleted:
-      archive it instead with the **Active** button at the top right.
+      archive it instead with the [`Active`] button at the top right.
 
    .. help-question:: Where is a contact I archived?
 
       Archived contacts are hidden: in the list use the *Archived* filter, open
-      the contact and press the **Archived** button to restore it.
+      the contact and press the [`Archived`] button to restore it.
 
    .. help-question:: Why is the email required?
 

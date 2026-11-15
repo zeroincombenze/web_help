@@ -1,3 +1,10 @@
+12.0.1.0.1 (2026-11-13)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Company form and list: new section How to archive or delete record
+* [IMP] Company list: new sections How to insert a new record (button Create / New) and How to update a record (click on a line)
+* [IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)
+
 12.0.1.0.0 (2026-11-07)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

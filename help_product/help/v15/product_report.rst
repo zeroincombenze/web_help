@@ -5,7 +5,7 @@ Report and export file
 
 * **Print ‣** :version:`11|**Products Labels**;*|**Product Label (PDF)**`:
   labels with name, reference, barcode and price. Select the products in the
-  list, or open one, and use **Print**\ :version:`15| (or **Print Labels**)`.
+  list, or open one, and use [`Print`]\ :version:`15| (or [\`Print Labels\`])`.
 * **Print ‣ Pricelist** (product variants): the prices of the selected
   products in a pricelist, for the quantities you choose.
 * The smart buttons at the top right open the related data: **On Hand**,

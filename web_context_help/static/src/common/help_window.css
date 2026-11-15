@@ -63,6 +63,22 @@ mark.wch-match.wch-current { background: #ff9632; }
 .wch-content a, .wch-answers a { color: var(--wch-accent); }
 a.wch-field, a.wch-tour { text-decoration: none; border-bottom: 1px dashed var(--wch-accent); }
 a.wch-tour::before { content: "▶ "; }
+.wch-help-tour { margin: 8px 0 12px; }
+.wch-help-tour .wch-tour-bar { margin: 0; }
+a.wch-tour.wch-tour-button { display: inline-block; padding: 4px 14px; border: 1px solid var(--wch-accent);
+    border-radius: 4px; background: var(--wch-accent); color: var(--wch-bg); font-weight: 600; }
+a.wch-tour.wch-tour-button:hover { background: var(--wch-bg); color: var(--wch-accent); }
+a.wch-tour.wch-tour-running::before { content: "↩ "; }
+a.wch-tour.wch-tour-button.wch-tour-running { background: var(--wch-bg); color: var(--wch-accent); }
+.wch-tour-steps[hidden] { display: none; }
+/* [`Save`] in the RST: a button label in a frame */
+.wch-button { display: inline-block; padding: 0 7px; border: 2px solid var(--wch-muted);
+    border-radius: 4px; background: #f0f0f0; color: #212529; font-size: 0.9em;
+    font-weight: normal; line-height: 1.4; white-space: nowrap; vertical-align: baseline; }
+.wch-content .admonition { margin: 12px 0; padding: 8px 12px; background: var(--wch-warn);
+    border-left: 4px solid #e0a800; border-radius: 4px; }
+.wch-content .admonition-title { margin: 0 0 4px; font-weight: 600; }
+.wch-content .admonition > :last-child { margin-bottom: 0; }
 .wch-question { margin: 8px 0; padding: 8px 12px; background: var(--wch-panel); border-radius: 4px; }
 .wch-question .wch-q { margin: 0; font-weight: 600; }
 .wch-question .wch-a > :last-child { margin-bottom: 0; }

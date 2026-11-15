@@ -12,5 +12,5 @@ Campi principali
   prodotto ha più varianti.
 * :field:`Costo <standard_price>`, :field:`peso <weight>` e :field:`volume
   <volume>`: ogni variante ha i propri.
-* Giacenza: i pulsanti **In Possesso** e **Forecasted** contano la quantità di
+* Giacenza: i pulsanti [`In Possesso`] e [`Forecasted`] contano la quantità di
   questa sola variante.

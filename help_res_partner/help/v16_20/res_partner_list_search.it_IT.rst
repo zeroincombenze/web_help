@@ -3,6 +3,39 @@
 Suggerimenti per la ricerca
 ---------------------------
 
+.. help-version:: 18
+
+   .. help-tour:: res_partner_search
+      :label: Mostrami come cercare i contatti
+
+      .. help-step:: filters
+         :click:
+
+         Premere la freccia a destra della barra di ricerca: apre i menu
+         **Filtri**, **Raggruppa per** e **Preferiti**.
+
+      .. help-step:: css:.o_filter_menu
+         :position: auto
+
+         Scegliere *Aziende* per elencare solo le aziende (*Persone* per le
+         persone). Il filtro compare nella barra di ricerca; la sua ✕ lo
+         toglie.
+
+      .. help-step:: css:.o_add_custom_filter
+         :position: auto
+
+         **Aggiungi filtro personalizzato** costruisce una condizione su
+         qualsiasi campo, ad es. *Città* contiene *Milano*: premerlo per aprire
+         l'editor della condizione.
+
+      .. help-step:: search
+         :position: bottom
+
+         Oppure scrivere nella barra di ricerca, ad es. il nome di un'azienda,
+         e scegliere il campo in cui cercare: *Ricerca Azienda correlata per:
+         …* elenca le persone di quell'azienda; ▸ accanto sceglie l'azienda
+         esatta.
+
 * **Contatti** elenca tutti i contatti; **Vendite ‣ Ordini ‣ Clienti**,
   **Acquisti ‣ Ordini ‣ Fornitori** e i menu **Clienti** / **Fornitori** di
   Fatturazione mostrano gli stessi contatti.

@@ -5,10 +5,10 @@ Esempi
 
 **Acconto del 30% prima della produzione**
 
-#. Creare il preventivo e premere **Conferma** quando il cliente accetta.
-#. Premere **Crea fattura**, scegliere *Anticipo (percentuale)*, digitare 30 e
+#. Creare il preventivo e premere [`Conferma`] quando il cliente accetta.
+#. Premere [`Crea fattura`], scegliere *Anticipo (percentuale)*, digitare 30 e
    creare la fattura: confermarla e inviarla al cliente.
-#. Quando la merce è consegnata premere di nuovo **Crea fattura** con *Fattura
+#. Quando la merce è consegnata premere di nuovo [`Crea fattura`] con *Fattura
    normale*: l'acconto viene dedotto dalla fattura finale.
 
 **Il cliente vuole 2 unità in più dopo la conferma**
@@ -25,5 +25,5 @@ Esempi
 
 **Il cliente rifiuta il preventivo**
 
-Premere **Annulla**: la procedura guidata propone un'e-mail al cliente;
-premere **Invia e annulla** oppure **Annulla** per annullare senza e-mail.
+Premere [`Annulla`]: la procedura guidata propone un'e-mail al cliente;
+premere [`Invia e annulla`] oppure [`Annulla`] per annullare senza e-mail.

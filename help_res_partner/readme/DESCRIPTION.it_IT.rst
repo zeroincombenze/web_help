@@ -4,7 +4,11 @@ Ogni pagina segue la regola di aiuto di web_context_help:
 
 * **Descrizione**: cosa sono aziende, persone e indirizzi, con i campi principali
 * **Nuovo record** (maschera): guida passo passo per creare un'azienda con i suoi contatti e indirizzi
-* **Modifica record** (maschera): modifica, archiviazione, unione ed eliminazione dei contatti
+* **Modifica record** (maschera): modifica e unione dei contatti
+* **Come archiviare o eliminare un record** (maschera, lista e kanban):
+  archiviazione, ripristino ed eliminazione dei contatti
+* **Tour guidati** (Odoo 18, con web_context_help_tour): creare, modificare
+  e cercare i contatti, passo per passo nella scheda di Odoo
 * **Come cercare** (lista e kanban): menu, ricerca, filtri e raggruppamenti
 * **Configurazione**: etichette, qualifiche, settori, nazioni e banche, e i
   dati di vendita, acquisto e fatturazione di un partner

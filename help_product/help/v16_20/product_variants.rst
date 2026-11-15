@@ -40,7 +40,7 @@ Shared fields include:
 * Vendor list (a vendor price may be limited to one variant)
 * HS code / Intrastat code (with the Intrastat modules)
 * Sales price (price differences are set as the *Extra price* of the
-  attribute values, with **Configure** in the **Attributes & Variants** tab)
+  attribute values, with [`Configure`] in the **Attributes & Variants** tab)
 * :version:`<=17|*Can be Sold* and *Can be Purchased*;*|*Sales* and
   *Purchase*` flags
 * Lead times (delivery times)

@@ -12,8 +12,8 @@ Purchase order
 Description
 -----------
 
-Click on button **Ready** for help about how to use this help; click on
-button **FAQ** for the most common solved questions.
+Click on button [`Ready`] for help about how to use this help; click on
+button [`FAQ`] for the most common solved questions.
 
 .. help-version:: <16
 
@@ -39,6 +39,8 @@ button **FAQ** for the most common solved questions.
 
 .. help-include:: purchase_order_update.rst
 
+.. help-include:: purchase_order_cancel.rst
+
 .. help-include:: purchase_order_configure.rst
 
 .. help-include:: purchase_order_report.rst
@@ -50,7 +52,7 @@ button **FAQ** for the most common solved questions.
 FAQ
 ---
 
-Click on button **Topic** to return to the specific help page.
+Click on button [`Topic`] to return to the specific help page.
 
 .. help-version:: <16
 
@@ -58,13 +60,13 @@ Click on button **Topic** to return to the specific help page.
 
       The *Levels of Approvals* setting requires 2 levels of approval and the
       order total is over the *Double validation amount*: a purchase manager must
-      open the order and press **Approve Order**.
+      open the order and press [`Approve Order`].
 
    .. help-question:: How do I change a confirmed order?
 
       Quantities, prices and new lines can be changed directly, see *Update
-      record*. If the order is *Locked*, a purchase manager must press **Unlock**
-      first. To change it a lot, cancel it, press **Set to Draft**, change it and
+      record*. If the order is *Locked*, a purchase manager must press [`Unlock`]
+      first. To change it a lot, cancel it, press [`Set to Draft`], change it and
       confirm it again.
 
    .. help-question:: Why can't I cancel the order?
@@ -79,7 +81,7 @@ Click on button **Topic** to return to the specific help page.
 
    .. help-question:: Why can't I delete the order?
 
-      Only cancelled orders can be deleted: press **Cancel** first.
+      Only cancelled orders can be deleted: press [`Cancel`] first.
 
    .. help-question:: Why is there nothing to bill?
 
@@ -92,19 +94,19 @@ Click on button **Topic** to return to the specific help page.
 
       The *Purchase Order Approval* setting is active and the total exceeds its
       minimum amount: a purchase manager must open the order and press
-      **Approve Order**.
+      [`Approve Order`].
 
    .. help-question:: Why can't I create the bill?
 
       The order must be confirmed first. With the *Received quantities* bill
       control, the goods must also be received: validate the receipt, then press
-      **Create Bill** again.
+      [`Create Bill`] again.
 
    .. help-question:: How do I change a confirmed order?
 
       Quantities, prices and new lines can be changed directly, see *Update
       record*. If the order is locked, a purchase manager must unlock it first.
-      To change the vendor, cancel the order, press **Set to Draft**, change it
+      To change the vendor, cancel the order, press [`Set to Draft`], change it
       and confirm it again.
 
    .. help-question:: Why can't I cancel the order?

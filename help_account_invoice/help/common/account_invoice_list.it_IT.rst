@@ -35,8 +35,8 @@ Fatture
 Descrizione
 -----------
 
-Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
-clic sul pulsante **FAQ** per le domande più comuni già risolte.
+Fare clic sul pulsante [`Pronto`] per sapere come usare questo aiuto; fare
+clic sul pulsante [`FAQ`] per le domande più comuni già risolte.
 
 .. help-version:: <13
 
@@ -56,7 +56,25 @@ clic sul pulsante **FAQ** per le domande più comuni già risolte.
    :version:`>=14|, con lo stato del pagamento`. Fare clic su una riga per
    aprire la fattura.
 
+.. _new_record:
+
+Come inserire un nuovo record
+-----------------------------
+
+Premere :version:`<16|[\`Crea\`];*|[\`Nuovo\`]` in alto a sinistra: si apre una
+maschera vuota, vedere il suo aiuto per i campi da compilare.
+
 .. help-include:: account_invoice_list_search.rst
+
+.. _update_record:
+
+Come modificare un record
+-------------------------
+
+Fare clic su una riga dell'elenco per aprire la sua maschera, poi seguire
+l'aiuto della maschera per modificarla.
+
+.. help-include:: account_invoice_cancel.rst
 
 .. help-include:: account_invoice_list_actions.rst
 
@@ -71,7 +89,7 @@ clic sul pulsante **FAQ** per le domande più comuni già risolte.
 Domande frequenti
 -----------------
 
-Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+Fare clic sul pulsante [`Argomento`] per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché non vedo le note di credito?
 

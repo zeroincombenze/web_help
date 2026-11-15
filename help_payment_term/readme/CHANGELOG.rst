@@ -1,3 +1,10 @@
+12.0.1.0.5 (2026-11-13)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Payment term form and list: new section How to archive or delete record
+* [IMP] Payment term list: new sections How to insert a new record (button Create / New) and How to update a record (click on a line)
+* [IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)
+
 12.0.1.0.4 (2026-11-08)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -5,7 +5,9 @@ Every page follows the help rule of web_context_help:
 * **Description**: what quotations and sales orders are, with the main fields
 * **New record** (form): step-by-step guide to create a quotation and confirm it
 * **Update record** (form): what can be changed in each status, invoicing,
-  locking, cancelling and deleting
+  locking
+* **How to cancel or delete record** (form and list): cancelling an order,
+  setting it back to quotation, which orders can be deleted
 * **How to search** (list): menus, search, filters and groupings
 * **Configure**: the Sales settings that affect sale orders
 * **Report**: the quotation / order PDF, the pro-forma and the sales analysis

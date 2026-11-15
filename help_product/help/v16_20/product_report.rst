@@ -3,7 +3,7 @@
 Report and export file
 ----------------------
 
-* **Print Labels** (in the header of the form, or in the list after selecting
+* [`Print Labels`] (in the header of the form, or in the list after selecting
   the products): choose the quantity and the layout to print price and barcode
   labels.
 * With the *Pricelists* setting, select the products and use

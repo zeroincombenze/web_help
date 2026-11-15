@@ -333,6 +333,106 @@ Press :version:`16|**View Invoice**;17|*Draft Invoice*;*|Create Draft` now.
             {("model", "a.b"), ("model", "c.d")},
         )
 
+    def test_help_tour(self):
+        text = """New
+===
+
+.. help-tour:: partner_new
+   :label: Show me
+
+   .. help-step:: new
+      :click:
+
+      Press **New**.
+
+   .. help-version:: >=17
+
+      .. help-step:: field:name
+         :position: right
+
+         Type the *name*.
+
+   .. help-step:: css:.o_form_button_save
+
+      Save.
+"""
+        self.assertEqual(rst_help.tour_target(" field:  name "), "field:name")
+        self.assertEqual(rst_help.tour_target("save"), "save")
+        self.assertRaises(ValueError, rst_help.tour_target, "name")
+        self.assertRaises(ValueError, rst_help.tour_target, "field:")
+        self.assertRaises(ValueError, rst_help.tour_target, "xpath://a")
+        installed = {"module": {rst_help.TOUR_MODULE}}
+        html = rst_help.to_html(
+            rst_help.parse(
+                text, "<t>", self.help_dir, "v16_20", version=18, installed=installed
+            )
+        )
+        self.assertIn('class="wch-tour wch-tour-button" data-tour="partner_new"', html)
+        self.assertIn(">Show me</a>", html)
+        self.assertIn('<div class="wch-tour-steps" hidden>', html)
+        self.assertIn(
+            '<div class="wch-tour-step" data-target="new" data-click="1"'
+            ' data-position="auto">',
+            html,
+        )
+        self.assertIn(
+            'data-target="field:name" data-click="0" data-position="right"', html)
+        self.assertIn("<em>name</em>", html)
+        self.assertIn('data-target="css:.o_form_button_save"', html)
+        # one opening tag per closing tag: the steps do not swallow the page
+        self.assertEqual(html.count("<div"), html.count("</div>"))
+        # help-version inside the tour drops its step
+        html = rst_help.to_html(
+            rst_help.parse(
+                text, "<t>", self.help_dir, "v16_20", version=16, installed=installed
+            )
+        )
+        self.assertNotIn("field:name", html)
+        self.assertIn('data-target="new"', html)
+        # default label in the language of the page
+        html = rst_help.to_html(
+            rst_help.parse(
+                text.replace("   :label: Show me\n", ""),
+                "<t>",
+                self.help_dir,
+                "v16_20",
+                lang="it_IT",
+                installed=installed,
+            )
+        )
+        self.assertIn(">Mostrami come</a>", html)
+        # without the tour module nothing is shown, and no error
+        doc = rst_help.parse(text, "<t>", self.help_dir, "v16_20", installed={})
+        html = rst_help.to_html(doc)
+        self.assertNotIn("wch-tour", html)
+        self.assertNotIn("Press", html)
+        self.assertFalse(rst_help._findall(doc, rst_help.nodes.system_message))
+        # the label is searched, the steps too
+        sections = rst_help.extract_sections(
+            rst_help.parse(text, "<t>", self.help_dir, "v16_20", installed=installed)
+        )
+        self.assertIn("Show me", sections[0]["text"])
+        self.assertIn("Press New.", sections[0]["text"])
+        # errors: bad target, no step, other content in the tour
+        for wrong in (
+            ".. help-tour:: t\n\n   .. help-step:: name\n\n      x\n",
+            ".. help-tour:: t\n\n   Just text.\n",
+            ".. help-tour:: t\n\n   .. help-step:: new\n\n      x\n\n   Text.\n",
+            ".. help-tour:: bad name\n\n   .. help-step:: new\n\n      x\n",
+            ".. help-tour:: t\n\n   .. help-step:: new\n",
+        ):
+            doc = rst_help.parse(
+                wrong, "<t>", self.help_dir, "v16_20", installed=installed)
+            self.assertTrue(
+                rst_help._findall(doc, rst_help.nodes.system_message), wrong
+            )
+        # pages with a tour are built again when the tour module comes or goes
+        self._write("common/tour.rst", text)
+        self.assertIn(
+            ("module", rst_help.TOUR_MODULE),
+            rst_help.installed_names(self.help_dir, "v16_20"),
+        )
+
     def test_version_role_semicolon(self):
         text = "Press :version:`<17|**Edit**; then **Save**;*|nothing`."
         for version in (16, 18):
@@ -350,6 +450,24 @@ Press :version:`16|**View Invoice**;17|*Draft Invoice*;*|Create Draft` now.
         )
         html = rst_help.to_html(doc)
         self.assertIn('data-field="partner_shipping_id">delivery address</a>', html)
+
+    def test_button_frames(self):
+        text = (
+            "Press [`Save`], then [`Confirm\nOrder`]; `cite` [x] stays.\n\n"
+            "Version: :version:`<16|[\\`Create\\`];*|[\\`New\\`]`.\n\n"
+            "::\n\n    [`Literal`]\n"
+        )
+        for version, label in ((14, "Create"), (18, "New")):
+            doc = rst_help.parse(text, "<t>", self.help_dir, "v16_20", version=version)
+            html = rst_help.to_html(doc)
+            self.assertIn('Press <span class="wch-button">Save</span>, then', html)
+            self.assertIn('<span class="wch-button">Confirm Order</span>;', html)
+            self.assertIn("<cite>cite</cite> [x] stays", html)
+            self.assertIn('Version: <span class="wch-button">%s</span>.' % label, html)
+            self.assertIn("[`Literal`]", html)
+            self.assertNotIn("[<span", html)
+            # the full-text search reads the label without the brackets
+            self.assertIn("Press Save, then Confirm Order;", rst_help._plain(doc))
 
     def test_html_sections(self):
         sections = html_page.extract_sections(

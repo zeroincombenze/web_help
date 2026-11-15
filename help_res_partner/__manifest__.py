@@ -6,7 +6,7 @@
 #
 {
     "name": "Help for partner",
-    "version": "12.0.1.0.4",
+    "version": "12.0.1.0.5",
     "category": "Hidden/Tools",
     "summary": "Context help pages for partners (contacts)",
     "author": "Zeroincombenze srls",
