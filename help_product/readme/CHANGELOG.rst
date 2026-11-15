@@ -1,3 +1,10 @@
+10.0.1.0.5 (2026-11-13)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Product and variant form, list and kanban: new section How to archive or delete record
+* [IMP] Product and variant list and kanban: new sections How to insert a new record (button Create / New) and How to update a record (click on a line or a card)
+* [IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)
+
 10.0.1.0.4 (2026-11-08)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

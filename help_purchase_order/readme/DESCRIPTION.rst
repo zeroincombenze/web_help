@@ -5,7 +5,9 @@ Every page follows the help rule of web_context_help:
 * **Description**: what requests for quotation and purchase orders are, with the main fields
 * **New record** (form): step-by-step guide to create a request for quotation and confirm it
 * **Update record** (form): what can be changed in each status, approval,
-  receipt, vendor bill, locking, cancelling and deleting
+  receipt, billing, locking
+* **How to cancel or delete record** (form and list): when an order can be
+  cancelled, setting it back to draft, deleting cancelled orders
 * **How to search** (list): menus, search, filters and groupings
 * **Configure**: the Purchases settings that affect purchase orders
 * **Report**: the request for quotation / purchase order PDF and the purchase analysis

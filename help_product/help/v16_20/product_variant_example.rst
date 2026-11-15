@@ -5,7 +5,7 @@ Example
 
 **Barcode of each size**
 
-Open the **Variants** smart button of the product, switch to the list view
+Open the [`Variants`] smart button of the product, switch to the list view
 and type the barcode of each variant in its row.
 
 **The blue XL is no longer produced**

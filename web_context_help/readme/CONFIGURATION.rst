@@ -23,5 +23,4 @@ and the **Edit** button of the help window.
 
 The videos inserted in the help pages are read from the directory of the system
 parameter ``web_help_video_path`` (default ``~/Video``, the home of the user
-running Odoo), subdirectories included; change it in *Settings > Technical >
-System Parameters*.
+running Odoo), subdirectories included; change it in *Settings > Technical > System Parameters*.

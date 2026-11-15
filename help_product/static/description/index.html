@@ -35,13 +35,13 @@ Every page follows the help rule of web_context_help:
 <ul>
 <li><b>Description</b>: products, product types and variants, with the main fields</li>
 <li><b>New record</b> (form): step-by-step guide to create a product and its variants</li>
-<li><b>Update record</b> (form): prices, costs, units of measure, variants,
-  archiving and deleting; what belongs to the variant and what to the product</li>
-<li><b>How to search</b> (list, kanban): menus, search, filters and groupings</li>
-<li><b>Configure</b>: the Sales, Purchases, Inventory and Invoicing settings that
-  affect products</li>
-<li><b>Report</b>: labels, pricelist and the product stat buttons</li>
-<li><b>Example</b>: common cases, e.g. a T-shirt in sizes and colours or a service</li>
+<li><b>Update record</b> (form): changing prices, units and types</li>
+<li><b>How to archive or delete record</b> (form, list and kanban): archiving,
+  restoring and deleting products and variants</li>
+<li><b>How to search</b> (list and kanban): menus, search, filters and groupings</li>
+<li><b>Configure</b>: the settings and the configuration menus that affect products</li>
+<li><b>Report</b>: labels and the pricelist report</li>
+<li><b>Example</b>: common cases, e.g. a product sold in sizes and colors</li>
 <li><b>FAQ</b> and <b>Footer</b></li>
 </ul>
 </p><p align="justify">
@@ -61,13 +61,13 @@ Ogni pagina segue la regola di aiuto di web_context_help:
 <ul>
 <li><b>Descrizione</b>: prodotti, tipi di prodotto e varianti, con i campi principali</li>
 <li><b>Nuovo record</b> (maschera): guida passo passo per creare un prodotto e le sue varianti</li>
-<li><b>Modifica record</b> (maschera): prezzi, costi, unit&#224; di misura, varianti,
-  archiviazione ed eliminazione; cosa appartiene alla variante e cosa al prodotto</li>
-<li><b>Come cercare</b> (lista, kanban): menu, ricerca, filtri e raggruppamenti</li>
-<li><b>Configurazione</b>: le impostazioni di Vendite, Acquisti, Magazzino e
-  Fatturazione che influenzano i prodotti</li>
-<li><b>Stampe</b>: etichette, listino e i pulsanti statistici del prodotto</li>
-<li><b>Esempi</b>: casi comuni, ad es. una maglietta in taglie e colori o un servizio</li>
+<li><b>Modifica record</b> (maschera): modifica di prezzi, unit&#224; e tipologia</li>
+<li><b>Come archiviare o eliminare un record</b> (maschera, lista e kanban):
+  archiviazione, ripristino ed eliminazione di prodotti e varianti</li>
+<li><b>Come cercare</b> (lista e kanban): menu, ricerca, filtri e raggruppamenti</li>
+<li><b>Configurazione</b>: le impostazioni e i menu di configurazione che influenzano i prodotti</li>
+<li><b>Stampe</b>: etichette e resoconto del listino prezzi</li>
+<li><b>Esempi</b>: casi comuni, ad es. un prodotto venduto in taglie e colori</li>
 <li><b>Domande frequenti</b> e <b>Pi&#232; di pagina</b></li>
 </ul>
 </p><p align="justify">
@@ -82,8 +82,22 @@ versione di Odoo in uso.
     <div class="oe_row oe_spaced">
         <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">ChangeLog History | Cronologia modifiche</h3>
         <div class="oe_span12">
-<h4>10.0.1.0.3 (2026-10-31)</h4>
+<h4>10.0.1.0.5 (2026-11-13)</h4>
 <p align="justify">
+<ul>
+<li>[IMP] Product and variant form, list and kanban: new section How to archive or delete record</li>
+<li>[IMP] Product and variant list and kanban: new sections How to insert a new record (button Create / New) and How to update a record (click on a line or a card)</li>
+<li>[IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)</li>
+</ul>
+</p><p align="justify">
+<h4>10.0.1.0.4 (2026-11-08)</h4>
+</p><p align="justify">
+<ul>
+<li>[IMP] Every help page starts with the hint to the Ready and FAQ buttons; every FAQ page starts with the hint to the Topic button</li>
+</ul>
+</p><p align="justify">
+<h4>10.0.1.0.3 (2026-10-31)</h4>
+</p><p align="justify">
 <ul>
 <li>[IMP] Help pages for Odoo 11-14 (help/v11_14) and 15 (help/v15): menus, buttons, fields and settings of each version, from 11.0 to 15.0, in English and Italian</li>
 <li>[FIX] Product variant pages of Odoo 12-15: attribute values field, archive, variant prices and purchase menu of the running version</li>
@@ -137,6 +151,6 @@ versione di Odoo in uso.
     </div>
     <div class="oe_row oe_spaced">
         <p>This module is part of <a href="https://github.com/zeroincombenze/web_help">web_help</a> project.</p>
-        <p>Published information on | Informazioni pubblicate: 2026-10-31</p>
+        <p>Published information on | Informazioni pubblicate: 2026-11-15</p>
     </div>
 </section>

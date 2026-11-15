@@ -8,8 +8,8 @@ prodotto.
 
 #. Attivare l'impostazione *Varianti* (**Vendite ‣ Configurazione ‣
    Impostazioni**).
-#. Aprire il prodotto, scheda **Attributi e varianti**, premere **Aggiungi
-   riga**, scegliere l'attributo e i suoi valori.
+#. Aprire il prodotto, scheda **Attributi e varianti**, premere [`Aggiungi
+   riga`], scegliere l'attributo e i suoi valori.
 #. Odoo crea una variante per ogni combinazione di valori; aprirle dal
    pulsante intelligente **Varianti** del prodotto o da **Vendite ‣ Prodotti ‣
    Varianti prodotto**.

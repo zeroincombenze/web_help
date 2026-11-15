@@ -42,7 +42,7 @@ records, to pick exactly one of them. The plain search uses the *contains*
 operator, so upper and lower case do not matter.
 
 Every search becomes a box (a *facet*) inside the search bar: remove it with
-its **×** or with Backspace. Searches on the same field are joined by *or*,
+its [`×`] or with Backspace. Searches on the same field are joined by *or*,
 searches on different fields by *and*.
 
 .. _several_words:
@@ -78,14 +78,14 @@ typing:
 
    in **Filters ‣ Add Custom Filter** write a rule *Name contains Rossi* and a
    second rule *Name contains Mario*, choose *Match all of the following
-   rules* and press **Add**.
+   rules* and press [`Add`].
 
 .. help-version:: <17
 
    the conditions of a single custom filter are joined by *or*, so apply two
    custom filters: **Filters ‣ Add Custom Filter**, condition *Name contains
-   Rossi*, **Apply**; then again **Add Custom Filter**, condition *Name
-   contains Mario*, **Apply**. Two custom filters are joined by *and*.
+   Rossi*, [`Apply`]; then again [`Add Custom Filter`], condition *Name
+   contains Mario*, [`Apply`]. Two custom filters are joined by *and*.
 
 The result is the contacts 1 and 2.
 
@@ -113,19 +113,19 @@ Filters, groups and favorites
 
 .. help-version:: <17
 
-   The **Filters**, **Group By** and **Favorites** buttons under the search box
+   The [`Filters`], [`Group By`] and [`Favorites`] buttons under the search box
    open their menus.
 
 * **Filters**: ready-made selections of the records. Filters of the same group
   (between two separator lines) are joined by *or*, filters of different groups
-  by *and*. **Add Custom Filter** builds a condition with a field, an operator
+  by *and*. [`Add Custom Filter`] builds a condition with a field, an operator
   and a value\ :version:`>=17|, joined by *any* or *all* of the rules, and can
   include the archived records`. Archived records are hidden: the *Archived*
   filter, when present, shows them.
 * **Group By**: groups the rows by a field, e.g. by customer; choosing a
   second grouping divides every group again. Click a group heading to open or
   close it: it shows the number of records and the totals of the number
-  columns. :version:`<=10|**Add custom group**;*|**Add Custom Group**` groups
+  columns. :version:`<=10|[\`Add custom group\`];*|[\`Add Custom Group\`]` groups
   by any field.
 * **Favorites**: **Save current search** keeps the search, filters and
   groups under a name; :version:`<=10|*Use by default*;*|*Default filter*`
@@ -185,7 +185,7 @@ Export
    fields that can be imported are offered, and the record identifier
    (*External ID*) is exported too.
 #. Choose the format, :version:`<=10|*CSV* or *Excel*;*|*XLSX* or *CSV*`, and
-   press **Export**: the browser downloads the file.
+   press [`Export`]: the browser downloads the file.
 
 .. _import:
 
@@ -193,10 +193,10 @@ Import
 ~~~~~~
 
 #. Open the list where the records go and press
-   :version:`<=12|the **Import** button next to **Create**;13-16|**Favorites ‣
+   :version:`<=12|the [\`Import\`] button next to [\`Create\`];13-16|**Favorites ‣
    Import records**;*|**⚙ ‣ Import records** (the gear next to the view
    title)`.
-#. Press :version:`<=10|**Load File**;*|**Upload Data File**` and choose the
+#. Press :version:`<=10|[\`Load File\`];*|[\`Upload Data File\`]` and choose the
    file, :version:`<=10|CSV or Excel;*|XLSX, XLS, ODS or CSV`. For a CSV file
    check the encoding, the separator and the text delimiter
    (:version:`<=10|options;*|**Formatting**`): Odoo expects commas and double
@@ -205,10 +205,10 @@ Import
    matches and choose the field of the columns not recognised; a column with no
    field is not imported. The fields of the related records are shown by
    *Show fields of relation fields (advanced)*.
-#. Press :version:`<=10|**Validate**;*|**Test**`: Odoo checks the whole file
+#. Press :version:`<=10|[\`Validate\`];*|[\`Test\`]`: Odoo checks the whole file
    without saving anything and lists the errors with their lines. Correct the
    file and load it again.
-#. Press **Import**.
+#. Press [`Import`].
 
 ⚠ **Caution!** An import cannot be undone. To find the records just imported,
 group or filter the list by *Created on*.
@@ -235,7 +235,7 @@ Help on help
 Welcome
 -------
 
-This is the help of your Odoo. Press **Summary** in the header to see every
+This is the help of your Odoo. Press [`Summary`] in the header to see every
 help page available: the list grows with each help module installed (e.g.
 invoices, sale orders, payment terms).
 
@@ -275,21 +275,21 @@ reading:
 * **Follow Odoo**: checked, the help window changes page every time you open
   another view in Odoo; unchecked, it stays on the page you are reading, e.g.
   to keep it open while you work elsewhere.
-* **Topic**: on a page, it appears when the Odoo view has a page other than
+* [`Topic`]: on a page, it appears when the Odoo view has a page other than
   the one you are reading (e.g. after opening the **Summary**, or with *Follow
   Odoo* unchecked): it brings you back to the help of the current view. On the
-  **FAQ**, **Example** and **Fields** pages it brings you back to the page they
+  [`FAQ`], [`Example`] and [`Fields`] pages it brings you back to the page they
   belong to.
-* **Ready**: opens this page, the general help, from any page.
+* [`Ready`]: opens this page, the general help, from any page.
 * **Loose help**: shown on the pages written for a special case, e.g. one type
   of order: it opens the general help of the same record.
 * **Example**: opens a worked example of the page, on a page of its own.
-* **FAQ**: opens the frequently asked questions of the page, see below.
+* [`FAQ`]: opens the frequently asked questions of the page, see below.
 * **Fields**: lists every field of the form with its explanation; click a
   field name to highlight it in Odoo.
 * **Summary**: lists all the help pages, grouped by module; click a title to
   open it.
-* **Edit**: help editors only, see *Changing this page*.
+* [`Edit`]: help editors only, see *Changing this page*.
 
 .. _faq_button:
 
@@ -297,13 +297,13 @@ Frequently asked questions (FAQ)
 --------------------------------
 
 The questions about a page are kept apart, so the page stays short: the
-**FAQ** button appears only when the page has questions. Press it to open
+[`FAQ`] button appears only when the page has questions. Press it to open
 them on a page of their own: every question is a box with the question in bold
 and its answer underneath. Scroll the list, or type a word of your doubt in the
 find box (e.g. *rebuild*) to go straight to the question that answers it. Press
-**Topic** to go back to the page.
+[`Topic`] to go back to the page.
 
-This page has its FAQ too: try the **FAQ** button.
+This page has its FAQ too: try the [`FAQ`] button.
 
 .. _search:
 
@@ -319,18 +319,18 @@ word is found on its own.
 The counter shows the current match and the total, e.g. *2/5*. Press Enter or
 ▼ for the next match, Shift+Enter or ▲ for the previous one, Esc to clear the
 search. The search looks only in the page you are reading: to search the
-questions, open the **FAQ** first.
+questions, open the [`FAQ`] first.
 
 .. _configure:
 
 Changing this page
 ------------------
 
-The help editors see the **Edit** button in the header: it opens the page in
+The help editors see the [`Edit`] button in the header: it opens the page in
 *Help > Help Editor > Help Pages*, where its content can be adapted to your
 company, this page included. An edited page keeps your version when the
 module is upgraded. A help editor of level **User** edits a copy of the pages
-of priority 64 or more, e.g. this page: **Edit** creates the copy, with the
+of priority 64 or more, e.g. this page: [`Edit`] creates the copy, with the
 default priority, and opens it.
 
 .. _faq:
@@ -338,7 +338,7 @@ default priority, and opens it.
 Questions
 ---------
 
-Click on button **Topic** to return to the specific help page.
+Click on button [`Topic`] to return to the specific help page.
 
 .. help-question:: Pressing the help button, no window opens. Why?
 
@@ -348,13 +348,13 @@ Click on button **Topic** to return to the specific help page.
 .. help-question:: The help window shows a page that is not about my view. Why?
 
    *Follow Odoo* is unchecked, or you have opened another page from the help.
-   Press **Topic** to go back to the help of the current view, or check
+   Press [`Topic`] to go back to the help of the current view, or check
    *Follow Odoo*.
 
 .. help-question:: Why don't I see the FAQ button?
 
-   The page you are reading has no questions. The **FAQ**, **Example**,
-   **Fields** and **Loose help** buttons appear only on the pages that have
+   The page you are reading has no questions. The [`FAQ`], [`Example`],
+   [`Fields`] and [`Loose help`] buttons appear only on the pages that have
    them.
 
 .. help-question:: The page lists only the fields of the form. Why?

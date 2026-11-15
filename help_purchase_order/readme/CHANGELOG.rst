@@ -1,3 +1,10 @@
+10.0.1.0.4 (2026-11-13)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Purchase order form and list: new section How to cancel or delete record (when cancelling is refused, Set to Draft, only cancelled orders can be deleted)
+* [IMP] Purchase order list: new sections How to insert a new record (button Create / New) and How to update a record (click on a line)
+* [IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)
+
 10.0.1.0.3 (2026-11-08)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

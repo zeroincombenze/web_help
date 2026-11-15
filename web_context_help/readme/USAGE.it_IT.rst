@@ -48,24 +48,31 @@ l'elenco (una vista kanban segue le regole dell'elenco):
   sezioni rimaste nella pagina, tranne il piè di pagina; le sezioni di una
   pagina con più parti (titoli di primo livello) sono raggruppate per parte
 * ``description`` *Descrizione*: sintesi della vista / modello; il primo
-  paragrafo è sempre "Fare clic sul pulsante **Pronto** per sapere come usare
-  questo aiuto; fare clic sul pulsante **FAQ** per le domande più comuni già
-  risolte." (inglese: "Click on button **Ready** for help about how to use
-  this help; click on button **FAQ** for the most common solved questions.")
-* ``new_record`` *Come inserire un nuovo record*: solo maschera, passi per
-  inserire un record
+  paragrafo è sempre "Fare clic sul pulsante ``[`Pronto`]`` per sapere come
+  usare questo aiuto; fare clic sul pulsante ``[`FAQ`]`` per le domande più
+  comuni già risolte." (inglese: "Click on button ``[`Ready`]`` for help about
+  how to use this help; click on button ``[`FAQ`]`` for the most common solved
+  questions.")
+* ``new_record`` *Come inserire un nuovo record*: nella maschera, passi per
+  inserire un record; in elenco / kanban, un breve testo sul pulsante
+  **Nuovo** (**Crea** fino a Odoo 15)
 * ``search`` *Suggerimenti per la ricerca*: solo elenco / kanban, come trovare,
   filtrare e raggruppare
-* ``update_record`` *Come modificare un record*: solo maschera, passi per
-  modificare un record
+* ``update_record`` *Come modificare un record*: nella maschera, passi per
+  modificare un record; in elenco / kanban, un breve testo: fare clic su una
+  riga (elenco) o su una scheda (kanban) per aprire la sua maschera
+* ``cancel`` *Come annullare o eliminare un record* quando il modello ha il
+  campo ``state``, altrimenti *Come archiviare o eliminare un record*:
+  maschera ed elenco, passi per annullare (o archiviare) un record,
+  ripristinarlo ed eliminarlo, con le condizioni che impediscono ogni passo
 * ``configure`` *Come configurare*: impostazioni e configurazione
 * ``report`` *Stampe ed esportazione*: stampe, allegato pdf, esportazione
 * ``example`` *Esempi*: esempi utili, in una pagina a parte aperta dal pulsante
   **Esempio**
 * ``faq`` *Domande frequenti*: blocchi ``help-question``, in una pagina a parte
   aperta dal pulsante **FAQ**; il primo paragrafo, prima della prima domanda, è
-  sempre "Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto
-  specifica." (inglese: "Click on button **Topic** to return to the specific
+  sempre "Fare clic sul pulsante ``[`Argomento`]`` per tornare alla pagina di
+  aiuto specifica." (inglese: "Click on button ``[`Topic`]`` to return to the specific
   help page.")
 * ``footer`` *Piè di pagina*: data e ora di creazione della pagina e nota di
   copyright, non nell'indice
@@ -159,12 +166,22 @@ che cambiano.
 
     Premere :version:`16|**Crea e visualizza fattura**;17|**Crea bozza fattura**;>=18|**Crea bozza**`.
 
-Condizioni: ``16``, ``16-18``, ``>=17``, ``>17``, ``<=16``, ``<17``, ``*``
-(qualsiasi versione), più condizioni separate da virgola (``10,16``). Il ruolo
+Condizioni: ``16``, ``16-18``, ``>=17``, ``>17``, ``<=16``, ``<17``, or un asterisco
+(l'asterisco: qualsiasi versione), più condizioni separate da virgola (``10,16``). Il ruolo
 mostra il testo della prima condizione soddisfatta, con il markup in linea ma
 senza altri ruoli; scrivere ``\ `` prima del ruolo quando è attaccato alla
 parola precedente.
 I ruoli ``:field:`` e ``:tour:`` evidenziano un campo o avviano un tour nella scheda di Odoo.
+
+L'etichetta di un pulsante scritta tra ``[`` e ``]`` con gli apici
+inversi, ``[`Salva`]``, è mostrata come un pulsante, l'etichetta dentro una
+cornice. Dentro ``:version:`` gli apici inversi sono preceduti da ``\``:
+``:version:`<16|[\`Crea\`];>=16|[\`Nuovo\`]```. Non si può annidare in
+Corsivo e grassetto si scrivono con uno o due asterischi attorno alle
+parole (*corsivo*, **grassetto**); in un blocco di codice restano come sono
+scritta. Le pagine di aiuto scrivono così tutti i pulsanti; i percorsi di menu
+(``**Vendite ‣ Ordini**``), le schede, le voci di menu dopo ‣ e i titoli
+restano in grassetto.
 
 Il testo che ha senso solo con un altro modulo va in ``help-if``: è mostrato
 solo quando il modulo è installato, o il modello esiste. Le pagine sono
@@ -187,5 +204,45 @@ installato o rimosso, in qualunque ordine siano installati i moduli.
 Condizioni: ``module`` o ``model``, ``=`` (almeno uno dei nomi separati da
 virgola è installato / esiste) o ``!=`` (nessuno di essi), più condizioni
 unite da ``and``.
+
+Tour guidati
+~~~~~~~~~~~~
+
+``help-tour`` scrive un tour guidato nella pagina, dove serve, ad es. in
+*Come inserire un nuovo record*. Con il modulo *Tour dell'aiuto contestuale*
+(``web_context_help_tour``) installato, la finestra di aiuto mostra un
+pulsante: premuto, esegue i passi nella scheda di Odoo, uno alla volta,
+oscurando lo schermo intorno all'elemento del passo, con i pulsanti
+**Indietro**, **Avanti** e **Interrompi**. Senza quel modulo il tour non è
+mostrato. I passi sono scritti nella pagina, quindi il gemello italiano ha il
+suo testo e ``help-version`` / ``help-if`` funzionano anche dentro il tour.
+
+::
+
+    .. help-tour:: res_partner_new
+       :label: Mostrami come creare un contatto
+
+       .. help-step:: new
+          :click:
+
+          Premere **Nuovo** per aprire la maschera di un contatto vuoto.
+
+       .. help-step:: field:name
+          :position: right
+
+          Digitare il nome: è l'unico campo obbligatorio.
+
+``:label:`` è il testo del pulsante, *Mostrami come* se manca.
+Obiettivi di ``help-step``: ``field:<nome campo>`` (il campo e la sua
+etichetta; la colonna in un elenco), ``button:<nome pulsante>``,
+``tab:<nome pagina del notebook>``, ``menu:<xmlid del menu>``,
+``css:<selettore>``, oppure ``new``, ``save``, ``discard``, ``search``,
+``filters``, ``actions`` (menu dell'ingranaggio), ``breadcrumb``,
+``statusbar``. ``:click:``: **Avanti** preme l'obiettivo per l'utente, ad es.
+**Nuovo**; ``:position:`` colloca il fumetto (``auto``, ``top``, ``bottom``,
+``left``, ``right``). Un passo il cui obiettivo non è sullo schermo lo
+attende: l'utente apre la schermata, o fa quanto chiede il passo precedente.
+Gli obiettivi sono quelli della versione di Odoo: mettere il tour in un
+blocco ``help-version`` delle versioni su cui è stato verificato.
 
 .. |sos| unicode:: U+1F6DF

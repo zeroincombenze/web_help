@@ -4,7 +4,7 @@ Come inserire un nuovo record
 -----------------------------
 
 #. Aprire **Vendite ‣ Prodotti ‣ Prodotti** (oppure **Magazzino ‣ Prodotti ‣
-   Prodotti**, **Acquisti ‣ Prodotti ‣ Prodotti**) e premere **Nuovo**.
+   Prodotti**, **Acquisti ‣ Prodotti ‣ Prodotti**) e premere [`Nuovo`].
 #. Digitare il :field:`nome del prodotto <name>` (obbligatorio) e scegliere la
    **Tipologia prodotto**\ :version:`>=18| (per i beni a magazzino attivare anche
    **Traccia magazzino**)`.
@@ -20,7 +20,7 @@ Come inserire un nuovo record
    scheda **Acquisto** aggiungere i fornitori con il loro prezzo; nella scheda
    **Magazzino** impostare percorsi, peso e volume.
 #. Per un prodotto venduto in più versioni aprire la scheda **Attributi e
-   varianti** (impostazione *Varianti*), premere **Aggiungi riga**,
+   varianti** (impostazione *Varianti*), premere [`Aggiungi riga`],
    scegliere l'attributo (es. *Taglia*) e i suoi valori: Odoo crea una
    variante per ogni combinazione.
 #. Il record si salva automaticamente quando si esce; premere l'icona della

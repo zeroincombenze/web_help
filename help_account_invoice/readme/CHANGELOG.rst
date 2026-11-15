@@ -1,3 +1,10 @@
+10.0.1.0.7 (2026-11-13)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Invoice form and list: new section How to cancel or delete record (Cancel Journal Entries up to 12.0, Reset to Draft then Cancel from 13.0, sequence and audit trail limits on deletion); journal dashboard: new section How to archive or delete record
+* [IMP] Invoice list: new sections How to insert a new record (button Create / New) and How to update a record (click on a line); journal dashboard: the same sections (cards are not created here, ⋮ ‣ Configuration)
+* [IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)
+
 10.0.1.0.6 (2026-11-08)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

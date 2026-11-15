@@ -2,16 +2,18 @@ Context help pages for the partner (contact) form, list and kanban, shown by web
 
 Every page follows the help rule of web_context_help:
 
-* **Description**: companies, individuals and addresses, with the main fields
-* **New record** (form): step-by-step guide to create a company, its contacts
-  and its addresses
-* **Update record** (form): changing addresses, the fields shared with the
-  company, archiving and deleting
-* **How to search** (list, kanban): menus, search, filters and groupings
-* **Configure**: tags, titles, countries, banks and the settings of the other
-  applications shown on the partner
-* **Report**: where the partner is printed and the stat buttons
-* **Example**: common cases, e.g. a separate invoice address or a duplicated partner
+* **Description**: what companies, individuals and addresses are, with the main fields
+* **New record** (form): step-by-step guide to create a company with its contacts and addresses
+* **Update record** (form): changing and merging contacts
+* **How to archive or delete record** (form, list and kanban): archiving,
+  restoring and deleting contacts
+* **Guided tours** (Odoo 18, with web_context_help_tour): create, update and
+  search contacts, step by step in the Odoo tab
+* **How to search** (list and kanban): menus, search, filters and groupings
+* **Configure**: tags, titles, industries, countries and banks, and the
+  sales, purchase and invoicing data of a partner
+* **Report**: smart buttons, exports and the partner documents
+* **Example**: common cases, e.g. a separate invoice address or duplicated contacts
 * **FAQ** and **Footer**
 
 Pages are in English and Italian, with the menus and settings of the running

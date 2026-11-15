@@ -15,6 +15,6 @@ Suggestions for search
   with Inventory *Available Products*, :version:`11|*Exhausted Stock*,
   *Negative Stock*;*|*Negative Forecasted Quantity*`; *Archived* shows the
   archived products; *Add Custom Filter* builds any condition.
-* **Group By**: :version:`<=12|**Add custom group**, e.g. by *Internal
+* **Group By**: :version:`<=12|[\`Add custom group\`], e.g. by *Internal
   Category* or *Product Type*;*|*Product Type* or *Product Category*`.
 * **Favorites ‣ Save current search** keeps filters and groups for later.

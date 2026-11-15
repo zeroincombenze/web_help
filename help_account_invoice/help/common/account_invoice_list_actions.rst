@@ -12,63 +12,48 @@ Confirm invoices
 .. help-version:: <13
 
    Select the draft invoices, then **Action ‣ Confirm Draft Invoices** and
-   press **Confirm Invoices**: each invoice gets its number and its journal
+   press [`Confirm Invoices`]: each invoice gets its number and its journal
    entry, and can no longer be changed. Only the draft invoices can be
-   confirmed; on the form the button is **Validate**.
+   confirmed; on the form the button is [`Validate`].
 
 .. help-version:: >=13
 
    Select the draft invoices, then :version:`<=16|**Action ‣ Post
    entries**;17|**Actions ‣ Post entries**;*|**Actions ‣ Confirm Entries**`
-   and press :version:`<18|**Post Journal Entries**;*|**Confirm**`: each
+   and press :version:`<18|[\`Post Journal Entries\`];*|[\`Confirm\`]`: each
    invoice gets its number and its journal entry, and can no longer be
    changed; set it back to draft to correct it. On the form the button is
-   :version:`13|**Post**;*|**Confirm**`.
+   :version:`13|[\`Post\`];*|[\`Confirm\`]`.
 
 Register a payment
 ~~~~~~~~~~~~~~~~~~
 
 .. help-version:: <13
 
-   .. help-version:: <12
-
-      Select the open invoices of the same partner, of the same type
-      (customer invoices or vendor bills) and in the same currency, then
-      **Action ‣ Register Payment**: choose the payment journal (bank or
-      cash), check the amount (the total of the invoices) and the payment
-      date, then press **Validate**. Odoo makes one payment for all of them
-      and the invoices become *Paid*. On the form the button is **Register
-      Payment**, and also handles an amount lower than the invoice (*Keep
-      open* or *Mark invoice as fully paid*).
-
-   .. help-version:: 12
-
-      Select the open invoices in the same currency, without mixing invoices
-      and credit notes, then **Action ‣ Register Payment**: choose the payment
-      journal (bank or cash), the payment date and press **Validate**. Odoo
-      makes one payment for each invoice; with *Group Invoices* checked, one
-      payment for the invoices of the same partner. The invoices become
-      *Paid* (or *In Payment*, see the form of the invoice). On the form the
-      button is **Register Payment**, and lets you also pay a partial amount.
+   Select the open invoices of the same type (customer or vendor), then
+   **Action ‣ Register Payment**: choose the payment journal (bank or cash),
+   the payment date and press [`Validate`]. The invoices become *Paid*. On the
+   form the button is [`Register Payment`], and lets you also pay a partial
+   amount.
 
 .. help-version:: 13
 
    Select the posted invoices, then **Action ‣ Register Payment**: choose the
-   payment journal (bank or cash), the payment date and press **Create
-   Payment**. The invoices become *Paid*. On the form the button is
-   **Register Payment**, and lets you also pay a partial amount.
+   payment journal (bank or cash), the payment date and press [`Create
+   Payment`]. The invoices become *Paid*. On the form the button is
+   [`Register Payment`], and lets you also pay a partial amount.
 
 .. help-version:: >=14
 
-   Select the posted invoices: the :version:`<18|**Register
-   Payment**;*|**Pay**` button appears above the list\ :version:`<17| (only
+   Select the posted invoices: the :version:`<18|[\`Register
+   Payment\`];*|[\`Pay\`]` button appears above the list\ :version:`<17| (only
    for the users with the *Show Full Accounting Features* right)`. Choose the
    payment journal (bank or cash), the payment date and the amount, then press
-   **Create Payment**\ :version:`>=17| (**Create Payments** when they are more
+   [`Create Payment`]\ :version:`>=17| ([\`Create Payments\`] when they are more
    than one)`. With several invoices of the same partner, *Group Payments*
    makes one payment for all of them. The invoices become *Paid*, or *In
    Payment* until the payment is matched with the bank statement. On the form
-   the button is :version:`<18|**Register Payment**;*|**Pay**`.
+   the button is :version:`<18|[\`Register Payment\`];*|[\`Pay\`]`.
 
 How to create a debit note
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -95,10 +80,10 @@ How to create a debit note
 
       Select the posted invoices, then :version:`<=16|**Action ‣ Create Debit
       Note**;*|**Actions ‣ Create Debit Note**` (on the form,
-      :version:`<17|the **Add Debit Note** button;*|**Debit Note** in the menu
+      :version:`<17|the [\`Add Debit Note\`] button;*|**Debit Note** in the menu
       under the gear icon`). Fill in the *Reason*, the *Debit Note Date*, the
       *Journal* and, to start from a copy of the invoice lines, *Copy Lines*;
-      then press **Create Debit Note**. A draft invoice is created, linked to
+      then press [`Create Debit Note`]. A draft invoice is created, linked to
       the original one: correct its lines and amounts, then confirm it. The
       original invoice shows the *Debit Notes* button.
 

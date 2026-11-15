@@ -15,4 +15,4 @@ Type the category in the search bar and select *Search Product Category for:
 
 **Print the labels of new products**
 
-Select the products in the list and press **Print Labels**.
+Select the products in the list and press [`Print Labels`].

@@ -12,8 +12,8 @@ Product variant
 Description
 -----------
 
-Click on button **Ready** for help about how to use this help; click on
-button **FAQ** for the most common solved questions.
+Click on button [`Ready`] for help about how to use this help; click on
+button [`FAQ`] for the most common solved questions.
 
 .. help-version:: <13
 
@@ -56,7 +56,7 @@ button **FAQ** for the most common solved questions.
 
    Variants are made from their product: add the attributes and their values
    in the **Variants** tab of the product form, and Odoo creates one variant
-   for each combination. **Create** here makes a new product with its single
+   for each combination. [`Create`] here makes a new product with its single
    variant.
 
 .. help-version:: >=16
@@ -64,6 +64,8 @@ button **FAQ** for the most common solved questions.
    .. help-include:: product_variant_new.rst
 
 .. help-include:: product_variant_update.rst
+
+.. help-include:: product_variant_cancel.rst
 
 .. help-include:: product_configure.rst
 
@@ -82,7 +84,7 @@ button **FAQ** for the most common solved questions.
 FAQ
 ---
 
-Click on button **Topic** to return to the specific help page.
+Click on button [`Topic`] to return to the specific help page.
 
 .. help-version:: <16
 
@@ -90,14 +92,14 @@ Click on button **Topic** to return to the specific help page.
 
       Name, category, type and prices belong to the product: changing them on a
       variant changes the product and all its variants. In the variant form
-      opened from the **Variants** button they are not even shown, press *the
+      opened from the [`Variants`] button they are not even shown, press *the
       product template* to open the product.
 
    .. help-question:: Why is the sale price of the variant read-only?
 
       With several variants it is computed: sale price of the product plus the
       extra price of the attribute values, set with :version:`<=11|**Variant
-      Prices**;12-14|**Configure Variants**;*|**Configure** on the attribute line`
+      Prices**;12-14|[\`Configure Variants\`];*|[\`Configure\`] on the attribute line`
       on the product.
 
    .. help-question:: Why can't I delete a variant?

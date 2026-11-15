@@ -22,7 +22,7 @@
    *To Invoice*, *Fully Invoiced* or *Upselling Opportunity* (more was
    delivered than ordered).
 
-   #. Open the confirmed sale order and press **Create Invoice**. The orders
+   #. Open the confirmed sale order and press [`Create Invoice`]. The orders
       waiting for an invoice are listed in :version:`10|**Sales ‣ Invoicing ‣
       Sales to Invoice**;11|**Sales ‣ Invoicing ‣ Orders to
       Invoice**;*|**Sales ‣ To Invoice ‣ Orders to Invoice**`.
@@ -43,8 +43,8 @@
       * *Down payment (percentage)* or *Down payment (fixed amount)*: an
         advance on the order total, deducted later from the regular invoice.
 
-   #. Press :version:`10-12|**Create and View Invoices**;13-16|**Create and
-      View Invoice**;17|**Create Draft Invoice**;*|**Create Draft**`: the new
+   #. Press :version:`10-12|[\`Create and View Invoices\`];13-16|[\`Create and
+      View Invoice\`];17|[\`Create Draft Invoice\`];*|[\`Create Draft\`]`: the new
       invoice opens as a draft, with the order number as *Source Document*.
    #. Check the invoice and confirm it, as described in *How to insert a new
       record*.
@@ -56,6 +56,6 @@
    :version:`>=17|*Consolidated Billing* makes one invoice for the orders of
    the same customer and invoice address.`
 
-   The invoice is linked to the order: the **Invoices** button of the order
+   The invoice is linked to the order: the [`Invoices`] button of the order
    opens its invoices, and cancelling or deleting a draft invoice makes its
    quantities invoiceable again.

@@ -15,7 +15,7 @@ Choose the *Purchase Orders* filter, then **Group By ‣ Buyer** and
 
 **Bill several orders at once**
 
-Select the confirmed orders with the check boxes and press **Create Bills**.
+Select the confirmed orders with the check boxes and press [`Create Bills`].
 
 .. help-version:: >=18
 

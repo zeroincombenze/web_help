@@ -10,4 +10,4 @@ Modello prodotto per: …*, oppure **Raggruppa per ‣ Modello prodotto**.
 
 **Varianti senza codice a barre**
 
-**Aggiungi filtro personalizzato**: *Codice a barre* non è impostato.
+[`Aggiungi filtro personalizzato`]: *Codice a barre* non è impostato.

@@ -42,8 +42,21 @@ Custom directives::
                                         models condition is met, see
        RST content (sections allowed)   installed_match()
 
+    .. help-tour:: name                 guided tour, run in the Odoo tab by
+       :label: Show me how              web_context_help_tour; shown as a
+                                        button only when that module is
+       .. help-step:: field:name        installed. Targets: field:<name>,
+          :click:                       button:<name>, tab:<page name>,
+          :position: bottom             menu:<xmlid>, css:<selector>, new,
+                                        save, discard, search, filters,
+          RST text of the step          actions, breadcrumb, statusbar.
+                                        :click: Next clicks the target.
+
 Roles: :field:`name` (highlight field in Odoo tab), :tour:`name` (run tour),
 :version:`16|text;17-18|text;*|text` (text of the first matching version).
+
+Buttons: [`Save`] is shown as a button, the label inside a frame
+(<span class="wch-button">); see button_frames().
 
 Version conditions: ``16``, ``16-18``, ``>=17``, ``>17``, ``<=16``, ``<17``,
 ``*`` (any), several joined by comma (``10,16``). The version is the major
@@ -169,6 +182,23 @@ INSTALLED_KINDS = ("module", "model")
 RE_HELP_IF = re.compile(
     r"^[ \t]*\.\.[ \t]+help-if::[ \t]*(.*?)[ \t]*$", re.MULTILINE
 )
+RE_HELP_TOUR = re.compile(r"^[ \t]*\.\.[ \t]+help-tour::", re.MULTILINE)
+# The module running the help-tour tours in the Odoo tab
+TOUR_MODULE = "web_context_help_tour"
+TOUR_LABELS = {"en_US": "Show me how", "it_IT": "Mostrami come"}
+TOUR_ALIASES = (
+    "new",
+    "save",
+    "discard",
+    "search",
+    "filters",
+    "actions",
+    "breadcrumb",
+    "statusbar",
+)
+TOUR_KINDS = ("field", "button", "tab", "menu", "css")
+TOUR_POSITIONS = ("auto", "top", "bottom", "left", "right")
+RE_TOUR_NAME = re.compile(r"^[A-Za-z0-9_.-]+$")
 
 
 def parse_installed(spec):
@@ -209,6 +239,10 @@ def installed_names(help_dir, group):
                 continue
             for kind, dummy, wanted in conditions:
                 names.update((kind, name) for name in wanted)
+        # help-tour is shown only with the tour module: built again when it
+        # is installed or removed
+        if RE_HELP_TOUR.search(read_text(path)):
+            names.add(("module", TOUR_MODULE))
     return names
 
 
@@ -479,6 +513,114 @@ class HelpIf(Directive):
         return []
 
 
+def tour_target(text):
+    """Normalized target of a help-step, or ValueError"""
+    target = re.sub(r"\s+", " ", text).strip()
+    if target in TOUR_ALIASES:
+        return target
+    kind, sep, value = target.partition(":")
+    if not sep or kind not in TOUR_KINDS or not value.strip():
+        raise ValueError(
+            "invalid target %r: use %s or one of %s"
+            % (
+                target,
+                ", ".join("%s:<...>" % k for k in TOUR_KINDS),
+                ", ".join(TOUR_ALIASES),
+            )
+        )
+    return "%s:%s" % (kind, value.strip())
+
+
+class HelpStep(Directive):
+    """One step of a help-tour: the target to show and the text of the step"""
+
+    required_arguments = 1
+    final_argument_whitespace = True
+    has_content = True
+    option_spec = {
+        "click": directives.flag,
+        "position": lambda arg: directives.choice(arg, TOUR_POSITIONS),
+    }
+
+    def run(self):
+        try:
+            target = tour_target(self.arguments[0])
+        except ValueError as e:
+            raise self.error("help-step: %s" % e)
+        if not self.content:
+            raise self.error("help-step: the text of the step is required")
+        box = nodes.container(classes=["wch-tour-step"])
+        box["wch_step"] = {
+            "target": target,
+            "click": "click" in self.options,
+            "position": self.options.get("position", "auto"),
+        }
+        self.state.nested_parse(self.content, self.content_offset, box)
+        return [box]
+
+
+class HelpTour(Directive):
+    """Guided tour run in the Odoo tab: a button followed by its hidden steps.
+
+    Shown only when the tour module is installed; the steps travel with the
+    button, so each language and Odoo version gets its own text."""
+
+    required_arguments = 1
+    has_content = True
+    option_spec = {"label": directives.unchanged}
+
+    def run(self):
+        settings = self.state.document.settings
+        name = self.arguments[0].strip()
+        if not RE_TOUR_NAME.match(name):
+            raise self.error("help-tour: invalid name %r" % name)
+        holder = nodes.container()
+        self.state.nested_parse(self.content, self.content_offset, holder)
+        steps, messages = [], []
+        for node in holder.children:
+            if isinstance(node, nodes.system_message):
+                messages.append(node)
+            elif isinstance(node, nodes.container) and node.get("wch_step"):
+                steps.append(node)
+            else:
+                raise self.error("help-tour: only help-step blocks are allowed")
+        if not steps:
+            raise self.error("help-tour: %s has no help-step" % name)
+        if not installed_match("module = %s" % TOUR_MODULE, settings.wch_installed):
+            return messages
+        label = re.sub(r"\s+", " ", self.options.get("label") or "").strip()
+        label = label or TOUR_LABELS.get(settings.wch_lang, TOUR_LABELS[DEFAULT_LANG])
+        button = nodes.raw(
+            "",
+            '<div class="wch-help-tour">\n'
+            '<p class="wch-tour-bar"><a href="#" class="wch-tour wch-tour-button"'
+            ' data-tour="%s">%s</a></p>\n'
+            '<div class="wch-tour-steps" hidden>' % (escape(name), escape(label)),
+            format="html",
+        )
+        button["wch_label"] = label
+        result = messages + [button]
+        for step in steps:
+            info = step["wch_step"]
+            result.append(
+                nodes.raw(
+                    "",
+                    '<div class="wch-tour-step" data-target="%s" data-click="%s"'
+                    ' data-position="%s">'
+                    % (
+                        escape(info["target"]),
+                        "1" if info["click"] else "0",
+                        escape(info["position"]),
+                    ),
+                    format="html",
+                )
+            )
+            result.extend(step.children)
+            result.append(nodes.raw("", "</div>", format="html"))
+        result.append(nodes.raw("", "</div>\n</div>", format="html"))
+        return result
+
+
 def version_role(name, rawtext, text, lineno, inliner, options=None, content=None):
     """:version:`16|text;>=17|text`: inline text of the first matching version"""
     version = inliner.document.settings.wch_version
@@ -535,6 +677,8 @@ directives.register_directive("help-inherit", HelpInherit)
 directives.register_directive("help-question", HelpQuestion)
 directives.register_directive("help-version", HelpVersion)
 directives.register_directive("help-if", HelpIf)
+directives.register_directive("help-tour", HelpTour)
+directives.register_directive("help-step", HelpStep)
 roles.register_local_role("version", version_role)
 roles.register_local_role("field", _data_role("field"))
 roles.register_local_role("tour", _data_role("tour"))
@@ -548,6 +692,33 @@ RE_ASTRAL_SUBST = re.compile(
     r"(?:U\+|u\+|0x|x|\\x|\\u|\\U)?(?P<code>[0-9A-Fa-f]{5,6})[ \t]*$",
     re.MULTILINE,
 )
+
+
+def button_frames(document):
+    """[`Label`] -> <span class="wch-button">Label</span>.
+
+    Docutils reads [`Label`] as "[", a title reference (the default role) and
+    "]": the three become one inline node, the label in a frame. Literal
+    blocks hold no title reference, so the syntax can still be shown there."""
+    for ref in _findall(document, nodes.title_reference):
+        parent = ref.parent
+        index = parent.index(ref)
+        if index == 0 or index + 1 >= len(parent.children):
+            continue
+        before, after = parent.children[index - 1], parent.children[index + 1]
+        if not (
+            isinstance(before, nodes.Text)
+            and isinstance(after, nodes.Text)
+            and before.astext().endswith("[")
+            and after.astext().startswith("]")
+        ):
+            continue
+        label = re.sub(r"\s+", " ", ref.astext()).strip()
+        button = nodes.inline(ref.rawsource, label, classes=["wch-button"])
+        parent.replace(before, nodes.Text(before.astext()[:-1]))
+        parent.replace(after, nodes.Text(after.astext()[1:]))
+        parent.replace(ref, button)
+    return document
 
 
 def _narrow_unicode(text):
@@ -590,6 +761,7 @@ def parse(
             help_dir, group, lang, fields_help, version, installed
         ),
     )
+    button_frames(document)
     _store(document, "wch_page", None)
     _store(document, "wch_inherits", [])
     return document

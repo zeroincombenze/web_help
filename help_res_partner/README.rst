@@ -1,5 +1,5 @@
 =================================================
-|icon| Help for partner/Aiuto contatti 10.0.1.0.2
+|icon| Help for partner/Aiuto contatti 10.0.1.0.4
 =================================================
 
 **Context help pages for contacts (partners)**
@@ -18,16 +18,18 @@ Overview | Panoramica
 
 Every page follows the help rule of web_context_help:
 
-* **Description**: companies, individuals and addresses, with the main fields
-* **New record** (form): step-by-step guide to create a company, its contacts
-  and its addresses
-* **Update record** (form): changing addresses, the fields shared with the
-  company, archiving and deleting
-* **How to search** (list, kanban): menus, search, filters and groupings
-* **Configure**: tags, titles, countries, banks and the settings of the other
-  applications shown on the partner
-* **Report**: where the partner is printed and the stat buttons
-* **Example**: common cases, e.g. a separate invoice address or a duplicated partner
+* **Description**: what companies, individuals and addresses are, with the main fields
+* **New record** (form): step-by-step guide to create a company with its contacts and addresses
+* **Update record** (form): changing and merging contacts
+* **How to archive or delete record** (form, list and kanban): archiving,
+  restoring and deleting contacts
+* **Guided tours** (Odoo 18, with web_context_help_tour): create, update and
+  search contacts, step by step in the Odoo tab
+* **How to search** (list and kanban): menus, search, filters and groupings
+* **Configure**: tags, titles, industries, countries and banks, and the
+  sales, purchase and invoicing data of a partner
+* **Report**: smart buttons, exports and the partner documents
+* **Example**: common cases, e.g. a separate invoice address or duplicated contacts
 * **FAQ** and **Footer**
 
 Pages are in English and Italian, with the menus and settings of the running
@@ -38,16 +40,18 @@ Odoo version.
 
 Ogni pagina segue la regola di aiuto di web_context_help:
 
-* **Descrizione**: aziende, persone e indirizzi, con i campi principali
-* **Nuovo record** (maschera): guida passo passo per creare un'azienda, i suoi
-  contatti e i suoi indirizzi
-* **Modifica record** (maschera): cambio degli indirizzi, i campi condivisi con
-  l'azienda, archiviazione ed eliminazione
-* **Come cercare** (lista, kanban): menu, ricerca, filtri e raggruppamenti
-* **Configurazione**: tag, qualifiche, nazioni, banche e le impostazioni delle
-  altre applicazioni mostrate sul partner
-* **Stampe**: dove viene stampato il partner e i pulsanti statistici
-* **Esempi**: casi comuni, ad es. un indirizzo di fatturazione separato o un partner duplicato
+* **Descrizione**: cosa sono aziende, persone e indirizzi, con i campi principali
+* **Nuovo record** (maschera): guida passo passo per creare un'azienda con i suoi contatti e indirizzi
+* **Modifica record** (maschera): modifica e unione dei contatti
+* **Come archiviare o eliminare un record** (maschera, lista e kanban):
+  archiviazione, ripristino ed eliminazione dei contatti
+* **Tour guidati** (Odoo 18, con web_context_help_tour): creare, modificare
+  e cercare i contatti, passo per passo nella scheda di Odoo
+* **Come cercare** (lista e kanban): menu, ricerca, filtri e raggruppamenti
+* **Configurazione**: etichette, qualifiche, settori, nazioni e banche, e i
+  dati di vendita, acquisto e fatturazione di un partner
+* **Stampe**: pulsanti intelligenti, esportazioni e documenti del partner
+* **Esempi**: casi comuni, ad es. un indirizzo di fatturazione diverso o contatti duplicati
 * **Domande frequenti** e **Piè di pagina**
 
 Le pagine sono in inglese e in italiano, con i menu e le impostazioni della
@@ -154,6 +158,19 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+10.0.1.0.4 (2026-11-13)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [NEW] Guided tours (Odoo 18, with web_context_help_tour): create a contact, update a contact, search contacts (Filters menu, Companies, Add Custom Filter, search by Related Company)
+* [IMP] Contact form, list and kanban: new section How to archive or delete record (archive, restore, delete, contacts linked to users)
+* [IMP] Contact list and kanban: new sections How to insert a new record (button Create / New) and How to update a record (click on a line or a card)
+* [IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)
+
+10.0.1.0.3 (2026-11-08)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Every help page starts with the hint to the Ready and FAQ buttons; every FAQ page starts with the hint to the Topic button
+
 10.0.1.0.2 (2026-10-31)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -219,7 +236,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-31
+Last Update / Ultimo aggiornamento: 2026-11-15
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

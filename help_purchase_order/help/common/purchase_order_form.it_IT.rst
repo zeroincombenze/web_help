@@ -12,8 +12,8 @@ Ordine di acquisto
 Descrizione
 -----------
 
-Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
-clic sul pulsante **FAQ** per le domande più comuni già risolte.
+Fare clic sul pulsante [`Pronto`] per sapere come usare questo aiuto; fare
+clic sul pulsante [`FAQ`] per le domande più comuni già risolte.
 
 .. help-version:: <16
 
@@ -39,6 +39,8 @@ clic sul pulsante **FAQ** per le domande più comuni già risolte.
 
 .. help-include:: purchase_order_update.rst
 
+.. help-include:: purchase_order_cancel.rst
+
 .. help-include:: purchase_order_configure.rst
 
 .. help-include:: purchase_order_report.rst
@@ -50,7 +52,7 @@ clic sul pulsante **FAQ** per le domande più comuni già risolte.
 Domande frequenti
 -----------------
 
-Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+Fare clic sul pulsante [`Argomento`] per tornare alla pagina di aiuto specifica.
 
 .. help-version:: <16
 
@@ -58,14 +60,14 @@ Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
       L'impostazione *Livelli di Approvazione* richiede 2 livelli di approvazione
       e il totale dell'ordine supera l'*importo di doppia validazione*: un
-      responsabile acquisti deve aprire l'ordine e premere **Approva Ordine**.
+      responsabile acquisti deve aprire l'ordine e premere [`Approva Ordine`].
 
    .. help-question:: Come si modifica un ordine confermato?
 
       Quantità, prezzi e nuove righe si modificano direttamente, vedere *Modifica
       record*. Se l'ordine è *Bloccato*, un responsabile acquisti deve prima
-      premere **Sblocca**. Per modifiche importanti, annullarlo, premere
-      **Imposta come Bozza**, modificarlo e confermarlo di nuovo.
+      premere [`Sblocca`]. Per modifiche importanti, annullarlo, premere
+      [`Imposta come Bozza`], modificarlo e confermarlo di nuovo.
 
    .. help-question:: Perché non riesco ad annullare l'ordine?
 
@@ -80,7 +82,7 @@ Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
    .. help-question:: Perché non riesco a eliminare l'ordine?
 
-      Si possono eliminare solo gli ordini annullati: premere prima **Annulla**.
+      Si possono eliminare solo gli ordini annullati: premere prima [`Annulla`].
 
    .. help-question:: Perché non c'è nulla da fatturare?
 
@@ -93,20 +95,20 @@ Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
 
       L'impostazione *Approvazione ordine di acquisto* è attiva e il totale supera
       il suo importo minimo: un responsabile acquisti deve aprire l'ordine e
-      premere **Approva ordine**.
+      premere [`Approva ordine`].
 
    .. help-question:: Perché non riesco a creare la fattura?
 
       L'ordine deve prima essere confermato. Con il controllo fatture *Quantità
       ricevute*, la merce deve anche essere ricevuta: validare la ricezione, poi
-      premere di nuovo **Crea fattura**.
+      premere di nuovo [`Crea fattura`].
 
    .. help-question:: Come si modifica un ordine confermato?
 
       Quantità, prezzi e nuove righe si modificano direttamente, vedere *Modifica
       record*. Se l'ordine è bloccato, un responsabile acquisti deve prima
       sbloccarlo. Per cambiare il fornitore, annullare l'ordine, premere
-      **Imposta a bozza**, modificarlo e confermarlo di nuovo.
+      [`Imposta a bozza`], modificarlo e confermarlo di nuovo.
 
    .. help-question:: Perché non riesco ad annullare l'ordine?
 

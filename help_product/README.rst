@@ -1,5 +1,5 @@
 =================================================
-|icon| Help for product/Aiuto prodotti 10.0.1.0.3
+|icon| Help for product/Aiuto prodotti 10.0.1.0.5
 =================================================
 
 **Context help pages for products and product variants**
@@ -21,13 +21,13 @@ Every page follows the help rule of web_context_help:
 
 * **Description**: products, product types and variants, with the main fields
 * **New record** (form): step-by-step guide to create a product and its variants
-* **Update record** (form): prices, costs, units of measure, variants,
-  archiving and deleting; what belongs to the variant and what to the product
-* **How to search** (list, kanban): menus, search, filters and groupings
-* **Configure**: the Sales, Purchases, Inventory and Invoicing settings that
-  affect products
-* **Report**: labels, pricelist and the product stat buttons
-* **Example**: common cases, e.g. a T-shirt in sizes and colours or a service
+* **Update record** (form): changing prices, units and types
+* **How to archive or delete record** (form, list and kanban): archiving,
+  restoring and deleting products and variants
+* **How to search** (list and kanban): menus, search, filters and groupings
+* **Configure**: the settings and the configuration menus that affect products
+* **Report**: labels and the pricelist report
+* **Example**: common cases, e.g. a product sold in sizes and colors
 * **FAQ** and **Footer**
 
 Pages are in English and Italian, with the menus and settings of the running
@@ -41,13 +41,13 @@ Ogni pagina segue la regola di aiuto di web_context_help:
 
 * **Descrizione**: prodotti, tipi di prodotto e varianti, con i campi principali
 * **Nuovo record** (maschera): guida passo passo per creare un prodotto e le sue varianti
-* **Modifica record** (maschera): prezzi, costi, unità di misura, varianti,
-  archiviazione ed eliminazione; cosa appartiene alla variante e cosa al prodotto
-* **Come cercare** (lista, kanban): menu, ricerca, filtri e raggruppamenti
-* **Configurazione**: le impostazioni di Vendite, Acquisti, Magazzino e
-  Fatturazione che influenzano i prodotti
-* **Stampe**: etichette, listino e i pulsanti statistici del prodotto
-* **Esempi**: casi comuni, ad es. una maglietta in taglie e colori o un servizio
+* **Modifica record** (maschera): modifica di prezzi, unità e tipologia
+* **Come archiviare o eliminare un record** (maschera, lista e kanban):
+  archiviazione, ripristino ed eliminazione di prodotti e varianti
+* **Come cercare** (lista e kanban): menu, ricerca, filtri e raggruppamenti
+* **Configurazione**: le impostazioni e i menu di configurazione che influenzano i prodotti
+* **Stampe**: etichette e resoconto del listino prezzi
+* **Esempi**: casi comuni, ad es. un prodotto venduto in taglie e colori
 * **Domande frequenti** e **Piè di pagina**
 
 Le pagine sono in inglese e in italiano, con i menu e le impostazioni della
@@ -154,6 +154,18 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+10.0.1.0.5 (2026-11-13)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Product and variant form, list and kanban: new section How to archive or delete record
+* [IMP] Product and variant list and kanban: new sections How to insert a new record (button Create / New) and How to update a record (click on a line or a card)
+* [IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)
+
+10.0.1.0.4 (2026-11-08)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Every help page starts with the hint to the Ready and FAQ buttons; every FAQ page starts with the hint to the Topic button
+
 10.0.1.0.3 (2026-10-31)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -227,7 +239,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-10-31
+Last Update / Ultimo aggiornamento: 2026-11-15
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

@@ -35,7 +35,9 @@ Every page follows the help rule of web_context_help:
 <li><b>Description</b>: what quotations and sales orders are, with the main fields</li>
 <li><b>New record</b> (form): step-by-step guide to create a quotation and confirm it</li>
 <li><b>Update record</b> (form): what can be changed in each status, invoicing,
-  locking, cancelling and deleting</li>
+  locking</li>
+<li><b>How to cancel or delete record</b> (form and list): cancelling an order,
+  setting it back to quotation, which orders can be deleted</li>
 <li><b>How to search</b> (list): menus, search, filters and groupings</li>
 <li><b>Configure</b>: the Sales settings that affect sale orders</li>
 <li><b>Report</b>: the quotation / order PDF, the pro-forma and the sales analysis</li>
@@ -59,7 +61,9 @@ Ogni pagina segue la regola di aiuto di web_context_help:
 <li><b>Descrizione</b>: cosa sono preventivi e ordini di vendita, con i campi principali</li>
 <li><b>Nuovo record</b> (maschera): guida passo passo per creare un preventivo e confermarlo</li>
 <li><b>Modifica record</b> (maschera): cosa si pu&#242; cambiare in ogni stato,
-  fatturazione, blocco, annullamento ed eliminazione</li>
+  fatturazione, blocco</li>
+<li><b>Come annullare o eliminare un record</b> (maschera e lista): annullare un
+  ordine, riportarlo a preventivo, quali ordini si possono eliminare</li>
 <li><b>Come cercare</b> (lista): menu, ricerca, filtri e raggruppamenti</li>
 <li><b>Configurazione</b>: le impostazioni di Vendite che influenzano gli ordini</li>
 <li><b>Stampe</b>: il PDF di preventivo / ordine, la pro-forma e l'analisi vendite</li>
@@ -78,8 +82,22 @@ versione di Odoo in uso.
     <div class="oe_row oe_spaced">
         <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">ChangeLog History | Cronologia modifiche</h3>
         <div class="oe_span12">
-<h4>10.0.1.0.5 (2026-10-31)</h4>
+<h4>10.0.1.0.7 (2026-11-13)</h4>
 <p align="justify">
+<ul>
+<li>[IMP] Sale order form and list: new section How to cancel or delete record (cancel wizard / confirmation by version, Set to Quotation, which orders can be deleted)</li>
+<li>[IMP] Sale order list: new sections How to insert a new record (button Create / New) and How to update a record (click on a line)</li>
+<li>[IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)</li>
+</ul>
+</p><p align="justify">
+<h4>10.0.1.0.6 (2026-11-08)</h4>
+</p><p align="justify">
+<ul>
+<li>[IMP] Every help page starts with the hint to the Ready and FAQ buttons; every FAQ page starts with the hint to the Topic button</li>
+</ul>
+</p><p align="justify">
+<h4>10.0.1.0.5 (2026-10-31)</h4>
+</p><p align="justify">
 <ul>
 <li>[IMP] Help pages for Odoo 11-14 (help/v11_14) and 15 (help/v15): menus, buttons, fields and settings of each version, from 11.0 to 15.0, in English and Italian</li>
 <li>[IMP] Help pages in the standard layout: sections renamed How to insert a new record, How to update a record, Suggestions for search, How to set up, Report and export file (Italian titles too); the Report section explains how to export the records to a file</li>
@@ -149,6 +167,6 @@ versione di Odoo in uso.
     </div>
     <div class="oe_row oe_spaced">
         <p>This module is part of <a href="https://github.com/zeroincombenze/web_help">web_help</a> project.</p>
-        <p>Published information on | Informazioni pubblicate: 2026-10-31</p>
+        <p>Published information on | Informazioni pubblicate: 2026-11-15</p>
     </div>
 </section>

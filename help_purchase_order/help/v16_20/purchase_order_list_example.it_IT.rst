@@ -16,8 +16,8 @@ Scegliere il filtro *Ordini di acquisto*, poi **Raggruppa per ‣ Acquirente** e
 
 **Fatturare più ordini in una volta**
 
-Selezionare gli ordini confermati con le caselle di spunta e premere **Crea
-fatture**.
+Selezionare gli ordini confermati con le caselle di spunta e premere [`Crea
+fatture`].
 
 .. help-version:: >=18
 

@@ -37,7 +37,7 @@ Shared fields include:
 * Supplier list
 * HS code / Intrastat code (with the Intrastat modules)
 * Sales price (price differences must be managed via attributes, with
-  :version:`11|**Variant Prices**;12-14|**Configure Variants**;*|**Configure**
+  :version:`11|**Variant Prices**;12-14|[\`Configure Variants\`];*|[\`Configure\`]
   on the attribute line`)
 * *Can be Sold* and *Can be Purchased* flags
 * Lead times (delivery times)

@@ -18,7 +18,7 @@ Suggerimenti per la ricerca
   negativa*`; :version:`11|*Archiviati*;12|*Archiviati*;*|*In archivio*`
   mostra i prodotti archiviati; :version:`11|*Aggiungi filtro*;*|*Aggiungi
   filtro personalizzato*` crea qualsiasi condizione.
-* **Raggruppa per**: :version:`<=12|**Aggiungi gruppo personalizzato**, ad es.
+* **Raggruppa per**: :version:`<=12|[\`Aggiungi gruppo personalizzato\`], ad es.
   per *Categoria interna* o *Tipologia prodotto*;*|*Tipologia prodotto* o
   *Categoria prodotto*`.
 * **Preferiti ‣ Salva la ricerca corrente** conserva filtri e raggruppamenti.

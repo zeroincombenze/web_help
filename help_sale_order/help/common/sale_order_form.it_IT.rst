@@ -12,8 +12,8 @@ Ordine di vendita
 Descrizione
 -----------
 
-Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
-clic sul pulsante **FAQ** per le domande più comuni già risolte.
+Fare clic sul pulsante [`Pronto`] per sapere come usare questo aiuto; fare
+clic sul pulsante [`FAQ`] per le domande più comuni già risolte.
 
 Un ordine di vendita nasce come **preventivo**: una proposta inviata al
 :field:`cliente <partner_id>` con prodotti, quantità e prezzi.
@@ -28,6 +28,8 @@ documento.
 
 .. help-include:: sale_order_update.rst
 
+.. help-include:: sale_order_cancel.rst
+
 .. help-include:: sale_order_configure.rst
 
 .. help-include:: sale_order_report.rst
@@ -39,21 +41,21 @@ documento.
 Domande frequenti
 -----------------
 
-Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+Fare clic sul pulsante [`Argomento`] per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché non riesco a creare la fattura?
 
    L'ordine deve prima essere confermato. Con la politica di fatturazione
    *quantità consegnate*, la merce deve anche essere consegnata: validare la
-   consegna, poi premere di nuovo **Crea fattura**.
+   consegna, poi premere di nuovo [`Crea fattura`].
 
 .. help-question:: Come si modifica un ordine confermato?
 
    Quantità e nuove righe si modificano direttamente, vedere *Come modificare
    un record*.
    Se l'ordine è bloccato, sbloccarlo prima. Per modifiche importanti,
-   annullarlo, premere :version:`10|**Converti in preventivo**;*|**Imposta a
-   preventivo**`, modificarlo e confermarlo di nuovo.
+   annullarlo, premere :version:`10|[\`Converti in preventivo\`];*|[\`Imposta a
+   preventivo\`]`, modificarlo e confermarlo di nuovo.
 
 .. help-question:: Perché non riesco a eliminare una riga d'ordine?
 

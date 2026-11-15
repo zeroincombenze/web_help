@@ -6,8 +6,8 @@
 Pagine di aiuto
 ===============
 
-Fare clic sul pulsante **Pronto** per sapere come usare questo aiuto; fare
-clic sul pulsante **FAQ** per le domande più comuni già risolte.
+Fare clic sul pulsante [`Pronto`] per sapere come usare questo aiuto; fare
+clic sul pulsante [`FAQ`] per le domande più comuni già risolte.
 
 Ogni modulo può spiegare le proprie maschere con file RST nella cartella
 ``help/``. Sono letti a ogni avvio del server e trasformati nelle pagine qui
@@ -46,19 +46,19 @@ più alta):
   cut) con la priorità più alta: le proprie pagine (predefinita 32) vengono
   prima delle pagine dei moduli (96), che sono l'ultima alternativa.
 
-Una pagina clear cut, o di priorità 64 o inferiore, mostra il pulsante **Aiuto
-generale**: apre l'aiuto generale dello stesso record, cioè la pagina generale
+Una pagina clear cut, o di priorità 64 o inferiore, mostra il pulsante [`Aiuto
+generale`]: apre l'aiuto generale dello stesso record, cioè la pagina generale
 di priorità 64 o superiore con la priorità più alta, di solito la pagina del
 modulo.
 
 Tutte le regole sono elencate anche in *Regole di aiuto*. Una pagina creata con
-**Nuovo** o **Duplica** non ha sorgente ed è conservata da **Ricostruisci tutte
+[`Nuovo`] o [`Duplica`] non ha sorgente ed è conservata da **Ricostruisci tutte
 le pagine**; un duplicato riceve la chiave della pagina seguita da " (copy)".
 
 .. help-include:: editing.rst
 
-Premere **Modifica** per cambiare la pagina e **Salva** al termine. Il
-pulsante **Inserisci video** elenca i video della cartella dei video
+Premere [`Modifica`] per cambiare la pagina e [`Salva`] al termine. Il
+pulsante [`Inserisci video`] elenca i video della cartella dei video
 (parametro di sistema ``web_help_video_path``): quello scelto è aggiunto in
 fondo alla pagina, oppure dopo il paragrafo che contiene il testo scritto in
 *Dopo il testo*.
@@ -68,12 +68,12 @@ fondo alla pagina, oppure dopo il paragrafo che contiene il testo scritto in
 Domande
 -------
 
-Fare clic sul pulsante **Argomento** per tornare alla pagina di aiuto specifica.
+Fare clic sul pulsante [`Argomento`] per tornare alla pagina di aiuto specifica.
 
 .. help-question:: Perché la modifica al file RST non compare?
 
    Le pagine sono ricostruite all'avvio del server quando cambia il checksum
-   di una sorgente. Riavviare il server o premere **Ricostruisci tutte le pagine**.
+   di una sorgente. Riavviare il server o premere [`Ricostruisci tutte le pagine`].
 
 .. help-question::
    :auto:

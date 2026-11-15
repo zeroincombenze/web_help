@@ -1,0 +1,13 @@
+#!/bin/bash
+# Copyright 2026 Zeroincombenze srls <https://www.zeroincombenze.it>
+# License LGPL-3.0-or-later (https://www.gnu.org/licenses/lgpl).
+#
+# PhantomJS for the browser tests of Odoo 10 (HttpCase.phantom_js runs the
+# executable named "phantomjs" found in the PATH). It runs the copy installed
+# by before_test.sh in tests/.phantomjs/, so nothing is installed system-wide.
+# PhantomJS 2.1.1 is built against OpenSSL 1.0: on a current system it aborts
+# at start with "Auto configuration failed" unless the OpenSSL configuration
+# file of the system is kept out of its way.
+DIR=$(cd "$(dirname "$0")/.." && pwd)
+export OPENSSL_CONF=${OPENSSL_CONF:-/dev/null}
+exec "$DIR/.phantomjs/bin/phantomjs" "$@"

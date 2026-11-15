@@ -5,13 +5,13 @@ Example
 
 **The customer wants the invoices sent to its head office**
 
-Open the company, in **Contacts & Addresses** press **Create**, choose
-*Invoice address*, type the head office address and **Save & Close**: new
+Open the company, in **Contacts & Addresses** press [`Create`], choose
+*Invoice address*, type the head office address and [`Save & Close`]: new
 orders propose it as invoice address.
 
 **A person moves to another company**
 
-Open the person, change the :field:`company <parent_id>` and **Save**: the
+Open the person, change the :field:`company <parent_id>` and [`Save`]: the
 address and the commercial data now come from the new company; old documents
 keep the old ones.
 

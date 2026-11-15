@@ -2,16 +2,18 @@ Pagine di aiuto contestuale per la maschera, la lista e il kanban dei contatti (
 
 Ogni pagina segue la regola di aiuto di web_context_help:
 
-* **Descrizione**: aziende, persone e indirizzi, con i campi principali
-* **Nuovo record** (maschera): guida passo passo per creare un'azienda, i suoi
-  contatti e i suoi indirizzi
-* **Modifica record** (maschera): cambio degli indirizzi, i campi condivisi con
-  l'azienda, archiviazione ed eliminazione
-* **Come cercare** (lista, kanban): menu, ricerca, filtri e raggruppamenti
-* **Configurazione**: tag, qualifiche, nazioni, banche e le impostazioni delle
-  altre applicazioni mostrate sul partner
-* **Stampe**: dove viene stampato il partner e i pulsanti statistici
-* **Esempi**: casi comuni, ad es. un indirizzo di fatturazione separato o un partner duplicato
+* **Descrizione**: cosa sono aziende, persone e indirizzi, con i campi principali
+* **Nuovo record** (maschera): guida passo passo per creare un'azienda con i suoi contatti e indirizzi
+* **Modifica record** (maschera): modifica e unione dei contatti
+* **Come archiviare o eliminare un record** (maschera, lista e kanban):
+  archiviazione, ripristino ed eliminazione dei contatti
+* **Tour guidati** (Odoo 18, con web_context_help_tour): creare, modificare
+  e cercare i contatti, passo per passo nella scheda di Odoo
+* **Come cercare** (lista e kanban): menu, ricerca, filtri e raggruppamenti
+* **Configurazione**: etichette, qualifiche, settori, nazioni e banche, e i
+  dati di vendita, acquisto e fatturazione di un partner
+* **Stampe**: pulsanti intelligenti, esportazioni e documenti del partner
+* **Esempi**: casi comuni, ad es. un indirizzo di fatturazione diverso o contatti duplicati
 * **Domande frequenti** e **Piè di pagina**
 
 Le pagine sono in inglese e in italiano, con i menu e le impostazioni della

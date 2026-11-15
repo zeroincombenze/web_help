@@ -5,13 +5,13 @@ Every page follows the help rule of web_context_help:
 
 * **Description**: products, product types and variants, with the main fields
 * **New record** (form): step-by-step guide to create a product and its variants
-* **Update record** (form): prices, costs, units of measure, variants,
-  archiving and deleting; what belongs to the variant and what to the product
-* **How to search** (list, kanban): menus, search, filters and groupings
-* **Configure**: the Sales, Purchases, Inventory and Invoicing settings that
-  affect products
-* **Report**: labels, pricelist and the product stat buttons
-* **Example**: common cases, e.g. a T-shirt in sizes and colours or a service
+* **Update record** (form): changing prices, units and types
+* **How to archive or delete record** (form, list and kanban): archiving,
+  restoring and deleting products and variants
+* **How to search** (list and kanban): menus, search, filters and groupings
+* **Configure**: the settings and the configuration menus that affect products
+* **Report**: labels and the pricelist report
+* **Example**: common cases, e.g. a product sold in sizes and colors
 * **FAQ** and **Footer**
 
 Pages are in English and Italian, with the menus and settings of the running

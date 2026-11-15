@@ -8,7 +8,7 @@ la data fattura (fattura del 15 gennaio, scadenza 14 febbraio).
 
 #. Aprire **Fatturazione ‣ Configurazione ‣**
    :version:`<12|**Gestione**;12|**Amministrazione**;*|**Fatturazione**`
-   **‣ Termini di pagamento** e premere :version:`<17|**Crea**;*|**Nuovo**`.
+   **‣ Termini di pagamento** e premere :version:`<17|[\`Crea\`];*|[\`Nuovo\`]`.
 #. Scrivere il :field:`nome <name>`, ad es. *30 giorni*: è il testo mostrato
    quando si sceglie il termine su un partner o una fattura.
 #. Scrivere la :field:`descrizione in fattura <note>`, ad es. *Pagamento a 30
@@ -27,7 +27,7 @@ la data fattura (fattura del 15 gennaio, scadenza 14 febbraio).
 
          Lasciare il :field:`giorno del mese <day_of_the_month>` a 0.
 
-   #. Premere **Salva e chiudi** per chiudere la riga, poi **Salva** il
+   #. Premere [`Salva e chiudi`] per chiudere la riga, poi [`Salva`] il
       termine.
 
 .. help-version:: 16
@@ -37,7 +37,7 @@ la data fattura (fattura del 15 gennaio, scadenza 14 febbraio).
       :field:`Mesi <months>` a 0 e :field:`Fine del mese <end_month>` spento.
    #. Controllare l'*Esempio* sotto la tabella: con data fattura 15 gennaio,
       la scadenza è il 14 febbraio.
-   #. Premere **Salva**.
+   #. Premere [`Salva`].
 
 .. help-version:: >=17
 
@@ -45,7 +45,7 @@ la data fattura (fattura del 15 gennaio, scadenza 14 febbraio).
       Percentuale Dopo 0 Giorni che seguono la data di fatturazione*:
       cliccare :field:`Dopo <nb_days>` e scrivere 30; lasciare *Giorni che
       seguono la data di fatturazione*.
-   #. Controllare l'**Anteprima**: con data fattura 15 gennaio, l'importo
+   #. Controllare l'[`Anteprima`]: con data fattura 15 gennaio, l'importo
       scade il 14 febbraio.
    #. Il record si salva automaticamente quando lo si lascia, o subito con
       l'icona della nuvola accanto al percorso.

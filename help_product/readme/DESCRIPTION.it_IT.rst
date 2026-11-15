@@ -5,13 +5,13 @@ Ogni pagina segue la regola di aiuto di web_context_help:
 
 * **Descrizione**: prodotti, tipi di prodotto e varianti, con i campi principali
 * **Nuovo record** (maschera): guida passo passo per creare un prodotto e le sue varianti
-* **Modifica record** (maschera): prezzi, costi, unità di misura, varianti,
-  archiviazione ed eliminazione; cosa appartiene alla variante e cosa al prodotto
-* **Come cercare** (lista, kanban): menu, ricerca, filtri e raggruppamenti
-* **Configurazione**: le impostazioni di Vendite, Acquisti, Magazzino e
-  Fatturazione che influenzano i prodotti
-* **Stampe**: etichette, listino e i pulsanti statistici del prodotto
-* **Esempi**: casi comuni, ad es. una maglietta in taglie e colori o un servizio
+* **Modifica record** (maschera): modifica di prezzi, unità e tipologia
+* **Come archiviare o eliminare un record** (maschera, lista e kanban):
+  archiviazione, ripristino ed eliminazione di prodotti e varianti
+* **Come cercare** (lista e kanban): menu, ricerca, filtri e raggruppamenti
+* **Configurazione**: le impostazioni e i menu di configurazione che influenzano i prodotti
+* **Stampe**: etichette e resoconto del listino prezzi
+* **Esempi**: casi comuni, ad es. un prodotto venduto in taglie e colori
 * **Domande frequenti** e **Piè di pagina**
 
 Le pagine sono in inglese e in italiano, con i menu e le impostazioni della

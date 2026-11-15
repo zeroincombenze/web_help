@@ -16,4 +16,4 @@ prodotto per: …*, oppure **Raggruppa per ‣ Categoria prodotto**.
 
 **Stampare le etichette dei nuovi prodotti**
 
-Selezionare i prodotti nell'elenco e premere **Stampare etichette**.
+Selezionare i prodotti nell'elenco e premere [`Stampare etichette`].

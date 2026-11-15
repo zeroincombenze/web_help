@@ -1,5 +1,5 @@
 =================================================
-|icon| Help for invoices/Aiuto fatture 10.0.1.0.4
+|icon| Help for invoices/Aiuto fatture 10.0.1.0.7
 =================================================
 
 **Context help pages for customer invoices and vendor bills**
@@ -32,7 +32,9 @@ Every page follows the standard layout of web_context_help:
   several orders at once
 * **Suggestions for search** (list): menus, search, filters and groupings
 * **How to update a record** (form): changing an invoice, registering payments,
-  credit notes, cancelling and deleting
+  credit notes
+* **How to cancel or delete record** (form and list): cancelling a draft or
+  posted invoice, resetting it to draft, which invoices can be deleted
 * **How to set up**: the Invoicing settings, journals, payment terms and taxes
 * **Report and export file**: the invoice PDF, sending, the invoice analysis
   and the export of the invoices to a file
@@ -41,7 +43,8 @@ Every page follows the standard layout of web_context_help:
 * **FAQ** button and **Footer**
 
 A page for the Accounting Dashboard (journal kanban) explains the cards of
-the journals, their buttons and figures, and the **More** menu.
+the journals, their buttons and figures, the **⋮** menu, and how journals
+are archived or deleted.
 
 Pages are in English and Italian, with the menus, buttons and statuses of the
 running Odoo version.
@@ -67,7 +70,10 @@ Ogni pagina segue la struttura standard di web_context_help:
 * **Suggerimenti per la ricerca** (lista): menu, ricerca, filtri e
   raggruppamenti
 * **Come modificare un record** (maschera): modificare una fattura, registrare
-  i pagamenti, note di credito, annullamento ed eliminazione
+  i pagamenti, note di credito
+* **Come annullare o eliminare un record** (maschera e lista): annullare una
+  fattura in bozza o confermata, riportarla in bozza, quali fatture si
+  possono eliminare
 * **Come configurare**: le impostazioni di Fatturazione, registri, termini di
   pagamento e imposte
 * **Stampe ed esportazione**: il PDF della fattura, l'invio, l'analisi fatture
@@ -77,7 +83,8 @@ Ogni pagina segue la struttura standard di web_context_help:
 * Pulsante **FAQ** e **Piè di pagina**
 
 Una pagina per la Bacheca della contabilità (kanban dei registri) spiega le
-schede dei registri, i loro pulsanti e importi, e il menu **Altro**.
+schede dei registri, i loro pulsanti e importi, il menu **⋮**, e come si
+archiviano o eliminano i registri.
 
 Le pagine sono in inglese e in italiano, con i menu, i pulsanti e gli stati
 della versione di Odoo in uso.
@@ -183,6 +190,28 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+10.0.1.0.7 (2026-11-13)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Invoice form and list: new section How to cancel or delete record (Cancel Journal Entries up to 12.0, Reset to Draft then Cancel from 13.0, sequence and audit trail limits on deletion); journal dashboard: new section How to archive or delete record
+* [IMP] Invoice list: new sections How to insert a new record (button Create / New) and How to update a record (click on a line); journal dashboard: the same sections (cards are not created here, ⋮ ‣ Configuration)
+* [IMP] Buttons written [`Label`], shown inside a frame (menu paths, tabs and titles stay bold)
+
+10.0.1.0.6 (2026-11-08)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Every help page starts with the hint to the Ready and FAQ buttons; every FAQ page starts with the hint to the Topic button
+* [IMP] Invoice FAQ: negative quantity on an invoice line and negative invoice total (Odoo 10.0 does not stop it, 11.0+ refuses it, 13.0+ can switch the draft into a credit note)
+* [FIX] New invoice: Odoo 10.0 does not refuse an invoice with a negative total
+
+10.0.1.0.5 (2026-11-07)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Invoice form and invoice list: 33 e-invoice FAQ (FAQ fattura elettronica, sending and receiving) from the helpdesk tickets, 10.0 only, shown when the l10n_it_einvoice modules are installed
+* [IMP] Invoice list: new chapter Other actions (Altre azioni), before How to set up: confirm invoices, register one payment for several invoices of the same partner, type and currency; no debit note function in 10.0
+* [IMP] Invoice form: new chapter Other actions (Altre azioni), before How to set up: confirm the invoice, register a payment (moved here from How to update a record), outstanding credits, debit note
+* [IMP] Report and export file: aligned with 18.0 (the new paragraphs apply to 17.0 and later only)
+
 10.0.1.0.4 (2026-11-01)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -258,7 +287,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-11-01
+Last Update / Ultimo aggiornamento: 2026-11-15
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status

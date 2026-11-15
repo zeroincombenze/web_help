@@ -17,8 +17,8 @@ di *Settimo Torinese*.
    Il filtro personalizzato degli ordini non raggiunge i campi del cliente:
    fare la ricerca nell'elenco :version:`<12|**Vendite ‣ Vendite ‣
    Clienti**;*|**Vendite ‣ Ordini ‣ Clienti**` con **Filtri ‣**
-   :version:`10|**Crea filtro personalizzato**;*|**Aggiungi filtro
-   personalizzato**`, campo *Città* e operatore *contiene*.
+   :version:`10|[\`Crea filtro personalizzato\`];*|[\`Aggiungi filtro
+   personalizzato\`]`, campo *Città* e operatore *contiene*.
 
 * Con il campo *Città*, l'operatore *contiene* e il valore ``Settimo`` si
   ottengono anche i record di altre città, ad esempio *Settimo Milanese*.
