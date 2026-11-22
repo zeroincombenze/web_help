@@ -6,8 +6,8 @@
 #
 {
     "name": "Help for partner",
-    "version": "10.0.1.0.4",
-    "category": "Hidden/Tools",
+    "version": "10.0.1.0.5",
+    "category": "Tutorial",
     "summary": "Context help pages for contacts (partners)",
     "author": "Zeroincombenze srls",
     "website": "https://github.com/zeroincombenze/web_help",

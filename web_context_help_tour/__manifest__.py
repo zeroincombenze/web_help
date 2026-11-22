@@ -9,8 +9,8 @@
 #
 {
     "name": "Context help tours",
-    "version": "10.0.1.0.0",
-    "category": "Hidden/Tools",
+    "version": "10.0.1.0.1",
+    "category": "Tutorial",
     "summary": "Guided tours of the context help pages, played in the Odoo tab",
     "author": "Zeroincombenze srls",
     "website": "https://github.com/zeroincombenze/web_help",

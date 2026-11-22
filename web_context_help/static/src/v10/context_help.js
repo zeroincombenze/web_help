@@ -11,6 +11,7 @@ odoo.define("web_context_help.context_help", function (require) {
     var ajax = require("web.ajax");
     var core = require("web.core");
     var pyeval = require("web.pyeval");
+    var session = require("web.session");
     var ControlPanel = require("web.ControlPanel");
     var FormView = require("web.FormView");
     var ViewManager = require("web.ViewManager");
@@ -160,7 +161,15 @@ odoo.define("web_context_help.context_help", function (require) {
         });
     }
 
+    // No help level of the user (see res.users._wch_help_disabled)
+    function helpDisabled() {
+        return Boolean(session.wch_help_disabled);
+    }
+
     function open(ctx) {
+        if (helpDisabled()) {
+            return;
+        }
         lastContext = ctx;
         // Open synchronously in the click handler, or popup blockers bite
         helpWindow = openWindow("");
@@ -175,6 +184,9 @@ odoo.define("web_context_help.context_help", function (require) {
 
     // Help menu: the home page, in the same window as the context help
     function openHome() {
+        if (helpDisabled()) {
+            return;
+        }
         helpWindow = openWindow("/web_context_help/home");
         if (helpWindow) {
             helpWindow.focus();
@@ -182,6 +194,9 @@ odoo.define("web_context_help.context_help", function (require) {
     }
 
     function notify(ctx) {
+        if (helpDisabled()) {
+            return;
+        }
         lastContext = ctx;
         if (!isOpen()) {
             return;
@@ -325,8 +340,16 @@ odoo.define("web_context_help.context_help", function (require) {
         events: _.extend({}, ControlPanel.prototype.events, {
             "click .o_wch_button": "on_context_help_click",
         }),
+        start: function () {
+            // No help level: the CSS hides the [?] button of the control panel
+            $("body").toggleClass("o_wch_no_help", helpDisabled());
+            return this._super.apply(this, arguments);
+        },
         on_context_help_click: function (ev) {
             ev.preventDefault();
+            if (helpDisabled()) {
+                return;
+            }
             // a client action (no view) has no context: the home page
             open(isMain(current) ? getContext(current) : {});
         },

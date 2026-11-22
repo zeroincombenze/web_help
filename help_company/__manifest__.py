@@ -6,8 +6,8 @@
 #
 {
     "name": "Help for company",
-    "version": "10.0.1.0.2",
-    "category": "Hidden/Tools",
+    "version": "10.0.1.0.3",
+    "category": "Tutorial",
     "summary": "Context help pages for companies, with Italian e-invoicing setup",
     "author": "Zeroincombenze srls",
     "website": "https://github.com/zeroincombenze/web_help",

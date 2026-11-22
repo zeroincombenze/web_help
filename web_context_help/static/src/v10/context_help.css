@@ -38,3 +38,6 @@
     line-height: 1.4;
     white-space: nowrap;
 }
+
+/* No help level: no [?] button */
+.o_wch_no_help .o_wch_button { display: none !important; }

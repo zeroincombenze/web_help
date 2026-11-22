@@ -94,7 +94,7 @@ RE_VERSION_RANGE = re.compile(r"^(\d+)(?:\s*-\s*(\d+))?$")
 
 def group_version(group):
     """Lowest Odoo major of a group: ``v16_20`` -> 16"""
-    for lo, dummy, name in VERSION_GROUPS:
+    for lo, _dummy, name in VERSION_GROUPS:
         if name == group:
             return lo
     return VERSION_GROUPS[-1][0]
@@ -206,7 +206,7 @@ def parse_installed(spec):
     conditions = parse_when(spec)
     if not conditions:
         raise ValueError("empty help-if condition")
-    for kind, dummy, dummy in conditions:
+    for kind, _dummy, _dummy2 in conditions:
         if kind not in INSTALLED_KINDS:
             raise ValueError("invalid help-if condition %r" % kind)
     return conditions
@@ -231,13 +231,13 @@ def installed_names(help_dir, group):
     """{(kind, name)} named by the help-if conditions of the visible sources:
     the pages are rebuilt when one of them is installed or removed"""
     names = set()
-    for dummy, path in list_sources(help_dir, group).items():
+    for _dummy, path in list_sources(help_dir, group).items():
         for spec in RE_HELP_IF.findall(read_text(path)):
             try:
                 conditions = parse_installed(spec)
             except ValueError:
                 continue
-            for kind, dummy, wanted in conditions:
+            for kind, _dummy, wanted in conditions:
                 names.update((kind, name) for name in wanted)
         # help-tour is shown only with the tour module: built again when it
         # is installed or removed

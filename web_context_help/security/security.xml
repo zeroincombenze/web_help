@@ -10,15 +10,26 @@
         <field name="sequence">90</field>
     </record>
 
-    <!-- Help edit authorization, a selection in the user form:
-         empty (no edit), User, System -->
+    <!-- Help level, a selection in the user form: empty (help shown, no edit),
+         No help (help hidden), User, System. The selection needs groups that imply
+         each other: User implies No help, so a User or System level user is in the
+         No help group too and has the help: the help is hidden only to the users
+         of the No help group that are not in the User group
+         (res.users._wch_help_disabled) -->
+
+    <!-- Disables the help: no Help button, no Help menu, no help pages -->
+    <record id="group_no_help" model="res.groups">
+        <field name="name">No help</field>
+        <field name="category_id" ref="module_category_context_help"/>
+        <field name="comment">The help is not shown to the user: no Help button, no Help menu and no help pages.</field>
+    </record>
 
     <!-- Edits the pages of priority lower than 64; editing a page of the
          modules or of priority 64 or more edits a copy of it -->
     <record id="group_help_user" model="res.groups">
         <field name="name">User</field>
         <field name="category_id" ref="module_category_context_help"/>
-        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user')), (4, ref('group_no_help'))]"/>
         <field name="comment">Edits the help pages of priority lower than 64, their rules and reads the questions asked. Editing any other page creates a copy of it with the default priority.</field>
     </record>
 

@@ -6,8 +6,8 @@
 #
 {
     "name": "Help for Odoo",
-    "version": "10.0.1.0.0",
-    "category": "Hidden/Tools",
+    "version": "10.0.1.0.1",
+    "category": "Tutorial",
     "summary": "Install all the context help pages",
     "author": "Zeroincombenze srls",
     "website": "https://github.com/zeroincombenze/web_help",

@@ -716,3 +716,17 @@ msgstr "Solo gli editor dell'aiuto di livello Sistema impostano una priorità di
 #: model:res.groups,name:web_context_help.group_help_user
 msgid "User"
 msgstr "Utente"
+
+#. module: web_context_help
+#: model:res.groups,name:web_context_help.group_no_help
+msgid "No help"
+msgstr "Nessun aiuto"
+
+#. module: web_context_help
+#: model:res.groups,comment:web_context_help.group_no_help
+msgid ""
+"The help is not shown to the user: no Help button, no Help menu and no help "
+"pages."
+msgstr ""
+"L'aiuto non è mostrato all'utente: niente pulsante Aiuto, niente menu Aiuto "
+"e niente pagine di aiuto."

@@ -1,5 +1,5 @@
 ================================================================
-|icon| Context help tours/Tour dell'aiuto contestuale 10.0.1.0.0
+|icon| Context help tours/Tour dell'aiuto contestuale 10.0.1.0.1
 ================================================================
 
 **Guided tours of the context help pages, played in the Odoo tab**
@@ -184,6 +184,11 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
+
+10.0.1.0.1 (2026-11-22)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Module category changed from Hidden/Tools to Tutorial, as the apps of odoo.com
 
 10.0.1.0.0 (2026-11-13)
 ~~~~~~~~~~~~~~~~~~~~~~~
