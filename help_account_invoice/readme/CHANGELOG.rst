@@ -1,3 +1,11 @@
+12.0.1.0.6 (2026-11-22)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Help pages split in customer invoices (account_invoice_out_*, types out_invoice / out_refund) and vendor bills (account_invoice_in_*, types in_invoice / in_refund, view invoice_supplier_form): list and form, new record, update, cancel, set up, report, examples, FAQ and e-invoice FAQ (v11_14) rewritten for each side; the old account_invoice_* files are removed
+* [IMP] Vendor bills: new chapter Invoice from supplier order (only with purchase): Control Policy of the product, Confirm Order, Receive Products, Create Bill, Auto-Complete, partial billing, Billing Status of the order
+* [IMP] Vendor bills: vendor reference, bill date, payment to the vendor, credit note requested to the vendor (Ask for a Credit Note, Add Credit Note); the Bill tab of the vendor form and the vendor set up (Sales & Purchases and Invoicing tabs of the partner) as in Odoo 12.0; no cash rounding on the vendor bills
+* [FIX] Italian labels of Odoo 12.0: Multi valuta, Modifica: crea nota di credito, riconcilia e genera nuova fattura in bozza, Cancel Journal Entries
+
 12.0.1.0.5 (2026-11-13)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

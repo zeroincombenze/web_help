@@ -1,3 +1,9 @@
+12.0.1.0.13 (2026-11-22)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [QUA] Test coverage 90% (1442: 137+1305) [0 TestPoints] - quality rating 51 (target 100)
+* [IMP] Help window: text column limited to 860px; on windows 1200px wide or more the Contents box hangs in the right margin, always in view while scrolling (before it was above the text)
+
 12.0.1.0.12 (2026-11-15)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 

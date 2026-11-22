@@ -1,5 +1,5 @@
 =================================================
-|icon| Context help/Aiuto contestuale 12.0.1.0.12
+|icon| Context help/Aiuto contestuale 12.0.1.0.13
 =================================================
 
 **Context help button, pages written in RST by each module**
@@ -432,6 +432,12 @@ An Enhancement Proposal may be submitted if your idea gains ground.
 ChangeLog History | Cronologia modifiche
 ----------------------------------------
 
+12.0.1.0.13 (2026-11-22)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [QUA] Test coverage 90% (1442: 137+1305) [0 TestPoints] - quality rating 51 (target 100)
+* [IMP] Help window: text column limited to 860px; on windows 1200px wide or more the Contents box hangs in the right margin, always in view while scrolling (before it was above the text)
+
 12.0.1.0.12 (2026-11-15)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -526,11 +532,6 @@ ChangeLog History | Cronologia modifiche
 
 * [IMP] Version specific help: help-version directive and :version: role, pages built for the running Odoo version
 
-12.0.0
-~~~~~~
-
-* [IMP] Field labels highlighted too, dialogs keep the help of the main view
-
 
 
 Credits | Ringraziamenti
@@ -580,7 +581,7 @@ La distribuzione `Zeroincombenze® <https://www.zeroincombenze.it/>`__ è proget
 
 This module is part of web_help project.
 
-Last Update / Ultimo aggiornamento: 2026-11-15
+Last Update / Ultimo aggiornamento: 2026-11-22
 
 .. |Maturity| image:: https://img.shields.io/badge/maturity-Alfa-black.png
     :target: https://odoo-community.org/page/development-status
