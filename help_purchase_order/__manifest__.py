@@ -6,8 +6,8 @@
 #
 {
     "name": "Help for purchase order",
-    "version": "12.0.1.0.5",
-    "category": "Hidden/Tools",
+    "version": "12.0.1.0.6",
+    "category": "Tutorial",
     "summary": "Context help pages for purchase orders",
     "author": "Zeroincombenze srls",
     "website": "https://github.com/zeroincombenze/web_help",

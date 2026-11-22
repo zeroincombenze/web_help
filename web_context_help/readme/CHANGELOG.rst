@@ -1,3 +1,14 @@
+12.0.1.0.14 (2026-11-22)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Documentation: how to add images (image directive, file in the static directory of a module) and videos (page editor), and the guided tours that need the web_context_help_tour module
+* [IMP] Module category changed from Hidden/Tools to Tutorial, as the apps of odoo.com
+* [IMP] Description: the help pages are on two levels, standard (supplied by the help modules, priority 64 or more) and customized (priority lower than 64)
+* [QUA] Test coverage 91% (1482: 139+1343) [0 TestPoints] - quality rating 51 (target 100)
+* [NEW] Help level *No help* (user form, field Context Help): the help is hidden to the user, with no Help button, no Help menu and no help pages (the User and System levels keep the help)
+* [FIX] Code cleanup for flake8 (unused loop variables, loop variable bound in a lambda)
+* [IMP] Documentation: buttons written as [`Label`] and the |sos| button, as the help pages
+
 12.0.1.0.13 (2026-11-22)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
