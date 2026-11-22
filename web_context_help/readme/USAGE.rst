@@ -1,4 +1,4 @@
-The **Help** menu, at the top of the menu tree, opens the help home page in
+The |sos| menu, at the top of the menu tree, opens the help home page in
 the help window. The **Summary** button in the header lists, grouped by module,
 the pages of every installed help module; **Ready** goes back to the home page.
 Users allowed to change the help pages also see **Edit**, which opens the page
@@ -23,12 +23,12 @@ in quotes (``"draft invoice"``) is searched as an exact phrase.
 **Esc** clears the search.
 
 The *Example* and *FAQ* sections of a page and the fields help of its model
-are shown on their own pages, opened by the **Example**, **FAQ** and **Fields**
-buttons in the help window header; the **Help** button goes back to the page
-(on the Example, FAQ and Fields pages it is labelled **Topic**). The questions built by
+are shown on their own pages, opened by the [`Example`], [`FAQ`] and [`Fields`]
+buttons in the help window header; the |sos| button goes back to the page
+(on the Example, FAQ and Fields pages it is labelled [`Topic`]). The questions built by
 ``help-question`` ``:auto:`` are left to the **Fields** page.
 
-Moving from page to page of the help window, the **Topic** button goes back to
+Moving from page to page of the help window, the [`Topic`] button goes back to
 the help page of the view open in Odoo; it is hidden when that page (or its
 Example / FAQ / Fields page) is the one shown.
 
@@ -47,11 +47,8 @@ kanban view follows the list rules):
 * ``description`` *Description*: summary of the view / model; its first
   paragraph is always "Click on button ``[`Ready`]`` for help about how to use
   this help; click on button ``[`FAQ`]`` for the most common solved questions."
-  (Italian: "Fare clic sul pulsante ``[`Pronto`]`` per sapere come usare questo
-  aiuto; fare clic sul pulsante ``[`FAQ`]`` per le domande più comuni già
-  risolte.")
 * ``new_record`` *How to insert a new record*: in the form, steps to insert a
-  record; in list / kanban, a brief text about the **New** button (**Create**
+  record; in list / kanban, a brief text about the [`New`] button ([`Create`]
   up to Odoo 15)
 * ``search`` *Suggestions for search*: list / kanban only, how to find, filter
   and group
@@ -65,12 +62,10 @@ kanban view follows the list rules):
 * ``configure`` *How to set up*: settings and configuration
 * ``report`` *Report and export file*: prints, pdf attachment, export
 * ``example`` *Example*: useful examples, on their own page opened by the
-  **Example** button
+  [`Example`] button
 * ``faq`` *FAQ*: ``help-question`` blocks, on their own page opened by the
-  **FAQ** button; the first paragraph, before the first question, is always
-  "Click on button ``[`Topic`]`` to return to the specific help page." (Italian:
-  "Fare clic sul pulsante ``[`Argomento`]`` per tornare alla pagina di aiuto
-  specifica.")
+  [`FAQ`] button; the first paragraph, before the first question, is always
+  "Click on button ``[`Topic`]`` to return to the specific help page."
 * ``footer`` *Footer*: date and time of page creation and copyright notice,
   not in the table of contents
 
@@ -130,7 +125,7 @@ administrator get 32 by default, the pages built from the modules 96: these are
 the last fallback, always available. The priority of a module page is set by
 the ``:priority:`` option of its ``help-page``, 96 when missing.
 
-A clear cut page, or a page of priority 64 or less, shows the **Loose help**
+A clear cut page, or a page of priority 64 or less, shows the [`Loose help`]
 button in the help window: it opens the general page of priority 64 or more
 with the highest priority, for the same record, usually the page of the
 module.
@@ -164,9 +159,11 @@ the first matching condition, inline markup allowed, roles not allowed; write
 ``\ `` before the role when it is glued to the previous word.
 Roles ``:field:`` and ``:tour:`` highlight a field or run a tour in the Odoo tab.
 
-A button label written between ``[`` and ``]`` with backquotes,
-``[`Save`]``, is shown as a button, the label inside a frame. Inside
-``:version:`` the backquotes are escaped:
+A button label written between ``[``` and ```]`` with backquotes,
+``[`Save`]``, is shown as a [`button`], the label inside a frame.
+A text written between ``[```` and ````]`` with backquotes,
+``[``''Tab''``]``, is shown as a [``Tab``], the label inside a frame, without bottom line.
+Inside ``:version:`` the backquotes are escaped:
 ``:version:`<16|[\`Create\`];>=16|[\`New\`]```. It cannot be nested in
 Italic and bold are written with one or two stars around the words
 (*italic*, **bold**); in a code block the stars stay as written.
@@ -193,6 +190,37 @@ in whatever order the modules are installed.
 
 Conditions: ``module`` or ``model``, ``=`` (any of the names joined by comma
 is installed / exists) or ``!=`` (none of them), several joined by ``and``.
+
+Images and videos
+~~~~~~~~~~~~~~~~~
+
+**Images** are written in the RST source of the page with the ``image``
+directive. The file is in the ``static/`` directory of a module, e.g.
+``static/description/`` of the module, and the path is the URL of the
+file, which starts with the technical name of the module::
+
+    .. image:: /web_context_help/static/description/devel_mode.png
+       :alt: Activate developer mode
+       :width: 100%
+
+Put a description in ``:alt:``, and ``:width: 100%`` to fit the image to the
+help window. The image is part of the source, so every language of the page
+shows it. An image can also be added to the page in the Odoo page editor, as
+in any other HTML field.
+
+**Videos** are not written in RST: a help editor inserts them in the HTML page
+from the Odoo interface. The video files are not in the module but in a
+directory of the server, set by the ``web_help_video_path`` system parameter
+(see *Configuration*), so the same files must be copied to every server where
+the page is shown. In the page editor press the film button of the floating
+toolbar (or type */Help video*): the list shows the videos of the video
+directory, and the chosen one is inserted after the current paragraph. The
+player starts at a click, and the page keeps the video when the module is
+upgraded, like any other edit of the page.
+
+**Guided tours** are written in the RST source of the page too (see below) but
+need another module: they are shown only when *Context help tours*
+(``web_context_help_tour``) is installed.
 
 Guided tours
 ~~~~~~~~~~~~

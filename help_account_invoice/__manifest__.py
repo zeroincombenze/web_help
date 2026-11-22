@@ -6,8 +6,8 @@
 #
 {
     "name": "Help for invoices",
-    "version": "18.0.1.0.7",
-    "category": "Hidden/Tools",
+    "version": "18.0.1.0.8",
+    "category": "Tutorial",
     "summary": "Context help pages for customer invoices and vendor bills",
     "author": "Zeroincombenze srls",
     "website": "https://github.com/zeroincombenze/zerobug-test",

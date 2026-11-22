@@ -1,4 +1,4 @@
-Il menu **Aiuto**, in cima all'albero dei menu, apre la pagina iniziale
+Il menu |sos|, in cima all'albero dei menu, apre la pagina iniziale
 dell'aiuto nella finestra di aiuto. Il pulsante **Sommario** nell'intestazione
 elenca, raggruppate per modulo, le pagine di ogni modulo di aiuto installato;
 **Pronto** torna alla pagina iniziale. Gli utenti abilitati a modificare le
@@ -26,12 +26,13 @@ precedente, **Esc** annulla la ricerca.
 
 Le sezioni *Esempio* e *Domande frequenti* di una pagina e l'aiuto dei campi
 del suo modello sono mostrati in pagine a parte, aperte dai pulsanti
-**Esempio**, **FAQ** e **Campi** nell'intestazione della finestra di aiuto; il pulsante **Aiuto**
-torna alla pagina (nelle pagine Esempio, FAQ e Campi si chiama **Argomento**). Le domande costruite da ``help-question`` ``:auto:`` sono
+[`Esempio`], [`FAQ`] e [`Campi`] nell'intestazione della finestra di aiuto; il pulsante |sos|
+torna alla pagina (nelle pagine Esempio, FAQ e Campi si chiama [`Argomento`]).
+Le domande costruite da ``help-question`` ``:auto:`` sono
 lasciate alla pagina **Campi**.
 
 Passando da una pagina all'altra della finestra di aiuto, il pulsante
-**Argomento** torna alla pagina di aiuto della vista aperta in Odoo; è nascosto
+[`Argomento`] torna alla pagina di aiuto della vista aperta in Odoo; è nascosto
 quando è mostrata proprio quella pagina (o la sua pagina Esempio / FAQ / Campi).
 
 Scrivere l'aiuto di un modulo: mettere i file RST in ``help/common/`` o nella
@@ -49,12 +50,10 @@ l'elenco (una vista kanban segue le regole dell'elenco):
 * ``description`` *Descrizione*: sintesi della vista / modello; il primo
   paragrafo è sempre "Fare clic sul pulsante ``[`Pronto`]`` per sapere come
   usare questo aiuto; fare clic sul pulsante ``[`FAQ`]`` per le domande più
-  comuni già risolte." (inglese: "Click on button ``[`Ready`]`` for help about
-  how to use this help; click on button ``[`FAQ`]`` for the most common solved
-  questions.")
+  comuni già risolte."
 * ``new_record`` *Come inserire un nuovo record*: nella maschera, passi per
   inserire un record; in elenco / kanban, un breve testo sul pulsante
-  **Nuovo** (**Crea** fino a Odoo 15)
+  [`Nuovo`] ([`Crea`] fino a Odoo 15)
 * ``search`` *Suggerimenti per la ricerca*: solo elenco / kanban, come trovare,
   filtrare e raggruppare
 * ``update_record`` *Come modificare un record*: nella maschera, passi per
@@ -67,12 +66,11 @@ l'elenco (una vista kanban segue le regole dell'elenco):
 * ``configure`` *Come configurare*: impostazioni e configurazione
 * ``report`` *Stampe ed esportazione*: stampe, allegato pdf, esportazione
 * ``example`` *Esempi*: esempi utili, in una pagina a parte aperta dal pulsante
-  **Esempio**
+  [`Esempio`]
 * ``faq`` *Domande frequenti*: blocchi ``help-question``, in una pagina a parte
-  aperta dal pulsante **FAQ**; il primo paragrafo, prima della prima domanda, è
+  aperta dal pulsante [`FAQ`]; il primo paragrafo, prima della prima domanda, è
   sempre "Fare clic sul pulsante ``[`Argomento`]`` per tornare alla pagina di
-  aiuto specifica." (inglese: "Click on button ``[`Topic`]`` to return to the specific
-  help page.")
+  aiuto specifica."
 * ``footer`` *Piè di pagina*: data e ora di creazione della pagina e nota di
   copyright, non nell'indice
 
@@ -136,7 +134,7 @@ sono l'ultima alternativa, sempre disponibile. La priorità di una pagina di
 modulo è data dall'opzione ``:priority:`` del suo ``help-page``, 96 se manca.
 
 Una pagina clear cut, o di priorità 64 o inferiore, mostra nella finestra di
-aiuto il pulsante **Aiuto generale**: apre la pagina generale di priorità 64 o
+aiuto il pulsante [`Aiuto generale`]: apre la pagina generale di priorità 64 o
 superiore con la priorità più alta, per lo stesso record, di solito la pagina
 del modulo.
 
@@ -171,9 +169,13 @@ senza altri ruoli; scrivere ``\ `` prima del ruolo quando è attaccato alla
 parola precedente.
 I ruoli ``:field:`` e ``:tour:`` evidenziano un campo o avviano un tour nella scheda di Odoo.
 
-L'etichetta di un pulsante scritta tra ``[`` e ``]`` con gli apici
-inversi, ``[`Salva`]``, è mostrata come un pulsante, l'etichetta dentro una
-cornice. Dentro ``:version:`` gli apici inversi sono preceduti da ``\``:
+L'etichetta di un pulsante scritta tra ``[``` e ```]`` con gli apici
+inversi, ``[`Salva`]``, è mostrata come un [`pulsante`], l'etichetta dentro una
+cornice.
+Il testo scritto tra ``[```` e ````]`` con gli apici
+inversi, ``[``''Scheda''``]``, è mostrata come una [``Scheda``], l'etichetta dentro una
+cornice, senza la linea bassa.
+Dentro ``:version:`` gli apici inversi sono preceduti da ``\``:
 ``:version:`<16|[\`Crea\`];>=16|[\`Nuovo\`]```. Non si può annidare in
 Corsivo e grassetto si scrivono con uno o due asterischi attorno alle
 parole (*corsivo*, **grassetto**); in un blocco di codice restano come sono
@@ -202,6 +204,38 @@ installato o rimosso, in qualunque ordine siano installati i moduli.
 Condizioni: ``module`` o ``model``, ``=`` (almeno uno dei nomi separati da
 virgola è installato / esiste) o ``!=`` (nessuno di essi), più condizioni
 unite da ``and``.
+
+Immagini e video
+~~~~~~~~~~~~~~~~
+
+Le **immagini** sono scritte nella sorgente RST della pagina con la direttiva
+``image``. Il file è nella cartella ``static/`` di un modulo, ad es.
+``static/description/`` del modulo, e il percorso è l'URL del file,
+che inizia con il nome tecnico del modulo::
+
+    .. image:: /web_context_help/static/description/devel_mode.png
+       :alt: Attiva la modalità sviluppatore
+       :width: 100%
+
+Scrivere una descrizione in ``:alt:`` e ``:width: 100%`` per adattare
+l'immagine alla finestra di aiuto. L'immagine fa parte della sorgente, quindi
+ogni lingua della pagina la mostra. Un'immagine si può aggiungere alla pagina
+anche con l'editor di Odoo, come in qualsiasi altro campo HTML.
+
+I **video** non si scrivono in RST: un editor dell'aiuto li inserisce nella
+pagina HTML dall'interfaccia di Odoo. I file dei video non sono nel modulo ma
+in una cartella del server, impostata dal parametro di sistema
+``web_help_video_path`` (vedere *Configurazione*), quindi gli stessi file
+vanno copiati su ogni server dove la pagina è mostrata. Nell'editor della
+pagina premere il pulsante a forma di pellicola della barra mobile (o scrivere
+*/Help video*): l'elenco mostra i video della cartella dei video, e quello
+scelto è inserito dopo il paragrafo corrente. Il lettore parte con un clic, e
+la pagina mantiene il video quando il modulo è aggiornato, come qualsiasi
+altra modifica della pagina.
+
+I **tour guidati** sono scritti anche nella sorgente RST della pagina (vedere
+sotto) ma richiedono un altro modulo: sono mostrati solo quando *Context help
+tours* (``web_context_help_tour``) è installato.
 
 Tour guidati
 ~~~~~~~~~~~~

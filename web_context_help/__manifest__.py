@@ -9,9 +9,9 @@
 #
 {
     "name": "Context help",
-    "version": "18.0.1.0.14",
-    "category": "Hidden/Tools",
-    "summary": "Context help button, pages written in RST by each module",
+    "version": "18.0.1.0.15",
+    "category": "Tutorial",
+    "summary": "Context help button",
     "author": "Zeroincombenze srls",
     "website": "https://github.com/zeroincombenze/zerobug-test",
     "development_status": "Alpha",

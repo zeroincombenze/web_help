@@ -6,6 +6,7 @@
 import {ControlPanel} from "@web/search/control_panel/control_panel";
 import {FormController} from "@web/views/form/form_controller";
 import {patch} from "@web/core/utils/patch";
+import {session} from "@web/session";
 import {useService} from "@web/core/utils/hooks";
 import {onMounted, useSubEnv} from "@odoo/owl";
 
@@ -52,10 +53,14 @@ patch(ControlPanel.prototype, {
         this.contextHelp = useService("context_help");
         onMounted(() => {
             // Dialogs (e.g. Search More) keep the help of the main view
-            if (!this.env.inDialog) {
+            if (!this.env.inDialog && this.contextHelpEnabled) {
                 this.contextHelp.notify(this.getContextHelpContext());
             }
         });
+    },
+    get contextHelpEnabled() {
+        // No help level of the user: no button (see res.users._wch_help_disabled)
+        return !session.wch_help_disabled;
     },
     getContextHelpContext() {
         const config = this.env.config || {};
@@ -89,7 +94,7 @@ patch(FormController.prototype, {
         this.contextHelp = useService("context_help");
     },
     notifyContextHelp() {
-        if (this.env.inDialog || !this.model.root) {
+        if (this.env.inDialog || !this.model.root || session.wch_help_disabled) {
             return;
         }
         this.contextHelp.notify({

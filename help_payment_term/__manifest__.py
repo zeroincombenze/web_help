@@ -6,8 +6,8 @@
 #
 {
     "name": "Help for payment terms",
-    "version": "18.0.1.0.4",
-    "category": "Hidden/Tools",
+    "version": "18.0.1.0.5",
+    "category": "Tutorial",
     "summary": "Context help pages for payment terms",
     "author": "Zeroincombenze srls",
     "website": "https://github.com/zeroincombenze/zerobug-test",

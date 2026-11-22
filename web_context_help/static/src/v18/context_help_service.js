@@ -7,6 +7,7 @@
 import {registry} from "@web/core/registry";
 import {browser} from "@web/core/browser/browser";
 import {rpc} from "@web/core/network/rpc";
+import {session} from "@web/session";
 
 const WINDOW_NAME = "odoo_help";
 const FOLLOW_KEY = "web_context_help.follow";
@@ -84,6 +85,9 @@ export const contextHelpService = {
         }
 
         async function open(ctx) {
+            if (session.wch_help_disabled) {
+                return;
+            }
             lastContext = ctx;
             // Open synchronously in the click handler, or popup blockers bite
             helpWindow = openWindow("");
@@ -97,6 +101,9 @@ export const contextHelpService = {
 
         // Help menu: the home page, in the same window as the context help
         function openHome() {
+            if (session.wch_help_disabled) {
+                return;
+            }
             helpWindow = openWindow("/web_context_help/home");
             if (helpWindow) {
                 helpWindow.focus();

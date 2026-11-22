@@ -6,8 +6,8 @@
 #
 {
     "name": "Help for sale order",
-    "version": "18.0.1.0.6",
-    "category": "Hidden/Tools",
+    "version": "18.0.1.0.7",
+    "category": "Tutorial",
     "summary": "Context help pages for sale orders",
     "author": "Zeroincombenze srls",
     "website": "https://github.com/zeroincombenze/zerobug-test",

@@ -456,7 +456,7 @@ class ContextHelpPage(models.Model):
     @api.model
     def _wch_best_lang(self, pages, lang):
         for code in (lang, rst_help.DEFAULT_LANG):
-            found = pages.filtered(lambda p: p.lang == code)
+            found = pages.filtered(lambda p, code=code: p.lang == code)
             if found:
                 return found[0]
         return pages[0]
@@ -683,7 +683,7 @@ class ContextHelpPage(models.Model):
         """Which help-if conditions are met: it changes, and the pages are
         rebuilt, when a module or model named by a condition comes or goes"""
         names = set()
-        for dummy, path in modules:
+        for _dummy, path in modules:
             names |= rst_help.installed_names(path, group)
         state = sorted(
             "%s:%s:%s" % (kind, name, name in installed.get(kind, ()))
@@ -768,7 +768,7 @@ class ContextHelpPage(models.Model):
             if inherit["target"] != key:
                 continue
             sources.setdefault((inherit["module"], inherit["base"]), []).append(inherit)
-        for dummy, items in sources.items():
+        for _dummy, items in sources.items():
             langs = set(i["lang"] for i in items)
             use = lang if lang in langs else rst_help.DEFAULT_LANG
             result.extend(i for i in items if i["lang"] == use)

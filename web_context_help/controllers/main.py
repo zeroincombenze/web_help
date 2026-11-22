@@ -22,6 +22,11 @@ RE_LANG = re.compile(r"^[a-z]{2,3}(_[A-Za-z0-9]+)?(@\w+)?$")
 
 
 class ContextHelp(http.Controller):
+    def _check_help(self):
+        """Users of the No help level get no help page"""
+        if request.env.user._wch_help_disabled():
+            raise Forbidden()
+
     def _lang(self, lang=None):
         """lang of the request; a malformed one is cut at the first bad char,
         e.g. it_IT?debug=1 (a second "?" in the URL) gives it_IT"""
@@ -49,6 +54,7 @@ class ContextHelp(http.Controller):
     @http.route("/web_context_help/home", type="http", auth="user")
     def home(self, lang=None, **kw):
         """Page of the Help menu; the summary when the page is missing"""
+        self._check_help()
         lang = self._lang(lang)
         Page = request.env["context.help.page"]
         if Page.get_page(HOME_KEY, lang):
@@ -58,6 +64,7 @@ class ContextHelp(http.Controller):
     @http.route("/web_context_help/summary", type="http", auth="user")
     def summary(self, lang=None, **kw):
         """Pages of every installed help module, grouped by module"""
+        self._check_help()
         lang = self._lang(lang)
         groups = request.env["context.help.page"].summary(lang)
         return self._html(
@@ -81,6 +88,7 @@ class ContextHelp(http.Controller):
         **kw
     ):
         """loose_from: key of the page shown, for its Loose help button"""
+        self._check_help()
         lang = self._lang(lang)
         Page = request.env["context.help.page"]
         page = Page.lookup(
@@ -101,6 +109,7 @@ class ContextHelp(http.Controller):
     def loose(self, key, lang=None, **kw):
         """Loose help of a page opened without the Odoo tab: the record is
         unknown, the general page is looked up by the model of the page"""
+        self._check_help()
         lang = self._lang(lang)
         Page = request.env["context.help.page"]
         page = Page.get_page(key, lang)
@@ -120,6 +129,7 @@ class ContextHelp(http.Controller):
         """view: None for the page, "example" / "faq" / "fields" for its
         Example or FAQ (sections of the page) or Fields (fields help of its
         model) page. The page itself starts with its table of contents"""
+        self._check_help()
         lang = self._lang(lang)
         Page = request.env["context.help.page"]
         page = Page.get_page(key, lang)
@@ -179,6 +189,7 @@ class ContextHelp(http.Controller):
 
     @http.route("/web_context_help/auto/<string:model>", type="http", auth="user")
     def auto(self, model, lang=None, **kw):
+        self._check_help()
         lang = self._lang(lang)
         if model not in request.env:
             raise NotFound()
@@ -200,6 +211,7 @@ class ContextHelp(http.Controller):
 
     @http.route("/web_context_help/ask", type="json", auth="user")
     def ask(self, question=None, context=None, **kw):
+        self._check_help()
         context = dict(context or {})
         context.setdefault("lang", self._lang())
         return request.env["context.help.page"].ask(question, context)

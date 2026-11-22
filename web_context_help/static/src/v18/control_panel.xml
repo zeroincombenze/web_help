@@ -4,7 +4,7 @@
      VERSION-DEPENDENT: Odoo 18 adapter. -->
 <templates xml:space="preserve">
     <t t-name="web_context_help.Button">
-        <button t-if="!env.inDialog" type="button" class="btn btn-link o_wch_button"
+        <button t-if="!env.inDialog and contextHelpEnabled" type="button" class="btn btn-link o_wch_button"
             title="Help" aria-label="Help" data-hotkey="shift+h"
             t-on-click="onContextHelpClick">
             <i class="fa fa-life-ring text-danger"/>

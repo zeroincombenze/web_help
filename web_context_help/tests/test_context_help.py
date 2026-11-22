@@ -13,6 +13,7 @@ import tempfile
 from odoo.exceptions import AccessError, ValidationError
 from odoo.modules.module import get_module_path
 from odoo.tests import common, tagged
+from odoo.tests.common import JsonRpcException
 
 BASE = """.. help-page:: partner
    :model: res.partner
@@ -789,13 +790,48 @@ class TestContextHelpHttp(common.HttpCase):
         page_e.write({"html": "<h2>System</h2><p>text</p>"})
         self.assertTrue(page.edited)
 
+    def test_no_help_level(self):
+        """The No help level hides the help; the User and System levels keep it"""
+        Users = self.env["res.users"]
+        no_help = self.env.ref("web_context_help.group_no_help")
+        user_level = self.env.ref("web_context_help.group_help_user")
+        system_level = self.env.ref("web_context_help.group_help_editor")
+        base_user = self.env.ref("base.group_user")
+
+        def make(login, groups):
+            return Users.create(
+                {
+                    "name": login,
+                    "login": login,
+                    "groups_id": [(6, 0, (base_user | groups).ids)],
+                }
+            )
+
+        plain = make("wch_plain", self.env["res.groups"])
+        silent = make("wch_silent", no_help)
+        editor = make("wch_user_level", user_level)
+        system = make("wch_system_level", system_level)
+        self.assertFalse(plain._wch_help_disabled())
+        self.assertTrue(silent._wch_help_disabled())
+        # User and System imply No help, but they keep the help
+        self.assertTrue(editor.has_group("web_context_help.group_no_help"))
+        self.assertFalse(editor._wch_help_disabled())
+        self.assertFalse(system._wch_help_disabled())
+        # the Help menus are hidden to the users without help only
+        root = self.env.ref("web_context_help.menu_help_root")
+        Menu = self.env["ir.ui.menu"]
+        self.assertNotIn(root.id, Menu.with_user(silent)._visible_menu_ids())
+        self.assertIn(root.id, Menu.with_user(plain)._visible_menu_ids())
+
     def test_help_user(self):
         Page = self.env["context.help.page"]
         Page.sync_sources(force=True)
         user_group = self.env.ref("web_context_help.group_help_user")
         system_group = self.env.ref("web_context_help.group_help_editor")
-        # three levels: no edit, User, System
+        no_help_group = self.env.ref("web_context_help.group_no_help")
+        # levels: no edit, No help, User, System
         self.assertIn(user_group, system_group.implied_ids)
+        self.assertIn(no_help_group, user_group.implied_ids)
         self.assertEqual(user_group.category_id, system_group.category_id)
         self.assertFalse(user_group.category_id.parent_id)
         # the authorization is in the Other section of the user form
@@ -805,7 +841,7 @@ class TestContextHelpHttp(common.HttpCase):
             if t[0] == user_group.category_id
         ][0]
         self.assertEqual(kind, "selection")
-        self.assertEqual(groups, user_group | system_group)
+        self.assertEqual(groups, no_help_group | user_group | system_group)
         self.assertEqual(section, (100, "Other"))
         help_user = self.env["res.users"].create(
             {
@@ -920,5 +956,5 @@ class TestContextHelpHttp(common.HttpCase):
         self.authenticate("wch_video", "wch_video_pwd")
         res = self.url_open("/web_context_help/video/intro.mp4")
         self.assertEqual(res.status_code, 200)
-        with self.assertRaises(Exception):
+        with self.assertRaises(JsonRpcException):
             self.make_jsonrpc_request("/web_context_help/videos")
