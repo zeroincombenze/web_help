@@ -1,0 +1,59 @@
+.. _update_record:
+
+How to update a record
+----------------------
+
+.. help-version:: <13
+
+   #. Open the invoice from the list and press [`Edit`]. A *Draft* invoice can
+      be changed freely; press [`Save`] when done.
+   #. A validated (*Open*) invoice cannot be changed. To correct it, press
+      [`Cancel Invoice`], then [`Reset to Draft`], change it and press
+      [`Validate`] again: it keeps its number. Cancelling needs the
+      *Allow Cancelling Entries* option of the journal, see *How to set up*.
+   #. To register a payment, see *Other actions*.
+   #. To refund the customer, press :version:`10|[\`Refund Invoice\`];*|[\`Add
+      Credit Note\`]`, write the reason and the date, choose the method and
+      press :version:`10|[\`Create Refund\`];*|[\`Add Credit Note\`]`:
+
+      * :version:`10|*Create a draft refund*;*|*Create a draft credit note*`:
+        a draft to change, e.g. for a partial refund;
+      * :version:`10|*Cancel: create refund and reconcile*;*|*Cancel: create
+        credit note and reconcile*`: the whole invoice is cancelled;
+      * :version:`10|*Modify: create refund, reconcile and create a new draft
+        invoice*;*|*Modify: create credit note, reconcile and create a new
+        draft invoice*`: as *Cancel*, plus a new draft to correct.
+
+.. help-version:: >=13
+
+   #. Open the invoice from the list. :version:`<17|Press [\`Edit\`]: a *Draft*
+      invoice can be changed freely, then press [\`Save\`].;*|A *Draft* invoice
+      can be changed freely and is saved automatically.`
+   #. A *Posted* invoice cannot be changed: press [`Reset to Draft`], change
+      it and press :version:`13|[\`Post\`];*|[\`Confirm\`]` again; it keeps its
+      number. The button is missing in a locked period and on secured
+      journals: issue a credit note instead.
+   #. To register a payment, see *Other actions*.
+   #. To refund the customer, press :version:`<17|[\`Add Credit Note\`];*|[\`Credit
+      Note\`]`, write the reason and check the reversal date and the journal.
+
+      .. help-version:: <17
+
+         Choose the credit method and press [`Reverse`]:
+
+         * *Partial Refund*: a draft credit note to change and confirm;
+         * *Full Refund*: the credit note is posted and matched with the
+           invoice, which becomes paid;
+         * *Full refund and new draft invoice*: as *Full Refund*, plus a new
+           draft invoice to correct.
+
+      .. help-version:: >=17
+
+         Press [`Reverse`] for a draft credit note to change and confirm, or
+         [`Reverse and Create Invoice`] to cancel the whole invoice with a
+         posted credit note and open a new draft invoice to correct.
+
+   .. help-version:: >=15
+
+      An invoice marked *To Check*, e.g. created from an email or a scanned
+      PDF, shows [`Set as Checked`]: press it after reviewing the invoice.

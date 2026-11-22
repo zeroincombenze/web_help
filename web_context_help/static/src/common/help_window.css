@@ -89,4 +89,10 @@ ul.wch-summary { padding-left: 20px; }
 .wch-toc .wch-toc-title { margin: 0 0 4px; font-weight: 600; }
 .wch-toc ul { margin: 0; padding-left: 20px; }
 .wch-toc li { margin: 2px 0; }
+@media (min-width: 1200px) {
+    /* Wide window: the contents hang in the right margin of the 860px text
+     * column (zero net width, so the text is never narrowed), always in view */
+    .wch-toc { float: right; position: sticky; top: 56px; width: 260px;
+        margin: 8px -284px 16px 24px; max-height: calc(100vh - 80px); overflow-y: auto; }
+}
 ul.wch-summary li { margin: 2px 0; }

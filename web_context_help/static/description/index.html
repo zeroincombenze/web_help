@@ -673,8 +673,15 @@ blocco <code>help-version</code> delle versioni su cui &#232; stato verificato.
     <div class="oe_row oe_spaced">
         <h3 align="center" style="color:#162832;font-size: 26px;font-weight: 300;">ChangeLog History | Cronologia modifiche</h3>
         <div class="oe_span12">
-<h4>18.0.1.0.13 (2026-11-14)</h4>
+<h4>18.0.1.0.14 (2026-11-22)</h4>
 <p align="justify">
+<ul>
+<li>[QUA] Test coverage 95% (1316: 64+1252) [0 TestPoints] - quality rating 54 (target 100)</li>
+<li>[IMP] Help window: text column limited to 860px; on windows 1200px wide or more the Contents box hangs in the right margin, always in view while scrolling (before it was above the text)</li>
+</ul>
+</p><p align="justify">
+<h4>18.0.1.0.13 (2026-11-14)</h4>
+</p><p align="justify">
 <ul>
 <li>[NEW] Guided tours: help-tour / help-step directives write the steps in the page, shown as a button by web_context_help_tour; the help window sends the steps to the Odoo tab and its find box skips them</li>
 <li>[IMP] Tour button: while its tour plays it reads <i>Return to record view</i> and brings the Odoo tab back; the original label returns when the tour ends</li>
@@ -777,12 +784,6 @@ blocco <code>help-version</code> delle versioni su cui &#232; stato verificato.
 <li>[IMP] help-page :when: condition on the open record or the menu context, e.g. move_type != entry</li>
 <li>[FIX] RST: a :field: role wrapped on two lines was printed as text; a :version: role with a stray ";" now fails on every version instead of cutting the text</li>
 </ul>
-</p><p align="justify">
-<h4>18.0.1.0.2 (2026-10-01)</h4>
-</p><p align="justify">
-<ul>
-<li>[IMP] Version specific help: help-version directive and :version: role, pages built for the running Odoo version</li>
-</ul>
 </p>
         </div>
     </div>
@@ -811,6 +812,6 @@ blocco <code>help-version</code> delle versioni su cui &#232; stato verificato.
     </div>
     <div class="oe_row oe_spaced">
         <p>This module is part of <a href="https://github.com/zeroincombenze/web_help">web_help</a> project.</p>
-        <p>Published information on | Informazioni pubblicate: 2026-11-14</p>
+        <p>Published information on | Informazioni pubblicate: 2026-11-22</p>
     </div>
 </section>

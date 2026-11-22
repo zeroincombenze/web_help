@@ -6,13 +6,20 @@ Il modello dipende dalla versione di Odoo: prima della 13.0 le pagine seguono
 ``account.invoice``, dalla 13.0 ``account.move``, dove una fattura è una
 registrazione contabile di tipo fattura.
 
+Le fatture clienti e le fatture fornitore hanno pagine di aiuto separate
+(fatture clienti: tipi out_invoice, out_refund, out_receipt; fatture
+fornitore: in_invoice, in_refund, in_receipt), ognuna con il proprio testo,
+menu e domande frequenti. Le pagine delle fatture fornitore comprendono
+**Fattura da ordine fornitore**, mostrata solo con l'app Acquisti installata, e **Come creare una fattura da XML** (Odoo 18.0 con
+l10n_it_edi): creare una fattura fornitore caricando una fattura elettronica.
+
 Ogni pagina segue la struttura standard di web_context_help:
 
 * **Indice**: le sezioni della pagina, costruito dalla finestra di aiuto
 * **Descrizione**: cosa sono le fatture, i loro stati e i campi principali
 * **Come inserire un nuovo record** (maschera): guida passo passo per creare,
   validare e inviare una fattura o una fattura fornitore
-* **Fatturazione da ordine di vendita** (maschera, solo con l'app Vendite
+* **Fatturazione da ordine di vendita** (maschera fattura cliente, solo con l'app Vendite
   installata): politica di fatturazione, stato fattura, fatture normali e
   anticipi, più ordini insieme
 * **Suggerimenti per la ricerca** (lista): menu, ricerca, filtri e

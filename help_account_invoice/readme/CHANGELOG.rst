@@ -1,3 +1,12 @@
+18.0.1.0.7 (2026-11-20)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Help pages split in customer invoices (account_invoice_out_*, move types out_invoice / out_refund / out_receipt) and vendor bills (account_invoice_in_*, move types in_invoice / in_refund / in_receipt; before 13.0 the views invoice_form / invoice_supplier_form): list and form, new record, update, cancel, set up, report, examples, FAQ and e-invoice FAQ rewritten for each side
+* [IMP] Vendor bills: new chapter Invoice from supplier order (only with purchase): control policy of the product, Confirm Order, Receive Products, Create Bill, Auto-Complete, partial billing, billing status of the order
+* [IMP] Vendor bills: vendor reference, bill date, payment to the vendor, credit note requested to the vendor (Ask Refund / Ask for a Credit Note up to 12.0), import of e-invoices of the vendors (only with l10n_it_edi_extension)
+* [IMP] Vendor bills: new chapter How to create invoice from xml (Odoo 18.0, with l10n_it_edi): Upload from the bills list or the purchase journal card, what is imported (vendor, lines, taxes, due date, bank, attachments), duplicate check, checks before Confirm, import detail level and validation message with l10n_it_edi_extension
+* [FIX] Credit note button of the invoice: Add Credit Note up to 16.0, Credit Note from 17.0; customer credit notes menu of 11.0
+
 18.0.1.0.6 (2026-11-13)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

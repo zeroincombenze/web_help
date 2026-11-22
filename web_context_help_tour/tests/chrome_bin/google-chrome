@@ -9,4 +9,9 @@ CHROME=/usr/bin/google-chrome
 if [ ! -x "$CHROME" ]; then
     CHROME=$(command -v chromium || command -v chromium-browser)
 fi
-exec "$CHROME" --disable-component-extensions-with-background-pages "$@"
+# The result must not depend on the desktop session of who runs the tests: Chrome
+# is headless, so it gets no display and no session bus / runtime dir (with them it
+# may attach to the user's GNOME session and stop answering to DevTools commands).
+exec env -u DISPLAY -u WAYLAND_DISPLAY -u XAUTHORITY -u DBUS_SESSION_BUS_ADDRESS \
+    -u XDG_RUNTIME_DIR -u XDG_SESSION_ID -u XDG_SESSION_TYPE -u XDG_CURRENT_DESKTOP \
+    -u SESSION_MANAGER "$CHROME" --disable-component-extensions-with-background-pages "$@"
