@@ -1,3 +1,13 @@
+10.0.1.0.8 (2026-11-22)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Help pages split in customer invoices (account_invoice_out_*, types out_invoice / out_refund) and vendor bills (account_invoice_in_*, types in_invoice / in_refund; views invoice_form / invoice_supplier_form): list and form, new record, update, cancel, set up, report, examples, FAQ and e-invoice FAQ rewritten for each side
+* [IMP] Vendor bills: new chapter Invoice from supplier order (only with purchase): Control Purchase Bills of the product, Confirm Order, Receive Products, Vendor Bills smart button, Add Purchase Order, partial billing, Billing Status of the order
+* [IMP] Vendor bills: vendor reference, bill date, Bill tab, payment terms shown only when set, Ask Refund and its options, Cancel Bill / Cancel Invoice
+* [FIX] Italian labels of Odoo 10.0: Fatture cliente, Fatture fornitori, Management, Business Intelligence, Registri, Annulla fattura, Imposta a bozza, Registra pagamenti, Aggiungi voce, Valida, Salva la ricerca corrente, Esportazione, Annullamento: creare nota di credito e riconciliare
+* [FIX] Search bar and filters of the invoice list (no product search, Invoice Date and Due Date are groupings), Settings labels (Default Sale Tax, Default Purchase Tax, Allow multi currencies, Warning)
+* [REM] No vendor bill help about the upload of the e-invoice XML (Odoo 18.0 only)
+
 10.0.1.0.7 (2026-11-13)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

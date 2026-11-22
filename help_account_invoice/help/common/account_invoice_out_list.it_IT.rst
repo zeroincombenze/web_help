@@ -1,0 +1,140 @@
+.. help-version:: <13
+
+   .. help-page:: account_invoice_out_list
+      :title: Fatture clienti
+      :model: account.invoice
+      :view: account.invoice_tree, account.invoice_tree_with_onboarding
+      :view-type: list
+      :priority: 96
+
+.. help-version:: 13
+
+   .. help-page:: account_invoice_out_list
+      :title: Fatture clienti
+      :model: account.move
+      :view: account.view_invoice_tree, account.view_out_invoice_tree, account.view_out_credit_note_tree
+      :view-type: list
+      :when: type = out_invoice, out_refund, out_receipt
+      :priority: 96
+
+.. help-version:: >=14
+
+   .. help-page:: account_invoice_out_list
+      :title: Fatture clienti
+      :model: account.move
+      :view: account.view_invoice_tree, account.view_out_invoice_tree, account.view_out_credit_note_tree
+      :view-type: list
+      :when: move_type = out_invoice, out_refund, out_receipt
+      :priority: 96
+
+Fatture clienti
+===============
+
+.. _description:
+
+Descrizione
+-----------
+
+Fare clic sul pulsante [`Pronto`] per sapere come usare questo aiuto; fare
+clic sul pulsante [`FAQ`] per le domande più comuni già risolte.
+
+.. help-version:: <13
+
+   La lista delle fatture clienti e delle loro note di credito, secondo il
+   menu. Ogni riga mostra il :field:`numero <number>`, il :field:`cliente
+   <partner_id>`, la :field:`data fattura <date_invoice>`, la :field:`data di
+   scadenza <date_due>`, il totale, l'importo ancora dovuto e lo
+   :field:`stato <state>`. Fare clic su una riga per aprire la fattura.
+
+.. help-version:: >=13
+
+   La lista delle fatture clienti e delle note di credito, secondo il menu.
+   Ogni riga mostra il :field:`numero <name>`, il :field:`cliente
+   <partner_id>`, la :field:`data fattura
+   <invoice_date>`, la :field:`data di scadenza <invoice_date_due>`, il
+   totale, l'importo ancora dovuto e lo :field:`stato <state>`\
+   :version:`>=14|, con lo stato del pagamento`. Fare clic su una riga per
+   aprire la fattura.
+
+.. _new_record:
+
+Come inserire un nuovo record
+-----------------------------
+
+Premere :version:`<16|[\`Crea\`];*|[\`Nuovo\`]` in alto a sinistra: si apre una
+maschera vuota, vedere il suo aiuto per i campi da compilare.
+
+.. help-include:: account_invoice_out_list_search.rst
+
+.. _update_record:
+
+Come modificare un record
+-------------------------
+
+Fare clic su una riga dell'elenco per aprire la sua maschera, poi seguire
+l'aiuto della maschera per modificarla.
+
+.. help-include:: account_invoice_out_cancel.rst
+
+.. help-include:: account_invoice_out_list_actions.rst
+
+.. help-include:: account_invoice_out_configure.rst
+
+.. help-include:: account_invoice_out_report.rst
+
+.. help-include:: account_invoice_out_list_example.rst
+
+.. _faq:
+
+Domande frequenti
+-----------------
+
+Fare clic sul pulsante [`Argomento`] per tornare alla pagina di aiuto specifica.
+
+.. help-question:: Perché non vedo le note di credito?
+
+   .. help-version:: 10
+
+      Le note di credito sono nella stessa lista delle fatture: usare il filtro
+      *Note credito*, o *Fatture* per nasconderle.
+
+   .. help-version:: 11
+
+      Hanno un loro menu: **Fatturazione ‣ Vendite ‣ Note di credito
+      cliente**.
+
+   .. help-version:: >=12
+
+      Hanno un loro menu: **Fatturazione ‣ Clienti ‣ Note di credito**.
+
+.. help-question:: Come vedo le fatture ancora da pagare?
+
+   Usare il filtro :version:`10|*Non pagato*;11-12|*Aperta*;13|*Non
+   pagato*;14|*Non pagata*;15-17|*Non pagato*;*|*Da pagare*`;
+   :version:`10|*Scaduto*;11|*Ritardi*;*|*In ritardo*` mostra solo quelle con
+   la scadenza passata.
+
+.. help-question:: Perché vedo qui delle registrazioni contabili?
+
+   .. help-version:: <13
+
+      La lista mostra solo fatture; le registrazioni contabili sono nei menu
+      della contabilità, visibili ai contabili.
+
+   .. help-version:: >=13
+
+      Una fattura è una registrazione contabile di tipo fattura: i menu delle
+      fatture mostrano solo i tipi fattura, mentre la lista delle registrazioni
+      contabili dei contabili mostra ogni registrazione, fatture comprese, e
+      non ha l'aiuto delle fatture.
+
+.. help-version:: 10
+
+   .. help-include:: account_invoice_out_faq_einvoice.rst
+
+.. _footer:
+
+Piè di pagina
+-------------
+
+Pagina creata il 2026-11-22 10:00 · © 2026 Zeroincombenze srls <https://www.zeroincombenze.it>

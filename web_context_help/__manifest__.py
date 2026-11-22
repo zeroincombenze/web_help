@@ -9,7 +9,7 @@
 #
 {
     "name": "Context help",
-    "version": "10.0.1.0.13",
+    "version": "10.0.1.0.14",
     "category": "Hidden/Tools",
     "summary": "Context help button, pages written in RST by each module",
     "author": "Zeroincombenze srls",
